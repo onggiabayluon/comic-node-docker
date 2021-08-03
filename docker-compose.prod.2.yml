@@ -25,11 +25,3 @@ services:
         environment:
             - MONGO_INITDB_ROOT_USERNAME=ducchuy
             - MONGO_INITDB_ROOT_PASSWORD=mypassword
-    mongo_seed:
-        image: mongo
-        depends_on:
-            - mongo
-        volumes:
-            - ./mongo-seed:/mongo-seed
-        command:
-            /mongo-seed/import.sh
