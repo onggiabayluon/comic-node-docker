@@ -1,0 +1,291 @@
+<style>
+    @keyframes fadeIn {
+        0% {
+            top: -1rem;
+            opacity: 0;
+        }
+
+        100% {
+            top: 0;
+            opacity: 1;
+        }
+    }
+
+    .progress {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        height: 5px;
+        border-radius: 20px;
+        background: var(--light-btn-background);
+    }
+
+    .bar {
+        border-radius: 20px;
+        width: 0%;
+        height: 100%;
+        transition: width;
+        transition-duration: 1s;
+        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
+    }
+
+    .aztec {
+        background-color: var(--theme-color-5);
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%230d37c2' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .modalBox {
+        position: fixed;
+        width: 300px;
+        max-height: 500px;
+        top: 0%;
+        margin-top: 2.5rem;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2999;
+    }
+
+    .modalBox--modifier {
+        height: auto;
+        text-align: center;
+        border-radius: .5em;
+        display: none;
+    }
+    
+    .modal-header--modifier {
+        padding: 0.5rem 1rem 0.5rem !important;
+    }
+
+    .is-active {
+        display: block;
+    }
+
+    .modal__image {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #48DB71;
+        padding: 11px 10px 2px;
+        margin-bottom: 0.5rem;
+    }
+
+    .modal__button {
+        font-size: 1.25em;
+        font-weight: bold;
+        background-color: #000;
+        border: none;
+        padding: .5em 1em;
+        color: #fff;
+        box-shadow: 0 0 0 2px #000 inset;
+        border-radius: .25em;
+        cursor: pointer;
+        transition: background .4s ease, color .4s ease;
+    }
+
+    .modal__button:hover {
+        box-shadow: 0 0 0 2px #000 inset;
+        color: #000;
+        background-color: transparent;
+    }
+
+</style>
+
+
+{{#if errors}}
+{{#each errors}}
+<div class="modalBox">
+    <div id="js-modal" class="modal modalBox--modifier js-modal">
+        <div class="modal-content">
+            <div class="modal-header modal-header--modifier">
+                <h5 class="modal-title text-danger" id="exampleModalLabel">Error</h5>
+                <button style="z-index: 99;" id="js-close" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ this.msg }}
+            </div>
+        </div>
+        <div id="progress" class="progress">
+            <div id="bar" class="bar shadow aztec"></div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{/if}}
+
+<div class="row">
+    {{#if error}}
+    <div class=" modalBox">
+        <div id="js-modal" class="modal modalBox--modifier js-modal">
+            <div class="modal-content">
+                <div class="modal-header modal-header--modifier">
+                    <h5 class="modal-title text-danger" id="exampleModalLabel">Error</h5>
+                    <button style="z-index: 99;" id="js-close" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ error }}
+                </div>
+            </div>
+            <div id="progress" class="progress">
+                <div id="bar" class="bar shadow aztec"></div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if error_message}}
+    <div class=" modalBox">
+        <div id="js-modal" class="modal modalBox--modifier js-modal">
+            <div class="modal-content">
+                <div class="modal-header modal-header--modifier">
+                    <h5 class="modal-title text-danger" id="exampleModalLabel">Error</h5>
+                    <button style="z-index: 99;" id="js-close" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ error_message }}
+                </div>
+            </div>
+            <div id="progress" class="progress">
+                <div id="bar" class="bar shadow aztec"></div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if success_message}}
+    <div class=" modalBox">
+        <div id="js-modal" class="modal modalBox--modifier js-modal">
+            <div class="modal-content">
+                <div class="modal-header modal-header--modifier">
+                    <h5 class="modal-title text-success" id="exampleModalLabel">Success</h5>
+                    <button style="z-index: 99;" id="js-close" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ success_message }}
+                </div>
+            </div>
+            <div id="progress" class="progress">
+                <div id="bar" class="bar shadow aztec"></div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+
+<script src="/js/vendor/dynamics.min.js"></script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        /* Start Progress Bar*/
+        const bars = document.getElementById('bar');
+        const progress = document.getElementById('progress');
+
+        
+        setTimeout(function () {
+            $('.alert-danger').fadeOut('fast');
+            $('.alert-success').fadeOut('fast');
+        }, 5000);
+
+        if (bars !== null || progress !== null) {
+            bars.style.transitionDuration = '5s';
+            bars.style.width = '100%';
+        } /* End Progress Bar*/
+
+
+
+    });
+
+</script>
+
+<script>
+    /* Start Modal Message*/
+    var modal = document.getElementById('js-modal');
+    var btnClose = document.getElementById('js-close');
+        
+    if (modal !== null) {
+        var modalChildren = modal.children;
+
+        setTimeout(function () {
+            hideModal()
+        }, 5000);
+
+            toggleClasses();
+            showModal();
+            showModalChildren();
+        
+        function showModal() {
+            // Define initial properties
+            dynamics.css(modal, {
+                opacity: 0,
+                scale: .5
+            });
+
+            // Animate to final properties
+            dynamics.animate(modal, {
+                opacity: 1,
+                scale: 1
+            }, {
+                type: dynamics.spring,
+                frequency: 300,
+                friction: 400,
+                duration: 2000
+            });
+        }
+        function showModalChildren() {
+            // Animate each child individually
+            for (var i = 0; i < modalChildren.length; i++) {
+                var item = modalChildren[i];
+
+                // Define initial properties
+                dynamics.css(item, {
+                    opacity: 0,
+                    translateY: 30
+                });
+
+                // Animate to final properties
+                dynamics.animate(item, {
+                    opacity: 1,
+                    translateY: 0
+                }, {
+                    type: dynamics.spring,
+                    frequency: 300,
+                    friction: 400,
+                    duration: 1000,
+                    delay: 100 + i * 40
+                });
+            }
+        }
+        function hideModal() {
+            dynamics.animate(modal, {
+                opacity: 0,
+                translateY: -100
+            }, {
+                type: dynamics.spring,
+                frequency: 50,
+                friction: 600,
+                duration: 1500
+            });
+        }
+        function toggleClasses() {
+            modal.classList.toggle('is-active')
+        }
+
+        // Open nav when clicking sandwich button
+        btnClose.addEventListener('click', function (e) {
+            hideModal();
+            dynamics.setTimeout(toggleClasses, 500);
+        }); 
+    } /* End Modal Message*/
+</script>

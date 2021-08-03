@@ -1,0 +1,197 @@
+$count: 15;
+@for $i from 1 through $count {
+
+    item {
+      &:nth-child(#{$i}) comic-info-back{
+        background: rgb(random(255),random(255),random(255));
+      }
+    }
+    
+  }
+
+.num {
+margin-left: 0.6rem;
+font-family: 'hind_m';
+font-weight: 600;
+}
+.comic-info {
+    height: auto;
+    &--top {
+        margin-top: auto;
+    }
+}
+comic-info {
+    /* comic info */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 21;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.6rem 0.6rem 0.3rem 0.6rem;
+    color: white;
+
+    /* title */
+    .title {
+        font-size: 1.3rem;
+        font-family: 'hind_m';
+        padding: 0.2em 0px 0 0;
+        text-transform: capitalize;
+        display: block;
+        color: white;
+        font-size: 18px;
+        font-family: hind_m;
+        font-weight: 500;
+
+        &--ellipsis  {
+            -webkit-line-clamp: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+        }
+        &--ellipsis-2 {
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            line-height: 1;
+        }
+        &--bot {
+            margin-top: auto;
+        }
+        
+        &--bot-2 {
+            margin-top: auto;
+            margin-bottom: 1rem;
+            position: relative;
+            left: 0.6rem;
+
+            &::after {
+                content: "";
+                display: block;
+                border-bottom: 1px solid var(--button-text-important);
+            }
+        }
+        &--mid {
+            margin: auto;
+        }
+        
+    }
+    description {
+        font-size: 0.8rem;
+        max-width: 75%;
+        -webkit-line-clamp: 3;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        margin: 0.5rem 0;
+    }
+
+    /* grade */
+    grade {
+        font-size: 16px;
+        line-height: 0.7rem;
+        a {
+            color: white;
+        }
+    }
+
+    /* category */
+    category {
+        color: red;
+    }
+
+}
+
+.comic-info-back {
+    &--wide {
+        width: 100%;
+    }
+
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    width: 210px;
+    height: 100%;
+    z-index: 21;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    
+    title, description, author a { color: var(--light); }
+    title { font-size: 1.1rem; }
+    author a { font-size: 0.9rem; }
+    description { font-size: 0.8rem; }
+
+    /* title */
+    title {
+        font-family: 'hind_m';
+        padding: 0.2em 0px 0 0;
+        text-transform: capitalize;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        max-width: 80%;
+        line-height: 1.2;
+    }
+    /* author */
+    author {
+       &::after {
+           content: "";
+           display: block;
+            width: 16px;
+            height: 1px;
+            margin-top: 10px;
+            background: #fff;
+            opacity: .5;
+       } 
+    }
+    /* description */
+    .description {
+        &--ellipsis-default {
+            max-width: 160px;
+            -webkit-line-clamp: 4;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            margin-top: auto;
+        }
+        &--ellipsis-wide {
+            font-size: 0.8rem;
+            max-width: 90%;
+            -webkit-line-clamp: 5;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            margin: 0.5rem 0;
+        }
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .comic-info {
+        opacity: 1 !important;
+    }
+    .comic-info-back {
+        display: none;
+        /* description */
+        .description {
+            display: none;
+        }
+    }
+}

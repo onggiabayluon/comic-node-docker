@@ -1,0 +1,226 @@
+@keyframes scaleUpDown {
+    0%,
+    100% {
+      transform: scaleY(1) scaleX(1);
+    }
+    50%,
+    90% {
+      transform: scaleY(1.1);
+    }
+    75% {
+      transform: scaleY(0.95);
+    }
+    80% {
+      transform: scaleX(0.95);
+    }
+}
+@keyframes shake {
+    0%,
+    100% {
+      transform: skewX(0) scale(1);
+    }
+    50% {
+      transform: skewX(5deg) scale(0.8);
+    }
+}
+@keyframes particleUp {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      top: -100%;
+      transform: scale(0.5);
+    }
+}
+
+
+.widget__container--right {
+    padding: 1em;
+    // border: 3px solid var(--foreground-color);
+    background-color: var(--foreground-color);
+    border-radius: 0.75em;
+}
+/* widget title */
+.widget__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.75em;
+    margin-left: 0.5em;
+    color: var(--button-text-important);
+}
+.widget__title i {
+    margin-right: 1em;
+    position: relative;
+}
+.widget__title h5 {
+    font-weight: 600;
+    color: var(--button-text-important);
+    margin: 0;
+    padding: 0;
+}
+
+/* widget title */
+
+/* widget card */
+.widget__card {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+}
+@media (max-width: 768px) {
+  .widget__card {
+      grid-template-columns: 0fr 2fr;
+      .card__details {
+        margin-left: 2.7em !important;
+      }
+  }
+}
+.widget__card--styling {
+    color: var(--primary-color);
+    background: var(--foreground-color);
+    border-bottom: 1px solid var(--separator-color-light);
+    padding: 1em;
+    border-radius: 0.75rem;
+    margin: 0 0 1em 0;
+}
+.widget__card {
+  .card__image img{
+    width: 70px;
+    height: auto;
+    border-radius: 0.5em;
+  } 
+  .card__details {
+    margin-left: 0.7em;
+  }
+
+}
+.widget__card .card__details .card__category {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--button-text-important);
+    width: fit-content;
+    margin: 0 0 0.75rem 0;
+    padding: 0 0 0.25rem 0;
+}
+.widget__card .card__details .card__chapter {
+    margin: 0 0 0.5rem 0;
+}
+.widget__card .card__details .card__chapter .chapter__info {
+    text-decoration: none;
+    font-size: 11px;
+}
+.widget__card .card__details .card__chapter .time__info {
+    font-size: 11px;
+    letter-spacing: -1px;
+    margin-left: 1em;
+}
+
+/* widget card */
+
+/* widget border */
+.widget__border {
+  position: relative;
+  margin-left: 0.5em;
+  border: 2px solid var(--separator-color-light);
+  margin-bottom: 1em;
+  &::before {
+    content: '';
+    width: 40px;
+    height: 4px;
+    position: absolute;
+    bottom: -2px;
+    left: -2px;
+    background: var(--theme-color-1);
+  }
+} /* End widget border */
+
+/* widget btn */
+.btn--modifier {
+  background-color: var(--theme-color-1);
+  color: var(--button-text-color);
+  border: 1px solid var(--theme-color-1);
+  &:hover, &:focus, &:active {
+    border: 1px solid var(--theme-color-1);
+    background-color: var(--foreground-color);
+    color: var(--theme-color-1);
+  }
+}
+
+/* widget btn */
+
+/* color overlay */
+
+.widget__card .card__image {
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+  @include box-shadow(3px, 3px, 3px, #000000)
+}
+.card__image--overlay {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  width: 100%;
+  height: 98px;
+  background-color: rgba(44, 51, 53, 0.4);
+  background-image: linear-gradient(
+  315deg
+  , rgba(44, 51, 53, 0.4) 0%, rgba(0, 0, 0, 0.4) 74%);
+  z-index: 10;
+  top: 0;
+  left: 0;
+}
+/* color overlay */
+
+/* hover */
+
+.widget-container:hover, .activate-fire:hover, .widget__container--right:hover {
+  .widget__title h5 {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.5s;
+  }
+
+  i {
+      animation: shake 2s ease-out 0;
+      animation-iteration-count: infinite;
+      animation-fill-mode: both;
+      color: #ef5a00;
+      filter: drop-shadow(0 0 10px #d43322);
+      transition: all 0.5s;
+  }
+  .particle-fire {
+      position: absolute;
+      top: 60%;
+      left: 45%;
+      width: 5px;
+      height: 5px;
+      background-color: #ef5a00;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 10px #d43322);
+      animation: particleUp 2s ease-out 0;
+      animation-iteration-count: infinite;
+      animation-fill-mode: both;
+  }
+}
+
+.widget__card .card__image:hover {
+  img {
+    transform: scale(1.2);
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+  }
+  .card__image--overlay {
+    opacity: 1;
+  }
+}
+/* hover */

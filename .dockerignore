@@ -1,0 +1,8 @@
+node_modules
+DockerFile
+docker-compose*
+.dockerignore
+.git
+.gitignore
+.env
+gulpfile

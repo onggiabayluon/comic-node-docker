@@ -1,0 +1,63 @@
+#card-wrapper {
+    background: var(--foreground-color);
+    
+    grid-container {
+        display: grid;
+        gap: 1.4rem;
+        max-width: 81%;
+        margin: 3rem auto;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-auto-rows: 200px;
+    }
+    grid-comic-item:hover {
+        background-overlay {
+            opacity: 0;
+        }
+        comic-info {
+            opacity: 0;
+            transition: 0.3s;
+        }
+    }
+    grid-comic-item  {
+        /* grid__item */
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        width: 200px;
+        img {
+            object-fit: cover;
+            object-position: top;
+        }
+    }
+    .card-tall {
+        grid-row: span 2 / auto;
+
+        img {
+            width: 100%;
+            height: calc(200% + 1rem);
+        }
+        background-overlay {
+            height: calc(200% + 1rem);
+        }
+    }
+    .card-wide {
+        grid-column: span 2 / auto;
+
+        img {
+            width: calc(200% + 1rem);
+            height: 100%;
+        }
+        background-overlay {
+            width: calc(200% + 1rem);
+        }
+        comic-info {
+            width: calc(200% + 1rem);
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    #card-wrapper grid-container {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,41 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:stable-alpine
+        restart: always
+        ports:
+            - "3000:80"
+        volumes:
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+    node-app:
+        # Custom container name
+        # container_name: node-app
+        # image: node-app-image:tag
+        restart: always
+        build: .
+        environment:
+            - PORT=3000
+        depends_on:
+            - mongo
+        # env_file:
+        #     - ./.env
+    mongo:
+        image: mongo
+        restart: always
+        # Open port for outside connection
+        ports:
+            - "27012:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ducchuy
+            MONGO_INITDB_ROOT_PASSWORD: mypassword
+        volumes:
+            - mongo-db:/data/db
+
+    redis:
+        image: redis
+        restart: always
+
+# Named volumes
+volumes:
+    mongo-db:

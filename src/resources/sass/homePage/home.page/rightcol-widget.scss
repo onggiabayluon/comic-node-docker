@@ -1,0 +1,211 @@
+
+.m-0 {
+    margin: 0;
+}
+.p-0 {
+    padding: 0;
+}
+
+#append__Box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.widget-container {
+    border-radius: .75rem;
+}
+
+.comic-title {
+    font-size: 1rem;
+    max-height: calc( 2.2em);
+    line-height: calc(2.2em / 2);
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-bottom: 1.2rem;
+}
+
+.card-title {
+
+    & .btn-link {
+        color: var(--theme-color-2);
+    }
+
+    & span {
+        font-weight: 700;
+    }
+}
+.widget-img {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    position: relative;
+
+    & img {
+        border-radius: .45rem;
+        width: 100%;
+        height: 96px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+.img-box {
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+    width: fit-content;
+    @include box-shadow(8px, 10px, 15px, #000000);
+
+    &:hover .img-overlay{
+        opacity: 1;
+        z-index: 10;
+        color: var(--light);
+    }
+
+    &:hover img {
+        object-position: center center;
+        -moz-transition: all .5s;
+        -webkit-transition: all .5s;
+        transition: all .5s;
+    }
+}
+.img-overlay {
+    color: var(--button-text-color);
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    position: absolute;
+    opacity: 1;
+        z-index: 10;
+    width: 100%;
+    height: 30%;
+    background-color: rgba(44, 51, 53, 0.4);
+    background-image: linear-gradient(
+    315deg
+    , rgba(44, 51, 53, 0.4) 0%, rgba(0, 0, 0, 0.4) 74%);
+    border-bottom-left-radius: 0.45em;
+    border-bottom-right-radius: 0.45em;
+    -webkit-border-bottom-left-radius: 0.45em;
+    -webkit-border-bottom-right-radius: 0.45em;
+    -moz-border-bottom-left-radius: 0.45em;
+    -moz-border-bottom-right-radius: 0.45em;
+    bottom: 0; left: 0;
+}
+
+
+.widget-chapterbox {
+    // margin: auto 0;
+
+    .chapter-btn {
+        margin: 0 0 0.8em 0;
+        padding: 0.3rem 0.65rem 0.3rem 0.65rem;
+    }
+}
+
+
+// Book Mark BOX
+.bookmark img {
+    height: 120px;
+}
+.widget-box {
+    position: relative;
+}
+.widget-title {
+    font-size: 1rem;
+    padding: 0.5em 0.5em 0em 0.5em;
+    margin-top: 1em;
+    max-height: calc( 3.3em );
+    line-height: calc( 3.3em / 3);
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.widget-chapter {
+    position: absolute;
+    width: 100%;
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+    color: var(--light-btn-background);
+    text-align: center;
+    padding: 0.2em 0em 0.2em 0;
+    font-size: 0.9em;
+    font-weight: 700;
+
+    &--circle {
+        border-radius: 50%;
+        border: 1px solid var(--button-text-color);
+        width: auto;
+        padding: 0.4em;
+        margin: 0 0.5em 0.3em 0;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        &:before {
+            content:     "";
+            display:     block;
+            padding-top: 100%; /* initial ratio of 1:1*/
+        }
+    }
+}
+.widget-time {
+    font-size: 0.75em;
+    position: absolute;
+    color: var(--light-btn-background);
+    padding: 0 0.5em 0px 0.5em;
+    margin: 0.3em 0em 0em 0.4em;
+
+    &--rounded {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--button-text-color);
+        border-radius: 0.35em;
+        
+    }
+}
+
+.top-left {
+    left: 0;
+    top: 0;
+}
+.top-right {
+    right: 0;
+    top: 0;
+}
+.bottom-left {
+    left: 0;
+    bottom: 0;
+}
+.bottom-right {
+    right: 0;
+    bottom: 0;
+}
+@media (max-width: 1200px) {
+    .comic-title {
+        font-size: 0.8rem;
+    }
+    .comic-chapter-btn {
+        display: block;
+    }
+    .widget-img {
+        & img {
+            height: 125px;
+        }
+    }
+    
+}
+@media (max-width: 576px) {
+    .img-box span {
+        font-size: 0.8em;
+    }
+}
+@media (max-width: 400px) {
+    .img-box span {
+        font-size: 0.7em;
+    }
+}

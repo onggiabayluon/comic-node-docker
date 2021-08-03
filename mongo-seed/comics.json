@@ -1,0 +1,497 @@
+[{
+  "_id": {
+    "$oid": "603a068034d84d21247cdb22"
+  },
+  "deleted": false,
+  "title": "An A-Ranked Adventurer’s “Slow-living",
+  "description": "",
+  "thumbnail": {
+    "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/thumbnail/1622887888331-A-rank-boukensha-351x500"
+  },
+  "slug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
+  "createdAt": {
+    "$date": "2021-02-27T08:44:48.523Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:33:03.554Z"
+  },
+  "__v": 141,
+  "titleForSearch": "Toi la nguoi choi duy nhat dang nhap ",
+  "userId": "6084e73384620a19a88780da",
+  "userName": "user",
+  "isPublish": true,
+  "category": [
+    {
+      "$oid": "609f250ace319201845e45ce"
+    },
+    {
+      "$oid": "609f8d6ea1ea9f1eac820a2c"
+    }
+  ],
+  "chapters": [
+    {
+      "$oid": "60b4de4fa345290b7004c86c"
+    },
+    {
+      "$oid": "60b4de5ba345290b7004c87a"
+    },
+    {
+      "$oid": "60b6f1e36ce2a71ac0a4c413"
+    },
+    {
+      "$oid": "60f39b2f59d748350c1a9899"
+    }
+  ],
+  "view": {
+    "totalView": 11,
+    "dayView": {
+      "thisDay": "21",
+      "view": 1
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 9
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 9
+    }
+  },
+  "rate": {
+    "rateCount": 1,
+    "rateValue": 4
+  }
+},{
+  "_id": {
+    "$oid": "603d8bebf7692e17d03cdb75"
+  },
+  "deleted": false,
+  "title": "Wizard of Anesia ",
+  "description": " Nope  ",
+  "thumbnail": {
+    "url": "wizard-of-anesia/thumbnail/1622345753265-0"
+  },
+  "slug": "wizard-of-anesia",
+  "createdAt": {
+    "$date": "2021-03-02T00:50:51.738Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:19.825Z"
+  },
+  "__v": 0,
+  "userId": "6084e73384620a19a88780da",
+  "userName": "user",
+  "titleForSearch": "Wizard of Anesia ",
+  "isPublish": true,
+  "category": [
+    {
+      "$oid": "609f250ace319201845e45ce"
+    },
+    {
+      "$oid": "609f8d6ea1ea9f1eac820a2c"
+    }
+  ],
+  "chapters": [
+    {
+      "$oid": "60b4575fea600f0f6ca7c49d"
+    },
+    {
+      "$oid": "60ee9f7c203fe42a60ac116c"
+    }
+  ],
+  "view": {
+    "totalView": 13,
+    "dayView": {
+      "thisDay": "21",
+      "view": 4
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 4
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 4
+    }
+  },
+  "rate": {
+    "rateCount": 1,
+    "rateValue": 5
+  }
+},{
+  "_id": {
+    "$oid": "608543c64441623214fdbf79"
+  },
+  "deleted": false,
+  "title": "Kill the hero",
+  "description": "",
+  "thumbnail": {
+    "url": "kill-the-hero/thumbnail/1622887926952-images-11-223x300"
+  },
+  "userId": "608542b81ff2a228dcb63d95",
+  "userName": "usermapdit",
+  "slug": "kill-the-hero",
+  "titleForSearch": "Reserved Villian",
+  "createdAt": {
+    "$date": "2021-04-25T10:26:14.461Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 3,
+  "isPublish": true,
+  "category": [],
+  "chapters": [
+    {
+      "$oid": "60b45775ea600f0f6ca7c4b4"
+    },
+    {
+      "$oid": "60b4577cea600f0f6ca7c4b9"
+    },
+    {
+      "$oid": "60eea00abe2b941a3cda891f"
+    }
+  ],
+  "view": {
+    "totalView": 123,
+    "dayView": {
+      "thisDay": "21",
+      "view": 23
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 35
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 35
+    }
+  },
+  "rate": {
+    "rateCount": 1,
+    "rateValue": 5
+  }
+},{
+  "_id": {
+    "$oid": "60856bd53bb19903a44e0b7b"
+  },
+  "deleted": false,
+  "title": "Magic Emperor",
+  "description": "",
+  "userId": "6084e73384620a19a88780da",
+  "userName": "user",
+  "slug": "magic-emperor",
+  "titleForSearch": "user comic 2",
+  "createdAt": {
+    "$date": "2021-04-25T13:17:09.969Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 2,
+  "isPublish": false,
+  "category": [
+    {
+      "$oid": "609f250ace319201845e45ce"
+    },
+    {
+      "$oid": "609f8d6ea1ea9f1eac820a2c"
+    }
+  ],
+  "thumbnail": {
+    "url": "magic-emperor/thumbnail/1622887960726-43692"
+  },
+  "chapters": [
+    {
+      "$oid": "60b6f23ef356f92b540632e8"
+    }
+  ],
+  "view": {
+    "totalView": 0,
+    "dayView": {
+      "thisDay": "20",
+      "view": 0
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 0
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 0
+    }
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  }
+},{
+  "_id": {
+    "$oid": "608a16fc2c381630b89c0f3d"
+  },
+  "deleted": false,
+  "title": "Survival Story of a Sword King in a Fantasy World",
+  "description": "1",
+  "isPublish": false,
+  "thumbnail": {
+    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500"
+  },
+  "userId": "6084dd9dec23a633c03f96e7",
+  "userName": "adminlivip",
+  "slug": "survival-story-of-a-sword-king-in-a-fantasy-world",
+  "titleForSearch": "test publish false",
+  "createdAt": {
+    "$date": "2021-04-29T02:16:28.443Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 1,
+  "chapters": [
+    {
+      "$oid": "60b6f26ff356f92b540632f5"
+    },
+    {
+      "$oid": "60b6f274f356f92b540632f8"
+    }
+  ],
+  "view": {
+    "totalView": 5,
+    "dayView": {
+      "thisDay": "21",
+      "view": 1
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 1
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 1
+    }
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  }
+},{
+  "_id": {
+    "$oid": "60b60a2f0a36ca09a46e773d"
+  },
+  "isPublish": true,
+  "chapters": [
+    {
+      "$oid": "60b6f27ff356f92b540632fb"
+    },
+    {
+      "$oid": "60b6f286f356f92b540632fe"
+    },
+    {
+      "$oid": "60b6f28bf356f92b54063301"
+    }
+  ],
+  "deleted": false,
+  "title": "Tensei Shite Inaka de Slowlife wo Okuritai",
+  "description": "1",
+  "userId": "6084dd9dec23a633c03f96e7",
+  "userName": "adminlivip",
+  "slug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "titleForSearch": "test",
+  "createdAt": {
+    "$date": "2021-06-01T10:21:35.614Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1622888365802-34352-350x500"
+  },
+  "view": {
+    "totalView": 2,
+    "dayView": {
+      "thisDay": "21",
+      "view": 0
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 2
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 2
+    }
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  }
+},{
+  "_id": {
+    "$oid": "60bb4a5cce7f1e1178551211"
+  },
+  "isPublish": true,
+  "chapters": [
+    {
+      "$oid": "60bb4b67ce7f1e1178551212"
+    }
+  ],
+  "category": [
+    {
+      "$oid": "609f250ace319201845e45ce"
+    }
+  ],
+  "deleted": false,
+  "title": "Overgeared",
+  "description": "1",
+  "userId": "6084dd9dec23a633c03f96e7",
+  "userName": "adminlivip",
+  "slug": "overgeared",
+  "titleForSearch": "Overgeared",
+  "createdAt": {
+    "$date": "2021-06-05T09:56:44.629Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "overgeared/thumbnail/1622887019250-mangatx"
+  },
+  "view": {
+    "totalView": 5,
+    "dayView": {
+      "thisDay": "21",
+      "view": 1
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 1
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 1
+    }
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  }
+},{
+  "_id": {
+    "$oid": "60bb7904f8b6d00d14efc5b2"
+  },
+  "isPublish": true,
+  "chapters": [
+    {
+      "$oid": "60bb797af8b6d00d14efc5b3"
+    }
+  ],
+  "category": [
+    {
+      "$oid": "609f250ace319201845e45ce"
+    }
+  ],
+  "deleted": false,
+  "title": "The Strongest Dull Prince’s Secret Battle for the Throne",
+  "description": "1",
+  "userId": "6084dd9dec23a633c03f96e7",
+  "userName": "adminlivip",
+  "slug": "the-strongest-dull-princes-secret-battle-for-the-throne",
+  "titleForSearch": "The Strongest Dull Prince’s Secret Battle for the Throne",
+  "createdAt": {
+    "$date": "2021-06-05T13:15:48.421Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "the-strongest-dull-princes-secret-battle-for-the-throne/thumbnail/1622898960004-44412-352x500"
+  },
+  "view": {
+    "totalView": 1,
+    "dayView": {
+      "thisDay": "21",
+      "view": 1
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 1
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 1
+    }
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  }
+},{
+  "_id": {
+    "$oid": "60ef99f4abe09323403b7468"
+  },
+  "isPublish": true,
+  "chapters": [
+    {
+      "$oid": "60ef9a04abe09323403b7469"
+    },
+    {
+      "$oid": "60ef9a9bedf6702150e5e88f"
+    },
+    {
+      "$oid": "60ef9aed8b4eeb0e7c5b74b6"
+    },
+    {
+      "$oid": "60ef9b051f60ee2714551665"
+    },
+    {
+      "$oid": "60ef9b3d1f60ee2714551668"
+    },
+    {
+      "$oid": "60efa40bd2cf7707588089ec"
+    }
+  ],
+  "category": [
+    {
+      "$oid": "609f250ace319201845e45ce"
+    }
+  ],
+  "deleted": false,
+  "title": "test",
+  "description": "1",
+  "userId": "6084dd9dec23a633c03f96e7",
+  "userName": "adminlivip",
+  "slug": "test",
+  "titleForSearch": "test",
+  "createdAt": {
+    "$date": "2021-07-15T02:14:12.721Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:03.719Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "test/thumbnail/1626575513924-item_3"
+  },
+  "view": {
+    "totalView": 1,
+    "dayView": {
+      "thisDay": "21",
+      "view": 1
+    },
+    "monthView": {
+      "thisMonth": "07",
+      "view": 1
+    },
+    "yearView": {
+      "thisYear": "2021",
+      "view": 1
+    }
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  }
+}]

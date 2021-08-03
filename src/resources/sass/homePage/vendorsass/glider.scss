@@ -1,0 +1,387 @@
+/* 44.Glide */
+
+#glide_2 .glide__slide glide-img img {
+  width: 100%;
+}
+
+#glide_1, #glide_2 {
+  .glide__slides {
+    white-space: initial;
+    .glide__slide {
+      
+      position: relative;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+  
+  .glide__slide {
+    
+
+    glide-img {
+      img {
+        object-fit: cover;
+        object-position: top;
+        // width: fit-content;
+      }
+    }
+    bottom-info {
+      display: block;
+      padding: 0.7rem;
+      border: 2px solid var(--border-color);
+
+      
+
+      info-title {
+        font-family: 'hind_m';
+        font-weight: 600;
+        color: var(--primary-color);
+
+        &:hover {
+          color: var(--theme-color-1);
+        }
+        
+      }
+      info-chapter {
+        display: flex;
+        justify-content: space-between;
+        text-transform: uppercase;
+        span {
+          text-transform: uppercase;
+          display: flex;
+          font-size: 73%;
+          align-items: center;
+        }
+      }
+      .info-sub {
+        display: block;
+        border: 1px solid var(--button-text-unimportant);
+        color: var(--button-text-color);
+        font-family: 'hind_m';
+        padding: 0.2rem 1rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .info-sub {
+        border: 1px solid var(--theme-color-1);
+        background: var(--theme-color-1);
+        color: var(--button-text-color-2);
+        cursor: pointer;
+
+        i {display: none;}
+        &::after {
+            content: "Subscribe";
+            display: inline;
+        }
+        &:hover {
+            background: unset;
+            color: var(--button-text-color);
+            border: 1px solid var(--button-text-unimportant);
+            i {display: inline;}
+        }
+        
+        &--subscribed {
+            border: 1px solid var(--button-text-unimportant);
+            background: unset;
+            color: var(--button-text-color);
+            position: relative;
+            &::after {
+                content: "Subscribed";
+                display: inline;
+            }
+            i {display: inline;}
+            &:hover {
+                background: var(--button-text-unimportant);
+                color: var(--button-text-color);
+                i {display: none;}
+                &::after {
+                    content: "UnSubscribe";
+                    display: inline;
+                }
+            }
+        }
+    }
+    }
+
+    main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: var(--button-text-important);
+      display: inline-flex;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      padding: 0.7rem 1rem 0.4rem 1rem;
+      
+      maintitle {
+        color: var(--light);
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 20px;
+        -webkit-line-clamp: 1;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        margin-top: auto;
+      }
+      info {
+        a {
+          color: var(--light);
+        }
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+    bottom-category {
+      margin-top: auto;
+      color: var(--danger);
+    }
+
+    .card {
+      background: unset;
+      box-shadow: unset;
+
+      display: flex;
+      flex-grow: 1;
+  
+      .w-50 {
+        display: flex;
+      }
+  
+      .card-body {
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  
+  .slider-nav {
+    text-align: center;
+    .left-arrow,
+    .right-arrow {
+      padding-top: 7px;
+      font-size: 20px;
+      color: var(--theme-color-1);
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 5px;
+      border: initial;
+      position: initial;
+      transform: initial;
+      top: initial;
+      left: initial;
+      right: initial;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  
+    .glide__arrow {
+      padding-top: 10px;
+    }
+  
+    .slider-dot-container {
+      display: inline-block;
+      position: initial;
+      text-align: center;
+      transform: initial;
+      left: initial;
+    }
+  
+    .btn {
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: initial;
+      }
+    }
+  }
+  
+  .slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 10px;
+    background: var(--separator-color);
+    outline: initial !important;
+    border: initial;
+    margin: 0 3px;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: initial;
+  
+    &.glide__bullet:hover, &.glide__bullet:focus {
+      background: var(--separator-color);
+      border: initial;
+    }
+  
+    &.glide__bullet--active {
+      background: var(--theme-color-1) !important;
+    }
+  }
+  
+  .glide {
+    .card-img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  .glide.details {
+    img {
+      margin-bottom: 0;
+    }
+  
+    .glide__slides {
+      margin-bottom: 0;
+    }
+  
+    .glide__slide {
+      padding: initial;
+    }
+  }
+  
+  
+  .glide.thumbs {
+    cursor: pointer;
+    width: 340px;
+    margin: 0 auto;
+    @include respond-below(sm) {
+      width: 300px;
+    }
+  
+    @include respond-below(xs) {
+      width: calc(100% - 80px);
+    }
+  
+    .glide__slide {
+      padding: initial;
+    }
+  
+    li {
+      text-align: center;
+      opacity: 0.4;
+      transition: opacity $animation-time-short;
+      height: 45px;
+      object-fit: cover;
+      &.active,
+      &:hover {
+        opacity: 1;
+      }
+  
+      img {
+        width: 60px;
+        margin-bottom: 0;
+      }
+    }
+  
+    .glide__slides {
+      margin-bottom: 0;
+    }
+  
+    .glide__arrows {
+      width: 100%;
+  
+      .glide__arrow--left {
+        border: initial;
+        background: initial;
+        box-shadow: initial;
+        top: 20px;
+        left: -50px;
+        font-size: 20px;
+        color: var(--theme-color-1);
+      }
+  
+      .glide__arrow--right {
+        border: initial;
+        background: initial;
+        box-shadow: initial;
+        top: 20px;
+        right: -50px;
+        font-size: 20px;
+        color: var(--theme-color-1);
+      }
+    }
+  }
+  
+  .bullet-text {
+    font-size: 0.85rem;
+}
+  .bullet-text:before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 5px;
+    display: inline-block;
+    background: var(--theme-color-1);
+    vertical-align: middle;
+}
+
+.card-body--custom {
+  padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+
+  & h6 {
+    font-weight: 600;
+  }
+}
+
+.title__wrapper {
+  display: flex;
+  justify-content: space-between; 
+  
+  & .titleBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+ 
+}
+.slick-prev {
+  margin-right: 0.4em;
+  left: -3rem;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--theme-color-2);
+    transition: all 0.3s;
+  }
+}
+.slick-next {
+  right: -3rem;
+  position: relative;
+  cursor: pointer;
+
+  & i {
+    margin-left: 3px;
+  }
+  
+  &:hover {
+    color: var(--theme-color-2);
+    transition: all 0.3s;
+  }
+}
+
+.slick-arrow {
+  background-color: var(--theme-color-3);
+  border: unset;
+  color: white;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.sliderBox {
+  position: absolute;
+  top: 37%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+}

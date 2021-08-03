@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Document</title>
+    {{!-- image API --}}
+    <link rel="preconnect" href="https://api.cloudimagewall.xyz">
+    {{!-- font --}}
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700" as="font">
+    {{!-- Font Icon CSS --}}
+    <link rel="stylesheet" href="/font/iconsmind-s/css/iconsminds.css" />
+    <link rel="stylesheet" href="/font/simple-line-icons/css/simple-line-icons.css" />
+
+    {{!-- bootstrap CSS --}}
+    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css" />
+    {{!-- JS cdn CSS --}}
+    <link rel="stylesheet" href="/css/vendor/glide.core.min.css" />
+    <link rel="stylesheet" href="/css/vendor/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="/css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="/css/vendor/dropzone.min.css" />
+
+    
+    {{!-- CSS Bundle --}}
+    {{!-- <link rel="stylesheet" href="/dist/css/Vendorbundle.css">  --}}
+    {{!-- nên gộp cả 2 file css bên dưới --}}
+    {{!-- CSS --}}
+    {{!-- <link rel="stylesheet" href="/css/app.css">  --}}
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/dore.light.purple.2.css" />
+    {{!-- <link rel="stylesheet" href="/css/dore.dark.blue.min.css" /> --}}
+    
+</head>
+
+<body>
+    <div class="app">
+
+        
+        {{> adminHeader}} 
+
+        
+            {{{body}}}
+       
+
+        {{> adminFooter}}
+        {{> errorMessage}}
+    </div>
+
+    
+    {{!-- jquerry --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{!-- Bootstrap --}}
+    <script src="/js/vendor/bootstrap.bundle.min.js"></script>
+    {{!-- Custom JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="/js/searchHandler.js"></script>
+    <script src="/js/fetchDataAPI.js"></script>
+    {{!-- JS cdn --}}
+    <script src="/js/vendor/datatables.min.js"></script>
+    <script src="/js/vendor/Chart.bundle.min.js"></script>
+    <script src="/js/vendor/glide.min.js"></script>
+    <script src="/js/vendor/dropzone.min.js"></script>
+    <script src="/js/vendor/bootstrap-tagsinput.min.js"></script>
+    <script src="/js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="/js/checkInput.js"></script>
+    <script src="/js/dore.script.js"></script>
+    <script src="/js/scripts.single.theme.js"></script>
+
+</body>
+
+</html>

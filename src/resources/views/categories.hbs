@@ -1,0 +1,53 @@
+<style>
+    body {
+        background: var(--foreground-color);
+    }
+</style>
+<categories-wrapper id="categories-wrapper">
+    <div class="categories-inner">
+        <ul class="categories">
+            <li onclick="location = this.children[0].href" class="category active">
+            <a href="/comic/categories/all">All</a>
+            </li>
+            {{#each firstCategories}}
+            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+            <li class="category"><div onclick="return drop(this);" class="more">More<i class="fas fa-sort-down"></i></div></li>
+        </ul>
+    </div>
+    <div id="categories-outer" class="categories-outer">
+        <ul class="categories">
+            {{#each remainingCategories}}
+            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</categories-wrapper>
+
+<section id="card-wrapper">
+    <grid-container>
+        {{#each comics}}
+        <grid-comic-item class="grid__item">
+            <a href="/comic/{{this.slug}}">
+                <background-overlay></background-overlay>
+                <img width="200" height="200" loading="lazy" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp
+                " alt="">
+                <comic-info>
+                    <title class="title title--ellipsis title--bot">
+                        {{this.title}}
+                    </title>
+                    <grade>
+                        {{this.author}}
+                    </grade>
+                    <category class="d-none">
+                        Action
+                    </category>
+                </comic-info>
+            </a>
+        </grid-comic-item>
+        {{/each}}
+    </grid-container>
+
+    
+{{> pagination}} 
+</section>

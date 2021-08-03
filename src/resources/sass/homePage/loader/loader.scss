@@ -1,0 +1,191 @@
+$white: #fff;
+$dark: #1e1e26;
+$highlight: #c8102e;
+
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap");
+
+section {
+	font-family: "PT Sans Narrow", Ariel, sans-serif !important;
+	font-weight: 300;
+	box-sizing: border-box;
+	*,
+	*::before,
+	*::after {
+		font-family: inherit;
+		font-weight: inherit;
+		box-sizing: inherit;
+	}
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 50%;
+	&:first-child {
+		background: $dark;
+	}
+}
+
+#loader {
+	position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000;
+}
+
+.app-loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: $white;
+	width: 100%;
+	height: 100vh;
+	padding: 3rem 1rem;
+
+	&.light {
+		color: $dark;
+		.app-loader {
+			&__wisk {
+				&-handle {
+					background: $white;
+				}
+			}
+			&__bowl {
+				background: $white;
+			}
+		}
+	}
+
+	&__text {
+		// font-size: 1.75rem !important;
+		display: flex;
+		justify-content: center;
+		text-transform: uppercase;
+		margin: 0 0 4rem;
+		width: 100%;
+		span {
+			flex: 0 0 auto;
+			position: relative;
+			animation: flip 10s ease-in infinite;
+			perspective: 1000px;
+			transform-style: preserve-3d;
+			transform-origin: 50% 50%;
+			@for $i from 0 through 50 {
+				&:nth-of-type(#{$i + 1}) {
+					animation-delay: #{$i * 100ms};
+					z-index: #{$i + 1};
+				}
+			}
+			sup,
+			sub {
+				color: currentColor;
+				transition: none;
+				display: block;
+				backface-visibility: hidden;
+				font-style: normal;
+			}
+			sub {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				transform: rotateY(-180deg) scaleX(-1);
+				color: $highlight;
+			}
+		}
+		i {
+			flex: 0 0 0.75ch;
+		}
+	}
+
+	&__wisk {
+		display: flex;
+		z-index: 1;
+		margin: 0;
+		transform-origin: bottom;
+		animation: depth 2s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+		transform: translateZ(-1px) scale(0.9, 0.9);
+
+		&-inner {
+			display: flex;
+			width: 100%;
+			flex-direction: column;
+			align-items: center;
+			animation: length 2s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+			transform: translateX(-45%) rotateZ(-10deg) rotateX(-5deg);
+		}
+
+		&-handle {
+			width: 1.75rem;
+			height: 2.75rem;
+			border: 0.25rem solid;
+			border-radius: 0.25rem;
+			background: $dark;
+			z-index: 2;
+		}
+
+		&-wires {
+			position: relative;
+			height: 5rem;
+			width: 5rem;
+			border: 0.25rem solid;
+			border-radius: 0% 100% 45% 55% / 0% 55% 45% 100%;
+			transform: rotate(45deg);
+			transform-origin: 50%;
+			z-index: 1;
+			margin-bottom: -2rem;
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 50%;
+				bottom: 0;
+				height: 100%;
+				width: 100%;
+				border-radius: 0% 100% 20% 80% / 0% 80% 20% 100%;
+				transform: translateX(-50%) scale(0.75);
+				margin-top: -0.5rem;
+				margin-left: -0.5rem;
+				border: 0.25rem solid;
+			}
+		}
+	}
+
+	&__bowl {
+		height: 4.5rem;
+		width: 9rem;
+		border: 0.25rem solid;
+		border-radius: 0.25rem 0.25rem 3rem 3rem;
+		background: $dark;
+		z-index: 2;
+		transform: translateZ(5px);
+	}
+}
+
+@keyframes flip {
+	0% {
+		transform: translateX(0) rotateY(0deg);
+	}
+	5% {
+		transform: translateX(-100%) rotateY(220deg);
+	}
+	10% {
+		transform: translateX(0) rotateY(360deg);
+	}
+	100% {
+		transform: translateX(0) rotateY(360deg);
+	}
+}
+
+@keyframes depth {
+	50% {
+		animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+		transform: translateX(25%) rotateZ(6deg) rotateX(10deg);
+	}
+}
+
+@keyframes length {
+	50% {
+		animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+		transform: translateZ(2px) scale(1.025, 1.025);
+	}
+}

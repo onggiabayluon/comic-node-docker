@@ -1,0 +1,99 @@
+<style>
+    .form-control {
+        border:none;
+        border-bottom: 1px solid var(--separator-color);
+        outline: none;
+    }
+    .form-group {
+        padding-top: 0.5rem;
+        font-size: 1rem;
+    }
+</style>
+<body class="background show-spinner no-footer">
+    <div class="fixed-background"></div>
+    <main>
+        <div class="container">
+            <div class="row h-100">
+                <div class="col-12 col-md-10 mx-auto my-auto">
+                    <div class="card auth-card">
+                        <div class="position-relative image-side ">
+
+                            <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
+
+                            <p class="white mb-0">
+                                Please use this form to register.
+                                <br>If you are a member, please
+                                <a href="#" class="white">login</a>.
+                            </p>
+                        </div>
+                        <div class="form-side">
+                            {{!-- <a href="Dashboard.Default.html">
+                                <span class="logo-single"></span>
+                            </a> --}}
+                            
+                            
+
+                            <h2 class="mb-5 ml-1 "><i class="p-2 fas fa-user-plus"></i></i>Register</h2>
+                            
+                            <form id="comicCreateForm" action="/users/register" method="POST">
+                                <label class="form-group has-float-label">
+                                    <span class="mr-2">Name</span>
+                                    <input class="form-control" type="name" id="name" name="name" class="customInput" value="{{name}}" required
+                                        minlength="1" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                </label>
+                                <label class="form-group has-float-label">
+                                    <span class="mr-2">Email</span>
+                                    <input class="form-control" type="email" id="email" name="email" class="customInput" value="{{email}}" required
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                </label>
+                                <label class="form-group has-float-label">
+                                    <span class="mr-2">Password</span>
+                                    <input class="form-control" type="password" id="password" name="password" class="customInput" 
+                                        value="{{password}}" required minlength="6" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                </label>
+                                <label class="form-group has-float-label">
+                                    <span class="mr-2">Confirm Password</span>
+                                    <input class="form-control" type="password" id="password2" name="password2" class="customInput" 
+                                        value="{{password2}}" required minlength="6" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                </label>
+
+                                <div class="d-flex justify-content-between align-items-center mt-5">
+                                
+                                    <a href="/users/login" class="btn btn-outline-primary btn-sm btn-shadow" >GO LOGIN</a>
+                                    <button  class="btn btn-primary btn-lg btn-shadow" type="submit">REGISTER</button> 
+                                </div>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+

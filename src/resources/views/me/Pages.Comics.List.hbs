@@ -1,0 +1,452 @@
+<head>
+    <title>Dore jQuery</title>
+    {{!--
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
+
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+
+    <form name="container-form" method="POST" action="/me/stored/handle-form-action-for-comics" class="mt-4">
+        <main>
+
+            <div class="container-fluid disable-text-selection">
+
+                
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <h1>Comics List </h1>
+                            <div class="text-zero top-right-button-container">
+
+                                <div class="btn-group">
+
+                                    <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+                                        <label class="custom-control custom-checkbox mb-0 d-inline-block"
+                                            aria-label="checkboxall">
+                                            <input type="checkbox" class="custom-control-input" id="checkAll">
+                                            <span class="custom-control-label">&nbsp;</span>
+                                        </label>
+                                    </div>
+                                    <div class="input-group">
+                                        <select class="custom-select" id="inputGroupSelect04" name="action"
+                                            aria-label="inputGroupSelect04">
+                                            <option selected>Chọn hành động...</option>
+                                            <option value="delete">Xóa</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary btn-sm " id="multifunctionButton"
+                                                data-target="#delete-multi">Áp dụng</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block"
+                                aria-label="breadcrumb">
+                                <ol class="breadcrumb pt-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="#">Pages</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">All Comics</li>
+                                </ol>
+                            </nav>
+
+                        </div>
+
+                        <div class="mb-2">
+                            <a class="display-text pb-2 d-inline-block d-md-none" data-toggle="collapse"
+                                href="#displayOptions" role="button" aria-expanded="true"
+                                aria-controls="displayOptions">
+                                Display Options
+                                <i class="simple-icon-arrow-down align-middle"></i>
+                            </a>
+
+                            {{!-- Sort Icon --}}
+                            <div class="collapse d-md-block" id="displayOptions">
+                                <span class="ml-2 pt-2 mr-3 mb-2 d-inline-block float-md-left">
+
+                                    {{{sortable 'title' _sort}}}
+
+                                    {{{sortable 'updatedAt' _sort}}}
+                
+                                </span> {{!-- End Sort Icon --}}
+
+                                <div class="container-flex d-flex justify-content-between flex-wrap">
+                                    <div class="d-flex align-items-center position-relative">
+                                        <a href="/me/stored/comics/create">
+                                            <button type="button" class="btn btn-primary mb-1 "
+                                                style="color: white;">Tạo truyện</button>
+                                        </a>
+
+                                            <div class="search-sm d-inline-block ml-3 mb-1">
+                                                <input id="search" type="text" class="w-100"
+                                                    placeholder="Search...">
+                                            </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="separator mb-5"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 list" data-check-all="checkAll">
+                        {{#ifCond noComics '==' true}}
+                        <p class="text-center">Bạn chưa đăng Truyện nào hết !!</p>
+                        <p class="text-center">Hãy Nhấn vào nút 
+                           <a href="/me/stored/comics/create" 
+                           class="text-primary"> Tạo Truyện Mới </a> </p>
+                        {{/ifCond}}
+                        <div id="match-list">
+                            {{#each comics}}
+                            <div class=" card d-flex flex-row mb-3">
+                                <a class="d-flex thumbnail-frame" href="/me/stored/comics/{{this.slug}}/edit"
+                                    aria-label="{{this.slug}}">
+                                    {{#if this.thumbnail}}
+                                    <img src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp"
+                                        type="image/webp"
+                                        class="list-thumbnail responsive border-0  my-thumb-style"
+                                        alt="image">
+                                    {{else}}
+                                    <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
+                                        class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+                                    {{/if}}
+                                </a>
+                                <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                    <div
+                                        class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                                        <a href="/me/stored/comics/{{this.slug}}/edit" class="w-40 w-sm-100">
+                                            <p class="list-item-heading mb-0 truncate">{{this.title}}</p>
+                                        </a>
+
+                                        <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
+                                            {{this.comicUpdateTime}}</p>
+
+                                        <div class="mt-2 d-flex align-items-center mb-0 w-40 w-sm-100 myPadding-top-sm justify-content-around">
+                                            <div class="w-20">
+                                                <span style="width: 7em;" class="badge badge-outline-primary">{{this.userName}}</span>
+                                            </div>
+                                            {{#ifCond this.isPublish '==' true}}
+                                            <div class="">
+                                                <span class="badge badge-primary">PUBLISH</span>
+                                            </div>
+                                            {{else}}
+                                            <div class="">
+                                                <span class="badge badge-outline-danger">PENDING</span>
+                                            </div>
+                                            {{/ifCond}}
+                                        </div>
+                                        
+
+                                        <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
+                                            style="justify-content: space-evenly;">
+
+                                            <a aria-label="Copy ID" type="button"
+                                                onclick="CompleteState('{{this._id}}'); copyToClipboard('{{this._id}}')"
+                                                class="tooltipIcon copy-Btn" style="align-items: center;">
+                                                <div id="circle-loader_{{this._id}}" class="circle-loader"
+                                                    style="cursor: pointer;">
+                                                    <div id="checkmark_{{this._id}}" class="checkmark draw"></div>
+                                                </div>
+                                                <span id="{{this._id}}" class="tooltiptext" value="{{this._id}}">
+                                                    Copy ID</span>
+                                                <div class="icon-container">
+                                                    <div class="svg_box_2 mr-2" style="margin-top: -51px; " aria-label="copy">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                        <!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                        <path
+                                                            d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z" />
+                                                    </svg>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </a>
+                                            <a aria-label="Chapter List" type="button"
+                                                href="/me/stored/comics/{{this.slug}}/chapter-list" class="tooltipIcon">
+                                                <span class="tooltiptext"> Chapter List </span>
+                                                <div class="icon-container">
+                                                    <div class="svg_box_2 mr-2" style="margin-top: 10px;" aria-label="layer-group">
+                                                        <svg 
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><defs><style>.fa-secondary{opacity:.65}</style></defs><path d="M12.41 236.31L70.51 210l161.63 73.27a57.64 57.64 0 0 0 47.72 0L441.5 210l58.09 26.33c16.55 7.5 16.55 32.5 0 40L266.64 381.9a25.68 25.68 0 0 1-21.29 0L12.41 276.31c-16.55-7.5-16.55-32.5 0-40z" class="svg_color_theme_1 fa-secondary"/><path d="M12.41 148l232.94 105.7a25.61 25.61 0 0 0 21.29 0L499.58 148c16.55-7.51 16.55-32.52 0-40L266.65 2.32a25.61 25.61 0 0 0-21.29 0L12.41 108c-16.55 7.5-16.55 32.52 0 40zm487.18 216.11l-57.87-26.23-161.86 73.37a57.64 57.64 0 0 1-47.72 0L70.29 337.88l-57.88 26.23c-16.55 7.5-16.55 32.5 0 40L245.35 509.7a25.68 25.68 0 0 0 21.29 0l233-105.59c16.5-7.5 16.5-32.5-.05-40z" class="fa-primary"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a aria-label="Xóa" type="button" href="#" class="tooltipIcon"
+                                                style="align-items: center;">
+                                                <span class="tooltiptext"> Xóa </span>
+                                                <div class="icon-container" data-toggle="modal" data-id="{{this.slug}}"
+                                                    data-target="#delete-course-modal">
+                                                    <div class="svg_box_2 mr-2" style="margin-top: 10px;" aria-label="layer-group" aria-label="trash-alt"> 
+                                                        <svg 
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><defs><style>.fa-secondary{opacity:.5}</style></defs><path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96H32zm272-288a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0z" class="fa-secondary"/><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM128 160a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16z" class="fa-primary"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        
+                                    </div>
+                                    {{!-- checkbox --}}
+                                    <label class="custom-control custom-checkbox mb-1 align-self-center pr-4"
+                                        aria-label="checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="comicSlug[]"
+                                            value="{{this.slug}}">
+                                        <span class="custom-control-label">&nbsp;</span>
+                                    </label>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+
+                        {{> pagination}}
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+
+</body>
+
+{{!-- Confirm delete course --}}
+<div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa truyện !!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa truyện này ?? </p>
+                <p class="text-danger">Hành động này sẽ xóa tất cả chapter liên quan </p>
+                <p class="text-danger"> Không thể hoàn tác lại nếu xóa!!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-course" type="button" class="btn btn-danger">
+                    Xóa bỏ</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- hidden form to delete stuff --}}
+<form name="hidden-form" method="POST">
+
+</form>
+
+{{!-- Search Template --}}
+<script id="userSearch-template" type="text/x-handlebars-template">
+    \{{#each comics}}
+    <div class=" card d-flex flex-row mb-3">
+        <a class="d-flex thumbnail-frame" href="/me/stored/comics/\{{this.slug}}/edit" aria-label="\{{this.slug}}">
+            \{{#each thumbnail}}
+            <img data-bg="\{{this.url}}" class="thumbnailsLoader list-thumbnail responsive border-0  my-thumb-style"
+                alt="image">
+            \{{else}}
+            <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
+                class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+            \{{/each}}
+        </a>
+        <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+            <div
+                class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                <a href="/me/stored/comics/\{{this.slug}}/edit" class="w-40 w-sm-100">
+                    <p class="list-item-heading mb-0 truncate">\{{this.title}}</p>
+                </a>
+
+                <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
+                    \{{this.comicUpdateTime}}</p>
+
+                <div class="mt-2 d-flex align-items-center mb-0 w-40 w-sm-100 myPadding-top-sm justify-content-around">
+                    <div class="w-20">
+                        <span style="width: 7em;" class="badge badge-outline-primary">\{{this.userName}}</span>
+                    </div>
+                    \{{#ifCond this.isPublish '==' true}}
+                    <div class="">
+                        <span class="badge badge-primary">PUBLISH</span>
+                    </div>
+                    \{{else}}
+                    <div class="">
+                        <span class="badge badge-outline-danger">PENDING</span>
+                    </div>
+                    \{{/ifCond}}
+                </div>
+
+
+                <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm" style="justify-content: space-evenly;">
+
+                    <a aria-label="Copy ID" type="button"
+                        onclick="CompleteState('\{{this._id}}'); copyToClipboard('\{{this._id}}')"
+                        class="tooltipIcon copy-Btn" style="align-items: center;">
+                        <div id="circle-loader_\{{this._id}}" class="circle-loader" style="cursor: pointer;">
+                            <div id="checkmark_\{{this._id}}" class="checkmark draw"></div>
+                        </div>
+                        <span id="\{{this._id}}" class="tooltiptext" value="\{{this._id}}">
+                            Copy ID</span>
+                        <div class="icon-container">
+                            <div class="svg_box_2 mr-2" style="margin-top: -51px; " aria-label="copy">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                    <path
+                                        d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z" />
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+                    <a aria-label="Chapter List" type="button" href="/me/stored/comics/\{{this.slug}}/chapter-list"
+                        class="tooltipIcon">
+                        <span class="tooltiptext"> Chapter List </span>
+                        <div class="icon-container">
+                            <div class="svg_box_2 mr-2" style="margin-top: 10px;" aria-label="layer-group">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                    <defs>
+                                        <style>
+                                            .fa-secondary {
+                                                opacity: .65
+                                            }
+                                        </style>
+                                    </defs>
+                                    <path
+                                        d="M12.41 236.31L70.51 210l161.63 73.27a57.64 57.64 0 0 0 47.72 0L441.5 210l58.09 26.33c16.55 7.5 16.55 32.5 0 40L266.64 381.9a25.68 25.68 0 0 1-21.29 0L12.41 276.31c-16.55-7.5-16.55-32.5 0-40z"
+                                        class="svg_color_theme_1 fa-secondary" />
+                                    <path
+                                        d="M12.41 148l232.94 105.7a25.61 25.61 0 0 0 21.29 0L499.58 148c16.55-7.51 16.55-32.52 0-40L266.65 2.32a25.61 25.61 0 0 0-21.29 0L12.41 108c-16.55 7.5-16.55 32.52 0 40zm487.18 216.11l-57.87-26.23-161.86 73.37a57.64 57.64 0 0 1-47.72 0L70.29 337.88l-57.88 26.23c-16.55 7.5-16.55 32.5 0 40L245.35 509.7a25.68 25.68 0 0 0 21.29 0l233-105.59c16.5-7.5 16.5-32.5-.05-40z"
+                                        class="fa-primary" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                    <a aria-label="Xóa" type="button" href="#" class="tooltipIcon" style="align-items: center;">
+                        <span class="tooltiptext"> Xóa </span>
+                        <div class="icon-container" data-toggle="modal" data-id="\{{this.slug}}"
+                            data-target="#delete-course-modal">
+                            <div class="svg_box_2 mr-2" style="margin-top: 10px;" aria-label="layer-group"
+                                aria-label="trash-alt">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                    <defs>
+                                        <style>
+                                            .fa-secondary {
+                                                opacity: .5
+                                            }
+                                        </style>
+                                    </defs>
+                                    <path
+                                        d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96H32zm272-288a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0z"
+                                        class="fa-secondary" />
+                                    <path
+                                        d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM128 160a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16z"
+                                        class="fa-primary" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
+            \{{!-- checkbox --}}
+            <label class="custom-control custom-checkbox mb-1 align-self-center pr-4" aria-label="checkbox">
+                <input type="checkbox" class="custom-control-input" name="comicSlug[]" value="\{{this.slug}}">
+                <span class="custom-control-label">&nbsp;</span>
+            </label>
+        </div>
+    </div>
+    \{{/each}}
+</script>
+
+
+    <script src="/js/thumbnailsLoader.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        /* Start Search */
+        var userData
+        var fetchAPIUrl = 'http://localhost:3000/fetch/comics'
+        var search = document.getElementById('search');
+        var matchList = document.getElementById('match-list');
+        var source = document.getElementById("userSearch-template").innerHTML;
+        var invoke_one_time = true;
+        var templateObjProperty = 'comics'
+
+        search.addEventListener("click", runSearch_OneTime);
+
+        function filterProperty(data, regex) {
+            return data.title.match(regex) || data.titleForSearch.match(regex) || data.userName.match(regex)
+        }
+        function runSearch_OneTime() {
+            if (invoke_one_time) {
+                runSearch()
+                invoke_one_time = false;
+            }
+        }
+        runSearch = async () => {
+            userData = await getData(fetchAPIUrl)
+            SearchHandler(userData, search, matchList, source, templateObjProperty, filterProperty, awaitGetImages)  
+        } /* End Search */
+
+        var comicSlug;
+        var hiddenForm = document.forms['hidden-form'];
+        var btnDeleteCourse = document.getElementById('btn-delete-course');
+
+        //dựa vào show modal rồi lưu slug
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            //bấm vào button lưu id vào comicSlug từ button-data bên trên
+            comicSlug = button.data('id');
+        });
+        btnDeleteCourse.onclick = function () {
+            hiddenForm.action = '/me/stored/destroyComic/' + comicSlug + '?_method=DELETE';
+            hiddenForm.submit();
+        };
+
+    });
+</script>
+
+<script type="text/javascript">
+    setTimeout(function () {
+        $('.alert-danger').fadeOut('fast');
+        $('.alert-success').fadeOut('fast');
+    }, 5000); // <-- time in milliseconds
+    //Copy to Clipboard
+    const copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    };
+    //Circle loader Complete state
+    const CompleteState = (id) => {
+        var text = $('#' + id).text();
+        if (text.replace(/\s/g, '') == "CopyID") {
+            $('#' + id).text(text.replace('Copy ID', 'Success'))
+        } else {
+            $('#' + id).text(text.replace('Success', 'Copy ID'))
+        }
+        $('#circle-loader_' + id).toggleClass('load-complete');
+        $('#checkmark_' + id).toggle();
+    };
+
+</script>

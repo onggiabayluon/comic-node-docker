@@ -1,0 +1,698 @@
+<style>
+    .img__PlaceholderLoader {
+        height: auto;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    /* image__dummy image styles */
+    .image__dummy {
+        box-sizing: border-box;
+        display: inline-block;
+        position: relative;
+    }
+
+    .image__dummy:before {
+        content: '';
+        position: absolute;
+        background: #fff;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .image__dummy:after {
+        content: attr(width) " x "attr(height);
+        white-space: pre;
+        color: #fff;
+        text-align: center;
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: calc(50% - .5em);
+        font-size: 100%;
+    }
+
+    .image__dummy.image__dummy--alt:after {
+        content: attr(image__dummy--alt);
+    }
+
+    .image {
+        position: relative;
+        background: url('/img/loading-placeholder.svg') center center no-repeat;
+        background-size: 300px 100px;
+        text-align: center;
+        width: fit-content;
+        margin: auto;
+    }
+
+    .image__Frame {
+        color: #fff;
+        border-color: #000;
+        border-image: initial;
+        border-style: none;
+        border-width: medium;
+        height: auto;
+        margin-bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        width: auto;
+        z-index: 999;
+        position: relative;
+    }
+
+
+    @media only screen and (max-width: 550px) {
+        .image__Frame {
+            width: 400px;
+            min-height: 400px;
+        }
+    }
+
+
+    @media only screen and (min-width: 550px) {
+        .image__Frame {
+            width: 700px;
+            min-height: 700px;
+        }
+    }
+
+
+    @media only screen and (min-width: 850px) {
+        .image__Frame {
+            width: 1000px;
+            min-height: 1000px;
+        }
+    }
+</style>
+<style>
+    #subnav {
+        margin-bottom: 3rem;
+    }
+    .subnav-container {
+        padding: 0 !important;
+    }
+    images-container {
+        display: block;
+        max-width: 1000px;
+        margin: 0 auto;
+        
+    }
+    
+    .fixed-ratio {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .fixed-ratio-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        max-width: inherit;
+    }
+
+</style>
+<main>
+    <nav id="chapterNavbar" class="chapterNavbar mb-4">
+
+        <left-items id="left-items">
+            <a class="navbar-logo d-flex" href="/">
+                <span class="logo d-none d-xs-block"></span>
+                {{!-- <h1 class="logo__title">Dore</h1> --}}
+                <span class="logo-mobile d-block d-xs-none" style="margin-bottom: 6px;"></span>
+            </a>
+            <a href="/comic/{{comics.slug}}" class="title title--ellipsis">
+                {{comics.title}}
+            </a>
+            <i class="m-custom ico fas fa-angle-right"></i>
+            <a href="/comic/{{comics.title}}/{{chapter.chapter}}" class="m-custom title chapter">
+                {{replaceHyphenIntoSpace chapter.chapter}}
+            </a>
+        </left-items>
+
+        <mid-items id="mid-items">
+            {{#if prevChapter}}
+            <a href="/comic/{{comics.slug}}/{{prevChapter.chapter}}"><i class="fad fa-2x fa-caret-square-left"></i></a>
+            {{else}}
+            <a href="#"><i class="fad fa-2x fa-caret-square-left"></i></a>
+            {{/if}}
+            
+            <select id="remove" onchange="location = this.value;" class="custom-select">
+                <option selected> {{replaceHyphenIntoHashmark chapter.chapter}}</option>
+                {{#each comics.chapters}}
+                    <option value="/comic/{{../comics.slug}}/{{this.chapter}}">{{replaceHyphenIntoHashmark this.chapter}}</option>
+                {{/each}}
+            </select>
+
+            {{#if nextChapter}}
+            <a href="/comic/{{comics.slug}}/{{nextChapter.chapter}}"><i class="fad fa-2x fa-caret-square-right"></i></a>
+            {{else}}
+            <a href="#"><i class="fad fa-2x fa-caret-square-right"></i></a>
+            {{/if}}
+
+        </mid-items>
+
+        <right-items id="right-items">
+            <a href="/"><i class="far fa-home mr-1"></i></a>
+        </right-items>
+    </nav>
+
+    <div id="breadcrumbContainer" class="container mb-4">
+        <nav class="breadcrumb-container d-lg-inline-block" aria-label="breadcrumb">
+            <ol class="breadcrumb pt-0">
+                <li class="breadcrumb-item mx-auto">
+                    <a href="/comic/{{comics.slug}}">{{comics.title}}</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    
+    {{#if prevChapter}}
+    <div class="container mb-4 image__Frame" style="min-height: unset;">
+        <chaptercard>
+            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/{{prevChapter.chapter}}">
+                <img width="92" height="98" class="card-img-left"
+                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
+                    alt="Card image cap">
+                <info id="info">
+                    <div class="maintext">Prev Chapter</div>
+                    <div class="subtext">{{replaceHyphenIntoSpace prevChapter.chapter}}</div>
+                </info>
+                <right-icon id="right-icon">
+                    <i class="far fa-chevron-circle-left"></i>
+                </right-icon>
+            </a>
+        </chaptercard>
+    </div>
+    {{/if}}
+
+
+    {{!-- show images --}}
+    <images-container>
+    {{#each chapter.image}}
+        {{!-- <div class="image"> --}}
+            <picture class="lazy fixed-ratio " style="padding-top: 150%;">
+                <source id="image--Main"
+                    data-srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.url}}"
+                    data-srcmain="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.url}}-large.jpeg"
+                    type="image/jpeg" />
+    
+                <img data-srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.url}}-large.jpeg"
+                    class="image fixed-ratio-content" onerror="this.onerror=null;this.src='/img/404.jpg';" />
+            </picture>
+        {{!-- </div> --}}
+    
+    {{/each}} {{!-- 🛑 End show images --}}
+    </images-container>
+
+
+<bottom-container class="p-3 d-block">
+    {{#if nextChapter}}
+    <div class="mt-4 image__Frame" style="min-height: unset;">
+        <chaptercard>
+            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/{{nextChapter.chapter}}">
+                <img width="92" height="98" class="card-img-left"
+                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
+                    alt="Card image cap">
+                <info id="info">
+                    <div class="maintext">Next Chapter</div>
+                    <div class="subtext">
+                        {{replaceHyphenIntoSpace nextChapter.chapter}}
+                    </div>
+                </info>
+                <right-icon id="right-icon">
+                    <i class="far fa-chevron-circle-right"></i>
+                </right-icon>
+            </a>
+        </chaptercard>
+    </div>
+    {{/if}}
+
+    <div id="commentbox" class="card container mt-4 mb-4">
+
+        <tools-header id="theader" class="theader">
+            <div class="title">
+                Comments
+                <span class="title__counter text-small"> ({{#if comments.[0].maxComment}} {{comments.[0].maxComment}} {{else}} 0
+                    {{/if}}) </span>
+            </div>
+            <div class="sort-menu">
+                <div class="sort-text dropdown show">
+                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="sort-icon"></i>
+                        Sort
+                    </a>
+
+                    <div id="sort-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="?">Default</a>
+                        <a class="dropdown-item" href="?_sort&column=commentArr&type=-1#commentbox">Newest</a>
+                        <a class="dropdown-item" href="?_sort&column=commentArr&type=1#commentbox">Oldest</a>
+                        <a class="dropdown-item" href="?_sort&_match=all&column=chapter&type=1#commentbox">All</a>
+                    </div>
+                </div>
+            </div>
+        </tools-header>
+
+        {{!-- {{#if user}} --}}
+        <simplebox id="simplebox" class="comment mb-4">
+            <div id="body" class="comment__body">
+                <thumbnail id="author-thumbnail" class="author-thumbnail">
+                    <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                </thumbnail>
+                <div id="main" class="main comment__form">
+                    <form id="postCommentForm" method="POST" onsubmit="return postComment(this);"
+                        enctype="application/x-www-form-urlencoded">
+                        <label class="form-group has-float-label">
+
+                            <input onfocus="return showInput(this);" placeholder="Add a comment ..." name="text"
+                                class="form-control custom-input customInput" required minlength="1">
+
+                            <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                <path d="M0 1 L40 1"></path>
+                                <path d="M0 1 L40 1" class="focus"></path>
+                                <path d="M0 1 L40 1" class="invalid"></path>
+                                <path d="M0 1 L40 1" class="valid"></path>
+                            </svg>
+                        </label>
+                        <div id="buttonbox" class="buttonbox">
+                            <button onfocus="return resetInput(this);"
+                                class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                            <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                POST</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </simplebox>
+        {{!-- {{else}}
+        <p class="text-medium">Login to comment</p>
+        <a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
+        <a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
+        {{/if}} --}}
+
+        <comments-container id="commentcontainer">
+            {{#each comments}}
+            {{#each this.commentArr}}
+            <comment-thread-renderer id="comment-{{this._id}}">
+
+                <comment-renderer id="comment" class="comment">
+                    {{!-- body --}}
+                    <div id="body" class="comment__body">
+                        {{!-- thumbnail --}}
+                        <thumbnail id="author-thumbnail" class="author-thumbnail">
+                            <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                        </thumbnail>
+
+                        {{!-- main --}}
+                        <div id="main" class="main">
+                            {{!-- header info --}}
+                            <header id="header" class="header">
+                                <div id="header-author" class="header__author">India pagoda</div>
+                                <div id="header-timer" class="header__timer text-muted text-small">{{CalcTimeEnglish updatedAt}}</div>
+                            </header>
+
+                            {{!-- comment --}}
+                            <comment id="content" class="content">
+                                <div id="text" class="content__text">{{this.text}}</div>
+                                <form method="POST" onsubmit="return editCommentForm(this);"
+                                    enctype="application/x-www-form-urlencoded">
+                                    <input name="comment_id" value="{{this._id}}" type="hidden">
+                                    <textarea name="text" style="display:none"></textarea>
+                                    <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
+                                        <button onfocus="return normalState(this);"
+                                            class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                        <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                            Edit</button>
+                                    </div>
+                                </form>
+                            </comment>
+
+                            {{!-- toolbar --}}
+                            <toolbar id="toolbar" class="toolbar">
+                                <div id="like"><i class="fas fa-thumbs-up"></i></div>
+                                <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
+                                {{#if user}}
+                                <div onclick="return showReplyBox(this);" id="reply">Reply</div>
+                                {{/if}}
+                            </toolbar>
+
+                            {{!-- replydialog --}}
+                            <replydialog id="replydialog" class="replydialog d-none">
+                                <simplebox id="replybox" class="comment mb-4">
+                                    <div class="comment__body">
+                                        <thumbnail id="author-thumbnail"
+                                            class="author-thumbnail author-thumbnail--small">
+                                            <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                        </thumbnail>
+                                        <div class="comment__form">
+                                            <form method="POST" onsubmit="return postReply(this);"
+                                                enctype="application/x-www-form-urlencoded">
+                                                <label class="form-group has-float-label">
+                                                    <input name="comment_id" value="{{this._id}}" type="hidden"></input>
+                                                    <input placeholder="Add a comment ..."
+                                                        class="form-control custom-input customInput" name="text"
+                                                        required minlength="1">
+
+                                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                                        <path d="M0 1 L40 1"></path>
+                                                        <path d="M0 1 L40 1" class="focus"></path>
+                                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                                        <path d="M0 1 L40 1" class="valid"></path>
+                                                    </svg>
+                                                </label>
+                                                <div id="buttonbox" class="buttonbox buttonbox--flex">
+                                                    <button onfocus="return resetInput(this);"
+                                                        class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                    <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                        POST</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </simplebox>
+                            </replydialog>
+
+                            {{!-- replies expander --}}
+                            {{setVar "replyLength" (getValues ../this.replyLength @index)}}
+                            {{#ifCond @root.replyLength '>=' 1}}
+                            <expander id="replies" class="replies">
+                                <comment-replies-renderer>
+                                    <expanderbtn onclick="return expander(this);" id="expander" class="expander"
+                                        data-expander="hide">
+                                        <div id="more-replies" class="expander__more">
+                                            <i class="expander__icon fas fa-caret-down"></i>
+                                            <span class="expander__text">{{@root.replyLength}} more replies</span>
+                                        </div>
+                                        <div id="less-replies" class="expander__less d-none">
+                                            <i class="expander__icon fas fa-caret-up"></i>
+                                            <span class="expander__text">Hide {{@root.replyLength}} replies</span>
+                                        </div>
+                                    </expanderbtn>
+                                </comment-replies-renderer>
+                            </expander>
+                            {{/ifCond}}
+
+                            {{!-- Edit menu --}}
+                            <action-menu-renderer class="action-menu-renderer">
+                                <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="menu__icon fas fa-ellipsis-v"></i>
+                                    <div class="menu__dropdown dropdown-menu">
+                                        <a onclick="return editableContent(this);" class="dropdown-item" href="#">
+                                            Edit</a>
+                                        <a class="dropdown-item" href="#">Report</a>
+                                        <div class="dropdown-divider"></div>
+
+                                        <form method="POST" onclick="return destroyComment(this);"
+                                            enctype="application/x-www-form-urlencoded">
+                                            <input class="form-control" name="comment_id" value="{{this._id}}"
+                                                type="hidden"></input>
+                                            <button type="submit" aria-label="Close"
+                                                class="text-danger dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </action-menu>
+                            </action-menu-renderer>
+                        </div> {{!-- End main --}}
+
+
+                    </div> {{!-- End body --}}
+
+                </comment-renderer>
+
+                {{#each this.reply}}
+                <replies-renderer id="reply-{{this._id}}" class="expander__content expander__content--hide">
+                    <comment-renderer id="comment" class="comment">
+                        {{!-- body --}}
+                        <div id="body" class="comment__body">
+                            {{!-- thumbnail --}}
+                            <thumbnail id="author-thumbnail" class="author-thumbnail">
+                                <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                            </thumbnail>
+
+                            {{!-- main --}}
+                            <div id="main" class="main">
+                                {{!-- header info --}}
+                                <header id="header" class="header">
+                                    <div id="header-author" class="header__author">India Pagoda </div>
+                                    <div id="header-timer" class="header__timer text-muted text-small">3 hours ago</div>
+                                </header>
+
+                                {{!-- comment --}}
+                                <comment id="content" class="content">
+                                    <div id="text" class="content__text">{{this.text}}</div>
+                                    <form method="POST" onsubmit="return editReplyForm(this);"
+                                        enctype="application/x-www-form-urlencoded">
+                                        <input name="comment_id" value="{{../this._id}}" type="hidden">
+                                        <input name="reply_id" value="{{this._id}}" type="hidden">
+                                        <textarea name="text" style="display:none"></textarea>
+                                        <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
+                                            <button onfocus="return normalState(this);"
+                                                class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                            <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                Edit</button>
+                                        </div>
+                                    </form>
+                                </comment>
+
+                                {{!-- toolbar --}}
+                                <toolbar id="toolbar" class="toolbar">
+                                    <div id="like"><i class="fas fa-thumbs-up"></i></div>
+                                    <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
+                                    <div onclick="return showReplyBox(this);" id="reply">Reply</div>
+                                </toolbar>
+
+                                {{!-- replydialog --}}
+                                <replydialog id="replydialog" class="replydialog d-none">
+                                    <simplebox id="replybox" class="comment mb-4">
+                                        <div class="comment__body">
+                                            <thumbnail id="author-thumbnail"
+                                                class="author-thumbnail author-thumbnail--small">
+                                                <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                            </thumbnail>
+                                            <div class="comment__form">
+                                                <form method="POST" onsubmit="return postReply(this);"
+                                                    enctype="application/x-www-form-urlencoded">
+                                                    <label class="form-group has-float-label">
+                                                        <input name="comment_id" value="{{../this._id}}"
+                                                            type="hidden"></input>
+                                                        <input placeholder="Add a comment ..."
+                                                            class="form-control custom-input customInput" name="text"
+                                                            required minlength="1">
+
+                                                        <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                                            <path d="M0 1 L40 1"></path>
+                                                            <path d="M0 1 L40 1" class="focus"></path>
+                                                            <path d="M0 1 L40 1" class="invalid"></path>
+                                                            <path d="M0 1 L40 1" class="valid"></path>
+                                                        </svg>
+                                                    </label>
+                                                    <div id="buttonbox" class="buttonbox buttonbox--flex">
+                                                        <button onfocus="return resetInput(this);"
+                                                            class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                        <button type="submit"
+                                                            class="ml-4 btn btn-primary default d-block ">
+                                                            POST</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </simplebox>
+                                </replydialog>
+
+
+                                {{!-- Edit menu --}}
+                                <action-menu-renderer class="action-menu-renderer">
+                                    <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="menu__icon fas fa-ellipsis-v"></i>
+                                        <div class="menu__dropdown dropdown-menu">
+                                            <a onclick="return editableContent(this);" class="dropdown-item"
+                                                href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Report</a>
+                                            <div class="dropdown-divider"></div>
+                                            <form method="POST" onclick="return destroyReply(this);"
+                                                enctype="application/x-www-form-urlencoded">
+                                                <input name="reply_id" value="{{this._id}}" type="hidden"></input>
+                                                <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
+                                                <button type="submit" aria-label="Close"
+                                                    class="text-danger dropdown-item">Delete</a>
+                                            </form>
+                                        </div>
+                                    </action-menu>
+                                </action-menu-renderer>
+                            </div> {{!-- End main --}}
+                        </div> {{!-- End body --}}
+
+                    </comment-renderer>
+                </replies-renderer>
+                {{/each}}
+
+            </comment-thread-renderer>
+            {{/each}}
+            {{/each}}
+        </comments-container>
+
+        {{#ifCond comments.[0].maxComment '>=' 10}}
+        <tools-footer id="tfooter" class="tfooter">
+            <a data-page="2" onclick="return fetchMoreComments(this);"
+                class="tfooter__btn btn btn-primary default mb-1">
+                More comments
+            </a>
+        </tools-footer>
+        {{/ifCond}}
+    </div>
+</bottom-container>
+    
+
+</main>
+
+
+{{!-- user info --}}
+<input name="user_id" value="{{user._id}}" type="hidden"></input>
+<input name="userName" value="{{user.name}}" type="hidden"></input>
+{{!-- comic info --}}
+<input name="title" value="{{comics.title}}" type="hidden"></input>
+<input name="comicSlug" value="{{comics.slug}}" type="hidden"></input>
+<input name="comicId" value="{{comics._id}}" type="hidden"></input>
+<input name="thumbnail" value="{{comics.thumbnail.url}}" type="hidden"></input>
+{{!-- chapter info --}}
+<input name="isChapterComment" value="true" type="hidden"></input>
+<input name="isChapterReply" value="true" type="hidden"></input>
+<input name="chapter" value="{{chapter.chapter}}" type="hidden"></input>
+<input name="chapterId" value="{{chapter._id}}" type="hidden"></input>
+
+<script src="/js/LazyLoader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+<script src="/js/chapter.details.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        /* local History */
+        var $chapterId          = $("input[type=hidden][name=chapterId]").val()
+        var $comicId            = $("input[type=hidden][name=comicId]").val()
+        var $comicSlug          = $("input[type=hidden][name=comicSlug]").val()
+        var $chapter            = $("input[type=hidden][name=chapter]").val()
+        var $title              = $("input[type=hidden][name=title]").val()
+        var $thumbnail          = $("input[type=hidden][name=thumbnail]").val()
+        
+        var href                = window.location.href.split('/chapter');
+        var chapterUrl          = window.location.href
+        var comicUrl            = href[0]
+        var visited_comics      = JSON.parse(localStorage.getItem('visited_comics'));
+        var visited_chapters    = JSON.parse(localStorage.getItem('visited_chapters'));
+        var newComicList
+                
+        var this_visit = {
+            chapterNameList: [{chapter:  $chapter, _id: $chapterId}],
+            title: $title,
+            comicUrl: comicUrl,
+            comicId: $comicId,
+            chapterUrl: chapterUrl,
+            comicSlug: $comicSlug,
+            thumbnail: $thumbnail
+        }
+
+        if (visited_chapters == null) {
+
+            visited_chapters = [$chapterId]
+
+            localStorage.setItem('visited_chapters', JSON.stringify(visited_chapters));
+
+        } else {
+
+            var isvisited = chapterisvisited(visited_chapters)
+            
+            if (isvisited != true) {
+
+                newChapterList = appendObjTo(visited_chapters, $chapterId)
+
+                localStorage.setItem('visited_chapters', JSON.stringify(newChapterList));
+            }
+        }
+
+        
+        /* if not have visited_comics -> add it with chapters */
+        if (visited_comics == null) {
+
+            localStorage.setItem('visited_comics', JSON.stringify([this_visit]));
+            
+        } else { 
+            /* if have local_slug -> check if isviewed */
+
+            var visitResult  = isViewed(visited_comics)
+
+            if (visitResult.visit_thiscomic === false && visitResult.visit_thischapter === false) { 
+                
+                newComicList = appendObjTo(visited_comics, this_visit)
+
+                localStorage.setItem('visited_comics', JSON.stringify(newComicList));
+
+            }  
+            if (visitResult.visit_thiscomic === true && visitResult.visit_thischapter === false) {
+                // false: replace new and save
+
+                const newchapterNameList = [...visited_comics[comic_index].chapterNameList, {chapter: $chapter, _id: $chapterId}] // construct old chapter list '[]'
+                //console.table(newchapterNameList)
+                this_visit.chapterNameList = newchapterNameList // replace old chapter list '[]'
+                
+                newComicList = [...visited_comics.filter(x => x.comicSlug != $comicSlug), this_visit] // replace old visited comics '[]'
+                
+                localStorage.setItem('visited_comics', JSON.stringify(newComicList));
+
+            }
+        };
+
+        function isViewed(visited_comics) {
+            var result = {
+                visit_thiscomic: false,
+                visit_thischapter: false,
+                comic_index: 0,
+                chapter_index: 0
+            }
+            for (let i = 0; i < visited_comics.length; i++) {
+                if (visited_comics[i].comicSlug === $comicSlug) {
+                    result.visit_thiscomic = true
+                    comic_index = i 
+                    for (let j = 0; j < visited_comics[i].chapterNameList.length; j++) {
+                        if (visited_comics[i].chapterNameList[j].chapter === $chapter) {
+                            console.log(visited_comics[i].chapterNameList[j])
+                            result.visit_thischapter = true
+                            break;
+                        }
+                    }
+                }
+            }
+            return result
+        };
+
+        function appendObjTo(thatArray, newObj) {
+            const frozenObj = Object.freeze(newObj);
+            return Object.freeze(thatArray.concat(frozenObj));
+        };
+
+        function chapterisvisited(visited_chapters) {
+            var result = false
+            for (let i = 0; i < visited_chapters.length; i++) {
+                if (visited_chapters[i] === $chapterId) {
+                    result = true
+                    break
+                }
+            }
+            return result
+        }
+        /* 🛑 End local History */
+
+    });
+</script>

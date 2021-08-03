@@ -1,0 +1,130 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
+
+    <link rel="stylesheet" href="/css/vendor/bootstrap-float-label.min.css" />
+    
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    
+
+    
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Category List</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Pages</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Category List</li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-4">Create Category</h5>
+                            {{!-- form --}}
+                            <form id="comicCreateForm" method="POST" action="/me/stored/comics/category-list/create">
+
+                                <label class="form-group has-float-label">
+                                    <input class="form-control" id="title" name="category" placeholder="Nhập ít nhất 1 ký tự" required
+                                        minlength="1" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                    <span>Name</span>
+                                </label>
+
+                                <div class="row">
+                                    <button class="mx-auto btn btn-primary default" type="submit">Create</button>
+                                </div>
+                            </form> {{!-- /form --}}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-4">Current Categories</h5>
+                            {{#each categories}}
+                                <a href="#" class="badge badge-secondary mb-1 mr-2 mt-2 position-relative">
+                                    <span data-toggle="modal" 
+                                    data-target="#delete-category-modal"
+                                    data-id="{{this._id}}"
+                                    class="miniBadge" aria-hidden="true">&times;</span>
+                                    <span class="mt-3 mr-1">{{this.name}}&nbsp;</span>
+                                    <span style="font-size: 0.6rem;font-weight: 700;" class="badge badge-light mr-1">{{this.numberOfComics}}</span>
+                                </a>
+                                
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </main>
+
+   
+</body>
+{{!-- hidden form to delete stuff --}}
+<form name="hidden-form" method="POST">
+</form>
+{{!-- Confirm delete Category --}}
+<div id="delete-category-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa Category !!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa Category này ?? </p>
+                <p class="text-danger"> Không thể hoàn tác lại nếu xóa!!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-category" type="button" class="btn btn-danger">
+                    Xóa bỏ</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        /* Start Form */
+        var category_id
+        var hiddenForm = document.forms['hidden-form'];
+        var btnDeleteCategory = document.getElementById('btn-delete-category');
+
+        $('#delete-category-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            category_id = button.data('id');
+        });
+        btnDeleteCategory.onclick = function () {
+            hiddenForm.action = '/me/stored/comics/destroyCategory/' + category_id + '?_method=DELETE';
+            hiddenForm.submit();
+        }; /* End Form */
+    });
+</script>

@@ -1,0 +1,107 @@
+\{{#if commentArr}}
+\{{#each commentArr}}
+<div class="container mt-2">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="d-flex flex-column comment-section">
+                <div class="bg-white p-2">
+                    {{!-- Start delete comment form --}}
+                    \{{#ifCond this.userId '== (string)' ../user._id}}
+                    <button style="z-index: 99;" type="button" class="close" aria-label="Close" data-toggle="modal"
+                        data-usercomment_id="\{{../this._id}}" data-comicslug="\{{../../chapter.comicSlug}}"
+                        data-target="#delete-comment-modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button> {{!-- End delete comment form --}}
+                    \{{/ifCond}}
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                            src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span
+                                class="d-block font-weight-bold name">\{{this.userName}}</span><span
+                                class="date text-black-50">Shared publicly - Jan 2020</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text">\{{this.text}}</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end row">
+                    <div class="col-md-12" style="margin-top: -1rem; padding:unset">
+                        <div class="bg-white">
+                            <div class="reply__parent d-flex flex-row fs-12">
+                                <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span
+                                        class="ml-1">Like</span></div>
+                                <div id="replyBtn" class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span
+                                        class="ml-1">Reply</span></div>
+                                <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {{!-- Display Reply --}}
+                        \{{#each reply}}
+                        <div class="container mt-2">
+                            <div class="d-flex justify-content-end row">
+                                <div class="col-md-10">
+                                    <div class="d-flex flex-column comment-section">
+                                        <div class="bg-white p-2">
+                                            {{!-- Start delete reply form --}}
+                                            \{{#ifCond ../this.userId '== (string)' ../../user._id}}
+                                            <button type="button" class="close" aria-label="Close" data-toggle="modal"
+                                                data-reply_id="\{{../this._id}}" data-comment_id="\{{../../this._id}}"
+                                                data-comicslug="\{{../../../chapter.comicSlug}}"
+                                                data-chapter="\{{../../../chapter.chapter}}"
+                                                data-target="#delete-reply-modal">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button> {{!-- End delete reply form --}}
+                                            \{{/ifCond}}
+                                            <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                                                    src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                                <div class="d-flex flex-column justify-content-start ml-2"><span
+                                                        class="d-block font-weight-bold name">\{{this.userName}}</span><span
+                                                        class="date text-black-50">Shared publicly - Jan 2020</span>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <p class="comment-text">\{{this.text}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        \{{/each}} {{!-- End Display Reply --}}
+                        \{{#if ../user}}
+                        <div id="replyBox" class="col-md-10 replyBox bg-light p-2 d-none" style="margin-left: auto;">
+                            {{!-- Start Reply Form --}}
+                            <form id="replyForm" method="POST" onsubmit="return postReply(this);"
+                                enctype="application/x-www-form-urlencoded">
+                                <input class="form-control" name="userId" value="\{{../user._id}}" type="hidden"></input>
+                                <input class="form-control" name="userName" value="\{{../user.name}}"
+                                    type="hidden"></input>
+                                <input class="form-control" name="commentId" value="\{{this._id}}" type="hidden"></input>
+                                <input class="form-control" name="chapter" value="\{{../chapter.chapter}}"
+                                    type="hidden"></input>
+                                <input id="comicSlugInput" class="form-control" name="comicSlug"
+                                    value="\{{../chapter.comicSlug}}" type="hidden"></input>
+                                <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
+                                        src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                    <textarea class="form-control" name="inputText" placeholder="Type something"
+                                        class="form-control ml-1 shadow-none textarea"></textarea>
+                                </div>
+                                <div class="mt-2 text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm shadow-none">Reply
+                                        comment</button>
+                                    <button type="button"
+                                        class="btn btn-outline-primary btn-sm ml-1 shadow-none">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                        \{{/if}} {{!-- End Reply Form --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+\{{/each}}
+\{{/if}}

@@ -1,0 +1,94 @@
+@mixin defineColorHSL($color, $hue, $saturation, $lightness){
+    #{$color}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");#{$color}-h: #{$hue};#{$color}-s: #{$saturation};#{$color}-l: #{$lightness};
+}
+/* color Scheme */
+:root {
+    --border-color: #d7d7d7;
+    --separator-color: #d7d7d7;
+    --background-color: #fff;
+    --background-color-2: #e5e5e5;
+    --foreground-color: #f5f5f5;
+    --foreground-color-2: #fff;
+    --input-background: #f5f5f5;
+
+    --dark-btn-background: #666;
+    --light-btn-background: #fff;
+
+    --button-text-color: #000;
+    --button-text-color-2: #f8f9fa;
+    --button-text-important: #8d8d8d;
+    --button-text-unimportant: #eaeaea;
+    // --visited-color: #6c757d;
+    --visited-color: #a32337;
+
+
+    --theme-color-1: #eb3349;
+    --theme-color-2: #e7284a;
+    --theme-color-3: #fd5d3d;
+    --theme-color-4: #843a47;
+    --theme-color-5: #d8667a;
+    --theme-color-6: #f69682;
+
+    --primary-color: #666;
+    --secondary-color: #757575;
+    --muted-color: #909090;
+
+    --button-color-1: #5f75ee;
+    --button-background-1: #1f2128;
+
+    --gradient-color-1 : #612c34;
+    --gradient-color-2 : #421e24;
+    --gradient-color-3 : #662b34;
+
+    --lp-bg-color-1 : #320209;
+    --lp-bg-color-2 : #35030b;
+    --lp-bg-color-3 : #620917;
+    --lp-bg-color-4 : #700c1b;
+}
+
+.dark {
+    --border-color: #2b2b2b;
+    --separator-color: #424242;
+    --background-color: #1b191b;
+    --background-color-2: #2f3136;
+    --foreground-color: #232223;
+    --foreground-color-2: #2b2b2b;
+    --input-background: #232223;
+
+    @include defineColorHSL(--dark-btn-background, 0, 0%, 100%);
+    --light-btn-background: #e4e4e4;
+    --button-text-color: #d0d0d0;
+    --button-text-color-2: #dae0e5;
+    --button-text-important: #d0d0d0;
+    --button-text-unimportant: #5a5a5a;
+    --visited-color: #5a5a5a;
+
+    --theme-color-1: #8f2938;
+    --theme-color-2: #aa5e6c;
+    --theme-color-3: #a53949;
+    --theme-color-4: #843a47;
+    --theme-color-5: #9e777e;
+    --theme-color-6: #c07a6c;
+
+    --primary-color: #969696;
+    --secondary-color: #757575;
+    --muted-color: #5a5a5a;
+
+    --gradient-color-1 : #612c34;
+    --gradient-color-2 : #421e24;
+    --gradient-color-3 : #662b34;
+
+    --lp-bg-color-1 : #320209;
+    --lp-bg-color-2 : #35030b;
+    --lp-bg-color-3 : #620917;
+    --lp-bg-color-4 : #700c1b;
+
+    @include defineColorHSL(--light, 0, 0%, 100%);
+}
+
+
+$logoPath: "../img/logo-white.svg";
+$logoPathMobile: "../img/logo-mobile.svg";
+
+$lpLogoPath: "../img/logo-white.svg";
+$lpLogoPathPinned: "../img/logo-white.svg";

@@ -1,0 +1,253 @@
+#top-displayer {
+    position: relative;
+    height: 492px;
+    #glide_banner {
+          .glide {
+            position: relative;
+          }
+          .glide__arrows {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-bottom: 1rem;
+            margin-left: 2rem;
+          }
+          .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 10px;
+            background: var(--gray);
+            outline: initial !important;
+            border: initial;
+            margin: 0 3px;
+            padding: 0;
+            cursor: pointer;
+            box-shadow: initial;
+          
+            &.glide__bullet:hover, &.glide__bullet:focus {
+              background: var(--separator-color);
+              border: initial;
+            }
+          
+            &.glide__bullet--active {
+                background: var(--light) !important;
+            }
+          }
+    }
+    background-banner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        height: 492px;
+        // background: #ccc;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            // background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(3px);
+            opacity: 0.6;
+        }
+    }
+
+    grid-container {
+        width: 100%;
+        display: grid; 
+        grid-template-columns: 2.6fr 1fr; 
+        grid-template-rows: 1fr 1fr; 
+        gap: 0px 0px; 
+        grid-template-areas: 
+            "mainpic topright"
+            "mainpic topbot"; 
+        height: 100%;
+        padding: 3rem 8rem 3rem 8rem;
+
+        banner-main {
+            width: 100%;
+            height: auto;
+            display: block;
+            grid-area: mainpic;
+            clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%);
+            position: relative;
+            right: -45px;
+
+            .frame {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: block;
+
+                .pic {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    position: absolute;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+        }
+        banner-topright {
+            grid-area: topright;
+            width: 100%;
+            height: auto;
+            // background: violet;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 10% 100%);
+            margin-left: auto;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top right;
+        }
+        banner-botright {
+            grid-area: topbot;
+            position: relative;
+            width: 90%;
+            height: 110%;
+            // background: darkblue;
+            clip-path: polygon(0 13%, 100% 0, 100% 100%, 10% 100%);
+            margin-left: auto;
+            position: relative;
+            top: -20px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+    }
+    
+}
+
+#glide_banner {
+    height: 100%;
+    .glide__track, .glide__slides {
+        height: inherit;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    #glide_banner {
+        .glide__slides { 
+            transform:none !important; 
+            width:auto !important;
+            display: grid; 
+            grid-template-areas: 'slide';  //create a 1x1 grid where the single cell is called slide
+        }
+          .glide__slide {
+            width: 100% !important;
+            position: relative; 
+            opacity: 0; 
+            transition: opacity 0.5s ease; 
+            grid-area: slide;  //assign all child slides to the cell
+        }
+          .glide__slide--active {
+            z-index:1; 
+            opacity:1;
+        }
+    }
+}
+@media (max-width: 1200px) {
+    #top-displayer {
+        height: 360px;
+        #glide_banner {
+            
+            .glide__slide {
+                width: 50%;
+                position: relative; 
+                opacity: 1; 
+            }
+            .glide__slide--active {
+                z-index:1; 
+                opacity:1;
+            }
+            .glide__arrows {
+                left: 50%;
+                bottom: 0.5rem;
+                transform: translate(-50%, -50%);
+                margin: 0 auto;
+            }
+        }
+        background-banner {
+            display: none;
+            background: unset !important;
+            height: auto;
+        }
+        grid-container {
+            padding: 0;
+            height: 100%;
+            display: block;
+            banner-main, .glide {
+                width: inherit;
+                height: 100%;
+            }
+            banner-main {
+                right: 0;
+                clip-path: unset;
+            }
+            banner-botright, banner-topright {
+                display: none;
+            }
+        }
+        // grid-container {
+        //     banner-main {
+        //         right: -5%;
+        //     }
+        // }
+    }
+}
+
+@media (max-width: 1000px) {
+    #top-displayer { height: 360px; }
+}
+@media (max-width: 750px) {
+    #top-displayer { height: 300px; }
+}
+@media (max-width: 650px) {
+    #top-displayer { height: 350px; }
+}
+// @media (max-width: 850px) {
+//     #top-displayer {
+//         grid-container {
+//             padding: 3rem 4rem 3rem 4rem;
+//         }
+//     }
+// }
+// @media (max-width: 768px) {
+//     #top-displayer {
+//         height: 380px;
+//         background-banner {
+//             height: 380px;
+//         }
+//         grid-container {
+//             grid-template-columns: 2fr 1fr;
+//             banner-botright {
+//                 height: 105%;
+//                 top: -8px;
+//             }
+//         }
+//     }
+// }
+// @media (max-width: 576px) {
+//     #top-displayer {
+//         height: 300px;
+//         background-banner {
+//             height: 300px;
+//         }
+//         grid-container {
+//             padding: 2rem 2rem 2rem 2rem;
+//             banner-botright {
+//                 height: 107%;
+//                 top: -8px;
+//             }
+//         }
+//         // background-banner {
+//         //     height: 300px;
+//         // }
+//     }
+// }

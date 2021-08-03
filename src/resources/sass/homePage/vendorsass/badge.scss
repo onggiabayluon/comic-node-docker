@@ -1,0 +1,159 @@
+/* 05.Badges */
+
+.bg-theme-2,
+.badge-theme-2 {
+  background-color: var(--theme-color-2) !important;
+  color: var(--button-text-color);
+}
+
+.bg-theme-3,
+.badge-theme-3 {
+  background-color: var(--theme-color-3) !important;
+  color: var(--button-text-color);
+}
+
+.bg-primary,
+.bg-theme-1,
+.badge-primary,
+.badge-theme-1 {
+  background-color: var(--theme-color-1);
+  color: var(--button-text-color);
+  border: 1px solid var(--theme-color-1);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--button-text-color);
+    background-color: darkness(var(--theme-color-1), 8%);
+    border-color: darkness(var(--theme-color-1), 8%);
+  }
+}
+
+.bg-secondary,
+.badge-secondary {
+  background-color: var(--theme-color-2) !important;
+  color: var(--button-text-color);
+}
+
+.badge-warning {
+  background-color: $warning-color;
+}
+
+.badge-success {
+  background-color: $success-color;
+}
+
+.badge-info {
+  background-color: $info-color;
+}
+
+.badge-danger {
+  background-color: $error-color;
+}
+
+.badge-success,
+.badge-danger,
+.badge-warning,
+.badge-info {
+  color: var(--button-text-color);
+}
+
+.badge {
+  padding: 0.45em 0.45em;
+  font-size: 85%;
+
+  &.badge-pill-custom {
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem !important;
+  }
+
+  &.badge-pill {
+    padding-right: 1.25em;
+    padding-left: 1.25em;
+  }
+
+  &.badge-top-left {
+    top: 7px;
+    left: -10px;
+  }
+
+  &.badge-top-left-2 {
+    top: 40px;
+    left: -7px;
+  }
+
+  &.badge-top-right {
+    top: 8px;
+    right: -7px;
+  }
+
+  &.badge-top-right-2 {
+    top: 40px;
+    right: -7px;
+  }
+}
+
+.badge-light {
+  background-color: var(--light-btn-background);
+  color: var(--dark-btn-background);
+}
+
+.badge-dark {
+  background-color: var(--dark-btn-background);
+  color: var(--light-btn-background);
+}
+
+.badge-outline-primary,
+.badge-outline-theme-1 {
+  background: unset;
+  border: 1px solid var(--theme-color-1);
+  color: var(--theme-color-1);
+}
+
+.badge-outline-secondary,
+.badge-outline-theme-2 {
+  background: unset;
+  border: 1px solid var(--theme-color-2);
+  color: var(--theme-color-2);
+}
+
+.badge-outline-theme-3 {
+  background: unset;
+  border: 1px solid var(--theme-color-3);
+  color: var(--theme-color-3);
+}
+
+.badge-outline-success {
+  background: unset;
+  border: 1px solid $success-color;
+  color: $success-color;
+}
+
+.badge-outline-danger {
+  background: unset;
+  border: 1px solid $error-color;
+  color: $error-color;
+}
+
+.badge-outline-warning {
+  background: unset;
+  border: 1px solid $warning-color;
+  color: $warning-color;
+}
+
+.badge-outline-info {
+  background: unset;
+  border: 1px solid $info-color;
+  color: $info-color;
+}
+
+.badge-outline-light {
+  background: unset;
+  border: 1px solid var(--light-btn-background);
+  color: var(--light-btn-background);
+}
+
+.badge-outline-dark {
+  background: unset;
+  border: 1px solid var(--dark-btn-background);
+  color: var(--dark-btn-background);
+}
+

@@ -1,0 +1,202 @@
+[{
+  "_id": {
+    "$oid": "609f250ace319201845e45ce"
+  },
+  "comic": [
+    {
+      "$oid": "603d8bebf7692e17d03cdb75"
+    },
+    {
+      "$oid": "60856bd53bb19903a44e0b7b"
+    },
+    {
+      "$oid": "603a068034d84d21247cdb22"
+    },
+    {
+      "$oid": "60a47375190ea03ad4f474f0"
+    },
+    {
+      "$oid": "60bb4a5cce7f1e1178551211"
+    },
+    {
+      "$oid": "60bb7904f8b6d00d14efc5b2"
+    },
+    {
+      "$oid": "60ef99f4abe09323403b7468"
+    }
+  ],
+  "name": "Manhwa",
+  "createdAt": {
+    "$date": "2021-05-15T01:34:02.384Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-15T02:14:12.797Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "609f8d6ea1ea9f1eac820a2c"
+  },
+  "comic": [
+    {
+      "$oid": "603d8bebf7692e17d03cdb75"
+    },
+    {
+      "$oid": "60856bd53bb19903a44e0b7b"
+    },
+    {
+      "$oid": "603a068034d84d21247cdb22"
+    }
+  ],
+  "name": "Manga",
+  "createdAt": {
+    "$date": "2021-05-15T08:59:26.773Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-30T08:29:34.731Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "609f98005e7eec3690b7edfe"
+  },
+  "comic": [],
+  "name": "Action",
+  "createdAt": {
+    "$date": "2021-05-15T09:44:32.432Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-18T02:31:01.654Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60a11c54080aea2b803cd9b6"
+  },
+  "comic": [],
+  "name": "Manhua",
+  "createdAt": {
+    "$date": "2021-05-16T13:21:24.228Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-18T03:18:07.195Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38ed267cdcb11cc58649e"
+  },
+  "comic": [],
+  "name": "Fantasy",
+  "createdAt": {
+    "$date": "2021-07-18T02:15:46.277Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:15:46.277Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38ed867cdcb11cc58649f"
+  },
+  "comic": [],
+  "name": "Comedy",
+  "createdAt": {
+    "$date": "2021-07-18T02:15:52.295Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:15:52.295Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38edd67cdcb11cc5864a0"
+  },
+  "comic": [],
+  "name": "Slice of Life",
+  "createdAt": {
+    "$date": "2021-07-18T02:15:57.922Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:15:57.922Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38ee267cdcb11cc5864a1"
+  },
+  "comic": [],
+  "name": "Romance",
+  "createdAt": {
+    "$date": "2021-07-18T02:16:02.494Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:16:02.494Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38ee967cdcb11cc5864a2"
+  },
+  "comic": [],
+  "name": "Sci-Fi",
+  "createdAt": {
+    "$date": "2021-07-18T02:16:09.710Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:16:09.710Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38ef267cdcb11cc5864a3"
+  },
+  "comic": [],
+  "name": "Mystery",
+  "createdAt": {
+    "$date": "2021-07-18T02:16:18.457Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:16:18.457Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38ef767cdcb11cc5864a4"
+  },
+  "comic": [],
+  "name": "Sports",
+  "createdAt": {
+    "$date": "2021-07-18T02:16:23.084Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:16:23.084Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38f0167cdcb11cc5864a5"
+  },
+  "comic": [],
+  "name": "Historical",
+  "createdAt": {
+    "$date": "2021-07-18T02:16:33.561Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:16:33.561Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60f38f0867cdcb11cc5864a6"
+  },
+  "comic": [],
+  "name": "Horror",
+  "createdAt": {
+    "$date": "2021-07-18T02:16:40.102Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-18T02:16:40.102Z"
+  },
+  "__v": 0
+}]

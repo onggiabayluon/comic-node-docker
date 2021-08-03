@@ -1,0 +1,250 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
+    
+    {{!-- Bootstrap CSS --}}
+    <link rel="stylesheet" href="/css/vendor/bootstrap-float-label.min.css" />
+    
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Edit Comic</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Pages</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a id="linkcomic" href="/me/stored/comics/comic-list">All Comics</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                               {{comic.title}}
+                            </li>
+                            
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-xl-4 col-left">
+                            <div class="card pb-3 mb-4 w-lg-100">
+                                 <div class="card-img-top p-xl-3 p-5">
+                                     {{#if comic.thumbnail}}
+                                            <img src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg" 
+                                            type="image/jpeg"
+                                            alt="img" width="100%" height="auto">
+                                        {{else}}
+                                            <div id="message__missingThumbnail"
+                                            style="vertical-align: middle;position: unset;position: relative;padding: .75rem 1.25rem;margin-bottom: 1rem;border: 1px solid transparent;"
+                                            class="alert alert-warning alert-dismissible fade show rounded pl-2 pr-1" role="alert">
+                                                <strong class="ml-2">Bạn chưa upload Thumbnail</strong>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span style="vertical-align: middle;" aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                    {{/if}}
+                                    
+                                    {{!-- <div class="separator mb-5"></div> --}}
+                                    <div id="message-wrongFileType" class="d-none alert-error mt-5 alert alert-danger alert-dismissible fade show"
+                                        role="alert">
+                                        <strong>File bạn chọn không hợp lệ</strong>
+                                        <p>Chỉ được upload file dạng ảnh như .png .jpg .webp ... </p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div id="message" class="d-none mt-5 alert alert-info alert-dismissible fade show  mb-0" role="alert">
+                                        <strong>Đang upload ảnh !!</strong>
+                                        <p> Vui lòng chờ trong giây lát </p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <h5 class="mt-4 mr-1 d-block text-center font-weight-bold">
+                                        <i class="simple-icon-cloud-upload mt-3 mr-2"></i>
+                                        <strong> Upload Thumbnail</strong>
+                                    </h5>
+
+                                    {{!-- Dropzone Form upload --}}
+                                    <div class="card-body position-relative">
+                                            <form class="dropzone" action="/me/stored/comics/{{comic.slug}}/S3-thumbnail-upload" id="buldUploadForm" method="POST" enctype="multipart/form-data">
+                                            <div class="dz-clickable" id="uploadDropzone">
+                                                <div class="dz-default dz-message" data-dz-message>
+                                                    <span>Drop 1 image here to upload</span>
+                                                </div>
+                                            
+                                            </div>
+                                            
+                                            <input class="btn btn-primary dropzone-submit-btn" name="many-files" type="submit"  
+                                            id="submitDropzonebtn" value="Upload Images" />
+                                            
+                                        </form> 
+                                    </div> {{!-- /Dropzone Form upload --}}
+
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-12 col-md-12 col-xl-8 col-right">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h3 class="mb-4"><strong> Edit Comic </strong></h3>
+
+                                    {{!-- form --}}
+                                    <form method="POST" action="/me/stored/comics/{{comic.slug}}?_method=PUT ">
+                                        <label class="form-group has-float-label">
+                                            <input class="form-control" id="title" name="title" 
+                                                value="{{comic.title}}"/>
+                                            <span>Title</span>
+                                        </label>
+                                    
+                                        <label class="form-group has-float-label">
+                                            <textarea class="form-control datepicker" id="description" name="description">{{comic.description}}  </textarea>
+                                            <span>Description</span>
+                                        </label>
+
+                                        {{!-- <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputCity">Translator</label>
+                                                <input type="text" class="form-control" value="{{comic.author}}">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="inputState">Badge</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option {{#ifCond comic.badge '==' 'none'}} selected {{/ifCond}}>None</option>
+                                                    <option {{#ifCond comic.badge '==' 'new'}} selected {{/ifCond}}>Mới</option>
+                                                    <option {{#ifCond comic.badge '==' 'hot'}} selected {{/ifCond}}>Hot</option>
+                                                </select>
+                                            </div>
+                                        </div> --}}
+
+                                        {{!-- Custom Radio Group 1 --}}
+                                        <div class="form-row mb-4 ml-1">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio1" name="isPublish" class="custom-control-input" 
+                                                value=true {{#ifCond comic.isPublish '==' true}} checked {{/ifCond}}>
+                                                <label class="custom-control-label" for="customRadio1">
+                                                    Publish
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-radio ml-4">
+                                                <input type="radio" id="customRadio2" name="isPublish" class="custom-control-input" 
+                                                value=false {{#ifCond comic.isPublish '==' false}} checked {{/ifCond}}>
+                                                <label class="custom-control-label" for="customRadio2">
+                                                    UnPublish
+                                                </label>
+                                            </div>
+                                        </div> {{!-- End Custom Radio Group 1 --}}
+
+                                        {{!-- Custom Radio Group 2 --}}
+                                        <div class="form-row mb-4 ml-1">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio3" name="isFinish" class="custom-control-input" 
+                                                value=true {{#ifCond comic.isFinish '==' true}} checked {{/ifCond}}>
+                                                <label class="custom-control-label" for="customRadio3" >
+                                                    In Progress
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-radio ml-4">
+                                                <input type="radio" id="customRadio4" name="isFinish" class="custom-control-input" 
+                                                value=false {{#ifCond comic.isFinish '==' false}} checked {{/ifCond}}>
+                                                <label class="custom-control-label" for="customRadio4">
+                                                    Finished
+                                                </label>
+                                            </div>
+                                        </div> {{!-- End Custom Radio Group 2 --}}
+
+                                        {{!-- Start checkbox --}}
+                                        <label class="form-group">
+                                            <div class="checkbox mt-2">
+                                            {{#each intersection}}
+                                                <label class="checkbox-wrapper mr-2">
+                                                    <input type="checkbox" class="checkbox-input" name="categories[]" value="{{this._id}}" 
+                                                    checked/>
+                                                    <span class="checkbox-tile">
+                                                        <span class="checkbox-label">{{this.name}}</span>
+                                                    </span>
+                                                </label>
+                                            {{/each}}
+                                            {{#each difference}}
+                                                <label class="checkbox-wrapper mr-2">
+                                                    <input type="checkbox" class="checkbox-input" name="categories[]" value="{{this._id}}" 
+                                                    />
+                                                    <span class="checkbox-tile">
+                                                        <span class="checkbox-label">{{this.name}}</span>
+                                                    </span>
+                                                </label>
+                                            {{/each}}
+                                            </div>
+                                        </label> {{!-- End CheckBox --}}
+                                        
+                                         <button type="submit" class="btn btn-block btn-primary default mb-1 mx-auto d-block ">
+                                            Áp dụng</button>
+                                    </form>  {{!-- /form --}}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    {{!-- Bootstrap JS --}}
+    <script src="/js/vendor/jquery-3.3.1.min.js"></script>
+    {{!-- <script src="/js/vendor/select2.full.js"></script> --}}
+    
+    
+</body>
+<script >
+    $(document).ready(function () {
+    if ($().dropzone && !$(".dropzone").hasClass("disabled")) {
+        Dropzone.autoDiscover = false;
+
+        var linkcomic = document.getElementById('linkcomic')
+        var message = document.getElementById('message')
+        var submitDropzonebtn = document.getElementById('submitDropzonebtn');
+        var message__wrongFileType = document.getElementById('message-wrongFileType')
+        var message__missingThumbnail = document.getElementById('message__missingThumbnail')
+        var myDropzone = new Dropzone('#buldUploadForm', {
+            paramName: 'many-files',
+            autoProcessQueue: false,
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
+            dictMaxFilesExceeded: 'fail',
+            init: function () {
+                var myDropzone = this;
+                $("#buldUploadForm").submit(function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    myDropzone.processQueue();
+                });
+                this.on("sending", function () {
+                    message.classList.remove("d-none");
+                });
+                this.on("success", function (file, responseText) {
+                    setTimeout(() => { window.location.href = '' }, 4000)
+                });
+                this.on("error", function (file, responseText) {
+                    if (responseText === "You can't upload files of this type.") {
+                        message__missingThumbnail.classList.add("d-none");
+                        message__wrongFileType.classList.remove("d-none");
+                    }
+                    setTimeout(() => { window.location.href = '' }, 4000)
+                });
+            },
+            thumbnailWidth: 160,
+            previewTemplate: '<div class="dz-preview dz-file-preview mb-3"><div class="d-flex flex-row "><div class="p-0 w-30 position-relative"><div class="dz-error-mark"><span><i></i></span></div><div class="dz-success-mark"><span><i></i></span></div><div class="preview-container"><img data-dz-thumbnail class="img-thumbnail border-0" /><i class="simple-icon-doc preview-icon" ></i></div></div><div class="pl-3 pt-2 pr-2 pb-1 w-70 dz-details position-relative"><div><span data-dz-name></span></div><div class="text-primary text-extra-small" data-dz-size /><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div><div class="dz-error-message"><span data-dz-errormessage></span></div></div></div><a href="#/" class="remove" data-dz-remove><i class="glyph-icon simple-icon-trash"></i></a></div>'
+        });
+    }
+});
+</script>

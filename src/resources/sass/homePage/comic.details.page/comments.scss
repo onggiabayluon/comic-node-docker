@@ -1,0 +1,380 @@
+comment-thread-renderer:target {
+  animation: textColor 5s ease;
+    
+  @keyframes textColor {
+    0% {
+      color: #7e0fff;
+    }
+    16% {
+      color: #0fffc1;
+    }
+    32% {
+      color: #7e0fff;
+    }
+    48% {
+      color: #b37bf3;
+    }
+    64% {
+      color: #a59ead;
+    }
+    100% {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.comment-thread-renderer {
+  display: block;
+}
+
+#theader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .title {
+    &__counter {
+      position: relative;
+      top: -1px;
+      padding: 0 0.4rem;
+    }
+  }
+
+  .sort-menu {
+    display: flex;
+    margin-right: 1rem;
+    
+    .sort-icon::after {
+      font-style: normal;
+      font-family: 'Font Awesome 5 Pro';
+      content: '\f0dc';
+      margin: 0.3rem;
+    }
+  }
+}
+
+#tfooter {
+  display: block;
+  text-align: center;
+
+  .tfooter__btn {
+    width: 50%;
+  }
+}
+
+#commentbox {
+  padding: 1rem 1.5rem;
+  background: var(--foreground-color);
+  border-radius: 0.5rem;
+}
+
+#commentcontainer {
+  display: block;
+}
+
+.comment {
+    &__body {
+        display: flex;
+        flex-direction: row;
+
+        &--center {
+          align-items: center;
+        }
+    }
+
+    &__form {
+      margin: 1rem 1rem 0rem 1rem;
+      width: 100%;
+    }
+}
+
+.author-thumbnail {
+
+    & img {
+      border-radius: 50%;
+      margin-top: 1.5rem;
+    }
+
+    &--small img {
+      width: 30px;
+      height: 30px;
+      margin-top: 1.5rem;
+    }
+}
+
+.replies #body {
+  margin-bottom: unset;
+}
+#body {
+  margin-bottom: 2rem;
+
+  .main {
+    position: relative;
+    background: var(--foreground-color-2);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin: 0 1rem;
+
+    & .header {
+        display: flex;
+        align-items: center;
+    
+        &__author {
+            margin: 0.2rem 0.4rem;
+            font-size: 1rem;
+        }
+    
+        &__timer {
+            margin: 0 0.4rem;
+            text-decoration: underline;
+        }
+    }
+
+    & .content {
+
+        &__text {
+            font-size: 1rem;
+            margin: 0 0.4rem;
+        }
+    }
+
+    & .toolbar {
+      display: flex;
+
+      & > * {
+        margin: 0.7rem 0.5rem 0 0.5rem;
+      }
+    }
+  }
+}
+
+
+#simplebox #main {
+  background: unset;
+}
+
+#commentForm {
+  label {
+    margin-bottom: 0;
+  }
+}
+
+.replies {
+
+  .expander {
+    margin: 0.6rem 0.5rem 0 0.5rem;
+    display: block;
+    cursor: pointer;
+    
+    div {
+      color: #2196f3;
+
+      .expander__text {
+        font-size: 1rem;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
+.expander__content {
+  display: block;
+  margin-left: 4rem;
+  margin-top: -0.5rem;
+}
+
+.buttonbox {
+    display: none;
+    justify-content: flex-end;
+    margin-top: -0.5rem;
+
+    &__clearbtn {
+        background: unset;
+    }
+    &__clearbtn:hover, &__clearbtn:focus {
+        background-color: #282828;
+    }
+
+    &--flex {
+      display: flex;
+    }
+    &--none {
+      display: none;
+    }
+}
+
+.comment__form form {
+  label {
+    width: 100%;
+  }
+  .form-group {
+    margin-bottom: unset;
+  }
+}
+
+.main:hover, .main:focus {
+  .action-menu-renderer {
+    display: block;
+  }
+}
+.action-menu-renderer {
+  display: none;
+
+  .menu {
+    position: absolute;
+   
+    &--style {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      top: 0px;
+      right: 0;
+      margin: 1rem;
+      cursor: pointer;
+    }
+
+    &:hover, &:focus, &:active {
+      color: var(--button-text-important);
+    }
+
+  }
+}
+
+//Expander contents
+.expander__content {
+
+  &--hide {
+    display: none;
+  }
+  &--show {
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Custom Input
+.customFlexbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .labelFlex {
+    width: 100%;
+    /*max-width: 30em;*/
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .customInput {
+    transition-property: all;
+    transition-duration: 1s;
+    flex-grow: 1;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    font-weight: 300;
+    display: block;
+    margin: 0;
+    border: none;
+    padding: 0.5em 0;
+    line-height: 1;
+    transition: border-color 0.2s;
+    padding: 10px;
+    background: var(--input-background);
+  
+    &:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+    &:focus + .icon {
+      stroke-dasharray: 28.284, 20;
+      stroke-dashoffset: 0;
+    }
+    
+  }
+  
+  .icon {
+    width: 1rem;
+    order: -1;
+    transition: all 0.2s;
+    stroke-dasharray: 0, 20;
+    stroke-dashoffset: -14.142;
+  
+    path {
+      stroke: var(--primary-color);
+      stroke-width: 1px;
+      fill: none;
+    }
+  }
+  
+  .line {
+    width: 100%;
+    height: 1px;
+    stroke: var(--button-text-unimportant);
+    stroke-width: 2px;
+    top: -13px;
+    position: relative;
+  
+    & .focus, & .valid, & .invalid {
+      transition: all 0.2s;
+      stroke-dasharray: 0, 20;
+      stroke-dashoffset: -20;
+    }
+    .focus {
+      stroke: var(--light-btn-background);
+    }
+    .valid {
+      stroke: hsl(166, 72%, 40%);
+    }
+    .invalid {
+      stroke: hsl(354, 70%, 54%)
+    }
+  }
+  
+  .customInput:focus ~ .line .focus,
+  .customInput:valid ~ .line .valid,
+  .customInput[data-touched]:invalid ~ .line .invalid {
+    stroke-dasharray: 40, 0;
+    stroke-dashoffset: 0;
+  }
+  .form-control:focus ~ .line .focus,
+  .form-control:valid ~ .line .valid,
+  .form-control[data-touched]:invalid ~ .line .invalid {
+    stroke-dasharray: 40, 0;
+    stroke-dashoffset: 0;
+  }
+  
+  .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 600px;
+      & > * {
+          margin: .5rem 0.5rem;
+      }
+  }
+.custom-input {
+    background: none;
+    border: none;
+}
+.custom-input:focus {
+    color: unset;
+    border-color: unset;
+    background-color: unset;
+    box-shadow: unset;
+}

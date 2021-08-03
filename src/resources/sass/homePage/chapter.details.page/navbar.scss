@@ -1,0 +1,202 @@
+
+//Chapter Navbar
+#chapterNavbar {
+    display: flex;
+    padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+    background: var(--foreground-color-2);
+    color: var(--dark-btn-background);
+    border-bottom: 1px solid var(--button-text-unimportant);
+    
+    #left-items {
+        width: 45%;
+        display: flex;
+        align-items: center;
+        margin: auto 0.5rem;
+
+        .navbar-logo {
+            margin-right: 0.5rem;
+            position: relative;
+            top: 3px;
+        }
+        .title {
+            color: var(--dark-btn-background);
+            max-width: 50%;
+            font-size: 1rem;
+            font-weight: unset;
+            margin: 3px 0.5rem;
+            cursor: pointer;
+            
+            &--ellipsis {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            &:hover {
+                color: var(--theme-color-2);
+            }
+        }
+        .ico {
+            padding: 3px 0 0 0;
+            position: relative;
+            top: -3px;
+        }
+        .m-custom {
+            margin: 0 0.5rem;
+        }
+    }
+
+    #mid-items {
+        display: flex;
+        align-items: center;
+
+        select:focus {
+            box-shadow: unset !important;
+        }
+
+        .custom-select {
+            color: var(--dark-btn-background);
+            background: var(--foreground-color-2);
+            border: unset;
+            padding: 0 1rem;
+        }
+        .fad {
+            --fa-primary-color: var(--dark-btn-background); 
+            // --fa-secondary-color: var(--theme-color-3); 
+            // --fa-secondary-opacity: 1.0;
+            --fa-secondary-color: var(--background-color);
+            --fa-secondary-opacity: 1.0;
+            border: 1px solid var(--foreground-color-2);
+            
+            &:hover {
+                --fa-primary-color: var(--btn-);
+                --fa-primary-opacity: 1.0; 
+                --fa-secondary-color: var(--foreground-color-2); 
+                border: 1px solid var(--theme-color-3);
+            }
+        }
+        
+    }
+
+    #right-items {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+} 
+
+#breadcrumbContainer {
+    display: none;
+}
+
+#prev-chaptercard {
+    display: flex;
+    background: var(--foreground-color-2);
+    height: 100px;
+    border: 1px solid var(--button-text-unimportant);
+    color: var(--button-text-color);
+
+    img {
+        border-radius: unset;
+    }
+
+    #info {
+        margin: auto 1.5rem;
+
+        .maintext {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .subtext {
+        }
+    }
+
+    #right-icon {
+        display: flex;
+        font-size: 1.5rem;
+        margin: auto 2em auto auto;
+        color: var(--primary-color);
+        transition: color 0.5s;
+
+    }
+
+    &:hover {
+        background: var(--background-color);
+        border: 1px solid var(--button-text-important);
+        transition: all 0.5s;
+    }
+    &:hover #right-icon {
+        color: var(--button-text-important);
+    }
+}
+@media (max-width: 992px) {
+    #chapterNavbar {
+        justify-content: space-between;
+        
+        #left-items {
+            width: 70%;
+        }
+        #right-items {
+            display: none;
+        }
+    }
+}
+@media (max-width: 768px) {
+    #chapterNavbar {
+        
+        #left-items {
+            .title--ellipsis {
+                display: none;
+            }
+            .ico {
+                display: none;
+            }
+        }
+    }
+
+    #breadcrumbContainer {
+        display: block;
+    }
+}
+
+
+
+
+
+// Breadcum
+@media (max-width: 576px) {
+    .breadcontainer {
+        font-size: 0.8rem;
+        margin-top: 1rem;
+    }
+}
+
+// Chapter selector
+#chapterSelector {
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+
+    #select {
+        background-color: var(--foreground-color-2);
+        color: var(--primary-color);
+        border: unset;
+        width: 40%;
+
+    }
+
+    #btn-container {
+        display: flex;
+
+        .btn--style {
+            margin: 0 1rem;
+        }
+        .btn__icon {
+            position: relative;
+            margin: 0 0.2rem;
+            font-size: 1rem;
+            top: 1px;
+        }
+    }
+   
+}

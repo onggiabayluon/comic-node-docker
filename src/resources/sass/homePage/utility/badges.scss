@@ -1,0 +1,21 @@
+badges {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    width: 30px;
+    height: 30px;
+    font-family: 'hind_m';
+    font-size: 0.8rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: var(--light);
+    background: var(--theme-color-3);
+    border: 1px solid var(--theme-color-2);
+
+    &:hover {
+        background: var(--theme-color-2);
+    }
+}

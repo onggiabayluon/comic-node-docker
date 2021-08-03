@@ -1,0 +1,141 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
+
+    <link rel="stylesheet" href="/css/vendor/bootstrap-float-label.min.css" />
+    
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    
+
+    
+
+    <main>
+        <div class="container-fluid">
+
+            
+            <div class="row">
+                <div class="col-12">
+                    <h1>Create Comic</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Pages</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/me/stored/comics/comic-list">All Comics</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Comic</li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="mb-4">New Comic</h5>
+                    {{!-- form --}}
+                    <form id="comicCreateForm" method="POST" action="/me/stored/comics/create">
+                        <label class="form-group has-float-label">
+                            <input class="form-control" id="title" name="title" placeholder="Nhập ít nhất 1 ký tự"
+                            required minlength="1"/>
+                            <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                <path d="M0 1 L40 1"></path>
+                                <path d="M0 1 L40 1" class="focus"></path>
+                                <path d="M0 1 L40 1" class="invalid"></path>
+                                <path d="M0 1 L40 1" class="valid"></path>
+                            </svg>
+                            <span> Name</span>
+                        </label>
+                        
+                        <label class="form-group has-float-label">
+                            <input class="form-control datepicker" 
+                            id="description" name="description" placeholder="Nhập ít nhất 1 ký tự"
+                            required minlength="1">
+                            <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                <path d="M0 1 L40 1"></path>
+                                <path d="M0 1 L40 1" class="focus"></path>
+                                <path d="M0 1 L40 1" class="invalid"></path>
+                                <path d="M0 1 L40 1" class="valid"></path>
+                            </svg>
+                            <span>Description</span>
+                        </label>
+                        
+                        <div class="form-row mb-4 ml-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="isPublish" class="custom-control-input" value=true checked>
+                                <label class="custom-control-label" for="customRadio1" >
+                                    Publish
+                                </label>
+                            </div>
+                            <div class="custom-control custom-radio ml-4">
+                                <input type="radio" id="customRadio2" name="isPublish" class="custom-control-input" value=false>
+                                <label class="custom-control-label" for="customRadio2">
+                                    UnPublish
+                                </label>
+                            </div>
+                        </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-group has-float-label">
+                                      <input class="form-control datepicker" id="Author" name="author" placeholder="Nhập ít nhất 1 ký tự"
+                                        required minlength="1">
+                                      <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                      </svg>
+                                      <span>Author</span>
+                                    </label>
+                                </div>
+                                {{!-- <div class="form-group col-md-4">
+                                    <label class="form-group has-float-label" for="inputState">
+                                      <select id="inputState" class="form-control" name="badge">
+                                          <option value="none" selected>None</option>
+                                          <option value="new">New</option>
+                                          <option value="hot">Hot</option>
+                                      </select>
+                                      <span>Badge</span>
+                                    </label>
+                                </div> --}}
+                            </div>
+
+                            {{!-- Start checkbox --}}
+                            <div class="form-row">
+                                <label class="form-group ml-1">
+                                    <div class="checkbox">
+                                        {{#each categories}}
+                                        <label class="checkbox-wrapper mr-2">
+                                            <input type="checkbox" class="checkbox-input" name="categories[]" value="{{this._id}}" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{this.name}}</span>
+                                            </span>
+                                        </label>
+                                        {{/each}}
+                                    </div>
+                                </label> 
+                            </div> {{!-- End CheckBox --}}
+                            
+                        <button class="btn btn-primary default" type="submit">Submit</button>
+                        <button onclick="reset()" class="ml-4 btn btn-primary default">Clear</button>
+                    </form> {{!-- /form --}}
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+   
+</body>
+
+<script>
+  function reset() {
+      document.getElementById("comicCreateForm").reset();
+    }
+</script>

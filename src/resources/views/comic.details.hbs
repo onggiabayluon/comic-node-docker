@@ -1,0 +1,491 @@
+
+<style>
+    #subnav {
+        margin-bottom: 3rem;
+    }
+    .subnav-container {
+        padding: 0 !important;
+    }
+</style>
+<body class="menu-default show-spinner">
+
+    <main id="comic-details">
+        <div class="cover" style="background-image: url(https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg);"> </div>
+        <div id="resize" class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="breadcrumb-container d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <a id="linkcomic">{{comic.title}}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-4"></div>
+                    <div class="row">
+                        <div id="leftbox" class="col-12 col-xl-3 col-md-4 col-sm-12 col-left" style="margin: 0 0 auto 0;">
+                            <div class="infoLeft">
+                                <div class="card infoLeft__img p-xl-3 col-5 col-xl-12 col-md-12 col-sm-4">
+                                    {{#if comic.thumbnail}}
+                                    <img src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg"
+                                        type="image/jpeg" alt="img" width="100%" height="auto">
+                                    {{else}}
+                                    <div id="message__missingThumbnail"
+                                        style="vertical-align: middle;position: unset;position: relative;padding: .75rem 1.25rem;margin-bottom: 1rem;border: 1px solid transparent;"
+                                        class="alert alert-warning alert-dismissible fade show rounded pl-2 pr-1" role="alert">
+                                        <strong class="ml-2">Bạn chưa upload Thumbnail</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span style="vertical-align: middle;" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <div class="card infoLeft__title col-sm-12">
+                                    <h1 id="main-title" class="font-weight-bold">{{comic.title}}</h1>
+                                    <h4 id="sub-title" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
+                                        Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
+                                </div>
+                                <div class="infoLeft__activities">
+                                    <ul>
+                                        <form onclick="return subscribe(this);" 
+                                        class="{{#ifCond subscribe '==' true}}bookmark--subscribed{{/ifCond}}
+                                        light-red bookmark btn btn-primary default btn-block mb-1">
+                                            <input type="hidden" name="comicId" value="{{comic._id}}">
+                                            <i class="bookmark__icon far fa-bookmark"></i>
+                                            <span class="bookmark__text"></span>
+                                        </form>
+                                        <div class="group" style="box-shadow: 0 1px 15px rgb(0 0 0 / 10%), 0 1px 8px rgb(0 0 0 / 10%);">
+                                            <div class="group__item">
+                                                <i class="fas fa-user-alt"></i>
+                                                <span>{{comic.view.totalView}}</span>
+                                            </div>
+
+                                            {{!-- <div class="bar"></div> --}}
+                                            
+                                            <div class="mt-2 group__item">
+                                                <i class="fas fa-star"></i>
+                                                <span class="rateNum">{{rateValue}}</span>
+                                                <div class="dropdown d-inline-block">
+                                                    <div class="light-red rate badge badge-pill badge-primary mb-1" role="button" id="dropdownMenuLink"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        RATE
+                                                    </div>
+                                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" x-placement="bottom-start"
+                                                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                        <div id="rating" class="rating" data-rate-value=5></div>
+                                                        <div class="rateCount text-info text-center mt-2"> ( <span class="countNum">{{rateCount}}</span> votes ) </div>
+                                                        <div class="msg-success text-success text-center mt-2 d-none"> Rated </div>
+                                                        <div class="msg-fail text-danger text-center mt-2 d-none"> You already Rated </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </ul>
+                                </div>
+                                
+                    
+                                <div class="card infoLeft__info">
+                                    <div class="box">
+                                        <div class="box__name">Status</div> <span class="box__value text-muted">Ongoing</span>
+                                    </div>
+                                    <div class="box">
+                                        <div class="box__name">Author</div> <span class="box__value text-muted">Fuyuki, turtle me</span>
+                                    </div>
+                                    <div class="box">
+                                        <div class="box__name">Views</div> <span class="box__value box__value--bold">{{comic.view.totalView}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="rightbox" class="col-12 col-xl-9 col-md-8 col-sm-12 col-right">
+                            <div class="infoRight card mb-4">
+                                <div class="infoRight__body card-body">
+                                    <h1 id="main-title" class="font-weight-bold">{{comic.title}}</h1>
+                                    <h4 id="sub-title" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
+                                        Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
+                                    <div id="tags" class="mb-3">
+                                        {{#each comic.category}}
+                                        <span class="badge badge-pill badge-outline-primary mb-1" style="font-weight: 500;">{{this.name}}</span>
+                                        {{/each}}
+                                    </div>
+                                    <p class="font-weight-bold">Synopsis {{comic.title}}</p>
+                                    <p>
+                                        Vivamus ultricies augue vitae commodo condimentum. Nullam
+                                        faucibus eros eu mauris feugiat, eget consectetur tortor tempus. Sed volutpat
+                                        mollis dui eget fringilla. Vestibulum blandit urna ut tellus lobortis tristique.
+                                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                                        Curae; Pellentesque quis cursus mauris. Nam in ornare erat. Vestibulum convallis
+                                        enim ac massa dapibus consectetur. Maecenas facilisis eros ac felis mattis, eget
+                                        auctor sapien varius.
+                                        <br>
+                                        <br>
+                                        Nulla non purus fermentum, pulvinar dui condimentum,
+                                        malesuada nibh. Sed viverra quam urna, at condimentum ante viverra non. Mauris
+                                        posuere erat sapien, a convallis libero lobortis sit amet. Suspendisse in orci
+                                        tellus.
+                                    </p>
+                        
+                        
+                                </div>
+                            </div>
+                            <div class="chapterRight card mb-4">
+                                <div class="btnbox card-body">
+                                    <a href="/comic/{{comic.slug}}/{{firstChapter.chapter}}" class="light-red btnbox__firstChapter btn btn-primary mb-1">
+                                        <span> First Chapter </span>
+                                        <span style="font-size: 1.1rem;"> {{replaceHyphenIntoSpace firstChapter.chapter}}</span>
+                                    </a>
+                                    <a href="/comic/{{comic.slug}}/{{lastChapter.chapter}}" class="light-red btnbox__lastChapter btn btn-primary mb-1">
+                                        <span> Last Chapter </span>
+                                        <span style="font-size: 1.1rem;"> {{replaceHyphenIntoSpace lastChapter.chapter}} </span>
+                                    </a>
+                                </div>
+                                <div class="listbox">
+                                    {{#each comic.chapters}}
+                                    <a href="/comic/{{../comic.slug}}/{{this.chapter}}" class="listbox__chapterbtn">
+                                        <span class="chaptertext"> {{replaceHyphenIntoSpace this.chapter}} </span>
+                                        <span class="date text-muted"> {{CalcTimeEnglish this.updatedAt}}</span>
+                                    </a>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="commentbox" class="col-12 mb-4">
+                            {{!-- tools-header --}}
+                            <tools-header id="theader" class="theader">
+                                <div class="title">
+                                    Comments
+                                    <span class="title__counter text-small"> ({{#if comments.[0].maxComment}} {{comments.[0].maxComment}} {{else}} 0 {{/if}}) </span> 
+                                </div>
+                                <div class="sort-menu">
+                                    <div class="sort-text dropdown show">
+                                        <a href="#" id="dropdownMenuLink" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="sort-icon"></i>
+                                            Sort
+                                        </a>
+                                    
+                                        <div id="sort-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="?">Default</a>
+                                            <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Newest</a>
+                                            <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Oldest</a>
+                                            <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tools-header>
+
+                            {{!-- {{#if user}} --}}
+                            <simplebox id="simplebox" class="comment mb-4">
+                                <div id="body" class="comment__body">
+                                    <thumbnail id="author-thumbnail" class="author-thumbnail">
+                                        <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                    </thumbnail>
+                                    <div id="main" class="main comment__form">
+                                        <form id="postCommentForm" method="POST" onsubmit="return postComment(this);"
+                                            enctype="application/x-www-form-urlencoded">
+                                            <label class="form-group has-float-label">
+
+                                                <input onfocus="return showInput(this);"
+                                                placeholder="Add a comment ..." name="text" 
+                                                class="form-control custom-input customInput" required minlength="1">
+                                        
+                                                <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                                    <path d="M0 1 L40 1"></path>
+                                                    <path d="M0 1 L40 1" class="focus"></path>
+                                                    <path d="M0 1 L40 1" class="invalid"></path>
+                                                    <path d="M0 1 L40 1" class="valid"></path>
+                                                </svg>
+                                            </label>
+                                            <div id="buttonbox" class="buttonbox">
+                                                <button onfocus="return resetInput(this);" class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                    POST</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </simplebox>
+                            {{!-- {{else}}
+                            <p class="text-medium">Login to comment</p>
+                            <a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
+                            <a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
+                            {{/if}}  --}}
+
+                            <comments-container id="commentcontainer">
+                                {{#each comments}}
+                                {{#each this.commentArr}}
+                                <comment-thread-renderer id="comment-{{this._id}}">
+                            
+                                    <comment-renderer id="comment" class="comment">
+                                        {{!-- body --}}
+                                        <div id="body" class="comment__body">
+                                            {{!-- thumbnail --}}
+                                            <thumbnail id="author-thumbnail" class="author-thumbnail">
+                                                <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                            </thumbnail>
+                            
+                                            {{!-- main --}}
+                                            <div id="main" class="main">
+                                                {{!-- header info --}}
+                                                <header id="header" class="header">
+                                                    <div id="header-author" class="header__author">India pagoda</div>
+                                                    <div id="header-timer" class="header__timer text-muted text-small">{{CalcTimeEnglish this.updatedAt}}</div>
+                                                </header>
+                            
+                                                {{!-- comment --}}
+                                                <comment id="content" class="content">
+                                                    <div id="text" class="content__text">{{this.text}}</div>
+                                                    <form method="POST" onsubmit="return editCommentForm(this);" enctype="application/x-www-form-urlencoded">
+                                                        <input name="comment_id" value="{{this._id}}" type="hidden">
+                                                        <textarea name="text" style="display:none"></textarea>
+                                                        <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
+                                                            <button onfocus="return normalState(this);" class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                            <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                                Edit</button>
+                                                        </div>
+                                                    </form>
+                                                </comment>
+                                
+                                                {{!-- toolbar --}}
+                                                <toolbar id="toolbar" class="toolbar">
+                                                    <div id="like"><i class="fas fa-thumbs-up"></i></div>
+                                                    <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
+                                                    {{#if user}}
+                                                    <div onclick="return showReplyBox(this);" id="reply">Reply</div>
+                                                    {{/if}}
+                                                </toolbar>
+                            
+                                                {{!-- replydialog --}}
+                                                <replydialog id="replydialog" class="replydialog d-none">
+                                                    <simplebox id="replybox" class="comment mb-4">
+                                                        <div class="comment__body">
+                                                            <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
+                                                                <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                                            </thumbnail>
+                                                            <div class="comment__form">
+                                                                <form method="POST" onsubmit="return postReply(this);"
+                                                                    enctype="application/x-www-form-urlencoded">
+                                                                    <label class="form-group has-float-label">
+                                                                        <input name="comment_id" value="{{this._id}}" type="hidden"></input>
+                                                                        <input placeholder="Add a comment ..."
+                                                                            class="form-control custom-input customInput" name="text" required
+                                                                            minlength="1">
+                            
+                                                                        <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                                                            <path d="M0 1 L40 1"></path>
+                                                                            <path d="M0 1 L40 1" class="focus"></path>
+                                                                            <path d="M0 1 L40 1" class="invalid"></path>
+                                                                            <path d="M0 1 L40 1" class="valid"></path>
+                                                                        </svg>
+                                                                    </label>
+                                                                    <div id="buttonbox" class="buttonbox buttonbox--flex">
+                                                                        <button onfocus="return resetInput(this);"
+                                                                            class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                                        <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                                            POST</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </simplebox>
+                                                </replydialog>
+                            
+                                                {{!-- replies expander --}}
+                                                {{setVar "replyLength" (getValues ../this.replyLength @index)}}
+                                                {{#ifCond @root.replyLength '>=' 1}}
+                                                <expander id="replies" class="replies">
+                                                    <comment-replies-renderer>
+                                                        <expanderbtn onclick="return expander(this);" id="expander" class="expander"
+                                                            data-expander="hide">
+                                                            <div id="more-replies" class="expander__more">
+                                                                <i class="expander__icon fas fa-caret-down"></i>
+                                                                <span class="expander__text">{{@root.replyLength}} more replies</span>
+                                                            </div>
+                                                            <div id="less-replies" class="expander__less d-none">
+                                                                <i class="expander__icon fas fa-caret-up"></i>
+                                                                <span class="expander__text">Hide {{@root.replyLength}} replies</span>
+                                                            </div>
+                                                        </expanderbtn>
+                                                    </comment-replies-renderer>
+                                                </expander>
+                                                {{/ifCond}}
+                            
+                                                {{!-- Edit menu --}}
+                                                <action-menu-renderer class="action-menu-renderer">
+                                                    <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="menu__icon fas fa-ellipsis-v"></i>
+                                                        <div class="menu__dropdown dropdown-menu">
+                                                            <a onclick="return editableContent(this);" class="dropdown-item" href="#">
+                                                                Edit</a>
+                                                            <a class="dropdown-item" href="#">Report</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            
+                                                            <form method="POST" onclick="return destroyComment(this);"
+                                                                enctype="application/x-www-form-urlencoded">
+                                                                <input class="form-control" name="comment_id" value="{{this._id}}"
+                                                                    type="hidden"></input>
+                                                                <button type="submit" aria-label="Close"
+                                                                    class="text-danger dropdown-item">Delete</a>
+                                                            </form>
+                                                        </div>
+                                                    </action-menu>
+                                                </action-menu-renderer>
+                                            </div> {{!-- End main --}}
+                            
+                            
+                                        </div> {{!-- End body --}}
+                            
+                                    </comment-renderer>
+                                    
+                                    {{#each this.reply}}
+                                    <replies-renderer id="reply-{{this._id}}" class="expander__content expander__content--hide">
+                                        <comment-renderer id="comment" class="comment">
+                                            {{!-- body --}}
+                                            <div id="body" class="comment__body">
+                                                {{!-- thumbnail --}}
+                                                <thumbnail id="author-thumbnail" class="author-thumbnail">
+                                                    <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                                </thumbnail>
+                            
+                                                {{!-- main --}}
+                                                <div id="main" class="main">
+                                                    {{!-- header info --}}
+                                                    <header id="header" class="header">
+                                                        <div id="header-author" class="header__author">India Pagoda </div>
+                                                        <div id="header-timer" class="header__timer text-muted text-small">3 hours ago</div>
+                                                    </header>
+                            
+                                                    {{!-- comment --}}
+                                                    <comment id="content" class="content">
+                                                        <div id="text" class="content__text">{{this.text}}</div>
+                                                        <form method="POST" onsubmit="return editReplyForm(this);" enctype="application/x-www-form-urlencoded">
+                                                            <input name="comment_id" value="{{../this._id}}" type="hidden">
+                                                            <input name="reply_id" value="{{this._id}}" type="hidden">
+                                                            <textarea name="text" style="display:none"></textarea>
+                                                            <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
+                                                                <button onfocus="return normalState(this);" class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                                <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                                    Edit</button>
+                                                            </div>
+                                                        </form>
+                                                    </comment>
+                            
+                                                    {{!-- toolbar --}}
+                                                    <toolbar id="toolbar" class="toolbar">
+                                                        <div id="like"><i class="fas fa-thumbs-up"></i></div>
+                                                        <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
+                                                        <div onclick="return showReplyBox(this);" id="reply">Reply</div>
+                                                    </toolbar>
+                            
+                                                    {{!-- replydialog --}}
+                                                    <replydialog id="replydialog" class="replydialog d-none">
+                                                        <simplebox id="replybox" class="comment mb-4">
+                                                            <div class="comment__body">
+                                                                <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
+                                                                    <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                                                </thumbnail>
+                                                                <div class="comment__form">
+                                                                    <form method="POST" onsubmit="return postReply(this);"
+                                                                        enctype="application/x-www-form-urlencoded">
+                                                                        <label class="form-group has-float-label">
+                                                                            <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
+                                                                            <input placeholder="Add a comment ..."
+                                                                                class="form-control custom-input customInput" name="text" required
+                                                                                minlength="1">
+                            
+                                                                            <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                                                                <path d="M0 1 L40 1"></path>
+                                                                                <path d="M0 1 L40 1" class="focus"></path>
+                                                                                <path d="M0 1 L40 1" class="invalid"></path>
+                                                                                <path d="M0 1 L40 1" class="valid"></path>
+                                                                            </svg>
+                                                                        </label>
+                                                                        <div id="buttonbox" class="buttonbox buttonbox--flex">
+                                                                            <button onfocus="return resetInput(this);"
+                                                                                class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                                                            <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                                                                                POST</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </simplebox>
+                                                    </replydialog>
+                            
+                            
+                                                    {{!-- Edit menu --}}
+                                                    <action-menu-renderer class="action-menu-renderer">
+                                                        <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <i class="menu__icon fas fa-ellipsis-v"></i>
+                                                            <div class="menu__dropdown dropdown-menu">
+                                                                <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                                                                <a class="dropdown-item" href="#">Report</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <form method="POST" onclick="return destroyReply(this);"
+                                                                    enctype="application/x-www-form-urlencoded">
+                                                                    <input name="reply_id" value="{{this._id}}" type="hidden"></input>
+                                                                    <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
+                                                                    <button type="submit" aria-label="Close"
+                                                                        class="text-danger dropdown-item">Delete</a>
+                                                                </form>
+                                                            </div>
+                                                        </action-menu>
+                                                    </action-menu-renderer>
+                                                </div> {{!-- End main --}}
+                                            </div> {{!-- End body --}}
+                            
+                                        </comment-renderer>
+                                    </replies-renderer>
+                                    {{/each}}
+                            
+                                </comment-thread-renderer>
+                                {{/each}}
+                                {{/each}}
+                            </comments-container>
+
+                            {{#ifCond comments.[0].maxComment '>=' 10}}
+                            <tools-footer id="tfooter" class="tfooter">
+                                <a data-page="2" onclick="return fetchMoreComments(this);" class="light-red tfooter__btn btn btn-primary default mb-1">
+                                    More comments
+                                </a>
+                            </tools-footer>
+                            {{/ifCond}}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</body>
+
+<instuff>
+
+{{!-- user info --}}
+<input name="user_id" value="{{user._id}}" type="hidden"></input>
+<input name="userName" value="{{user.name}}" type="hidden"></input>
+{{!-- comic info --}}
+<input name="isComicComment" value="true" value=true type="hidden"></input>
+<input name="isComicReply" value="true" value=true type="hidden"></input>
+<input name="comicId" value="{{comic._id}}" type="hidden"></input>
+<input name="title" value="{{comic.title}}" type="hidden"></input>
+<input name="comicSlug" value="{{comic.slug}}" type="hidden"></input>
+
+</instuff>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+<script src="/js/vendor/stars.js"></script>
+<script src="/js/comic.details.js"></script>
+
+

@@ -1,0 +1,50 @@
+#bookmark-places {
+    padding: 3rem 0 2rem 0;
+    display: block;
+    
+    splide-container {
+        img {
+            object-fit: cover;
+        }
+    }
+    
+    a {
+        color: var(--button-text-color);
+        &:hover {
+            color: var(--theme-color-1);
+        }
+    }
+
+    
+}
+
+@media (max-width: 576px) {
+    #bookmark-places {
+        background: var(--background-color) !important;
+        padding: 3rem 0 0 0;
+        heading {
+            padding: 0% 2% 0 2% !important;
+        }
+        .glide__bullet:nth-child(n+4) {
+            display: none;
+        }
+        .container {
+            padding: 0;
+        }
+        .row, .col-12 {
+            margin: 0; padding: 0;
+        }
+        .glide__slide {
+            // width: 17% !important;
+            padding: 5px 0.2% !important;
+        }
+    }
+    
+} 
+@media (min-width: 1380px) {
+    #bookmark-places {
+        .glide__slide {
+            height: auto;
+        }
+    }
+}

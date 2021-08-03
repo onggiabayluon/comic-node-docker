@@ -1,0 +1,354 @@
+<head>
+    <title>Dore jQuery</title>
+    {{!--
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
+
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+
+    <form name="container-form" method="POST" action="/me/stored/handle-form-action-for-chapters" class="mt-4">
+        <main>
+            <div class="container-fluid disable-text-selection">
+
+                
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <h1>Chapter List</h1>
+                            <div class="text-zero top-right-button-container">
+
+                                <div class="btn-group">
+
+                                    <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+                                        <label class="custom-control custom-checkbox mb-0 d-inline-block">
+                                            <input type="checkbox" class="custom-control-input" id="checkAll">
+                                            <span class="custom-control-label">&nbsp;</span>
+                                        </label>
+                                    </div>
+                                    <div class="input-group">
+                                        <select class="custom-select" id="inputGroupSelect04" name="action">
+                                            <option selected>Chọn hành động...</option>
+                                            <option value="delete">Xóa</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary btn-sm " id="multifunctionButton"
+                                                data-target="#delete-multi">Áp dụng</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block"
+                                aria-label="breadcrumb">
+                                <ol class="breadcrumb pt-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="#">Pages</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="/me/stored/comics/comic-list">All Comics</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a data-id="{{linkComics}}" id="chapterSlug" href="/me/stored/comics/{{linkComics}}/edit">{{replaceHyphenIntoSpace
+                                            linkComics}}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Chapter List
+                                    </li>
+                                </ol>
+                            </nav>
+
+                        </div>
+
+                        <div class="mb-2">
+                            <a class="display-text pb-2 d-inline-block d-md-none" data-toggle="collapse"
+                                href="#displayOptions" role="button" aria-expanded="true"
+                                aria-controls="displayOptions">
+                                Display Options
+                                <i class="simple-icon-arrow-down align-middle"></i>
+                            </a>
+                            <div class="collapse d-md-block" id="displayOptions">
+
+                                {{!-- <span class="mr-3 mb-2 d-inline-block float-md-left">
+                                    <a href="#" class="mr-2 view-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                            <path class="view-icon-svg"
+                                                d="M17.5,3H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M17.5,10H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M17.5,17H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="mr-2 view-icon active">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                            <path class="view-icon-svg"
+                                                d="M17.5,3H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M3,2V3H1V2H3m.12-1H.88A.87.87,0,0,0,0,1.88V3.12A.87.87,0,0,0,.88,4H3.12A.87.87,0,0,0,4,3.12V1.88A.87.87,0,0,0,3.12,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M3,9v1H1V9H3m.12-1H.88A.87.87,0,0,0,0,8.88v1.24A.87.87,0,0,0,.88,11H3.12A.87.87,0,0,0,4,10.12V8.88A.87.87,0,0,0,3.12,8Z" />
+                                            <path class="view-icon-svg"
+                                                d="M3,16v1H1V16H3m.12-1H.88a.87.87,0,0,0-.88.88v1.24A.87.87,0,0,0,.88,18H3.12A.87.87,0,0,0,4,17.12V15.88A.87.87,0,0,0,3.12,15Z" />
+                                            <path class="view-icon-svg"
+                                                d="M17.5,10H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M17.5,17H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="mr-2 view-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                            <path class="view-icon-svg"
+                                                d="M7,2V8H1V2H7m.12-1H.88A.87.87,0,0,0,0,1.88V8.12A.87.87,0,0,0,.88,9H7.12A.87.87,0,0,0,8,8.12V1.88A.87.87,0,0,0,7.12,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M17,2V8H11V2h6m.12-1H10.88a.87.87,0,0,0-.88.88V8.12a.87.87,0,0,0,.88.88h6.24A.87.87,0,0,0,18,8.12V1.88A.87.87,0,0,0,17.12,1Z" />
+                                            <path class="view-icon-svg"
+                                                d="M7,12v6H1V12H7m.12-1H.88a.87.87,0,0,0-.88.88v6.24A.87.87,0,0,0,.88,19H7.12A.87.87,0,0,0,8,18.12V11.88A.87.87,0,0,0,7.12,11Z" />
+                                            <path class="view-icon-svg"
+                                                d="M17,12v6H11V12h6m.12-1H10.88a.87.87,0,0,0-.88.88v6.24a.87.87,0,0,0,.88.88h6.24a.87.87,0,0,0,.88-.88V11.88a.87.87,0,0,0-.88-.88Z" />
+                                        </svg>
+                                    </a>
+                                </span> --}}
+                                <div class="container-flex d-flex justify-content-between flex-wrap">
+                                    <div class="d-flex align-items-center position-relative">
+                                        <a href="/me/stored/comics/{{linkComics}}/create-chapter">
+                                            <button type="button" class="btn btn-primary mb-1 "
+                                                style="color: white;">Tạo Chapter mới</button>
+                                        </a>
+                                        <div class="search-sm d-inline-block ml-3 mb-1">
+                                                <input id="search" type="text" class="w-100"
+                                                    placeholder="Nhập 1 hoặc 20.1">
+                                            </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="separator mb-5"></div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    {{!-- <div class="align-self-center ml-3 mb-5">
+                        <span class="text-muted text-small ">Displaying 1-10 of 210 items </span>
+                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expand ed="false">
+                            20
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">10</a>
+                            <a class="dropdown-item active" href="#">20</a>
+                            <a class="dropdown-item" href="#">30</a>
+                            <a class="dropdown-item" href="#">50</a>
+                            <a class="dropdown-item" href="#">100</a>
+                        </div>
+                    </div> --}}
+
+                    <div id="match-list" class="col-12 list" data-check-all="checkAll">
+                        {{#ifCond noChapters '==' true}}
+                        <p class="text-center">Bạn chưa đăng chapter nào hết !!</p>
+                        <p class="text-center">Hãy Nhấn vào nút 
+                           <a href="/me/stored/comics/{{ ../linkComics}}/create-chapter" 
+                           class="text-primary"> Tạo Chapter Mới </a> </p>
+                        {{/ifCond}}
+                        {{#each chapters}}
+
+                        <div class="card d-flex flex-row mb-3">
+                            <a class="d-flex thumbnail-frame" href="#">
+                                {{#each thumbnail}}
+                                <img src="#" alt="Chưa có thumbnail"
+                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+                                {{else}}
+                                <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
+                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+                                {{/each}}
+                            </a>
+                            <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                <div
+                                    class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                                    <a href="#" class="w-40 w-sm-100">
+                                        <p class="list-item-heading mb-0 truncate">{{replaceHyphenIntoSpace
+                                            this.chapter}}</p>
+                                    </a>
+
+                                    <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
+                                        {{this.chapterUpdateTime}}</p>
+
+                                    <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
+                                        style="justify-content: space-evenly;">
+
+                                        <a href="#" class="tooltipIcon delete-icon-red" style="align-items: center;">
+                                            <span class="tooltiptext"> Xóa </span>
+                                            <div class="icon-container" data-toggle="modal"
+                                                data-id="{{this._id}}" 
+                                                data-slug="{{this.comicSlug}}"
+                                                data-target="#delete-course-modal">
+                                                <i class="simple-icon-trash" style="z-index: -1;"></i>
+                                            </div>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                                {{!-- Handle Form checkbox --}}
+                                <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                    <input type="hidden" name="comicSlug" value="{{this.comicSlug}}">
+                                    <input type="checkbox" class="custom-control-input" name="chapter_id[]"
+                                        value="{{this._id}}">
+                                    <span class="custom-control-label">&nbsp;</span>
+                                </label>
+                                {{!-- End Handle Form checkbox --}}
+                            </div>
+                        </div>
+                        {{/each}}
+    
+                        {{> pagination}}
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+    {{!-- Bootstrap Js --}}
+
+</body>
+
+{{!-- Confirm delete course --}}
+<div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa Chapter !!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa Chapter này ?? </p>
+                <p class="text-danger"> Không thể hoàn tác lại nếu xóa!!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-course" type="button" class="btn btn-danger">
+                    Xóa bỏ</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- hidden form to delete stuff --}}
+<form name="hidden-form" method="POST">
+    <input type="hidden" name="comicSlug" >
+</form>
+
+{{!-- Search Template --}}
+<script id="userSearch-template" type="text/x-handlebars-template">
+    \{{#each chapters}}
+    <div class="card d-flex flex-row mb-3">
+        <a class="d-flex thumbnail-frame" href="#">
+            \{{#each thumbnail}}
+            <img src="#" alt="Chưa có thumbnail" class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+            \{{else}}
+            <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
+                class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+            \{{/each}}
+        </a>
+        <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+            <div
+                class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                <a href="#" class="w-40 w-sm-100">
+                    <p class="list-item-heading mb-0 truncate">\{{replaceHyphenIntoSpace
+                        this.chapter}}</p>
+                </a>
+
+                <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
+                    \{{this.chapterUpdateTime}}</p>
+
+                <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm" style="justify-content: space-evenly;">
+
+                    <a href="#" class="tooltipIcon delete-icon-red" style="align-items: center;">
+                        <span class="tooltiptext"> Xóa </span>
+                        <div class="icon-container" data-toggle="modal" 
+                        data-id="\{{this._id}}"
+                         data-slug="\{{this.comicSlug}}"
+                            data-target="#delete-course-modal">
+                            <i class="simple-icon-trash" style="z-index: -1;"></i>
+                        </div>
+                    </a>
+
+                </div>
+
+                
+            </div>
+            <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                <input type="checkbox" class="custom-control-input" name="chapter_id[]" value="\{{this._id}}">
+                <span class="custom-control-label">&nbsp;</span>
+            </label>
+        </div>
+    </div>
+    \{{/each}}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        /* Start Search */
+        var chapterSlug = document.getElementById('chapterSlug');
+        var chapterSlugValue = chapterSlug.getAttribute('data-id')
+        var chapterData
+        var fetchAPIUrl = `http://localhost:3000/fetch/comics/${chapterSlugValue}`
+        var search = document.getElementById('search');
+        var matchList = document.getElementById('match-list');
+        var source = document.getElementById("userSearch-template").innerHTML;
+        var invoke_one_time = true;
+        var templateObjProperty = 'chapters'
+
+        search.addEventListener("click", runSearch_OneTime);
+
+        function filterProperty(data, regex) {
+            return data.chapter.replace('chapter-','').match(regex)
+        }
+        function runSearch_OneTime() {
+            if (invoke_one_time) {
+                runSearch()
+                invoke_one_time = false;
+            }
+        }
+        runSearch = async () => {
+            chapterData = await getData(fetchAPIUrl)
+            SearchHandler(chapterData, search, matchList, source, templateObjProperty, filterProperty)  
+        } /* End Search */
+
+        /* Start Form */
+        var chapter_id, comicSlug;
+        var hiddenForm = document.forms['hidden-form'];
+        var btnDeleteCourse = document.getElementById('btn-delete-course');
+
+        setTimeout(function () {
+            $('.alert-danger').fadeOut('fast');
+            $('.alert-success').fadeOut('fast');
+        }, 5000); // <-- time in milliseconds
+        //dựa vào show modal rồi lưu slug
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            //bấm vào button lưu id vào chapter_id từ button-data bên trên
+            chapter_id = button.data('id');
+            comicSlug = button.data('slug');
+        });
+        btnDeleteCourse.onclick = function () {
+            $("input:hidden[name=comicSlug]").val(comicSlug)
+            hiddenForm.action = '/me/stored/destroyChapter/' + chapter_id + '?_method=DELETE';
+            hiddenForm.submit();
+        }; /* End Form */
+
+    });
+</script>

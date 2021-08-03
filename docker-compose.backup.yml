@@ -1,0 +1,16 @@
+version: '3'
+services:
+    node-app:
+        container_name: node-app
+        image: node-app-image:tag
+        restart: always
+        build: .
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/app
+            - /app/node_modules
+        environment:
+            - PORT=3000
+        # env_file:
+        #     - ./.env

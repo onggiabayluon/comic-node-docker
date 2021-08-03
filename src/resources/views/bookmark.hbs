@@ -1,0 +1,83 @@
+<style>
+    #navbar {
+        background: var(--background-color);
+    }
+    html, body {
+        background: var(--foreground-color);
+    }
+    #card-wrapper grid-container {
+        grid-auto-rows: 310px;
+    }
+</style>
+{{!-- <categories-wrapper id="categories-wrapper">
+    <div class="categories-inner">
+        <ul class="categories">
+            <li class="category active"><a href="?">All</a></li>
+            {{#each firstCategories}}
+            <li class="category"><a href="?_find&columnFind=name&typeFind={{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+            <li class="category"><div onclick="return drop(this);" class="more">More<i class="fas fa-sort-down"></i></div></li>
+        </ul>
+    </div>
+    <div id="categories-outer" class="categories-outer">
+        <ul class="categories">
+            {{#each remainingCategories}}
+            <li class="category"><a href="?_find&columnFind=name&typeFind={{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</categories-wrapper> --}}
+
+<section id="card-wrapper">
+    <grid-container>
+        {{#unless comics}}
+        <h1>You Not Bookmark Anything Yet.</h1>
+        {{else}}
+        {{#each comics}}
+        <div id="comic-{{this._id}}" class="glide__slide">
+            <glide-img>
+                <img width="198" height="160"
+                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp"
+                    alt="">
+            </glide-img>
+            <bottom-info>
+                <a href="/comic/wizard-of-anesia">
+                    <info-title class="ellipsis-2">
+                        {{this.title}}
+                    </info-title>
+                </a>
+                {{#each this.chapters}}
+                <a href="/comic/{{../this.slug}}/{{this.chapter}}">
+                    <info-chapter id="chapter-{{this._id}}">
+                        {{chapterText this.chapter}}
+                        <span>{{CalcTimeEnglish this.updatedAt}}</span>
+                    </info-chapter>
+                </a>
+                {{/each}}
+                <form onclick="return subscribe(this);" class="info-sub info-sub--subscribed">
+                    <input name="comicId" value="{{this._id}}" type="hidden">
+                    <i class="far fa-xs fa-check"></i>
+                </form>
+            </bottom-info>
+        </div>
+        {{/each}}
+        {{/unless}}
+    </grid-container>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/CustomScript.js"></script>
+<script>
+    addClassVisited()
+    function addClassVisited() {
+            //filter remove empty string in array
+            var visited_chapters_list = JSON.parse(localStorage.getItem('visited_chapters')).filter(items => items);
+            if (visited_chapters_list == null ) return
+
+            var $cardWrapper = $('#card-wrapper')
+
+            for (let i = 0; i < visited_chapters_list.length; i++) {
+                $cardWrapper.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
+            }
+        }
+</script>

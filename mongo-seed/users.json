@@ -1,0 +1,148 @@
+[{
+  "_id": {
+    "$oid": "6084dd9dec23a633c03f96e7"
+  },
+  "role": "admin",
+  "name": "adminlivip",
+  "email": "livipst2@gmail.com",
+  "password": "$2b$10$pBJoSjOiHVNnIROESIdl1OJFuyxneSqY9NTQdu8BX4Jw/At68D2je",
+  "createdAt": {
+    "$date": "2021-04-25T03:10:21.874Z"
+  },
+  "__v": 0,
+  "banned": "false",
+  "comment": [
+    {
+      "$oid": "607a994a6290a72e18635e53"
+    }
+  ],
+  "subscribed": [
+    {
+      "$oid": "603a068034d84d21247cdb22"
+    },
+    {
+      "$oid": "603d8bebf7692e17d03cdb75"
+    },
+    {
+      "$oid": "60bb7904f8b6d00d14efc5b2"
+    },
+    {
+      "$oid": "608a16fc2c381630b89c0f3d"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2021-07-18T03:08:02.792Z"
+  }
+},{
+  "_id": {
+    "$oid": "6086c3292e9bce268c0fdc66"
+  },
+  "role": "extraAdmin",
+  "name": "userdethuong",
+  "email": "user2@gmail.com",
+  "password": "$2b$10$edGMS/KlD1a2grgnViVRKOxDR8QryUBCgejNiCZxlXIpwYtNiKmOC",
+  "createdAt": {
+    "$date": "2021-04-26T13:42:02.088Z"
+  },
+  "updatedAt": {
+    "$date": "2021-04-26T13:42:02.088Z"
+  },
+  "__v": 0,
+  "banned": "false"
+},{
+  "_id": {
+    "$oid": "60877f09030b3f2ecc6f7f0f"
+  },
+  "role": "extraAdmin",
+  "banned": "true",
+  "name": "testBan",
+  "email": "user3@gmail.com",
+  "password": "$2b$10$f/jBjpG8F6aZDv0relLs6.z0jGRJ8/8e3tiqqUzyiXw7mvPrLqQKy",
+  "createdAt": {
+    "$date": "2021-04-27T03:03:37.716Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-06T13:06:54.181Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6088c977f3e3952ab0cbe7f5"
+  },
+  "role": "user",
+  "banned": "false",
+  "name": "mapdit",
+  "email": "user4@gmail.com",
+  "password": "$2b$10$PxhCx7ssDS6WQz5XNLl6FufpIN1yWqqOjjwC1VcoeGy8WA7YmxtU6",
+  "createdAt": {
+    "$date": "2021-04-28T02:33:27.551Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-03T14:54:31.826Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "608969f3a64abe2fd8014929"
+  },
+  "role": "user",
+  "banned": "true",
+  "name": "mapdit",
+  "email": "usertest@gmail.com",
+  "password": "$2b$10$7tEax/PMr8/OfBLEIjOTlO0Mb7DVLdfQjwMBVrS9CUToZ0oTX3htu",
+  "createdAt": {
+    "$date": "2021-04-28T13:58:11.702Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-03T14:53:51.855Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60896a6933273818c4aaf146"
+  },
+  "role": "user",
+  "banned": "false",
+  "name": "bebee",
+  "email": "usermapdit@gmail.com",
+  "password": "$2b$10$z0Lx.7TSO0.jXNZALz4Kh.66Zmc8JPqIA9M1lWvr3nWKGj1Om/.Wq",
+  "createdAt": {
+    "$date": "2021-04-28T14:00:10.004Z"
+  },
+  "updatedAt": {
+    "$date": "2021-04-28T14:00:10.004Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60896ac8df3412313c84259d"
+  },
+  "role": "user",
+  "banned": "false",
+  "name": "bebee2",
+  "email": "usermapdit2@gmail.com",
+  "password": "$2b$10$ZDvZ771AQiceCEmAbaCF6uNVc315jRdLL5S0Kwoi1lLwkySqzDytW",
+  "createdAt": {
+    "$date": "2021-04-28T14:01:44.178Z"
+  },
+  "updatedAt": {
+    "$date": "2021-04-28T14:01:44.178Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6091ed83ebd0352e3cd60fbf"
+  },
+  "role": "user",
+  "banned": "false",
+  "name": "VVH",
+  "email": "hoavinh@tyti.com",
+  "password": "$2b$10$HHW/QyliHT1s1VuPORICYO3Nbqd6plpYe0SlmH0NMJvlmGOUAhmFC",
+  "createdAt": {
+    "$date": "2021-05-05T00:57:40.050Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-06T13:06:20.251Z"
+  },
+  "__v": 0
+}]

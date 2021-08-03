@@ -1,0 +1,163 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
+    <link rel="stylesheet" href="/css/vendor/bootstrap-float-label.min.css" />
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Create Chapter</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Pages</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/me/stored/comics/comic-list">All Comics</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/me/stored/comics/{{linkComics}}/edit">{{replaceHyphenIntoSpace linkComics}}</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a id="linkcomic" href="/me/stored/comics/{{linkComics}}/chapter-list">Chapter List</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Create Chapter
+                            </li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="mb-4">Tạo Chapter Mới</h5>
+                    <div id="message" class="d-none mt-5 alert alert-info alert-dismissible fade show" role="alert">
+                        <strong>Đang upload ảnh !!</strong>
+                        <p> Vui lòng chờ trong giây lát </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="message-2" class="d-none alert-error mt-5 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Chapter Đã tồn tại !!</strong>
+                        <p>hãy chọn chapter khác </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="message-wrongFileType" class="d-none alert-error mt-5 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>File bạn chọn không hợp lệ</strong>
+                        <p>Chỉ được upload file dạng ảnh như .png .jpg .webp ... </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        <div class="card-body position-relative">
+                            <form class="dropzone position-relative"  style="margin: 2rem 0px;"
+                            action="/me/stored/comics/{{linkComics}}/S3-multiple-upload" id="buldUploadForm" method="POST"
+                                enctype="multipart/form-data">
+                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: -44%;left: 0;">
+                                    <input type="number" class="form-control" id="getInput" name="chapter" 
+                                    placeholder="VD: 1 hoặc 20.1" style="cursor: auto;"
+                                    required min="0" step="any" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                    <span>Thêm Chapter</span>
+                                </label>
+                                <div class="dz-clickable" id="uploadDropzone">
+                                    <div class="dz-default dz-message" data-dz-message>
+                                        <span>Drop Multiple images here to upload</span>
+                                    </div>
+                                </div>
+
+                                <input class="btn btn-primary dropzone-submit-btn"
+                                name="many-files" 
+                                type="submit" id="submitDropzonebtn"
+                                    value="Upload Images"
+                                    style="margin: 3rem 0;"/>
+                            </form>
+                        </div> {{!-- /Dropzone Form upload --}}
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+   
+
+
+    {{!-- <script src="/js/vendor/jquery-3.3.1.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        if ($().dropzone && !$(".dropzone").hasClass("disabled")) {
+            Dropzone.autoDiscover = false; 
+
+            $(document).ready(function () {
+                var message = document.getElementById('message')
+                var message2 = document.getElementById('message-2')
+                var message__wrongFileType = document.getElementById('message-wrongFileType')
+                var textOutputValue = document.getElementById('chapter')
+                var linkcomic = document.getElementById('linkcomic')
+                
+                var submitDropzonebtn = document.getElementById('submitDropzonebtn');
+                var inputDropzone = document.getElementById('inputDropzone');
+                var myDropzone = new Dropzone('#buldUploadForm', {
+                     paramName: function () {
+                        return "many-files";
+                    },
+                    uploadMultiple: true,
+                    parallelUploads: 200,
+                    autoProcessQueue: false,
+                    maxFiles: 200,
+                    acceptedFiles: 'image/*',
+                    dictMaxFilesExceeded: 'fail',
+                    init: function () {
+                        var myDropzone = this;
+                        
+                        $("#buldUploadForm").submit(function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            myDropzone.processQueue();
+                            
+                        });
+                        this.on("sending", function (data, xhr, formData) {
+                            message.classList.remove("d-none");
+                        });
+                        
+                        this.on("success", function (file, responseText) {
+                            window.location.replace(linkcomic);
+                        });
+                        this.on("error", function (file, responseText) {
+                            alert(responseText)
+                            if(responseText === "You can't upload files of this type.") {
+                               message__wrongFileType.classList.remove("d-none");
+                            } else {
+                                message2.classList.remove("d-none");
+                            }
+                            message.classList.add("d-none");
+                            setTimeout(() => { window.location.href = ''}, 4000)
+                        });
+                    },
+                    thumbnailWidth: 160,
+                    previewTemplate: '<div class="dz-preview dz-file-preview mb-3"><div class="d-flex flex-row "><div class="p-0 w-30 position-relative"><div class="dz-error-mark"><span><i></i></span></div><div class="dz-success-mark"><span><i></i></span></div><div class="preview-container"><img data-dz-thumbnail class="img-thumbnail border-0" /><i class="simple-icon-doc preview-icon" ></i></div></div><div class="pl-3 pt-2 pr-2 pb-1 w-70 dz-details position-relative"><div><span data-dz-name></span></div><div class="text-primary text-extra-small" data-dz-size /><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div><div class="dz-error-message"><span data-dz-errormessage></span></div></div></div><a href="#/" class="remove" data-dz-remove><i class="glyph-icon simple-icon-trash"></i></a></div>'
+                });
+            });
+        }
+    });
+    </script>
+</body>
+

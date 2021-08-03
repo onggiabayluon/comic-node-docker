@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    
+
+
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-2">
+                        <h1>Faq</h1>
+                        <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                            <ol class="breadcrumb pt-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Library</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="mb-2">
+                        <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions"
+                            role="button" aria-expanded="true" aria-controls="displayOptions">
+                            Display Options
+                            <i class="simple-icon-arrow-down align-middle"></i>
+                        </a>
+                        <div class="collapse d-md-block" id="displayOptions">
+                            <div class="d-block d-md-inline-block">
+                                <div class="btn-group float-md-left mr-1 mb-1">
+                                    <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Order By
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </div>
+                                <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+                                    <input placeholder="Search...">
+                                </div>
+                            </div>
+                            <div class="float-md-right">
+                                <span class="text-muted text-small">Displaying 1-10 of 210 items </span>
+                                <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    20
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">10</a>
+                                    <a class="dropdown-item active" href="#">20</a>
+                                    <a class="dropdown-item" href="#">30</a>
+                                    <a class="dropdown-item" href="#">50</a>
+                                    <a class="dropdown-item" href="#">100</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12" id="accordion">
+
+                    <style>
+                        .btn {
+                            color: var(--theme-color-1)
+                        }
+                        .btn:focus, .btn:hover{
+                            color: var(--theme-color-3)
+                        } 
+                    </style>
+                    <div class="card d-flex mb-3">
+                        <div class="d-flex flex-grow-1 min-width-zero" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <button class="card-body btn btn-empty list-item-heading text-left text-one">
+                                Quyền truy cập 
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body accordion-content">
+                                <p><strong>Admin</strong></p>
+                                <p>
+                                    Thêm, Xóa, Sửa Comics, Chapters của cả Admin và Extra Admin
+                                </p>
+                                <p>
+                                    Thêm, Xóa, Ban (cấm) Extra Admin 
+                                </p>
+                                <br />
+                                <p><strong>Extra Admin</strong></p>
+                                <p>
+                                    Thêm, Xóa, Sửa Comics, Chapters của bản thân Extra Admin
+                                </p>
+                                <br />
+                                <p><strong>User</strong></p>
+                                <p>
+                                    Đăng nhập, Đăng ký, Like truyện
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card d-flex mb-3">
+                        <div class="d-flex flex-grow-1 min-width-zero" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <button class="card-body btn btn-empty list-item-heading text-left text-one">
+                                Đăng Truyện Size bao nhiêu là ổn ?
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                            <div class="card-body accordion-content">
+                                <p><strong>Size tốt nhất là 1000 x ???? px (Width x Height) </strong></p>
+                                <p>
+                                    Size Width luôn bé hơn Size Height
+                                    <br /> 
+                                    VD: 1000x2000, 1000x1500, ...
+                                </p>
+                                <br />
+                                <p><strong>Format ảnh được chấp nhận ?</strong></p>
+                                <p>
+                                    png, jpge, jpg, tốt nhất là jpg 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card d-flex mb-3">
+                        <div class="d-flex flex-grow-1 min-width-zero" data-toggle="collapse"
+                            data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                            <button class="card-body btn btn-empty list-item-heading text-left text-one">
+                                ...
+                            </button>
+                        </div>
+                        <div id="collapseThree" class="collapse" data-parent="#accordion">
+                            <div class="card-body accordion-content">
+                                <p><strong>...</strong></p>
+                                <p>
+                                    ...
+                                </p>
+                                <br />
+                                <p><strong>...</strong></p>
+                                <p>
+                                    ..
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+
+</body>
+
+</html>

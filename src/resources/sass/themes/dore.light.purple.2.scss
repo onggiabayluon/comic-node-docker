@@ -1,0 +1,86 @@
+@mixin defineColorHSL($color, $hue, $saturation, $lightness){
+    #{$color}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");#{$color}-h: #{$hue};#{$color}-s: #{$saturation};#{$color}-l: #{$lightness};
+  }
+:root {
+    @include defineColorHSL(--separator-color-light, 0, 0%, 95%);
+    @include defineColorHSL(--separator-color, 0, 0%, 84%);
+    @include defineColorHSL(--background-color, 0, 0%, 97%);
+    @include defineColorHSL(--foreground-color, 0, 0%, 100%);
+    @include defineColorHSL(--input-background, 0, 0%, 100%);
+
+    @include defineColorHSL(--dark-btn-background, 300, 4%, 33%);
+    @include defineColorHSL(--light-btn-background, 0, 0%, 83%);
+    @include defineColorHSL(--button-text-color, 0, 0%, 100%);
+    
+    @include defineColorHSL(--theme-color-1, 306, 54%, 37%);
+    @include defineColorHSL(--theme-color-2, 230, 43%, 47%);
+    @include defineColorHSL(--theme-color-3, 309, 31%, 55%);
+    @include defineColorHSL(--theme-color-4, 306, 32%, 35%);
+    @include defineColorHSL(--theme-color-5, 230, 26%, 40%);
+    @include defineColorHSL(--theme-color-6, 309, 13%, 42%);
+   
+    @include defineColorHSL(--primary-color, 0, 0%, 23%);
+    @include defineColorHSL(--secondary-color, 0, 0%, 56%);
+    @include defineColorHSL(--muted-color, 0, 0%, 20%);
+
+    @include defineColorHSL(--gradient-color-1, 306, 43%, 46%);
+    @include defineColorHSL(--gradient-color-2, 280, 56%, 20%);
+    @include defineColorHSL(--gradient-color-3, 306, 45%, 37%);
+
+    @include defineColorHSL(--lp-bg-color-1, 293, 69%, 16%);
+    @include defineColorHSL(--lp-bg-color-2, 299, 61%, 20%);
+    @include defineColorHSL(--lp-bg-color-3, 305, 61%, 43%);
+    @include defineColorHSL(--lp-bg-color-4, 306, 60%, 50%);
+   
+}
+
+.dark {
+    @include defineColorHSL(--separator-color-light, 0, 0%, 19%);
+    @include defineColorHSL(--separator-color, 0, 0%, 26%);
+    @include defineColorHSL(--background-color, 300, 4%, 10%);
+    @include defineColorHSL(--foreground-color, 300, 1%, 14%);
+    @include defineColorHSL(--input-background, 300, 1%, 14%);
+
+    @include defineColorHSL(--dark-btn-background, 0, 0%, 55%);
+    @include defineColorHSL(--light-btn-background, 0, 0%, 89%);
+    @include defineColorHSL(--button-text-color, 0, 0%, 82%);
+    
+    @include defineColorHSL(--theme-color-1, 306, 43%, 37%);
+    @include defineColorHSL(--theme-color-2, 230, 44%, 42%);
+    @include defineColorHSL(--theme-color-3, 309, 31%, 55%);
+    @include defineColorHSL(--theme-color-4, 306, 32%, 35%);
+    @include defineColorHSL(--theme-color-5, 230, 26%, 40%);
+    @include defineColorHSL(--theme-color-6, 309, 13%, 42%);
+  
+    @include defineColorHSL(--primary-color, 0, 0%, 59%);
+    @include defineColorHSL(--secondary-color, 0, 0%, 46%);
+    @include defineColorHSL(--muted-color, 0, 0%, 71%);
+
+    @include defineColorHSL(--gradient-color-1, 306, 41%, 25%);
+    @include defineColorHSL(--gradient-color-2, 306, 41%, 19%);
+    @include defineColorHSL(--gradient-color-3, 306, 42%, 28%);
+
+    @include defineColorHSL(--lp-bg-color-1, 292, 82%, 9%);
+    @include defineColorHSL(--lp-bg-color-2, 297, 72%, 10%);
+    @include defineColorHSL(--lp-bg-color-3, 303, 64%, 19%);
+    @include defineColorHSL(--lp-bg-color-4, 305, 64%, 27%);
+} // /* ------  DARK ------ */ 
+
+
+
+$shadowOffsetsTop : 1 3 10 14 19;
+$shadowBlursTop: 1.5 5 10 14 19;
+$shadowOpacitiesTop: 0.04 0.1 0.19 0.25 0.3;
+
+$shadowOffsetsBottom : 1 3 6 10 15;
+$shadowBlursBottom: 3 6 6 5 6;
+$shadowOpacitiesBottom: 0.04 0.1 0.2 0.22 0.22;
+
+$logoPath: "../img/logo-black.svg";
+$logoPathMobile: "../img/logo-mobile.svg";
+
+$lpLogoPath: "../img/logo-white.svg";
+$lpLogoPathPinned: "../img/logo-black.svg";
+
+@import "../_mixins.scss";
+@import "../_dore.style.scss";

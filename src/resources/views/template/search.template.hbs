@@ -1,0 +1,20 @@
+
+{{#ifCond empty '==' true}}
+<empty>No Result</empty>
+{{/ifCond}}
+
+{{#each comics}}
+    <item>
+        <img width="60" height="60" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp" alt="">
+        <info class="info">
+            <a href="/comic/{{this.slug}}" class="info__title">{{this.title}}</a>
+            <a href="/comic/{{this.slug}}/{{getValues (limit this.chapters 1) "chapter"}}" class="info__chapter">{{replaceHyphenIntoSpace (getValues (limit this.chapters 1) "chapter")}}</a>
+        </info>
+    </item>
+{{/each}}
+
+{{#ifCond leftover '>' 0}}
+<left-over>
+    <a href="" class="mt-2"> ({{../leftover}}) More Comics</a>
+</left-over>
+{{/ifCond}}

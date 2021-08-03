@@ -1,0 +1,140 @@
+background-overlay {
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.24;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+  background-overlay-2 {
+    background: linear-gradient(180deg, rgba(111,124,130,0.4) 0%, rgba(83,100,106,0.5) 40%, rgba(54,74,81,0.8) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // opacity: 0.34;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+.mid {
+  width: 100%;
+}
+
+.heading--center {
+  display: flex;
+  justify-content: center;
+}
+
+heading {
+  margin: 0 auto 1.5rem auto;
+  font-family: 'hind_m';
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  
+  .title {
+      display: flex;
+      font-size: 1.3rem;
+      font-family: 'hind_m';
+      color: var(--button-text-color);
+
+      &--center {
+        justify-content: center;
+      }
+  }
+  icon-right {
+    margin: 0.55rem 0 0 0.6rem;
+    font-size: 1rem;
+    color: var(--button-text-color);
+  }
+}
+
+.background-color {
+  background: var(--background-color);
+}
+.foreground-color {
+  background: var(--foreground-color);
+}
+.background-color-2 {
+  background: var(--foreground-color-2);
+}
+.border-bottom-1 {
+  border-bottom: 1px solid var(--background-color);
+}
+.border-bottom-2 {
+  border-bottom: 1px solid var(--background-color-2);
+}
+.border-bottom-3 {
+  border-bottom: 1px solid var(--button-text-unimportant);
+}
+.border-top-bot-3 {
+  border-top: 1px solid var(--background-color-2);
+  border-bottom: 1px solid var(--background-color-2);
+}
+
+.color-black {
+  color: #000 !important;
+  font-family: 'hind_m';
+}
+.color-white {
+  color: #fff !important;
+}
+.color-theme-2 {
+  color: var(--theme-color-2) !important;
+}
+
+.visited {
+  color: var(--visited-color) !important;
+
+  &:hover {
+    color: var(--button-text-color) !important;
+  }
+}
+.light-red {
+  color: var(--button-text-color-2) !important;
+  &:hover {
+      color: var(--button-text-color) !important;
+  }
+}
+.ellipsis {
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}
+.ellipsis-2  {
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 576px) {
+  #newest-places .container, #bookmark-places .container  {
+    max-width: 100%;
+  }
+}
+@media (max-width: 1040px) {
+  .container {
+    max-width: 90%;
+  }
+}
+@media (min-width: 1380px) {
+  .container {
+    max-width: 80%;
+  }
+  .glide__slide glide-img img {
+    height: 215px;
+  }
+}
