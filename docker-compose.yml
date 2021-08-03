@@ -23,7 +23,6 @@ services:
         #     - ./.env
     mongo:
         image: mongo
-        restart: always
         # Open port for outside connection
         ports:
             - "27012:27017"

@@ -14,7 +14,7 @@ services:
             - NODE_ENV=production
             # Remove Later :x:
             - MONGO_USER=${MONGO_USER}
-            - MONGO_PASSWORD=mypassword${MONGO_PASSWORD}
+            - MONGO_PASSWORD=${MONGO_PASSWORD}
             - WASABI_ACCESS_KEY_ID=${WASABI_ACCESS_KEY_ID}
             - WASABI_SECRET_ACCESS_KEY=${WASABI_SECRET_ACCESS_KEY}
         command: node ./src/index.js
