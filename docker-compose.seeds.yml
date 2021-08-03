@@ -17,9 +17,6 @@ services:
             - MONGO_PASSWORD=mypassword${MONGO_PASSWORD}
             - WASABI_ACCESS_KEY_ID=${WASABI_ACCESS_KEY_ID}
             - WASABI_SECRET_ACCESS_KEY=${WASABI_SECRET_ACCESS_KEY}
-            - WASABI_ENDPOINT=s3.eu-central-1.wasabisys.com
-            - WASABI_BUCKET_NAME=cloudimagewallbucket
-            - WASABI_REGION=eu-central-1
         command: node ./src/index.js
     mongo:
         environment:
