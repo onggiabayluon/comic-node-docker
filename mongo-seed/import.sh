@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 colls=( comics chapters categories comments users )
 
 for c in ${colls[@]}
