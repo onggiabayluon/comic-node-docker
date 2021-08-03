@@ -26,9 +26,6 @@ services:
         # Open port for outside connection
         ports:
             - "27012:27017"
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: ducchuy
-            MONGO_INITDB_ROOT_PASSWORD: mypassword
         volumes:
             - mongo-db:/data/db
 

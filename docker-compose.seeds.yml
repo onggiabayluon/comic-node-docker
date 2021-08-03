@@ -13,14 +13,18 @@ services:
         environment:
             - NODE_ENV=production
             # Remove Later :x:
-            - MONGO_USER=ducchuy
-            - MONGO_PASSWORD=mypassword
-            - WASABI_ACCESS_KEY_ID=NGAA0F53USVKDK1KHV0M,
-            - WASABI_SECRET_ACCESS_KEY=MKCCJ0gCJ2YveUg2SYhtHUnj4HHgiS51vqZjGuBk,
-            - WASABI_ENDPOINT= s3.eu-central-1.wasabisys.com,
-            - WASABI_BUCKET_NAME= cloudimagewallbucket,
-            - WASABI_REGION= eu-central-1,
+            - MONGO_USER=${MONGO_USER}
+            - MONGO_PASSWORD=mypassword${MONGO_PASSWORD}
+            - WASABI_ACCESS_KEY_ID=${WASABI_ACCESS_KEY_ID}
+            - WASABI_SECRET_ACCESS_KEY=${WASABI_SECRET_ACCESS_KEY}
+            - WASABI_ENDPOINT=s3.eu-central-1.wasabisys.com
+            - WASABI_BUCKET_NAME=cloudimagewallbucket
+            - WASABI_REGION=eu-central-1
         command: node ./src/index.js
+    mongo:
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     mongo_seed:
         image: mongo
         links:
