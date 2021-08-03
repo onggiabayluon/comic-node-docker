@@ -30,7 +30,7 @@ services:
         volumes:
             - mongo-db:/data/db
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=sanjeev
+            - MONGO_INITDB_ROOT_USERNAME=ducchuy
             - MONGO_INITDB_ROOT_PASSWORD=mypassword
     redis:
         image: redis
