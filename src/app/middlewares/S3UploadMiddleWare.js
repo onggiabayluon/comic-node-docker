@@ -5,7 +5,7 @@ const { WASABI_ENDPOINT, WASABI_ACCESS_KEY_ID, WASABI_SECRET_ACCESS_KEY, WASABI_
 
 // S3 config
 const s3 = new AWS.S3({
-    endpoint: new AWS.Endpoint(WASABI_ENDPOINT),
+    endpoint: new AWS.Endpoint("s3.eu-central-1.wasabisys.com"),
     accessKeyId: WASABI_ACCESS_KEY_ID,
     secretAccessKey: WASABI_SECRET_ACCESS_KEY,
 });

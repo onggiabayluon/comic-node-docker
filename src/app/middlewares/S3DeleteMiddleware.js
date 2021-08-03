@@ -4,7 +4,7 @@ module.exports = function destroyTodoImage(filename, callback) {
   const AWS = require('aws-sdk');
 
   const s3 = new AWS.S3({
-    endpoint: new AWS.Endpoint(WASABI_ENDPOINT),
+    endpoint: new AWS.Endpoint("s3.eu-central-1.wasabisys.com"),
     accessKeyId: WASABI_ACCESS_KEY_ID,
     secretAccessKey: WASABI_SECRET_ACCESS_KEY,
     region: WASABI_REGION
