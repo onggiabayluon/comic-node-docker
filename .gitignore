@@ -2,6 +2,6 @@
 
 /.env
 
-docker-compose.dev.yml
-docker-compose.seeds.2.yml
-docker-compose.prod.2.yml
+docker-compose.dev
+docker-compose.seeds.2
+docker-compose.prod.2
