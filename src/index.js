@@ -91,7 +91,8 @@ app.use(session({
     secret: 'secret',
     cookie: { maxAge: 2592000}, //   30 day
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: true, sameSite: 'strict' }
 }));
 
 // Passport middleware

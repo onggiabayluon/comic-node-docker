@@ -1,17 +1,24 @@
 // Loader
-$(window).on('load', function () {
-    // PAGE IS FULLY LOADED  
-    // FADE OUT YOUR OVERLAYING DIV
-    $('#loader').fadeOut("slow");
+// $(window).on('load', function () {
+//     // PAGE IS FULLY LOADED  
+//     // FADE OUT YOUR OVERLAYING DIV
+//     $('#loader').fadeOut("slow");
     
-    let page = 'newest-places'
-    var url = document.location.href;
-    if (url.match(/\?page./)) {
-        document.location = url + `#${page}`;
-        if (url.match(/\#./)) document.location = url;
-    }
+//     let page = 'newest-places'
+//     var url = document.location.href;
+//     if (url.match(/\?page./)) {
+//         document.location = url + `#${page}`;
+//         if (url.match(/\#./)) document.location = url;
+//     }
     
-});
+// });
+
+let page = 'newest-places'
+var url = document.location.href;
+if (url.match(/\?page./)) {
+    document.location = url + `#${page}`;
+    if (url.match(/\#./)) document.location = url;
+}
 
 /*************** Utility ***************/
 $('[data-toggle="tooltip"]').tooltip()
@@ -253,51 +260,51 @@ if ($("#glide_1").length > 0) {
         // },
     }).mount();
 }
+if ($("#glide_banner").length > 0) {
+    var $backgroundBanner = $('#background-banner')
+    var glide = new Glide("#glide_banner", {
+        type: 'carousel',
+        bound: true,
+        rewind: true,
+        focusAt: 0,
+        perView: 1,
+        startAt: 0,
+        // autoplay: 10000,
+        direction: 'ltr',
+        breakpoints: {
+            1200: { perView: 1, gap: 10, peek: {
+                before: 250,
+                after: 250
+            }},
+            1000: { perView: 1, gap: 10, peek: {
+                before: 150,
+                after: 150
+            }},
+            750: { perView: 1, gap: 10, peek: {
+                before: 130,
+                after: 130
+            }},
+            650: { perView: 1, gap: 0, peek: {
+                before: 0,
+                after: 0
+            }},
+            // afterTransition : function(event) {
+            //     console.log(event.index); // the current slide number
+            // } 
+        },
+    })
+    glide.mount();
+    // glide.on('run', () => {
+    //     $src = $('#glide_banner .glide__slide--active').next().find('img').attr('src')
+    //     $backgroundBanner.css('background-image', 'url(' + $src + ')').hide().fadeIn(1000);
+    //     console.log('move called')
+    //     // this.__changeActiveProject(glide.index)
+    // })
+}
 function gliderjs() {
     // Glider
-    if (typeof Glide !== "undefined") {
     
-        if ($("#glide_banner").length > 0) {
-            var $backgroundBanner = $('#background-banner')
-            var glide = new Glide("#glide_banner", {
-                type: 'carousel',
-                bound: true,
-                rewind: true,
-                focusAt: 0,
-                perView: 1,
-                startAt: 0,
-                // autoplay: 10000,
-                direction: 'ltr',
-                breakpoints: {
-                    1200: { perView: 1, gap: 10, peek: {
-                        before: 250,
-                        after: 250
-                    }},
-                    1000: { perView: 1, gap: 10, peek: {
-                        before: 150,
-                        after: 150
-                    }},
-                    750: { perView: 1, gap: 10, peek: {
-                        before: 130,
-                        after: 130
-                    }},
-                    650: { perView: 1, gap: 0, peek: {
-                        before: 0,
-                        after: 0
-                    }},
-                    afterTransition : function(event) {
-                        console.log(event.index); // the current slide number
-                    } 
-                },
-            })
-            glide.mount();
-            // glide.on('run', () => {
-            //     $src = $('#glide_banner .glide__slide--active').next().find('img').attr('src')
-            //     $backgroundBanner.css('background-image', 'url(' + $src + ')').hide().fadeIn(1000);
-            //     console.log('move called')
-            //     // this.__changeActiveProject(glide.index)
-            // })
-        }
+        
 
         if ($("#glide_2").length > 0) {
             new Glide("#glide_2", {
@@ -314,7 +321,6 @@ function gliderjs() {
                 },
             }).mount();
         }
-    }  /* 😆 End Glide */
 }
 
 /*************** glide js ***************/

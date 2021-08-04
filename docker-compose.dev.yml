@@ -14,7 +14,17 @@ services:
             - /app/node_modules
         environment:
             - NODE_ENV=development
+            # Remove Later :x:
             - MONGO_USER=ducchuy
             - MONGO_PASSWORD=mypassword
+            - WASABI_ACCESS_KEY_ID=NGAA0F53USVKDK1KHV0M,
+            - WASABI_SECRET_ACCESS_KEY=MKCCJ0gCJ2YveUg2SYhtHUnj4HHgiS51vqZjGuBk
+            - WASABI_ENDPOINT= s3.eu-central-1.wasabisys.com
+            - WASABI_BUCKET_NAME= cloudimagewallbucket
+            - WASABI_REGION= eu-central-1
         command: npm start
+    mongo:
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=ducchuy
+            - MONGO_INITDB_ROOT_PASSWORD=mypassword
     

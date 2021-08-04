@@ -13,7 +13,10 @@ const User = require('../models/User');
 
 class SiteController {
 
-    
+    test(req, res, next) {
+        res.send("<h1> Hello </h1>")
+    }
+
     // [GET] / Site
     index(req, res, next) {
         // Comic.updateMany({}, {rate: {rateCount: 0, rateValue: 0}}).then(info => console.log(info))
