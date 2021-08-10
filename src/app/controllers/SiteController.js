@@ -2,9 +2,10 @@
 // --> 3. lấy được dữ liệu mang về controller --> 4. chọc sang views, lấy data
 // từ model truyền sang views --> 5. views render trả về client
 const Comic     = require('../models/Comic');
-
+const Config     = require('../models/Config');
 const { singleMongooseToObject } =  require('../../util/mongoose');
 const User = require('../models/User');
+const { IMAGE_URL } = require('../../config/config');
 
 // connect to redis
 // const path  = require('path');
@@ -14,7 +15,26 @@ const User = require('../models/User');
 class SiteController {
 
     test(req, res, next) {
-        res.send("<h1> Hello </h1>")
+        let update = { 
+            $setOnInsert: { type: 'slider' },
+            $set: {
+                [`images.1`]: {
+                'title': 'title',
+                'subtitle': 'subtitle',
+                'description': 'description',
+                'href': 'href',
+                 url :'imagesURL'}
+            } 
+        }
+        Config.updateOne(
+            { type: 'slider' },  
+            update,
+            { upsert: true }
+        )
+        .then(re => console.log(re))
+
+        res.send("<h1> Helloadddaada </h1>")
+        
     }
 
     // [GET] / Site
@@ -31,7 +51,7 @@ class SiteController {
 
         Promise.all([
             Comic.countDocuments({}),
-            Comic.find({ chaptername: { $not: { $exists: true } } }).lean()
+            Comic.find({ chaptername: { $not: { $exists: true } } })
             .skip(skipCourse)
             .limit(PageSize)
             .sort({ updatedAt: -1})
@@ -42,7 +62,9 @@ class SiteController {
                     limit: 3,
                     sort: { updatedAt: -1},
                 }
-            }),
+            })
+            .lean(),
+            Config.findOne({ category: "image" }).lean(),
             // Comment.aggregate([
             //     {
             //         $match:  { }
@@ -97,7 +119,7 @@ class SiteController {
                 }
             })
           ])
-          .then(([count, comicsDoc, subscribeList]) => {
+          .then(([count, comicsDoc, config, subscribeList]) => {
             res.status(200).render('home', { 
                 layout: 'home_layout',
                 comics: comicsDoc,
@@ -107,6 +129,8 @@ class SiteController {
                 prevPage2,
                 pages: Math.ceil(count / PageSize),
                 user: singleMongooseToObject(req.user),
+                img_url: IMAGE_URL,
+                config: config,
                 // commentDoc: commentDoc,
                 sublist: subscribeList
              });

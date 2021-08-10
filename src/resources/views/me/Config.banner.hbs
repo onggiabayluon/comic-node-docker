@@ -1,0 +1,367 @@
+<link rel="stylesheet" href="/css/vendor/bootstrap-float-label.min.css" />
+
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>Config Banner</h1>
+                <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                    <ol class="breadcrumb pt-0">
+                        <li class="breadcrumb-item">
+                            <a href="#">Config</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Banner
+                        </li>
+                    </ol>
+                </nav>
+                <div class="separator mb-5"></div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+
+            <div>
+                <box id="slider" class="card-body" style="display: flex;justify-content: center;flex-wrap: wrap;text-align: center;">
+                    {{#each config.slider}}
+                    <a class="position-relative mt-4" href="#" style="height: fit-content;flex: 1 0 21%;">
+                        <picture>
+
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                class="list-thumbnail border-0" style="max-width: 180px;object-position: right;" />
+                        </picture>
+                        <span
+                            style="position: absolute;top: -10px;left: 50%;transform: translate(-50%, -50%);color: var(--theme-color-1);">{{sum
+                            @index 1}}</span>
+                    </a>
+                    {{/each}}
+                </box>
+
+                <box id="banner" class="card-body d-none" style="display: flex;justify-content: center;">
+                    {{#each config.banner}}
+                    <a class="position-relative mt-4" href="#" style="height: fit-content;">
+                        <picture>
+
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                style="max-width: 100%;object-position: right;" />
+                        </picture>
+                        <span
+                            style="position: absolute;top: -10px;left: 50%;transform: translate(-50%, -50%);color: var(--theme-color-1);">
+                            {{sum @index 1}}</span>
+                    </a>
+                    {{/each}}
+                </box>
+
+                <box id="banner_background" class="card-body d-none" style="display: flex;justify-content: center;">
+                    {{#each config.banner_background}}
+                    <a class="position-relative mt-4" href="#" style="height: fit-content;">
+                        <picture>
+
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                style="max-width: 100%;object-position: right;" />
+                        </picture>
+                        <span
+                            style="position: absolute;top: -10px;left: 50%;transform: translate(-50%, -50%);color: var(--theme-color-1);">{{sum
+                            @index 1}}</span>
+                    </a>
+                    {{/each}}
+                </box>
+
+                <box id="banner_topright" class="card-body d-none" style="display: flex;justify-content: center;">
+                    {{#each config.banner_topright}}
+                    <a class="position-relative mt-4" href="#" style="height: fit-content;">
+                        <picture>
+
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                style="max-width: 100%;object-position: right;" />
+                        </picture>
+                        <span
+                            style="position: absolute;top: -10px;left: 50%;transform: translate(-50%, -50%);color: var(--theme-color-1);">{{sum
+                            @index 1}}</span>
+                    </a>
+                    {{/each}}
+                </box>
+                <box id="banner_botright" class="card-body d-none" style="display: flex;justify-content: center;">
+                    {{#each config.banner_botright}}
+                    <a class="position-relative mt-4" href="#" style="height: fit-content;">
+                        <picture>
+
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                style="max-width: 100%;object-position: right;" />
+                        </picture>
+                        <span
+                            style="position: absolute;top: -10px;left: 50%;transform: translate(-50%, -50%);color: var(--theme-color-1);">{{sum
+                            @index 1}}</span>
+                    </a>
+                    {{/each}}
+                </box>
+            </div>
+            
+
+            <div class="card-body">
+                <div id="message" class="d-none mt-5 alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Đang upload ảnh !!</strong>
+                    <p> Vui lòng chờ trong giây lát </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="message-2" class="d-none alert-error mt-5 alert alert-danger alert-dismissible fade show"
+                    role="alert">
+                    <strong>Chapter Đã tồn tại !!</strong>
+                    <p>hãy chọn chapter khác </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="message-wrongFileType"
+                    class="d-none alert-error mt-5 alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>File bạn chọn không hợp lệ</strong>
+                    <p>Chỉ được upload file dạng ảnh như .png .jpg .webp ... </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                
+
+                <form id="tempForm" style="width:95%; margin: 0 auto;">
+                    
+                    <label class="form-group has-float-label custom">
+                        <input class="form-control" id="categoryInput" 
+                            value="image" readonly/>
+                        <span>Category</span>
+                    </label>
+                    <label class="form-group has-float-label custom">
+                        <select class="custom-select" id="typeInput">
+                            <option selected="" value="slider">Slider</option>
+                            <option value="banner">Banner</option>
+                            <option value="banner_background">Background Banner</option>
+                            <option value="banner_topright">Top Right Banner </option>
+                            <option value="banner_botright">Bottom Right Banner</option>
+                        </select>
+                        <span>Type</span>
+                    </label>
+                    <label class="form-group has-float-label custom">
+                        <input class="form-control" id="titleInput" 
+                            style="cursor: auto;" value="{{config.slider.0.title}}"/>
+                        <span>Title</span>
+                    </label>
+                    <label class="form-group has-float-label custom">
+                        <input class="form-control" id="subTitleInput" 
+                            style="cursor: auto;" value="{{config.slider.0.subtitle}}"/>
+                        <span>SubTitle</span>
+                    </label>
+                    <label class="form-group has-float-label custom">
+                        <input class="form-control" id="authorInput" 
+                            style="cursor: auto;" value="{{config.slider.0.author}}"/>
+                        <span>Author</span>
+                    </label>
+                    <label class="form-group has-float-label custom">
+                        <input class="form-control" id="descriptionInput" 
+                            style="cursor: auto;" value="{{config.slider.0.description}}"/>
+                        <span>Description</span>
+                    </label>
+                    <label class="form-group has-float-label custom">
+                        <input class="form-control" id="hrefInput" 
+                            style="cursor: auto;" value="{{config.slider.0.href}}"/>
+                        <span>href</span>
+                    </label>
+                    <div class="form-row ml-1">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" name="indexInput" class="custom-control-input" 
+                            value=0 checked>
+                            <label class="custom-control-label" for="customRadio1">1</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio2" name="indexInput" class="custom-control-input" 
+                            value=1>
+                            <label class="custom-control-label" for="customRadio2">2</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio3" name="indexInput" class="custom-control-input" 
+                            value=2>
+                            <label class="custom-control-label" for="customRadio3">3</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio4" name="indexInput" class="custom-control-input" 
+                            value=3>
+                            <label class="custom-control-label" for="customRadio4">4</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio5" name="indexInput" class="custom-control-input" 
+                            value=4>
+                            <label class="custom-control-label" for="customRadio5">5</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio6" name="indexInput" class="custom-control-input" 
+                            value=5>
+                            <label class="custom-control-label" for="customRadio6">6</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio7" name="indexInput" class="custom-control-input" 
+                            value=6>
+                            <label class="custom-control-label" for="customRadio7">7</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="customRadio8" name="indexInput" class="custom-control-input" 
+                            value=7>
+                            <label class="custom-control-label" for="customRadio8">8</label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="card-body position-relative">
+                    <form class="dropzone " style="margin: 2rem 0px;"
+                        action="/me/stored/config/banner/upload"
+                        id="buldUploadForm" method="POST"
+                        enctype="multipart/form-data">
+                        
+                        
+                        <div class="dz-clickable" id="uploadDropzone">
+                            <div class="dz-default dz-message" data-dz-message>
+                                <span>Drop 1 images here to upload</span>
+                            </div>
+                        </div>
+
+                        <input class="btn btn-primary dropzone-submit-btn" name="many-files" type="submit"
+                            id="submitDropzonebtn" value="Upload Images" style="margin-top: -1rem;" />
+                    </form>
+                </div> {{!-- /Dropzone Form upload --}}
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+
+
+{{!--
+<script src="/js/vendor/jquery-3.3.0.min.js"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+        
+    $(document).ready(function () {
+        var config = {{{configString}}}
+        var $titleInput = $('#titleInput')
+        var $subTitleInput = $('#subTitleInput')
+        var $authorInput = $('#authorInput')
+        var $descriptionInput = $('#descriptionInput')
+        var $hrefInput = $('#hrefInput')
+
+        empty = () => {
+            $titleInput.val('')
+            $subTitleInput.val('')
+            $authorInput.val('')
+            $descriptionInput.val('')
+            $hrefInput.val('')
+        }
+
+        changeVal = (type, index) => {
+            if (!config[`${type}`]) { return empty() }
+            if (config[`${type}`][`${index}`]) {
+                $titleInput.val(config[`${type}`][`${index}`].title)
+                $subTitleInput.val(config[`${type}`][`${index}`].subtitle)
+                $authorInput.val(config[`${type}`][`${index}`].author)
+                $descriptionInput.val(config[`${type}`][`${index}`].description)
+                $hrefInput.val(config[`${type}`][`${index}`].href)
+            } else {
+                empty()
+            }
+        }
+
+        $('#typeInput').on("change", function (e) {
+            type = this.value
+            index = $('input[type=radio][name=indexInput]').val()
+            
+            changeVal(type, index)
+
+            $('box').not(`#${type}`).addClass('d-none')
+            $(`#${type}`).removeClass('d-none')
+        })
+    
+        $('input[type=radio][name=indexInput]').on("change", function(e){
+            index = this.value
+            type = $('#typeInput').val()
+            changeVal(type, index)
+        })
+    
+        
+        if ($().dropzone && !$(".dropzone").hasClass("disabled")) {
+            Dropzone.autoDiscover = false;
+
+            $(document).ready(function () {
+                var message = document.getElementById('message')
+                var message2 = document.getElementById('message-2')
+                var message__wrongFileType = document.getElementById('message-wrongFileType')
+                var submitDropzonebtn = document.getElementById('submitDropzonebtn');
+
+                var myDropzone = new Dropzone('#buldUploadForm', {
+                    paramName: function () {
+                        return "many-files";
+                    },
+                    uploadMultiple: true,
+                    parallelUploads: 1,
+                    autoProcessQueue: false,
+                    maxFiles: 1,
+                    acceptedFiles: 'image/*',
+                    dictMaxFilesExceeded: 'fail',
+                    init: function () {
+                        var myDropzone = this;
+
+                        $("#buldUploadForm").submit(function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            myDropzone.processQueue();
+
+                        });
+                        this.on("sendingmultiple", function (data, xhr, formData) {
+                            message.classList.remove("d-none");
+                            formData.append('category', $('#categoryInput').val());
+                            formData.append('type', $("#typeInput :selected").val());
+                            formData.append('title', $('#titleInput').val());
+                            formData.append('subtitle', $('#subTitleInput').val());
+                            formData.append('author', $('#authorInput').val());
+                            formData.append('description', $('#descriptionInput').val());
+                            formData.append('href', $('#hrefInput').val());
+                            formData.append("index", $('input[name=indexInput]:checked').val());
+                        });
+                        
+                        this.on("success", function (file, responseText) {
+                            window.location.replace('/me/stored/config/banner');
+                        });
+                        this.on("error", function (file, responseText) {
+                            alert(responseText)
+                            if (responseText === "You can't upload files of this type.") {
+                                message__wrongFileType.classList.remove("d-none");
+                            } else {
+                                message2.classList.remove("d-none");
+                            }
+                            message.classList.add("d-none");
+                            setTimeout(() => { window.location.href = '' }, 4000)
+                        });
+                    },
+                    thumbnailWidth: 160,
+                    previewTemplate: '<div class="dz-preview dz-file-preview mb-3"><div class="d-flex flex-row "><div class="p-0 w-30 position-relative"><div class="dz-error-mark"><span><i></i></span></div><div class="dz-success-mark"><span><i></i></span></div><div class="preview-container"><img data-dz-thumbnail class="img-thumbnail border-0" /><i class="simple-icon-doc preview-icon" ></i></div></div><div class="pl-3 pt-2 pr-2 pb-1 w-70 dz-details position-relative"><div><span data-dz-name></span></div><div class="text-primary text-extra-small" data-dz-size /><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div><div class="dz-error-message"><span data-dz-errormessage></span></div></div></div><a href="#/" class="remove" data-dz-remove><i class="glyph-icon simple-icon-trash"></i></a></div>'
+                });
+            });
+        }
+    });
+</script>

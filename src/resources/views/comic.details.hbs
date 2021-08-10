@@ -10,7 +10,19 @@
 <body class="menu-default show-spinner">
 
     <main id="comic-details">
-        <div class="cover" style="background-image: url(https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg);"> </div>
+        <div class="cover" 
+        {{!-- style="background-image: url(https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg);" --}}
+        > 
+        <picture>
+            <source srcset="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" type="image/jpeg" 
+            media="(max-width: 768px)"/>
+
+            <img class="backgroundBanner__img" alt="{{comic.title}} Background" 
+            src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" 
+            srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 769w"
+            />
+        </picture>
+        </div>
         <div id="resize" class="container mb-4">
             <div class="row">
                 <div class="col-12">
@@ -43,7 +55,7 @@
                                     </div>
                                     {{/if}}
                                 </div>
-                                <div class="card infoLeft__title col-sm-12">
+                                <div class="p-3 card infoLeft__title col-sm-12">
                                     <h1 id="main-title" class="font-weight-bold">{{comic.title}}</h1>
                                     <h4 id="sub-title" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
                                         Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
@@ -181,7 +193,7 @@
                                 </div>
                             </tools-header>
 
-                            {{!-- {{#if user}} --}}
+                            {{#if user}}
                             <simplebox id="simplebox" class="comment mb-4">
                                 <div id="body" class="comment__body">
                                     <thumbnail id="author-thumbnail" class="author-thumbnail">
@@ -212,11 +224,11 @@
                                     </div>
                                 </div>
                             </simplebox>
-                            {{!-- {{else}}
+                            {{else}}
                             <p class="text-medium">Login to comment</p>
                             <a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
                             <a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
-                            {{/if}}  --}}
+                            {{/if}} 
 
                             <comments-container id="commentcontainer">
                                 {{#each comments}}
@@ -483,9 +495,6 @@
 
 </instuff>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-<script src="/js/vendor/stars.js"></script>
-<script src="/js/comic.details.js"></script>
+
 
 

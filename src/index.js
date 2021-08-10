@@ -43,9 +43,6 @@ db.connect();
 const app   = express();
 const port = process.env.PORT || 3000;
 
-// Cors and Proxy
-app.enable("trust proxy")
-app.use(cors())
 
 // Socket io
 const server = require('http').createServer(app);
@@ -86,14 +83,29 @@ io.on('connection', client => {
     
     
 });
-// Flash setup
-app.use(session({
+
+// Cors and Proxy
+
+// sessionConfig
+const sessionConfig = {
     secret: 'secret',
-    cookie: { maxAge: 2592000}, //   30 day
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: true, sameSite: 'strict' }
-}));
+    resave: false,
+    saveUninitialized: false,
+    cookie : {
+        sameSite: 'strict', // THIS is the config you are looing for.
+        maxAge: 2592000,
+        httpOnly: true,
+        secure: false
+    }
+};
+
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1); // trust first proxy
+    app.use(cors())
+    sessionConfig.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sessionConfig));
 
 // Passport middleware
 app.use(passport.initialize());
@@ -177,6 +189,10 @@ app.engine(
                 if (!Array.isArray(arr)) { return []; }
                 return arr.slice(0, limit);
             },
+            limitFrom: (arr, startLimit, endLimit) => {
+                if (!Array.isArray(arr)) { return []; }
+                return arr.slice(startLimit, endLimit);
+            },
             replaceHyphenIntoHashmark: (str) => {
                 str = str.toString().replace(/chapter-/g, '#');
                 return str && str[0].toUpperCase() + str.slice(1);
@@ -207,6 +223,12 @@ app.engine(
             },
             ifCond: (a,operator,b,options) => {
                 switch (operator) {
+                    case '%':
+                        a++
+                        return (a % b == 0) ? options.fn(this) : options.inverse(this);
+                    case '!%':
+                        a++
+                        return (a % b != 0) ? options.fn(this) : options.inverse(this);
                     case '== (string)':
                         a = (!a) ? null : a.toString()
                         b = (!b) ? null : b.toString()

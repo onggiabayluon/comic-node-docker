@@ -58,8 +58,9 @@
   
     &.active .page-link {
       background: transparent;
-      border: 1px solid var(--theme-color-1);
-      color: var(--theme-color-1);
+      background-color: transparent !important;
+      border: 1px solid var(--theme-color-1) !important;
+      color: var(--theme-color-1) !important;
     }
   
     &.disabled .page-link {

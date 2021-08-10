@@ -11,14 +11,16 @@ class UserController {
     // login Page
     loginPage(req, res, next) {
         res.render('users/login', {
-            layout: 'login_register_layout'
+            layout: 'login_register_layout',
+            referer: req.headers.referer,
         })
     }
 
     // Login
     login(req, res, next) {
+        let referer = (req.body.referer !== '' && req.body.referer !== null) ? req.body.referer : '/'
         passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: referer,
         failureRedirect: '/users/login',
         failureFlash: true
         })(req, res, next);

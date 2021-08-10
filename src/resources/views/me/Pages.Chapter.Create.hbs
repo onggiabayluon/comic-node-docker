@@ -62,10 +62,10 @@
                         </button>
                     </div>
                         <div class="card-body position-relative">
-                            <form class="dropzone position-relative"  style="margin: 2rem 0px;"
+                            <form class="dropzone "  style="margin: 2rem 0px;"
                             action="/me/stored/comics/{{linkComics}}/S3-multiple-upload" id="buldUploadForm" method="POST"
                                 enctype="multipart/form-data">
-                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: -44%;left: 0;">
+                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 0%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
                                     <input type="number" class="form-control" id="getInput" name="chapter" 
                                     placeholder="VD: 1 hoặc 20.1" style="cursor: auto;"
                                     required min="0" step="any" />
@@ -86,8 +86,8 @@
                                 <input class="btn btn-primary dropzone-submit-btn"
                                 name="many-files" 
                                 type="submit" id="submitDropzonebtn"
-                                    value="Upload Images"
-                                    style="margin: 3rem 0;"/>
+                                value="Upload Images"
+                                style="margin-top: -1rem;"/>
                             </form>
                         </div> {{!-- /Dropzone Form upload --}}
                 </div>

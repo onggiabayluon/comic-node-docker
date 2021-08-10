@@ -34,17 +34,17 @@
             }
           }
     }
-    background-banner {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: block;
-        height: 492px;
-        // background: #ccc;
-        background-size: cover;
-        background-repeat: no-repeat;
+    .backgroundBanner {
+        &__img {
+            position: absolute;
+            width: 100%;
+            height: 492px;
+            // background: #ccc;
+            background-size: cover;
+            background-repeat: no-repeat;
 
-        &::before {
+        }
+        picture::after {
             content: "";
             position: absolute;
             top: 0;
@@ -55,6 +55,7 @@
             backdrop-filter: blur(3px);
             opacity: 0.6;
         }
+        
     }
 
     grid-container {
@@ -95,17 +96,24 @@
             }
         }
         banner-topright {
+            position: relative;
             grid-area: topright;
             width: 100%;
             height: auto;
             // background: violet;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 10% 100%);
             margin-left: auto;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: top right;
+
+            img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                object-fit: cover;
+                object-position: top right;
+            }
         }
         banner-botright {
+            position: relative;
             grid-area: topbot;
             position: relative;
             width: 90%;
@@ -115,9 +123,14 @@
             margin-left: auto;
             position: relative;
             top: -20px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: bottom right;
+
+            img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                object-fit: cover;
+                object-position: bottom right;
+            }
         }
     }
     
@@ -201,6 +214,7 @@
         // }
     }
 }
+
 
 @media (max-width: 1000px) {
     #top-displayer { height: 360px; }

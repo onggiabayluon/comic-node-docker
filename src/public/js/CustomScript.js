@@ -245,7 +245,7 @@ $(window).resize(() => {
 /*************** Scroll ***************/
 
 /*************** glide js ***************/
-if ($("#glide_1").length > 0) {
+if ($("#glide_1 .glide__slide").length > 0) {
     new Glide("#glide_1", {
         // type: 'carousel',
         gap: 15,
@@ -260,7 +260,7 @@ if ($("#glide_1").length > 0) {
         // },
     }).mount();
 }
-if ($("#glide_banner").length > 0) {
+if ($("#glide_banner .glide__slide").length > 0) {
     var $backgroundBanner = $('#background-banner')
     var glide = new Glide("#glide_banner", {
         type: 'carousel',
@@ -301,26 +301,26 @@ if ($("#glide_banner").length > 0) {
     //     // this.__changeActiveProject(glide.index)
     // })
 }
+// gliderjs()
+if ($("#glide_2 .glide__slide").length > 0) {
+    gliderjs()
+}
+
 function gliderjs() {
     // Glider
-    
-        
-
-        if ($("#glide_2").length > 0) {
-            new Glide("#glide_2", {
-                gap: 0,
-                rewind: false,
-                bound: true,
-                perView: 5,
-                direction: 'ltr',
-                breakpoints: {
-                    450: { perView: 3},
-                    600: { perView: 3},
-                    900: { perView: 3 },
-                    1200: { perView: 4 },
-                },
-            }).mount();
-        }
+    new Glide("#glide_2", {
+        gap: 0,
+        rewind: false,
+        bound: true,
+        perView: 5,
+        direction: 'ltr',
+        breakpoints: {
+            450: { perView: 3},
+            600: { perView: 3},
+            900: { perView: 3 },
+            1200: { perView: 4 },
+        },
+    }).mount();
 }
 
 /*************** glide js ***************/

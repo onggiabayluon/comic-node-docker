@@ -1,11 +1,13 @@
 const Comic     = require('../models/Comic');
 const Chapter   = require('../models/Chapter');
 const Comment   = require('../models/Comment');
+const Config   = require('../models/Config');
 const Category   = require('../models/Category');
 const User      = require('../models/User');
 const dbHelper  = require('./dbHelper')
 const { singleMongooseToObject, multiMongooseToObject } = require('../../util/mongoose');
-const { canViewProject, canDeleteProject } = require('../../config/permissions/comics.permission')
+const { canViewProject, canDeleteProject } = require('../../config/permissions/comics.permission');
+const { IMAGE_URL } = require('../../config/config');
 class meController {
 
   /***** Comic Controller *****
@@ -164,6 +166,21 @@ class meController {
       })
   }
 
+  configBannerPage(req, res, next) {
+    Config.findOne({category: 'image'}).lean()
+      .then(config => {
+        res.render('me/Config.banner.hbs',
+          {
+            layout: 'admin',
+            user: singleMongooseToObject(req.user),
+            title: 'Config - Banner',
+            config: config,
+            configString: JSON.stringify(config),
+            img_url: IMAGE_URL
+          })
+      })
+  }
+  
   // 1. comic List Page: [GET] / me / stored / comics / comic-list  + (/:comicId )
   comicListPage(req, res, next) {
     var comicList = new Object()

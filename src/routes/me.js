@@ -14,10 +14,14 @@ router.get('/stored/comics/dashboard/admin', meController.adminDashboard);
 router.get('/stored/comics/dashboard/extraAdmin', meController.extraAdminDashboard);
 // Quyền truy cập Page
 router.get('/stored/comics/faqPage', meController.faqPage);
+// configBannerPage
+router.get('/stored/config/banner', meController.configBannerPage);
 // Upload Chapter Images 
 router.post('/stored/comics/:slug/S3-multiple-upload', UploadController.multipleUpload);
 // Upload Thumbnail Image 
 router.post('/stored/comics/:slug/S3-thumbnail-upload', UploadController.thumbnailUpload);
+// Upload Config Image
+router.post('/stored/config/banner/upload', UploadController.configUpload);
 
 /**               ***
 ***  COMIC ROUTE  ***

@@ -13,6 +13,7 @@ const path  = require('path');
 const redis = require(path.resolve('./src/config/redis'))
 const { promisify } = require("util");
 const { Promise } = require('mongoose');
+const { IMAGE_URL } = require('../../config/config');
 
 class ComicController {
 
@@ -179,7 +180,8 @@ class ComicController {
           firstChapter: comicdoc.chapters[0],
           lastChapter: comicdoc.chapters[chaptersLength - 1],
           user: singleMongooseToObject(req.user),
-          subscribe: subscribe
+          subscribe: subscribe,
+          img_url: IMAGE_URL
         })
       })
       .catch(next)
@@ -198,8 +200,12 @@ class ComicController {
     Promise.all([
       Comic.findOne({ slug: req.params.comicSlug })
       .lean()
-      .select('-category').populate('chapters', 'chapter')
-      .populate({ path: 'chapters', select: '-_id chapter', options: { sort: { 'chapter': 1 } } }),
+      .select('-category')
+      .populate({ 
+        path: 'chapters', 
+        select: '-_id chapter', 
+        options: { sort: { 'chapter': 1 } } 
+      }),
       Chapter.findOne({ comicSlug: req.params.comicSlug, chapter: req.params.chapter }).lean(),
       Comment.aggregate([
         { $match: match },
@@ -266,7 +272,6 @@ class ComicController {
 
       let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
       let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]
-
       res.status(200).render('chapter.details.hbs',
         {
           layout: 'chapter.details.layout.hbs',
@@ -276,6 +281,7 @@ class ComicController {
           prevChapter: prevChapter,
           nextChapter: nextChapter,
           user: singleMongooseToObject(req.user),
+          img_url: IMAGE_URL
         })
     };
 

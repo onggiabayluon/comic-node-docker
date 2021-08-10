@@ -12,10 +12,6 @@
 #main-title {
     font-size: 1.4rem;
 }
-#rightbox {
-    margin: 0;
-    padding: 0;
-}
 //  LEFT
 .infoLeft__img {
     background: var(--foreground-color);
@@ -307,6 +303,11 @@
 } 
 @media (max-width: 768px) {
    
+    #rightbox {
+        margin: 0;
+        padding: 0;
+    }
+    
     #resize {
         position: absolute;
         top: 188px;
@@ -324,10 +325,11 @@
         position: relative;
         width: 100%;
         height: 280px;
-        overflow: hidden;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        img {
+            width: 100%;
+            height: 280px;
+            object-position: center;
+        }
     }
     
     .infoLeft__img {

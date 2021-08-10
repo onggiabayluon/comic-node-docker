@@ -6,7 +6,8 @@
   font-style: normal;
   font-weight: 400;
   src: url('/font/hind/Hind-Regular.ttf');
-  src: local("Hind Regular"),local("Hind-Regular"),url('/font/hind/Hind-Regular.ttf') format("woff")
+  src: local("Hind Regular"),local("Hind-Regular"),url('/font/hind/Hind-Regular.ttf') format("woff");
+  font-display: swap;
 }
 
 @font-face {
@@ -14,7 +15,8 @@
   font-style: normal;
   font-weight: 500;
   src: url('/font/hind/Hind-Medium.ttf') format("woff");
-  src: local("Hind Regular"),local("Hind-Regular"),url('/font/hind/Hind-Medium.ttf') format("woff")
+  src: local("Hind Regular"),local("Hind-Regular"),url('/font/hind/Hind-Medium.ttf') format("woff");
+  font-display: swap;
 }
 
 // @font-face {
@@ -28,6 +30,7 @@
 
 
 body {
+  margin: 0;
   font-family: 'Hind', sans-serif;
   color: var(--primary-color);
   background: var(--background-color);
@@ -85,7 +88,7 @@ body {
 // @import "./home.page//leftcol-card.scss";
 // @import "./home.page/media-querry.scss";
 
-@import "./comic.details.page/info.scss";
-@import "./comic.details.page/comments.scss";
+// @import "./comic.details.page/info.scss";
+// @import "./comic.details.page/comments.scss";
 
-@import "./chapter.details.page/navbar.scss";
+// @import "./chapter.details.page/navbar.scss";

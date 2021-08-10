@@ -1,4 +1,8 @@
 <style>
+    img {
+        object-fit: cover;
+    }
+    
     .img__PlaceholderLoader {
         height: auto;
         display: inline-block;
@@ -134,7 +138,7 @@
                 {{comics.title}}
             </a>
             <i class="m-custom ico fas fa-angle-right"></i>
-            <a href="/comic/{{comics.title}}/{{chapter.chapter}}" class="m-custom title chapter">
+            <a href="/comic/{{comics.slug}}/{{chapter.chapter}}" class="m-custom title chapter">
                 {{replaceHyphenIntoSpace chapter.chapter}}
             </a>
         </left-items>
@@ -177,12 +181,23 @@
     </div>
     
     {{#if prevChapter}}
-    <div class="container mb-4 image__Frame" style="min-height: unset;">
+    <div class="container mb-4" style="min-height: unset;">
         <chaptercard>
             <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/{{prevChapter.chapter}}">
-                <img width="92" height="98" class="card-img-left"
-                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
-                    alt="Card image cap">
+                <picture>
+                    <source 
+                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.webp"
+                    type="image/webp" />
+                    <source 
+                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    type="image/jpeg" />
+                
+                    <img width="92" height="98"
+                    alt="Previous Chapter" 
+                    src="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    />
+                </picture>
+                
                 <info id="info">
                     <div class="maintext">Prev Chapter</div>
                     <div class="subtext">{{replaceHyphenIntoSpace prevChapter.chapter}}</div>
@@ -199,30 +214,40 @@
     {{!-- show images --}}
     <images-container>
     {{#each chapter.image}}
-        {{!-- <div class="image"> --}}
-            <picture class="lazy fixed-ratio " style="padding-top: 150%;">
-                <source id="image--Main"
-                    data-srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.url}}"
-                    data-srcmain="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.url}}-large.jpeg"
-                    type="image/jpeg" />
-    
-                <img data-srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.url}}-large.jpeg"
-                    class="image fixed-ratio-content" onerror="this.onerror=null;this.src='/img/404.jpg';" />
-            </picture>
-        {{!-- </div> --}}
-    
-    {{/each}} {{!-- 🛑 End show images --}}
+        <picture class="lazy fixed-ratio " style="padding-top: 150%;">
+            <source id="image--Main"
+                data-srcset="{{../img_url}}/{{this.url}}"
+                data-srcmain="{{../img_url}}/{{this.url}}-medium.jpeg"
+            />
+
+            <img alt="{{../comics.title}} {{../chapter.chapter}} Page {{@index}}"  
+            class="image fixed-ratio-content" 
+            onerror="this.onerror=null;this.src='/img/404.jpg';" />
+        </picture>
+    {{/each}} 
     </images-container>
+    {{!-- 🛑 End show images --}}
 
 
 <bottom-container class="p-3 d-block">
     {{#if nextChapter}}
-    <div class="mt-4 image__Frame" style="min-height: unset;">
+    <div class="container mt-4" style="min-height: unset;">
         <chaptercard>
             <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/{{nextChapter.chapter}}">
-                <img width="92" height="98" class="card-img-left"
-                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
-                    alt="Card image cap">
+                <picture>
+                    <source 
+                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.webp"
+                    type="image/webp" />
+                    <source 
+                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    type="image/jpeg" />
+                
+                    <img width="92" height="98"
+                    alt="Next Chapter"  
+                    src="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    />
+                </picture>
+                
                 <info id="info">
                     <div class="maintext">Next Chapter</div>
                     <div class="subtext">
@@ -556,143 +581,18 @@
 
 </main>
 
-
-{{!-- user info --}}
-<input name="user_id" value="{{user._id}}" type="hidden"></input>
-<input name="userName" value="{{user.name}}" type="hidden"></input>
-{{!-- comic info --}}
-<input name="title" value="{{comics.title}}" type="hidden"></input>
-<input name="comicSlug" value="{{comics.slug}}" type="hidden"></input>
-<input name="comicId" value="{{comics._id}}" type="hidden"></input>
-<input name="thumbnail" value="{{comics.thumbnail.url}}" type="hidden"></input>
-{{!-- chapter info --}}
-<input name="isChapterComment" value="true" type="hidden"></input>
-<input name="isChapterReply" value="true" type="hidden"></input>
-<input name="chapter" value="{{chapter.chapter}}" type="hidden"></input>
-<input name="chapterId" value="{{chapter._id}}" type="hidden"></input>
-
-<script src="/js/LazyLoader.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-<script src="/js/chapter.details.js"></script>
-
-<script>
-    $(document).ready(function () {
-
-        /* local History */
-        var $chapterId          = $("input[type=hidden][name=chapterId]").val()
-        var $comicId            = $("input[type=hidden][name=comicId]").val()
-        var $comicSlug          = $("input[type=hidden][name=comicSlug]").val()
-        var $chapter            = $("input[type=hidden][name=chapter]").val()
-        var $title              = $("input[type=hidden][name=title]").val()
-        var $thumbnail          = $("input[type=hidden][name=thumbnail]").val()
-        
-        var href                = window.location.href.split('/chapter');
-        var chapterUrl          = window.location.href
-        var comicUrl            = href[0]
-        var visited_comics      = JSON.parse(localStorage.getItem('visited_comics'));
-        var visited_chapters    = JSON.parse(localStorage.getItem('visited_chapters'));
-        var newComicList
-                
-        var this_visit = {
-            chapterNameList: [{chapter:  $chapter, _id: $chapterId}],
-            title: $title,
-            comicUrl: comicUrl,
-            comicId: $comicId,
-            chapterUrl: chapterUrl,
-            comicSlug: $comicSlug,
-            thumbnail: $thumbnail
-        }
-
-        if (visited_chapters == null) {
-
-            visited_chapters = [$chapterId]
-
-            localStorage.setItem('visited_chapters', JSON.stringify(visited_chapters));
-
-        } else {
-
-            var isvisited = chapterisvisited(visited_chapters)
-            
-            if (isvisited != true) {
-
-                newChapterList = appendObjTo(visited_chapters, $chapterId)
-
-                localStorage.setItem('visited_chapters', JSON.stringify(newChapterList));
-            }
-        }
-
-        
-        /* if not have visited_comics -> add it with chapters */
-        if (visited_comics == null) {
-
-            localStorage.setItem('visited_comics', JSON.stringify([this_visit]));
-            
-        } else { 
-            /* if have local_slug -> check if isviewed */
-
-            var visitResult  = isViewed(visited_comics)
-
-            if (visitResult.visit_thiscomic === false && visitResult.visit_thischapter === false) { 
-                
-                newComicList = appendObjTo(visited_comics, this_visit)
-
-                localStorage.setItem('visited_comics', JSON.stringify(newComicList));
-
-            }  
-            if (visitResult.visit_thiscomic === true && visitResult.visit_thischapter === false) {
-                // false: replace new and save
-
-                const newchapterNameList = [...visited_comics[comic_index].chapterNameList, {chapter: $chapter, _id: $chapterId}] // construct old chapter list '[]'
-                //console.table(newchapterNameList)
-                this_visit.chapterNameList = newchapterNameList // replace old chapter list '[]'
-                
-                newComicList = [...visited_comics.filter(x => x.comicSlug != $comicSlug), this_visit] // replace old visited comics '[]'
-                
-                localStorage.setItem('visited_comics', JSON.stringify(newComicList));
-
-            }
-        };
-
-        function isViewed(visited_comics) {
-            var result = {
-                visit_thiscomic: false,
-                visit_thischapter: false,
-                comic_index: 0,
-                chapter_index: 0
-            }
-            for (let i = 0; i < visited_comics.length; i++) {
-                if (visited_comics[i].comicSlug === $comicSlug) {
-                    result.visit_thiscomic = true
-                    comic_index = i 
-                    for (let j = 0; j < visited_comics[i].chapterNameList.length; j++) {
-                        if (visited_comics[i].chapterNameList[j].chapter === $chapter) {
-                            console.log(visited_comics[i].chapterNameList[j])
-                            result.visit_thischapter = true
-                            break;
-                        }
-                    }
-                }
-            }
-            return result
-        };
-
-        function appendObjTo(thatArray, newObj) {
-            const frozenObj = Object.freeze(newObj);
-            return Object.freeze(thatArray.concat(frozenObj));
-        };
-
-        function chapterisvisited(visited_chapters) {
-            var result = false
-            for (let i = 0; i < visited_chapters.length; i++) {
-                if (visited_chapters[i] === $chapterId) {
-                    result = true
-                    break
-                }
-            }
-            return result
-        }
-        /* 🛑 End local History */
-
-    });
-</script>
+<in-stuff>
+    {{!-- user info --}}
+    <input name="user_id" value="{{user._id}}" type="hidden"></input>
+    <input name="userName" value="{{user.name}}" type="hidden"></input>
+    {{!-- comic info --}}
+    <input name="title" value="{{comics.title}}" type="hidden"></input>
+    <input name="comicSlug" value="{{comics.slug}}" type="hidden"></input>
+    <input name="comicId" value="{{comics._id}}" type="hidden"></input>
+    <input name="thumbnail" value="{{comics.thumbnail.url}}" type="hidden"></input>
+    {{!-- chapter info --}}
+    <input name="isChapterComment" value="true" type="hidden"></input>
+    <input name="isChapterReply" value="true" type="hidden"></input>
+    <input name="chapter" value="{{chapter.chapter}}" type="hidden"></input>
+    <input name="chapterId" value="{{chapter._id}}" type="hidden"></input>
+</in-stuff>

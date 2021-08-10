@@ -1,6 +1,6 @@
 /* 44.Glide */
 
-#glide_2 .glide__slide glide-img img {
+#glide_2 .glide__slide img {
   width: 100%;
 }
 
@@ -20,19 +20,14 @@
   .glide__slide {
     
 
-    glide-img {
-      img {
-        object-fit: cover;
-        object-position: top;
-        // width: fit-content;
-      }
+    img {
+      object-position: top;
     }
+
     bottom-info {
       display: block;
       padding: 0.7rem;
       border: 2px solid var(--border-color);
-
-      
 
       info-title {
         font-family: 'hind_m';

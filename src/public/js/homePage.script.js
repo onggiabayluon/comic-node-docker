@@ -33,20 +33,20 @@ $(document).ready(function () {
     function createPseudoFrame() {
         let glide__slides = $('#glide_2 #glide__slides')
         let glideLength = glide__slides.children().length
-        if (glideLength > 0) {
-            let child = $('#glide_2 #glide__slides .glide__slide:first-child')
-            let { width, height } = { width: child.innerWidth(), height: child.innerHeight() }
-            do {
-                glide__slides.append(`<div class="glide__slide" style="width:${width}px;height:${height}px;"><div style="width:100%;height:100%;border: 1px solid var(--border-color);"></div></div>`);
-                $("b").clone().prependTo("p");
-                glideLength++
-            } while (glideLength < 5)
-        }
+        let child = $('#glide_2 #glide__slides .glide__slide:first-child')
+        let { width, height, wType, hType } = (glideLength > 0) 
+        ? { width: child.innerWidth(), height: child.innerHeight(), wType: 'px', hType: 'px' }
+        : { width: 25, height: 275, wType: '%', hType: 'px'}
+        do {
+            glide__slides.append(`<div class="glide__slide" style="width:${width}${wType};height:${height}${hType};"><div style="width:100%;height:100%;border: 1px solid var(--border-color);"></div></div>`);
+            $("b").clone().prependTo("p");
+            glideLength++
+        } while (glideLength < 5)
     }
 
     async function constructHistory() {
         var visited_comics_list = JSON.parse(localStorage.getItem('visited_comics'));
-        if (visited_comics_list == null) return
+        if (visited_comics_list == null) return createPseudoFrame()
 
         /* helper */
         Handlebars.registerHelper('ifCond', function (a, operator, b, options) {

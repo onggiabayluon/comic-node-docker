@@ -1,27 +1,47 @@
 <top-displayer id="top-displayer" class="d-block">
-    <background-banner id="background-banner" style="background-image: url('/img/banner_main_1.jpg');">
+    <background-banner id="background-banner" class="backgroundBanner">
+    {{#each config.banner_background}}
+        <picture>
+            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" 
+            media="(min-width: 1200px)"/>
+            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" 
+            media="(min-width: 1200px)"/>
+
+            <img class="backgroundBanner__img" alt="Background Banner" 
+            src="{{../img_url}}/{{this.url}}-thumbnail.jpeg" 
+            srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 1200w"
+            />
+        </picture>
+    {{/each}}
     </background-banner>
     <grid-container>
         <banner-main>
             <div id="glide_banner" class="glide">
                 <div class="glide__track" data-glide-el="track">
                     <ul class="glide__slides">
+                        {{#each config.banner}}
                         <li class="glide__slide">
                             <a href="#" class="frame">
-                                <img class="pic" src="/img/banner_main_1.jpg" alt="">
+                                <picture>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" 
+                                    media="(min-width: 650px)"/>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" 
+                                    media="(min-width: 650px)"/>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.url}}-thumbnail-small.webp" type="image/webp" 
+                                    media="(min-width: 0px)"/>
+                                
+                                    <img style="width: 100%;height: 100%;"
+                                    {{!-- width="800" height="400" --}}
+                                    alt="banner" 
+                                    src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                    />
+                                </picture>
                             </a>
                         </li>
-                        <li class="glide__slide">
-                            <a href="#" class="frame">
-                                <img class="pic" src="/img/solo_wallpaper.png" alt="">
-                            </a>
-                        </li>
-                        <li class="glide__slide">
-                            <a href="#" class="frame">
-                                <img class="pic" src="/img/banner_main_2.jpg" alt="">
-                            </a>
-                        </li>
-                        
+                        {{/each}}
                     </ul>
                 </div>
                 <div class="glide__arrows slider-nav" data-glide-el="controls">
@@ -34,11 +54,31 @@
                 </div>
             </div>
         </banner-main>
-        <banner-topright class="topright-pic" style="background-image: url('/img/upload.jpg')">
-    
+        <banner-topright class="topright-pic" >
+            {{#each config.banner_topright}}
+            <picture>
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" media="(min-width: 1200px)" />
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" media="(min-width: 1200px)" />
+            
+                <img alt="Banner Top images" 
+                    src="{{../img_url}}/{{this.url}}-thumbnail.jpeg" 
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 1200w"
+                />
+            </picture>
+            {{/each}}
         </banner-topright>
-        <banner-botright class="topbot-pic" style="background-image: url('/img/readall.jpg')">
-    
+        <banner-botright class="topbot-pic">
+            {{#each config.banner_botright}}
+            <picture>
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" media="(min-width: 1200px)" />
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" media="(min-width: 1200px)" />
+            
+                <img alt="Banner Bottom images" 
+                    src="{{../img_url}}/{{this.url}}-thumbnail.jpeg" 
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 1200w"
+                />
+            </picture>
+            {{/each}}
         </banner-botright>
     </grid-container>
 </top-displayer>
@@ -57,107 +97,6 @@
         <li onclick="location = this.children[0].href" class="more"><a href="/comic/categories/all">MORE</a></li>
     </ul>
 </categories-nav>
-
-<categories-content id="categories-content" class="foreground-color border-bottom-2" style="display: none;">
-    {{!-- <heading class="container" style="padding: 0 1.3rem;">
-        <title class="title">
-            My Series
-        </title>
-        <icon-right>
-            <i class="fas fa-chevron-right"></i>
-        </icon-right>
-    </heading> --}}
-    <grid-wrapper class="grid-wrapper">
-        <top-grid class="top-grid">
-            <item class="left">
-                {{!-- <background-overlay></background-overlay> --}}
-                <img width="336" height="336" src="/img/The Vault.jpg" alt="">
-                <comic-info>
-                    <title class="title title--ellipsis-2 title--bot-2">
-                        Action
-                    </title>
-                </comic-info>
-            </item>
-            <item class="mid">
-                {{!-- <background-overlay></background-overlay> --}}
-                <img width="336" height="160" src="/img/TOG.jpg" alt="">
-                <comic-info>
-                    <title class="title title--ellipsis-2 title--bot-2">
-                        Tower Of God
-                    </title>
-                </comic-info>
-            </item>
-            <item class="right">
-                {{!-- <background-overlay></background-overlay> --}}
-                <img width="336" height="336" src="/img/[Artwork] Rực rỡ cánh đồng trong đêm.jpg
-                " alt="">
-                <comic-info>
-                    <title class="title title--ellipsis-2 title--bot-2">
-                        Adventure
-                    </title>
-                </comic-info>
-            </item>
-        </top-grid>
-        <bottom-grid class="bottom-grid">
-            <grid-comic-item class="grid__item">
-                <background-overlay-2></background-overlay-2>
-                <img width="336" height="336" src="/img/0001.jpg" alt="">
-                <comic-info class="mid">
-                    <title class="title title--ellipsis-2 title--mid">
-                        Fantasy
-                    </title>
-                </comic-info>
-            </grid-comic-item>
-            <grid-comic-item class="grid__item">
-                <background-overlay-2></background-overlay-2>
-                <img width="336" height="336" src="/img/Sherwood's Legacy Rebecca of York by HELMUTTT on DeviantArt.jpg" alt="">
-                <comic-info class="mid">
-                    <title class="title title--ellipsis-2 title--mid">
-                        Mystery
-                    </title>
-                </comic-info>
-            </grid-comic-item>
-            <grid-comic-item class="grid__item">
-                <background-overlay-2></background-overlay-2>
-                <img width="336" height="336" src="/img/Hyouka Wallpapers.jpg" alt="">
-                <comic-info class="mid">
-                    <title class="title title--ellipsis-2 title--mid">
-                        Slice of Life
-                    </title>
-                </comic-info>
-            </grid-comic-item>
-            <grid-comic-item class="grid__item">
-                <background-overlay-2></background-overlay-2>
-                <img width="336" height="336" src="/img/comedy.jpg" alt="">
-                <comic-info class="mid">
-                    <title class="title title--ellipsis-2 title--mid">
-                        Comedy
-                    </title>
-                </comic-info>
-            </grid-comic-item>
-            <grid-comic-item class="grid__item">
-                <background-overlay-2></background-overlay-2>
-                <img width="336" height="336" src="/img/manhwa.jpg" alt="">
-                <comic-info class="mid">
-                    <title class="title title--ellipsis-2 title--mid">
-                        Manhwa
-                    </title>
-                </comic-info>
-            </grid-comic-item>
-            <grid-comic-item class="grid__item">
-                <background-overlay-2></background-overlay-2>
-                <img width="336" height="336" src="/img/female.jpg" alt="">
-                <comic-info class="mid">
-                    <title class="title title--ellipsis-2 title--mid">
-                        Female
-                    </title>
-                </comic-info>
-            </grid-comic-item>
-
-        </bottom-grid>
-    </grid-wrapper>
-    
-</categories-content>
 
 <welcome-places id="welcome-places" class="foreground-color border-bottom-2">
     <heading class="container">
@@ -179,301 +118,171 @@
                                 <div class="glide__slides glide__slides--custom">
 
                                     <div class="glide__slide glide__slide--2">
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_1.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                    Villians are destiny to die
-                                                </title>
-                                                <grade class="color-black">
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">35. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    Villians are destiny to die
-                                                </title>
-                                                <author>
-                                                    <a href="#">Gwon Gyeoeul</a>
-                                                </author>
-                                                <description class="description--ellipsis-default">
-                                                    Penelope Eckart reincarnated as the adopted daughter of Duke Eckart and the villainess of a reverse harem dating sim.
-                                                    The problem is, she entered the game at its hardest difficulty, and no matter what she does, death awaits her at every
-                                                    ending! Before the "real daughter" of Duke Eckart appears, she must choose one of the male leads and reach a happy
-                                                    ending in order to survive. But the two brothers always pick a fight with her over every little thing, as well as a
-                                                    crazy crown prince, whose routes all lead to death. There's even a magician who's enamoured with the female lead, and a
-                                                    loyal slave knight! But somehow, the favourability meters of the male leads increase the more she crosses the line with
-                                                    them!
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_2.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                    Solo Leveling
-                                                </title>
-                                                <grade class="color-black">
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    Solo Leveling	
-                                                </title>
-                                                <author>
-                                                    <a href="#">Sung-Lak Jang</a>
-                                                </author>
-                                                <description class="description--ellipsis-default">
-                                                    10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary,
-                                                    everyday people received the power to hunt monsters within the Gate. They are known as "Hunters". However, not all
-                                                    Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of
-                                                    dungeons, the "World's Weakest". Having no skills whatsoever to display
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_3.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                   Noblesse
-                                                </title>
-                                                <grade class="color-black">
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    Noblesse
-                                                </title>
-                                                <author>
-                                                    <a href="#">Son Jae-Ho - Lee Gwang-Su</a>
-                                                </author>
-                                                <description class="description--ellipsis-default">
-                                                    10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary,
-                                                    everyday people received the power to hunt monsters within the Gate. They are known as "Hunters". However, not all
-                                                    Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of
-                                                    dungeons, the "World's Weakest". Having no skills whatsoever to display
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_wide_blank_1_v4.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-white">
-                                                   The Beginning After The End
-                                                </title>
-                                                <description>
-                                                    King Grey has unrivaled strength, wealth, and prestige in a world governed by martial ability. However, solitude lingers
-                                                    closely behind those with great power. Beneath ...
-                                                    glamorous exterior of a powerful king lurks the shell of man, devoid of purpose and will.
+                                        {{#each (limitFrom config.slider 0 4)}}
+                                            {{#ifCond @index '!%' 4}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture class="lazy">
+                                                        <source 
+                                                            data-srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp"
+                                                            data-srcmain="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/webp" />
                                                     
-                                                    Reincarnated into a new world filled with magic and monsters, the king has a second chance to relive his life.
-                                                    Correcting the mistakes of his past will not be his only challenge, however. Underneath the peace and prosperity of the
-                                                    new world is an undercurrent threatening to destroy everything he has worked for, questioning his role and reason for
-                                                    being born again..
-                                                </description>
-                                                <grade>
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back comic-info-back--wide">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    The Beginning After The End
-                                                </title>
-                                                <author>
-                                                    <a href="#">Son Jae-Ho - Lee Gwang-Su</a>
-                                                </author>
-                                                <description class="description--ellipsis-wide">
-                                                    King Grey has unrivaled strength, wealth, and prestige in a world governed by martial ability. However, solitude lingers
-                                                    closely behind those with great power. Beneath ...
-                                                    glamorous exterior of a powerful king lurks the shell of man, devoid of purpose and will.
+                                                        <img 
+                                                        width="210" height="210" alt="{{../this.title}}" 
+                                                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-black">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <grade class="color-black">
+                                                        <a href="#" class="fas fa-heart color-theme-2"><span class="num">35. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{../this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-default">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{else}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture class="lazy">
+                                                        <source 
+                                                            data-srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp"
+                                                            data-srcmain="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/webp" />
                                                     
-                                                    Reincarnated into a new world filled with magic and monsters, the king has a second chance to relive his life.
-                                                    Correcting the mistakes of his past will not be his only challenge, however. Underneath the peace and prosperity of the
-                                                    new world is an undercurrent threatening to destroy everything he has worked for, questioning his role and reason for
-                                                    being born again..
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        
+                                                        <img 
+                                                        width="210" height="210" alt="{{../this.title}}" 
+                                                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-white">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <description>
+                                                        {{../this.description}}
+                                                    </description>
+                                                    <grade>
+                                                        <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back comic-info-back--wide">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-wide">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{/ifCond}}
+                                        {{/each}}
                                     </div>
 
                                     <div class="glide__slide glide__slide--2">
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_1.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                    Villians are destiny to die
-                                                </title>
-                                                <grade class="color-black">
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">35. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    Villians are destiny to die
-                                                </title>
-                                                <author>
-                                                    <a href="#">Gwon Gyeoeul</a>
-                                                </author>
-                                                <description class="description--ellipsis-default">
-                                                    Penelope Eckart reincarnated as the adopted daughter of Duke Eckart and the villainess of a reverse harem dating sim.
-                                                    The problem is, she entered the game at its hardest difficulty, and no matter what she does, death awaits her at every
-                                                    ending! Before the "real daughter" of Duke Eckart appears, she must choose one of the male leads and reach a happy
-                                                    ending in order to survive. But the two brothers always pick a fight with her over every little thing, as well as a
-                                                    crazy crown prince, whose routes all lead to death. There's even a magician who's enamoured with the female lead, and a
-                                                    loyal slave knight! But somehow, the favourability meters of the male leads increase the more she crosses the line with
-                                                    them!
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_2.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                    Solo Leveling
-                                                </title>
-                                                <grade class="color-black">
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    Solo Leveling	
-                                                </title>
-                                                <author>
-                                                    <a href="#">Sung-Lak Jang</a>
-                                                </author>
-                                                <description class="description--ellipsis-default">
-                                                    10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary,
-                                                    everyday people received the power to hunt monsters within the Gate. They are known as "Hunters". However, not all
-                                                    Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of
-                                                    dungeons, the "World's Weakest". Having no skills whatsoever to display
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_3.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                   Noblesse
-                                                </title>
-                                                <grade class="color-black">
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    Noblesse
-                                                </title>
-                                                <author>
-                                                    <a href="#">Son Jae-Ho - Lee Gwang-Su</a>
-                                                </author>
-                                                <description class="description--ellipsis-default">
-                                                    10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary,
-                                                    everyday people received the power to hunt monsters within the Gate. They are known as "Hunters". However, not all
-                                                    Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of
-                                                    dungeons, the "World's Weakest". Having no skills whatsoever to display
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        <item>
-                                            <glide-img>
-                                                <img width="198" height="160" src="/img/item_wide_blank_2_v4.jpg" alt="">
-                                            </glide-img>
-                                            <comic-info class="comic-info comic-info--top">
-                                                <title class="title title--ellipsis title--bot color-black">
-                                                   When The Vllainess Love
-                                                </title>
-                                                <description class="color-black">
-                                                    I’ve transmigrated into the body of a princess, living on borrowed time.
+                                        {{#each (limitFrom config.slider 4 8)}}
+                                            {{#ifCond @index '!%' 4}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture>
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp" type="image/webp" />
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/jpeg" />
                                                     
-                                                    It’s okay, though, we can cure this illness!
-                                                    My goal is to lead a life where I can do whatever I want!
+                                                        <img 
+                                                        alt="{{../this.title}}"
+                                                        width="210" height="210" src="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg"
+                                                            onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-black">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <grade class="color-black">
+                                                        <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">35. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{../this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-default">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{else}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture>
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail-small.webp" type="image/webp" />
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/jpeg" />
                                                     
-                                                    First, I decided to rave over all of my favorite characters in the novel!
-                                                    But, because I am a villainess, people around me tend to be wary…
-                                                    
-                                                    “You will die soon, and yet… how can you laugh like that?”
-                                                    
-                                                    Well, it’s ‘cus I’m super hot.
-                                                </description>
-                                                <grade>
-                                                    <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
-                                                </grade>
-                                                <category class="d-none">
-                                                    Action
-                                                </category>
-                                            </comic-info>
-                                            <comic-info-back class="comic-info-back comic-info-back--wide">
-                                                <color-overlay></color-overlay>
-                                                <title class=" title--ellipsis title--bot">
-                                                    When The Vllainess Love
-                                                </title>
-                                                <author>
-                                                    <a href="#">Hj - 붉구</a>
-                                                </author>
-                                                <description class="description--ellipsis-wide">
-                                                    I’ve transmigrated into the body of a princess, living on borrowed time.
-                                                    
-                                                    It’s okay, though, we can cure this illness!
-                                                    My goal is to lead a life where I can do whatever I want!
-                                                    
-                                                    First, I decided to rave over all of my favorite characters in the novel!
-                                                    But, because I am a villainess, people around me tend to be wary…
-                                                    
-                                                    “You will die soon, and yet… how can you laugh like that?”
-                                                    
-                                                    Well, it’s ‘cus I’m super hot.
-                                                </description>
-                                            </comic-info-back>
-                                        </item>
-                                        
+                                                        <img 
+                                                        alt="{{../this.title}}"
+                                                        src="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg"
+                                                            onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-white">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <description>
+                                                        {{../this.description}}
+                                                    </description>
+                                                    <grade>
+                                                        <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back comic-info-back--wide">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-wide">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{/ifCond}}
+                                        {{/each}}
                                     </div>
-                                    
+
 
                                 </div>
                             </div>
@@ -522,14 +331,16 @@
                                     {{#if user}}
                                     {{#each sublist.subscribed}}
                                     <div class="glide__slide">
-                                        <glide-img>
-                                            <img width="198" height="160"
-                                                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp"
-                                                alt="">
-                                        </glide-img>
-                                        <badges>
+                                            <picture>
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" type="image/webp" />
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/jpeg" />
+                                            
+                                                <img width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                                                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                            </picture>
+                                        {{!-- <badges>
                                             Up
-                                        </badges>
+                                        </badges> --}}
                                         <bottom-info>
                                             <a href="/comic/{{this.slug}}">
                                                 <info-title class="ellipsis">
@@ -555,15 +366,7 @@
 
                                 </div>
                             </div>
-                            {{!-- <div class="glide__arrows sliderBox" data-glide-el="controls">
-                                <span class="slick-prev" aria-label="Previous"
-                                    data-glide-dir="<">
-                                    <i class="fas fa-2x fa-chevron-left"></i>
-                                </span>
-                                <span class="slick-next" aria-label="Next" data-glide-dir=">">
-                                    <i class="fas fa-2x fa-chevron-right"></i>
-                                </span>
-                            </div> --}}
+                            
                             <div class="glide__arrows slider-nav" data-glide-el="controls">
                                 <div class="glide__bullets slider-dot-container" data-glide-el="controls[nav]">
                                     <button class="glide__bullet slider-dot" data-glide-dir="=0"></button>
@@ -596,10 +399,19 @@
         <grid-container>
             {{#each comics}}
             <item class="item item--border">
-                <img width="92" height="120" loading="lazy"
-                src="{{#if this.thumbnail.url}}https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp
-                {{else}}https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/user-comic-2/thumbnail/1622345516518-7-thumbnail.webp
-                {{/if}}"alt="">
+                
+                <picture class="lazy">
+                    <source
+                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                    data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
+                    type="image/webp"
+                    />
+                
+                    <img width="92" height="120"
+                    alt="{{this.title}}" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+                
                 <info>
                     <a href="./comic/{{this.slug}}"><title class="title title--ellipsis">{{this.title}}</title></a> 
                     <chapter-box>
@@ -640,9 +452,19 @@
         <grid-comic-item class="grid__item">
             <a href="/comic/{{this.slug}}">
                 <background-overlay></background-overlay>
-                <img width="160" height="160" loading="lazy" src="{{#if this.thumbnail.url}}https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp
-                {{else}}https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/user-comic-2/thumbnail/1622345516518-7-thumbnail.webp
-                {{/if}}" alt="">
+                
+                <picture class="lazy">
+                    <source
+                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                    data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
+                    type="image/webp"
+                    />
+                
+                    <img width="160" height="160"
+                    alt="{{this.title}}" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+
                 <comic-info>
                     <title class="title title--ellipsis title--bot">
                         {{this.title}}
@@ -661,475 +483,14 @@
     </grid-container>
 </comics-gridbox>
 
-<!--
-<firstslider class="d-block mt-4 container">
-    <div class="row">
-        <div id="first-slider" class="slider__wrapper">
-            <div class="slider__container">
-                <div class="slider__cover">
-                    <div class="cover__icon">
-                        <a href="/"><i class="fas fa-location-circle"></i></a>
-                    </div>
-                    <div class="cover__meta">
-                        <span class="meta__views">200 Views</span>
-                        <div class="meta__title">Legend Of Zelda</div>
-                    </div>
-                    <a href="#">
-                        <img class="mainthumb" src="/img/1360593.png" alt="">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/1910324.jpg" alt="" 
-                        data-title="Angelic Figure" data-views="120 Views">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/1910341.jpg" alt=""
-                        data-title="Angelic Figure 2" data-views="20102 Views">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/wallpaperflare.com_wallpaper_1.jpg" alt=""
-                        data-title="Angelic Figure 3" data-views="121 Views">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/wallpaperflare.com_wallpaper_2.jpg" alt=""
-                        data-title="Legendary Tree" data-views="30000 Views">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/wallpaperflare.com_wallpaper.jpg" alt=""
-                        data-title="The sisters" data-views="30000 Views">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/balloon.jpg" alt=""
-                        data-title="Flying Balloon" data-views="93183 Views">
-                    </a>
-                </div>
-                <div class="slider__item">
-                    <a href="#">
-                        <img class="subthumb" src="/img/1360593.png" alt=""
-                        data-title="Legend Of Zelda" data-views="200 Views">
-                    </a>
-                </div>
-            </div>
-        </div> 
-    </div>
-</firstslider>
 
-<secondslider class="d-block container">
-    <div id="second-slider" class="row">
-        <div class="col-12">
-            <div class="title__wrapper">
-                <div class="titleBox">
-                    <i class="title__icon far fa-bolt fa-2x mr-3"></i>
-                    <h3 class="title mb-4">POPULAR TODAY</h3>
-                </div>
-
-            </div>
-
-            <div class="row mb-4">
-                <div class="col-md-12 mb-4 pl-0 pr-0">
-                    <div class="glide basic">
-                        <div class="glide__track pb-3" data-glide-el="track">
-                            <div class="glide__slides">
-
-                                <div class="glide__slide">
-                                    <div class="rounded card flex-row">
-                                        <div class="position-relative">
-                                            <background-overlay></background-overlay>
-                                            <img width="210" height="180" class="card-img-left"
-                                                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
-                                                alt="Card image cap">
-                                            <main>
-                                                <maintitle> Survival Story of a Sword King in a Fantasy World
-                                                </maintitle>
-                                                <info>
-                                                    <a href="#">Chapter 1</a>
-                                                </info>
-                                            </main>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="glide__slide">
-                                    <div class="rounded card flex-row">
-                                        <div class="position-relative">
-                                            <background-overlay></background-overlay>
-                                            <img width="210" height="180" class="card-img-left"
-                                                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/overgeared/thumbnail/1622887019250-mangatx-thumbnail.webp"
-                                                alt="Card image cap">
-                                            <main>
-                                                <maintitle> Take me I'm Yours </maintitle>
-                                                <info>
-                                                    <a href="#" class="fa fa fa-heart-o"><span>86.213</span></a>
-                                                </info>
-
-                                            </main>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="glide__slide">
-                                    <div class="rounded card flex-row">
-                                        <div class="position-relative">
-                                            <background-overlay></background-overlay>
-                                            <img width="210" height="180" class="card-img-left"
-                                                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
-                                                alt="Card image cap">
-                                            <main>
-                                                <maintitle>OverGeared </maintitle>
-                                                <info>
-                                                    <a href="#" class="fa fa fa-heart-o"><span>86.213</span></a>
-                                                </info>
-
-                                            </main>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="glide__slide">
-                                    <div class="rounded card flex-row">
-                                        <div class="position-relative">
-                                            <background-overlay></background-overlay>
-                                            <img width="210" height="180" class="card-img-left"
-                                                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1622888365802-34352-350x500-thumbnail.webp"
-                                                alt="Card image cap">
-                                            <main>
-                                                <maintitle> Tensei Shite Inaka de Slowlife wo Okuritai </maintitle>
-                                                <info>
-                                                    <a href="#" class="fa fa fa-heart-o"><span>86.213</span></a>
-                                                </info>
-
-                                            </main>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="glide__slide">
-                                    <div class="rounded card flex-row">
-                                        <div class="position-relative">
-                                            <background-overlay></background-overlay>
-                                            <img width="210" height="180" class="card-img-left"
-                                                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500-thumbnail.webp"
-                                                alt="Card image cap">
-                                            <main>
-                                                <maintitle> Take me I'm Yours </maintitle>
-                                                <info>
-                                                    <a href="#" class="fa fa fa-heart-o"><span>86.213</span></a>
-                                                </info>
-
-                                            </main>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="glide__arrows sliderBox" data-glide-el="controls">
-                            <button class="slick-prev slick-arrow" aria-label="Previous" type="button"
-                                data-glide-dir="<">
-                                <i class="fas fa-caret-left"></i>
-                            </button>
-                            <button class="slick-next slick-arrow" aria-label="Next" type="button" data-glide-dir=">">
-                                <i class="fas fa-caret-right"></i>
-                            </button>
-                        </div>
-                        <div class="glide__arrows slider-nav" data-glide-el="controls">
-                            <div class="glide__bullets slider-dot-container" data-glide-el="controls[nav]">
-                                <button class="glide__bullet slider-dot" data-glide-dir="=0"></button>
-                                <button class="glide__bullet slider-dot" data-glide-dir="=1"></button>
-                                <button class="glide__bullet slider-dot" data-glide-dir="=2"></button>
-                                <button class="glide__bullet slider-dot" data-glide-dir="=3"></button>
-                                <button class="glide__bullet slider-dot" data-glide-dir="=4"></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</secondslider>
--->
-
-<!-- 
-<main-container class="d-block container">
-    <div class="row">
-        <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-left mb-3" style="background: var(--foreground-color);">
+<instuff>
     
-            <div class="row">
-                <div class="col-12 nav__container">
-                    <div class="nav__wrapper">
-                        <nav class="nav">
-                            <input class="nav__checkbox" type="radio" name="comic" id="item1">
-                            <label id="tooltip1" for="item1" class="red-tooltip nav__item active" data-toggle="tooltip"
-                                data-placement="top" title="View All">
-                                <i class="fal fa-books"></i>
-                            </label>
-                            <input class="nav__checkbox" type="radio" name="comic" id="item2">
-                            <label id="tooltip2" class="nav__item" for="item2" data-toggle="tooltip" data-placement="top"
-                                title="History">
-                                <i class="fas fa-history"></i>
-                            </label>
-                            <input class="nav__checkbox" type="radio" name="comic" id="item3">
-                            <label id="tooltip3" class="nav__item" for="item3" data-toggle="tooltip" data-placement="top"
-                                title="Book Mark">
-                                <i class="far fa-bookmark"></i>
-                            </label>
-                            <input class="nav__checkbox" type="radio" name="comic" id="item4">
-                            <label id="tooltip4" class="nav__item disabled" for="item4" data-toggle="tooltip"
-                                data-placement="top" title="Chat Box">
-                                <i class="far fa-comments"></i>
-                            </label>
-    
-                            <div class="animation start-home">
-                                <div class="center">
-                                    <i id="dynamic__icon" class="fal fa-books"></i>
-                                </div>
-                            </div>
-    
-                        </nav>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row title__container">
-                <i class="title__icon far fa-2x fa-book-spells mr-3"></i>
-                <h3 class="title__text"> LATEST MANGA UPDATES </h3>
-            </div>
-    
-    
-    
-            <div id="main__box" class="card__container card__container--left row foreground card__wrapper">
-                {{#each comics}}
-                <div class="align-middle col-6 col-lg-3 col-md-3 col-sm-4 mt-2 mb-4">
-                    <div class="">
-                        <div class="example-2 card card-w-175">
-                            <div class="wrapper">
-                                <img src="{{#if this.thumbnail.url}}https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp
-                                        {{else}}https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/user-comic-2/thumbnail/1622345516518-7-thumbnail.webp
-                                        {{/if}}" type="image/webp" width="175" height="238"
-                                    style="max-width: 100%;height: auto" class=" responsive zoom" alt="image">
-
-                                <div class="color-overlay"></div>
-                                <div class="header">
-                                    <ul class="menu-content icon-3-right icon-4-right">
-                                        <li><a href="#" class="fa fa fa-bookmark-o"></a></li>
-                                        <li><a href="#" class="fa fa fa-heart-o"><span>{{this.view.totalView}}</span></a>
-                                        </li>
-                                        <li><a href="#" class="fa fa fa-comment-o"><span>30</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="card-body mb-3" style="padding-bottom: 0;">
-                                <a href="./comic/{{this.slug}}">
-                                    <h5 class="card-title card-title--modifier row w-md-unset">
-                                        {{ this.title}}
-                                    </h5>
-                                </a>
-                            </div>
-                            <div class="chapter" style="padding: 0;">
-                                {{#each chapters}}
-                                <a href="/comic/{{../ this.slug}}/{{this.chapter}}"
-                                    class="card-body__container mb-xl-custom mb-2 ml-xl-0">
-                                    <span id="{{this._id}}" class="card-body__chapter badge badge--modifier badge-pill">
-                                        {{replaceHyphenIntoSpace this.chapter}} </span>
-                                    <span class="card-body__time"> 56 mins ago </span>
-                                </a>
-                                {{/each}}
-                            </div>
-                        </div>
-    
-                    </div>
-                </div>
-    
-                {{/each}}
-            </div> 
-    
-            <div class="row justify-content-center">
-                <nav aria-label="Page navigation" class="mt-4">
-                    <div class="d-flex">
-                        <div class="mx-auto">
-                            <ul class="pagination pagination-sm">
-                                <li class="paginate_button page-item prev mr-3">
-                                    <a class="page-link prev" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link custom-numbers active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link custom-numbers" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link custom-numbers" href="#">3</a></li>
-                                <li class="paginate_button page-item next ml-3">
-                                    <a class="page-link next" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div> 
-    
-    
-        </div>
-    
-      
-        <div class="col-12 col-lg-4 col-md-12 col-sm-12 col-right mt-2">
-    
-    
-    
-    
-            <div id="bookmark__box" class="widget-container card mb-4 d-lg-block">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-fire mr-1">
-                            <span class="particle-fire"></span>
-                        </i>
-                        <span>BookMark</span>
-                        <a class="btn-link float-right text-small pt-1" href="#">View All</a>
-                    </h5>
-    
-                    <div class="row social-image-row gallery">
-                        
-                        <div class="widget-item col-12 col-xl-12 col-lg-12 col-md-6 col-sm-6 row m-0 p-0 mb-3">
-                            <div class="widget-img col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <a class="bookmark widget-box img-box" href="#">
-                                    <img width="128" height="120" class="img img-fluid border-radius"
-                                        src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/overgeared/thumbnail/1622887019250-mangatx-thumbnail.webp">
-    
-                                    <span class="widget-time widget-time--rounded top-left">1 hours</span>
-                                    <a href="" class="position-relative">
-                                        <span class="widget-chapter widget-chapter--circle bottom-right">12</span>
-                                    </a>
-                                </a>
-                                <span class="widget-title">Magic Emperor</span>
-                            </div>
-                            <div class="widget-img col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <a class="bookmark widget-box img-box" href="#">
-                                    <img width="128" height="120" class="img img-fluid border-radius"
-                                        src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/overgeared/thumbnail/1622887019250-mangatx-thumbnail.webp">
-    
-                                    <span class="widget-time widget-time--rounded top-left">1 hours</span>
-                                    <a href="" class="position-relative">
-                                        <span class="widget-chapter widget-chapter--circle bottom-right">12</span>
-                                    </a>
-                                </a>
-                                <span class="widget-title">Magic Emperor</span>
-                            </div>
-                        </div> 
-                        <div class="widget-item col-12 col-xl-12 col-lg-12 col-md-6 col-sm-6 row m-0 p-0 mb-3">
-                            <div class="widget-img col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <a class="bookmark widget-box img-box" href="#">
-                                    <img width="128" height="120" class="img img-fluid border-radius"
-                                        src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/overgeared/thumbnail/1622887019250-mangatx-thumbnail.webp">
-    
-                                    <span class="widget-time widget-time--rounded top-left">1 hours</span>
-                                    <a href="" class="position-relative">
-                                        <span class="widget-chapter widget-chapter--circle bottom-right">12</span>
-                                    </a>
-                                </a>
-                                <span class="widget-title">Magic Emperor</span>
-                            </div>
-                            <div class="widget-img col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <a class="bookmark widget-box img-box" href="#">
-                                    <img width="128" height="120" class="img img-fluid border-radius"
-                                        src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/overgeared/thumbnail/1622887019250-mangatx-thumbnail.webp">
-    
-                                    <span class="widget-time widget-time--rounded top-left">1 hours</span>
-                                    <a href="" class="position-relative">
-                                        <span class="widget-chapter widget-chapter--circle bottom-right">12</span>
-                                    </a>
-                                </a>
-                                <span class="widget-title">Magic Emperor</span>
-                            </div>
-                        </div> 
-    
-                    </div>
-                </div>
-            </div>
-    
-            <div id="history__box" class="widget-container card mb-4 d-lg-block">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-fire mr-1">
-                            <span class="particle-fire"></span>
-                        </i>
-                        <span>Reading History</span>
-                        <a class="btn-link float-right text-small pt-1" href="#">View All</a>
-                    </h5>
-                    <div class="row social-image-row gallery">
-                       
-                        <div id="append__Box" style="display: none;">
-    
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div id="comment__box" class="widget-container card mb-4 d-lg-block">
-                <div class="card-body">
-                    <h5 class="card-title">Comments</h5>
-    
-                    <div class="scroll dashboard-list-with-user ps ps--active-y">
-                        {{#if commentDoc}}
-                        {{#each commentDoc}}
-                        {{#each this.commentArr}}
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img alt="Profile Picture" src="img/profile-pic-l.jpg"
-                                    class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall">
-                            </a>
-                            <div class="pl-3" style="flex: 1;">
-    
-                                <div class="info d-flex flex-wrap justify-content-between">
-                                    <a href="#" class="mt-1 text-small">
-                                        Quizzy Lemon
-                                    </a>
-                                    <a href="#" class="text-muted mt-1 text-small mb-2"
-                                        style="text-decoration: underline;">{{CalcTimeEnglish this.updatedAt}}</a>
-                                </div>
-    
-                                <a
-                                    href="/comic/{{../comicSlug}}{{#if ../chapter}}/{{../chapter}}{{/if}}/#comment-{{this._id}}">
-                                    <p class="font-weight-medium mb-2">{{this.text}}</p>
-                                </a>
-    
-                                <a href="#" class="text-muted mt-2 text-small">
-                                    {{../title}} {{#if ../chapter}} | {{chapterText ../chapter}} {{/if}}
-                                </a>
-                            </div>
-                        </div>
-                        {{/each}}
-                        {{/each}}
-                        {{/if}}
-    
-    
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    
-    </div>
-</main-container>  -->
-
-
 {{!-- user info --}}
 <input name="user_id" value="{{user._id}}" type="hidden"></input>
 <input name="userName" value="{{user.name}}" type="hidden"></input>
 {{!-- comic info --}}
+</instuff>
 
 
 <script id="glides-template" type="text/x-handlebars-template">
@@ -1140,10 +501,19 @@
         \{{else}}
         <div id="comic-\{{this.comicId}}" class="glide__slide">
             <glide-img>
+                <picture class="lazy">
+                    <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
+                    <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
+            
+                    <img width="198" height="160" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg"
+                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+            </glide-img>
+            {{!-- <glide-img>
                 <img width="198" height="160"
                     src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp"
                     alt="">
-            </glide-img>
+            </glide-img> --}}
             <bottom-info>
                 <a href="">
                     <info-title class="ellipsis">
@@ -1168,10 +538,16 @@
 
     \{{#each historyItems}}
     <div id="comic-\{{this.comicId}}" class="glide__slide">
-        <glide-img>
+        <picture class="lazy">
+            <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp"
+                type="image/webp" />
+            <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg"
+                type="image/jpeg" />
+    
             <img width="198" height="160"
-                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp" alt="">
-        </glide-img>
+                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg"
+                onerror="this.onerror=null;this.src='/img/404.jpg';" />
+        </picture>
         <bottom-info>
             <a href="\{{this.comicUrl}}">
                 <info-title class="ellipsis">
@@ -1196,8 +572,4 @@
 \{{/if}}
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-<script src="/js/fetchDataAPI.js"></script>
-<script src="/js/homePage.script.js"></script>
 

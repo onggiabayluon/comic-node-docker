@@ -8,19 +8,35 @@ const imgOptions = {
 }
 var size, autoMedia, autoType;
 var w = window.innerWidth
+
+// if (w > 1000) {
+//     size = "-large.jpeg"
+//     // autoMedia = "(min-width: 1000px)"
+//     autoType = 'image/jpeg'
+// } else if (w > 550) {
+//     size = "-medium.webp"
+//     // autoMedia = "(min-width: 550px)"
+//     autoType = 'image/webp'
+// } else if (w < 550) {
+//     size = "-small.webp"
+//     // autoMedia = "(max-width: 550px)"
+//     autoType = 'image/webp'
+// }
+
 if (w > 1000) {
-    size = "-large.jpeg"
+    size = "-large.webp"
     // autoMedia = "(min-width: 1000px)"
-    autoType = 'image/jpeg'
-} else if (w > 550) {
-    size = "-medium.webp"
-    // autoMedia = "(min-width: 550px)"
     autoType = 'image/webp'
+} else if (w > 550) {
+    size = "-medium.jpeg"
+    // autoMedia = "(min-width: 550px)"
+    autoType = 'image/jpeg'
 } else if (w < 550) {
     size = "-small.webp"
     // autoMedia = "(max-width: 550px)"
     autoType = 'image/webp'
 }
+
 function setMeta(url, callback) {
     var img = new Image();
     img.src = url;
@@ -39,7 +55,7 @@ if ("IntersectionObserver" in window) {
 
                     lazyImage.dataset.srcset += size
                     lazyImage.srcset = lazyImage.dataset.srcset;
-                    lazyImage.nextElementSibling.srcset = lazyImage.dataset.srcmain;
+                    lazyImage.nextElementSibling.src = lazyImage.dataset.srcmain;
                     setMeta(lazyImage.dataset.srcset ,function(width, height) { 
                         lazyImage.nextElementSibling.width = width
                         lazyImage.nextElementSibling.height = height
