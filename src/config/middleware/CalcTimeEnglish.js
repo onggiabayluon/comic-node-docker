@@ -1,5 +1,4 @@
 module.exports = function convertIOSdateInto_ddmmyy_format(UploadedTime) {
-    
     var earlierDate = UploadedTime;
     var currentTime = new Date();
     var oDiff = new Object();

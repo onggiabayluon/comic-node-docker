@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT, MONGO_FOLDER } = require("../config");
-// const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/${MONGO_FOLDER}?authSource=admin`
-const mongoURL = 'mongodb://localhost:27017/ducchuy2'
+const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/${MONGO_FOLDER}?authSource=admin`
+// const mongoURL = 'mongodb://localhost:27017/ducchuy2'
+const autoIndex = process.env.NODE_ENV !== 'production';
 async function connect() {
 
     try {
@@ -10,7 +11,8 @@ async function connect() {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
-            useCreateIndex: true
+            useCreateIndex: true,
+            autoIndex
         });
         console.log("Connect success to DB!!");
     } catch (error) {

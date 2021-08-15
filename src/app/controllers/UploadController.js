@@ -26,7 +26,7 @@ class UploadController {
 
             var res_id = await saveURLToDb(imagesURL)
 
-            saveChapterRef(res_id)
+            saveChapterRef(res_id, params.chapter)
 
         })
         .then(() => res.redirect('back'))
@@ -48,10 +48,22 @@ class UploadController {
             
             return newChapter._id
         };
-        function saveChapterRef(res_id) {
+        function saveChapterRef(res_id, chapterName) {
+            let date = new Date()
+            let IOSDate = date.toISOString()
             Comic.updateOne(
                 { slug: req.params.slug },
-                { $push: { chapters: res_id } }
+                {
+                    $push: {
+                        lastest_chapters: {
+                            $each: [{ chapter: chapterName, updatedAt: IOSDate }],
+                            $position: 0,
+                            $slice: 3
+                        },
+                        chapters: { chapter: chapterName, updatedAt: IOSDate }
+                    }
+                }
+                // { $push: { chapters: res_id } }
             ).exec()
         };
     };
@@ -180,20 +192,6 @@ class UploadController {
                     ).then(res.redirect('back'))
                 })
 
-                // let update = { 
-                //     $setOnInsert: { category: category},
-                //     $push: {
-                //         [`${type}.${index}`]: {
-                //             title: title,
-                //             subtitle: subtitle,
-                //             description: cleanDescription,
-                //             author: author,
-                //             href: href,
-                //             url: imagesURL
-                //         }
-                //     }
-                // }
-               
             };
         })
         .catch(err => next(err))

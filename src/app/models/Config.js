@@ -5,10 +5,10 @@ const moment = require('moment-timezone');
 
 const opts = {
   // set lại time zone sang asia
-  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Bangkok") },
+  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
 const Config = new Schema({
-  category: String,
+  category: { type: String, index: true},
   slider: [{
     url: String,
     href: String,
@@ -40,7 +40,15 @@ const Config = new Schema({
 
 }, opts);
 
+Config.pre('findOne', function () {
+  this._startTime = Date.now();
+});
 
+Config.post('findOne', function () {
+  if (this._startTime != null) {
+    console.log('Runtime in MS: ', Date.now() - this._startTime, 'ms');
+  }
+});
 
 module.exports = mongoose.model('Config', Config);
 

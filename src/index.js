@@ -92,18 +92,22 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: false,
     cookie : {
-        sameSite: 'strict', // THIS is the config you are looing for.
+        sameSite: 'strict',
         maxAge: 2592000,
         httpOnly: true,
         secure: false
     }
 };
 
-if (process.env.NODE_ENV === 'production') {
-    app.set('trust proxy', 1); // trust first proxy
+app.set('trust proxy', 1); // trust first proxy
     app.use(cors())
-    sessionConfig.cookie.secure = true; // serve secure cookies
-}
+
+//❌
+// if (process.env.NODE_ENV === 'production') {
+//     app.set('trust proxy', 1); // trust first proxy
+//     app.use(cors())
+//     sessionConfig.cookie.secure = true; // serve secure cookies
+// }
 
 app.use(session(sessionConfig));
 
@@ -178,9 +182,14 @@ app.engine(
                 }
                 options.data.root[varName] = varValue;
             },
-            getValues: (object, key) => {
-                let temp = object[0]
-               return temp[key]
+            getValues: (object, index) => {
+               return object[index]
+            },
+            getObjValues: (object, key) => {
+                let obj = (Array.isArray(object))
+                ? object.shift()
+                : object
+               return obj[`${key}`]
             },
             CalcTimeEnglish: (time) => CalcTimeEnglish(time),
             minus: (a,b) => a - b,
@@ -194,11 +203,11 @@ app.engine(
                 return arr.slice(startLimit, endLimit);
             },
             replaceHyphenIntoHashmark: (str) => {
-                str = str.toString().replace(/chapter-/g, '#');
+                str = (str) ? str.toString().replace(/chapter-/g, '#') : '';
                 return str && str[0].toUpperCase() + str.slice(1);
             },
             replaceHyphenIntoSpace: (str) => {
-                str = str.toString().replace(/-/g, ' ');
+                str = (str) ? str.toString().replace(/-/g, ' ') : '';
                 return str && str[0].toUpperCase() + str.slice(1);// replace '-' -> space 
             },
             chapterText: (str) => {

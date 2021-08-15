@@ -5,10 +5,21 @@
 
 {{#each comics}}
     <item>
-        <img width="60" height="60" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp" alt="">
+        <picture>
+            <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                type="image/webp" />
+            <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                type="image/jpeg" />
+        
+            <img width="60" height="80" alt="{{this.title}}"
+                src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                onerror="this.onerror=null;this.src='/img/404.jpg';" />
+        </picture>
         <info class="info">
             <a href="/comic/{{this.slug}}" class="info__title">{{this.title}}</a>
-            <a href="/comic/{{this.slug}}/{{getValues (limit this.chapters 1) "chapter"}}" class="info__chapter">{{replaceHyphenIntoSpace (getValues (limit this.chapters 1) "chapter")}}</a>
+            <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}" class="info__chapter">
+                {{replaceHyphenIntoSpace (getObjValues (limit this.chapters 1) "chapter")}}
+            </a>
         </info>
     </item>
 {{/each}}

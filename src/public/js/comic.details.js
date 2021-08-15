@@ -1,6 +1,43 @@
+/*************** Fetch Comments ***************/
+var $pathname = window.location.pathname;
+var $search = window.location.search
+var element_position = $('#commentbox').offset().top;
+var $commentBox = $('#commentbox')
+var flag = 0;
+$.fn.isVisible = function () {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+}
+
+$(window).scroll(function () {
+    if ($commentBox.isVisible()) {
+        if (flag == 0) {
+            // do something
+            flag = 1
+            $.ajax({
+                type: 'GET',
+                url:`/fetch${$pathname}/null/comments${$search}`,
+                contentType: "application/json; charset=utf-8",
+                success: function(result) {
+                    $commentBox.append(result)
+                },
+                error: function(result) {
+                    console.log(result)
+                },
+            });
+        }
+    }
+})
+/*************** Fetch Comments ***************/
+
 /*************** star rating ***************/
 
-(function($) {
+$(function() {
     $('#rating').starrr({
         change: function(e, value){
             if (value) {
@@ -10,8 +47,7 @@
             } else $('.your-choice-was').hide();
         }
     });
-
-})(jQuery);
+});
 
 /*************** star rating ***************/
 
@@ -146,6 +182,9 @@ window.postComment = function (form) {
         contentType: "application/json; charset=utf-8",
         success: function (response) {
             socket.emit('new_comment', response)
+        },
+        error: function (response) {
+            console.log(response)
         }
     })
     return false;
@@ -190,6 +229,9 @@ window.postReply = function (form) {
         success: function (response) {
             hideReplydialog(form)
             socket.emit('new_reply', response) 
+        },
+        error: function (response) {
+            console.log(response)
         }
     })
     return false;

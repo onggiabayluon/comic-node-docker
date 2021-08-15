@@ -1,4 +1,4 @@
-<top-displayer id="top-displayer" class="d-block">
+<section id="top-displayer" itemprop="articleSection">
     <background-banner id="background-banner" class="backgroundBanner">
     {{#each config.banner_background}}
         <picture>
@@ -81,9 +81,9 @@
             {{/each}}
         </banner-botright>
     </grid-container>
-</top-displayer>
+</section>
 
-<categories-nav id="categories-nav" class="container">
+<section id="categories-nav" itemprop="articleSection">
     <ul class="categoires-container">
         <li id="hidden-btn" class="category" style="color: var(--button-text-unimportant);"
         data-toggle="tooltip" data-placement="top" title=" Under Construction !! ">
@@ -94,15 +94,15 @@
         <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/Romance">Romance</a></li>
         <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/Fantasy">Fantasy</a></li>
         <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/SliceofLife">Slice of Life</a></li>
-        <li onclick="location = this.children[0].href" class="more"><a href="/comic/categories/all">MORE</a></li>
+        <li onclick="location = this.children[0].href" class="more"><a href="/comic/categories/all">MORE GENRES</a></li>
     </ul>
-</categories-nav>
+</section>
 
-<welcome-places id="welcome-places" class="foreground-color border-bottom-2">
+<section id="welcome-places" itemprop="articleSection" class="foreground-color border-bottom-2">
     <heading class="container">
-        <title class="title">
+        <h2 class="title">
             New To DORE
-        </title>
+        </h2>
         <icon-right>
             <i class="fas fa-chevron-right"></i>
         </icon-right>
@@ -307,13 +307,13 @@
             </div>
         </div>
     </slider-container>
-</welcome-places>
+</section>
 
-<bookmark-places id="bookmark-places" class="foreground-color">
+<section id="bookmark-places" itemprop="articleSection"class="foreground-color">
     <heading class="container">
-        <title class="title">
+        <h2 class="title">
             My Series
-        </title>
+        </h2>
         <icon-right>
             <i class="fas fa-chevron-right"></i>
         </icon-right>
@@ -347,9 +347,9 @@
                                                     {{this.title}}
                                                 </info-title>
                                             </a>
-                                            <a href="/comic/{{this.slug}}/{{getValues (limit this.chapters 1) "chapter"}}">
-                                                <info-chapter id="chapter-{{getValues (limit this.chapters 1) "_id"}}">
-                                                    {{chapterText (getValues (limit this.chapters 1) "chapter")}}
+                                            <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}">
+                                                <info-chapter id="chapter-{{getObjValues (limit this.chapters 1) "_id"}}">
+                                                    {{chapterText (getObjValues (limit this.chapters 1) "chapter")}}
                                                     <span>{{CalcTimeEnglish this.updatedAt}}</span>
                                                 </info-chapter>
                                             </a>
@@ -382,15 +382,15 @@
             </div>
         </div>
     </slider-container>
-</bookmark-places>
+</section>
 
-<newest-places id="newest-places" >
+<section id="lastest-update-places" itemprop="articleBody">
     <wrapper-big class="container">
 
         <heading class="container">
-            <title class="title">
+            <h2 class="title">
                 Lastest Update
-            </title>
+            </h2>
             <icon-right>
                 <i class="fas fa-chevron-right"></i>
             </icon-right>
@@ -415,8 +415,8 @@
                 <info>
                     <a href="./comic/{{this.slug}}"><title class="title title--ellipsis">{{this.title}}</title></a> 
                     <chapter-box>
-                        {{#each (limit chapters 2)}}
-                        <a href="/comic/{{../ this.slug}}/{{this.chapter}}">
+                        {{#each (limit lastest_chapters 2)}}
+                        <a href="/comic/{{../this.slug}}/{{this.chapter}}">
                             <chapter class="chapter" id="chapter-{{this._id}}">{{replaceHyphenIntoSpace this.chapter}}<span class="left-auto">{{CalcTimeEnglish this.updatedAt}}</span></chapter>
                         </a>
                         {{/each}}
@@ -430,18 +430,18 @@
         
 
     </wrapper-big>
-</newest-places>
+</section>
 
-<comics-gridbox id="comics-gridbox" class="mb-4 border-top-bot-3">
+<section id="comics-gridbox" itemprop="articleSection" class="mb-4 border-top-bot-3">
     <intro-container class="intro">
-        <main>
+        <h2>
             WEBTOON <span>CANVAS</span> 
-        </main>
-        <sub>
+        </h2>
+        <p>
             Have a story to tell?
             </br>Share it on WEBTOON CANVAS.
             </br>Find everything you need to get it published.
-        </sub>
+        </p>
         <btn-intro>
             Find out more
         </btn-intro>
@@ -481,7 +481,7 @@
         {{/each}}
         
     </grid-container>
-</comics-gridbox>
+</section>
 
 
 <instuff>
@@ -500,20 +500,14 @@
         \{{#ifCond (compareListId this.comicId ../sublist.subscribed) '==' true}}
         \{{else}}
         <div id="comic-\{{this.comicId}}" class="glide__slide">
-            <glide-img>
-                <picture class="lazy">
-                    <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
-                    <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
+                <picture >
+                    <source srcset="\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
+                    <source srcset="\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
             
-                    <img width="198" height="160" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg"
+                    <img alt="\{{this.title}}" width="198" height="160" src="\{{this.thumbnail}}-thumbnail.jpeg"
                         onerror="this.onerror=null;this.src='/img/404.jpg';" />
                 </picture>
-            </glide-img>
-            {{!-- <glide-img>
-                <img width="198" height="160"
-                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp"
-                    alt="">
-            </glide-img> --}}
+            
             <bottom-info>
                 <a href="">
                     <info-title class="ellipsis">
@@ -538,14 +532,14 @@
 
     \{{#each historyItems}}
     <div id="comic-\{{this.comicId}}" class="glide__slide">
-        <picture class="lazy">
-            <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp"
+        <picture >
+            <source srcset="\{{this.thumbnail}}-thumbnail.webp"
                 type="image/webp" />
-            <source srcset="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg"
+            <source srcset="\{{this.thumbnail}}-thumbnail.jpeg"
                 type="image/jpeg" />
     
-            <img width="198" height="160"
-                src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.jpeg"
+            <img alt="\{{this.title}}" width="198" height="160"
+                src="\{{this.thumbnail}}-thumbnail.jpeg"
                 onerror="this.onerror=null;this.src='/img/404.jpg';" />
         </picture>
         <bottom-info>

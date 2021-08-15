@@ -1,6 +1,7 @@
 const path  = require('path');
 const redis = require(path.resolve('./src/config/redis'))
 const Comic = require('../app/models/Comic')
+const TopView = require('../app/models/TopView')
 const { promisify } = require("util");
 
 const handlingUpdate = async () => {
@@ -47,9 +48,8 @@ const getRedisCounts = async (keys) => {
 };
 
 const updateMongodb = async (keys, counts) => {
-    log(3)
     // Variables
-    const newKeysArr = [], bulkArr = [], filtered = [], b = {};
+    const newKeysArr = [], bulkUpdateOfComics = [], bulkUpdateOfTopViews = [], filtered = [], b = {};
 
     // Get comicslug and view
     keys.forEach((element, index) => {
@@ -67,15 +67,28 @@ const updateMongodb = async (keys, counts) => {
     // update
     for (const i of newKeysArr) {
         log(newKeysArr)
-        bulkArr.push({
+        bulkUpdateOfComics.push({
             updateOne: {
                 "filter": { "slug": i.key },
                 "update": { $inc: { "view.totalView": i.count } }, timestamps: false
             }
         })
+        bulkUpdateOfTopViews.push({
+            updateOne: {
+                "filter": { "slug": i.key },
+                "update": { $inc: { "views": i.count }, $setOnInsert: {expiredAt: Date.now()} }, 
+                "upsert": true,
+                "timestamps": false,
+            }
+        })
     }
-    var bulkwriteResult = await Comic.bulkWrite(bulkArr)
-    return [`Modify ${bulkwriteResult.nModified} Comics in db Successfully`, null]
+
+    var [bulkwriteComicsResult, bulkwriteTopViewsResult] = await Promise.all([
+        Comic.bulkWrite(bulkUpdateOfComics), 
+        TopView.bulkWrite(bulkUpdateOfTopViews)
+    ])
+    return [`Modify ${bulkwriteComicsResult.nModified} Comics in db Successfully,
+    Modify ${bulkwriteTopViewsResult.nModified} TopViews in db Successfully`, null]
 };
 
 const delRedisKey = async (keys) => {

@@ -2,10 +2,12 @@
 // --> 3. lấy được dữ liệu mang về controller --> 4. chọc sang views, lấy data
 // từ model truyền sang views --> 5. views render trả về client
 const Comic     = require('../models/Comic');
-const Config     = require('../models/Config');
+const Config    = require('../models/Config');
+const User      = require('../models/User');
+const TopView      = require('../models/TopView');
 const { singleMongooseToObject } =  require('../../util/mongoose');
-const User = require('../models/User');
-const { IMAGE_URL } = require('../../config/config');
+const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
+, HOME_KEYWORDS, HOME_URL, HOME_SITENAME } = require('../../config/config');
 
 // connect to redis
 // const path  = require('path');
@@ -14,33 +16,84 @@ const { IMAGE_URL } = require('../../config/config');
 
 class SiteController {
 
-    test(req, res, next) {
-        let update = { 
-            $setOnInsert: { type: 'slider' },
-            $set: {
-                [`images.1`]: {
-                'title': 'title',
-                'subtitle': 'subtitle',
-                'description': 'description',
-                'href': 'href',
-                 url :'imagesURL'}
-            } 
-        }
-        Config.updateOne(
-            { type: 'slider' },  
-            update,
-            { upsert: true }
-        )
-        .then(re => console.log(re))
+    async test(req, res, next) {
+        // const mongoose = require('mongoose')
+        // mongoose.set('debug', true);
 
-        res.send("<h1> Helloadddaada </h1>")
-        
+
+        // Fetch top10 Data With Sort
+        // let Top10View = await TopView.find({}).lean().sort({views: -1}).limit(10)
+        // .hint( { views: 1 } ).explain("executionStats")
+        // return res.json(Top10View)
+
+        // Genrerate Data
+        const shortid = require('shortid');
+ 
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        let keys = []
+        let makeData = 10
+        // for (let i = 0; i < makeData; i++) {
+        //     keys.push({
+        //         key: shortid.generate(), 
+        //         count: randomIntFromInterval(1,200)
+        //     })
+        // }
+        keys = [{
+            slug: 'adaddada',
+            count: 10,
+        }]
+        // TopView.insertMany([keys]).then(data => res.json(data))
+        // Update && Upsert Data
+        let today = new Date();
+        let dd = today.getDate();
+        let bulkArr = []
+        for (const i of keys) {
+            bulkArr.push({
+                updateOne: {
+                    "filter": { "slug": i.key },
+                    "update": [{ 
+                        $addFields: {
+                            "view.dayView.thisDay": dd,
+                            "view.totalView": {
+                                $cond: {
+                                    if: { $gt: [ "$view.totalView", null ] },
+                                    then: { $add: [ i.count, "$view.dayView.view" ] },
+                                    else: { $add: [ i.count, 0 ] }
+                                }
+                            },
+                            "view.dayView.view": {
+                                $cond: {
+                                    if: { $eq: [ "$view.dayView.thisDay", dd ] },
+                                    then: { $add: [ "$view.dayView.view", i.count ] },
+                                    else: 0
+                                }
+                            },
+                        }
+                    }], 
+                    "upsert": true,
+                    "timestamps": false,
+                }
+            })
+        }
+        console.log(bulkArr)
+        var bulkwriteResult = await TopView.bulkWrite(bulkArr)
+        res.json(bulkwriteResult)
+
+
+        // TopView.collection.getIndexes({full: true}).then(indexes => {
+        //     console.log("indexes:", indexes);
+        //     // ...
+        // }).catch(console.error);
+
+       
     }
 
     // [GET] / Site
     index(req, res, next) {
         // Comic.updateMany({}, {rate: {rateCount: 0, rateValue: 0}}).then(info => console.log(info))
-
         let id = (req.user) ? req.user._id : null
         let page = +req.query.page || 1;
         let PageSize = 10;
@@ -51,18 +104,10 @@ class SiteController {
 
         Promise.all([
             Comic.countDocuments({}),
-            Comic.find({ chaptername: { $not: { $exists: true } } })
+            Comic.find({})
+            .select('-description -chapters')
             .skip(skipCourse)
             .limit(PageSize)
-            .sort({ updatedAt: -1})
-            .populate({
-                path: 'chapters',
-                select: 'chapter updatedAt',
-                options: {
-                    limit: 3,
-                    sort: { updatedAt: -1},
-                }
-            })
             .lean(),
             Config.findOne({ category: "image" }).lean(),
             // Comment.aggregate([
@@ -120,6 +165,13 @@ class SiteController {
             })
           ])
           .then(([count, comicsDoc, config, subscribeList]) => {
+            let meta = {
+                home_title: HOME_TITLE,
+                home_description: HOME_DESCRIPTION,
+                home_keywords: HOME_KEYWORDS,
+                home_url: HOME_URL,
+                home_sitename: HOME_SITENAME
+            }
             res.status(200).render('home', { 
                 layout: 'home_layout',
                 comics: comicsDoc,
@@ -132,7 +184,8 @@ class SiteController {
                 img_url: IMAGE_URL,
                 config: config,
                 // commentDoc: commentDoc,
-                sublist: subscribeList
+                sublist: subscribeList,
+                meta
              });
           })
           .catch(err => next(err))

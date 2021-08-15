@@ -189,6 +189,7 @@
                                             <div class="icon-container" data-toggle="modal"
                                                 data-id="{{this._id}}" 
                                                 data-slug="{{this.comicSlug}}"
+                                                data-chapter="{{this.chapter}}"
                                                 data-target="#delete-course-modal">
                                                 <i class="simple-icon-trash" style="z-index: -1;"></i>
                                             </div>
@@ -200,6 +201,7 @@
 
                                 {{!-- Handle Form checkbox --}}
                                 <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                    <input type="hidden" name="chapter" value="{{this.chapter}}">
                                     <input type="hidden" name="comicSlug" value="{{this.comicSlug}}">
                                     <input type="checkbox" class="custom-control-input" name="chapter_id[]"
                                         value="{{this._id}}">
@@ -248,6 +250,7 @@
 {{!-- hidden form to delete stuff --}}
 <form name="hidden-form" method="POST">
     <input type="hidden" name="comicSlug" >
+    <input type="hidden" name="chapter" >
 </form>
 
 {{!-- Search Template --}}
@@ -280,6 +283,7 @@
                         <div class="icon-container" data-toggle="modal" 
                         data-id="\{{this._id}}"
                          data-slug="\{{this.comicSlug}}"
+                         data-chapter="\{{this.chapter}}"
                             data-target="#delete-course-modal">
                             <i class="simple-icon-trash" style="z-index: -1;"></i>
                         </div>
@@ -343,9 +347,11 @@
             //bấm vào button lưu id vào chapter_id từ button-data bên trên
             chapter_id = button.data('id');
             comicSlug = button.data('slug');
+            chapter = button.data('chapter');
         });
         btnDeleteCourse.onclick = function () {
             $("input:hidden[name=comicSlug]").val(comicSlug)
+            $("input:hidden[name=chapter]").val(chapter)
             hiddenForm.action = '/me/stored/destroyChapter/' + chapter_id + '?_method=DELETE';
             hiddenForm.submit();
         }; /* End Form */

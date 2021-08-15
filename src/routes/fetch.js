@@ -5,6 +5,8 @@ const { authRole, ensureAuthenticated, forwardAuthenticated } = require('../conf
 // Load Fetchcontroller
 const Fetchcontroller = require('../app/controllers/FetchController');
 
+// Route: fetch / comics /:comicSlug / :chapter / comments
+router.get('/comic/:comicSlug/:chapter/comments', Fetchcontroller.fetchChapterComments);
 // Route: fetch / comics / :chapterSlug
 router.get('/comics/:chapterSlug', Fetchcontroller.fetchChapters);
 // Route: fetch / comics

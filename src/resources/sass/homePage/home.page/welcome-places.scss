@@ -1,4 +1,4 @@
-welcome-places {
+#welcome-places {
     min-height: 315px;
     padding: 3rem 0 2rem 0;
     display: block;
@@ -26,8 +26,19 @@ welcome-places {
         display: flex;
         flex-direction: row;
 
+        item {
+            position: relative;
+            min-width: 210px;
+            height: 210px;
+
+            comic-info {
+                padding: 0.5rem 1.5rem 0 1.5rem;
+            }
+        }
+
         item:nth-child(4) {
             width: 435px !important;
+            height: 210px;
             img {
                 width: 100% !important;
                 object-position: right !important;
@@ -43,14 +54,7 @@ welcome-places {
             height: 210px;
         }
 
-        item {
-            position: relative;
-            height: 210px;
-
-            comic-info {
-                padding: 0.5rem 1.5rem 0 1.5rem;
-            }
-        }
+        
     }
     .glide__arrows--custom {
         margin: 1rem 0 0.6rem 0;
@@ -60,7 +64,7 @@ welcome-places {
     }
 }
 @media (max-width: 1200px) { 
-    welcome-places {
+    #welcome-places {
         .glide {
             width: unset ;
         }
@@ -118,13 +122,8 @@ welcome-places {
         border-bottom: unset !important;
     } 
 }
-// @media (max-width: 1380px) {
-//     welcome-places .glide__slide--2 {
-//         width: calc(210px * 3 + 435px + (15px * 4)) !important;
-//     }
-// }
 @media (min-width: 1380px) {
-    welcome-places {
+    #welcome-places {
         .comic-info-back {
             width: 100%;
         }

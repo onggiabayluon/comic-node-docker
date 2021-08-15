@@ -6,12 +6,12 @@ const moment = require('moment-timezone');
 
 const opts = {
   // set lại time zone sang asia
-  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Bangkok") },
+  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
 const Chapter = new Schema({
     title: { type: String },
-    comicSlug: { type: String },
-    chapter: { type: String, unique: false },
+    comicSlug: { type: String, index: true },
+    chapter: { type: String, index: true },
     description: { type: String },
     chapterSlug: { type: String },
     chapterUpdateTime: { type: String },

@@ -90,10 +90,13 @@ a {
 }
 
 body {
-  font-family: 'Hind', sans-serif;
   color: var(--primary-color);
   background: var(--background-color);
   // overflow-x: hidden;
+}
+
+body, section {
+  font-family: 'Hind', sans-serif;
 }
 
 .m-all-0 {

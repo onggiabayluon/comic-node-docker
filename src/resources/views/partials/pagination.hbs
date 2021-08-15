@@ -1,6 +1,7 @@
+
 {{#if pages}}
     {{#ifCond current '<=' pages}} 
-    <nav class="mt-4 mb-3" aria-label="Page navigation example">
+    <nav class="mt-4 mb-3" aria-label="Page navigation example" itemscope itemtype="http://schema.org/SiteNavigationElement/Pagination">
         <ul class="pagination justify-content-center mb-0">
 
             {{!-- <li class="page-item ">
@@ -8,8 +9,8 @@
                     <i class="simple-icon-control-start" style="line-height: unset;"></i>
                 </a>
             </li> --}}
-            <li class="page-item ">
-                <a class="page-link prev" {{#ifCond ../current '==' 1}}href="#" {{else}} href="?page=1"
+            <li class="page-item">
+                <a class="page-link prev" rel="prev" {{#ifCond ../current '==' 1}}href="#" {{else}}  href="?page=1"
                     aria-label="prev" {{/ifCond}}>
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
@@ -37,7 +38,7 @@
                         {{/ifCond}}
 
                         <li class="page-item">
-                            <a class="page-link next" {{#ifCond ../current '==' ../pages}}href="#" {{else}}
+                            <a class="page-link next" rel="next" {{#ifCond ../current '==' ../pages}}href="#" {{else}}
                                 href="?page={{../pages}}" aria-label="next" {{/ifCond}}>
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>

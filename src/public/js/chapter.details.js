@@ -1,3 +1,42 @@
+/*************** Fetch Comments ***************/
+
+var $pathname = window.location.pathname;
+var $search = window.location.search
+var element_position = $('#commentbox').offset().top;
+var $commentBox = $('#commentbox')
+var flag = 0;
+$.fn.isVisible = function () {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+}
+
+$(window).scroll(function () {
+    if ($commentBox.isVisible()) {
+        if (flag == 0) {
+            // do something
+            flag = 1
+            $.ajax({
+                type: 'GET',
+                url:`/fetch${$pathname}/comments${$search}`,
+                contentType: "application/json; charset=utf-8",
+                success: function(result) {
+                    $commentBox.append(result)
+                },
+                error: function(result) {
+                    console.log(result)
+                },
+            });
+        }
+    }
+})
+
+/*************** Fetch Comments ***************/
+
 /* local History */
 var $chapterId          = $("input[type=hidden][name=chapterId]").val()
 var $comicId            = $("input[type=hidden][name=comicId]").val()
@@ -247,6 +286,7 @@ window.destroyComment = function (form) {
 window.postReply = function (form) {
     formData = {
         comment_id: form.comment_id.value,
+        isChapterReply: $isChapterReply,
         text: form.text.value,
         title: $title,
         userId: $user_id,
@@ -275,7 +315,7 @@ window.destroyReply = function (form) {
         comment_id: form.comment_id.value,
         comicSlug: $comicSlug,
         chapter: $chapter,
-        isChapterReoly: $isChapterReply,
+        isChapterReply: $isChapterReply,
     }
     if (confirm("Delete this Reply ?")) {
         $.ajax({

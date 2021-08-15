@@ -35,7 +35,7 @@
         
 
         &--subscribed {
-            color: var(--button-text-color);
+            color: var(--button-text-color) !important;
             background-color: darkness(--theme-color-1, 8%);
             border-color: darkness(--theme-color-1, 8%);
             transition: 0.5s ease-in-out;

@@ -8,7 +8,7 @@ const trimEng = require('../../config/middleware/trimEng')
 
 const opts = {
   // set lại time zone sang asia
-  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Bangkok") },
+  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
 function setDefaultTime() {
   var today = new Date();
@@ -19,29 +19,22 @@ function setDefaultTime() {
 };
 
 const Comic = new Schema({
-  description: { type: String, trim: true },
   title: { type: String, trim: true },
+  subtitle: { type: String, trim: true },
   titleForSearch: { type: String, trim: true },
-  videoId: { type: String },
-  author: { type: String },
-  userId: { type: String },
-  userName: { type: String },
-  slug: { type: String },
-  comicUpdateTime: { type: String },
+  description: { type: String, trim: true },
+  slug: { type: String, unique: true },
+  author: String,
+  user: {
+    _id: String,
+    name: String,
+  },
   view: {
-    totalView: { type: Number, default: 0 },
+    totalView: { type: Number, default: 0, index: true },
     dayView: {
-      thisDay: { type: String, default: setDefaultTime().dd },
-      view: { type: Number, default: 0 }
-    },
-    monthView: {
-      thisMonth: { type: String, default: setDefaultTime().mm },
-      view: { type: Number, default: 0 }
-    },
-    yearView: {
-      thisYear: { type: String, default: setDefaultTime().yyyy },
-      view: { type: Number, default: 0 }
-    },
+      view: { type: Number, default: 0, index: true },
+      thisDay: { type: Number, default: new Date().getDay() }
+    }
   },
   isPublish: {
     type: Boolean,
@@ -56,8 +49,12 @@ const Comic = new Schema({
     url: String,
   },
   chapters: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Chapter"
+    chapter: String,
+    updatedAt: Date,
+  }],
+  lastest_chapters: [{ 
+    chapter: String,
+    updatedAt: Date,
   }],
   category: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -76,6 +73,18 @@ Comic.plugin(mongooseDelete, {
   overrideMethods: 'all',
   deletedAt: true
 });
+
+Comic.pre('findOne', function () {
+  this._startTime = Date.now();
+});
+
+Comic.post('findOne', function () {
+  if (this._startTime != null) {
+    console.log('Runtime in MS: ', Date.now() - this._startTime, 'ms');
+  }
+});
+//old Find around 50 ~ 70 ms 
+
 
 
 //               mongoose.model('ModelName', mySchema);

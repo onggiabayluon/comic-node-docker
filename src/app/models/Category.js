@@ -8,10 +8,10 @@ const trimEng         = require('../../config/middleware/trimEng')
 
 const opts = {
   // set lại time zone sang asia
-  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Bangkok") },
+  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
 const Category = new Schema({
-  name: { type: String },
+  name: { type: String, index: true },
   comic: [{ 
     type: mongoose.Schema.Types.ObjectId,
     ref: "Comic"

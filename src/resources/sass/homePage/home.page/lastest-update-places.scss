@@ -1,4 +1,4 @@
-#newest-places {
+#lastest-update-places {
     display: block;
     padding: 3rem 0 5rem 0;
     background: var(--background-color);
@@ -92,7 +92,7 @@
 }
 
 @media (max-width: 992px) {
-    #newest-places {
+    #lastest-update-places {
         .item {
 
             // &--border {
@@ -118,7 +118,7 @@
     }
 }
 @media (max-width: 768px) {
-    #newest-places {
+    #lastest-update-places {
         min-height: 1235px;
         heading {
             max-width: 95%;
@@ -136,7 +136,7 @@
 }
 
 @media (min-width: 1380px) {
-    #newest-places .item img {
+    #lastest-update-places .item img {
         width: 100px;
     }
 }

@@ -671,7 +671,11 @@ const destroyChapter_Helper = (exports.destroyChapter_Helper
     async function delete_chaptersRef() {
       Comic.updateOne(
         { slug: req.body.comicSlug },
-        { $pull: { chapters: req.params.chapter_id } }
+        { $pull: { 
+            lastest_chapters: { chapter: req.body.chapter }, 
+            chapters: { chapter: req.body.chapter }
+          }
+        }
       ).exec()
     };
 
@@ -699,9 +703,9 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
         }
 
         async function delete_Chapter_Images_s3() {
-          chapter_ids.map(chapter_id => {
+          chapter_ids.map((chapter_id, index) => {
 
-            delete_chaptersRef(chapter_id)
+            delete_chaptersRef(chapter_id, index)
 
             Chapter.findOne({ _id: chapter_id })
               .then(currentChapter => {
@@ -739,10 +743,14 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
             .catch(next)
         };
 
-        async function delete_chaptersRef(chapter_id) {
+        async function delete_chaptersRef(chapter_id, index) {
           Comic.updateOne(
             { slug: req.body.comicSlug[0] },
-            { $pull: { chapters: chapter_id } }
+            { $pull: { 
+              lastest_chapters: { chapter: req.body.chapter[index] }, 
+              chapters: { chapter: req.body.chapter[index] }
+            }
+          }
           ).exec()
         };
 

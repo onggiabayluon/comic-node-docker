@@ -1,5 +1,4 @@
 
-$(document).ready(function () {
     var $href = window.location.href;
     var $user_id = $("input[type=hidden][name=user_id]").val()
     var isLoggedIn = ($user_id) ? true : false
@@ -14,7 +13,7 @@ $(document).ready(function () {
         if (visited_chapters_list == null) return
 
         var $glide2 = $('#glide_2')
-        var $newestplaces = $('#newest-places')
+        var $newestplaces = $('#lastest-update-places')
 
         for (let i = 0; i < visited_chapters_list.length; i++) {
             $glide2.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
@@ -93,15 +92,15 @@ $(document).ready(function () {
             }
             return result
         }) /* helper */
+        var $sublist = (isLoggedIn) ? await fetchSubList() : {}
         Handlebars.registerHelper('minus', (a, b) => a - b)
-        var $sublist = await fetchSubList()
         var content = visited_comics_list.slice(Math.max(visited_comics_list.length - 6, 0))
         var source = $("#glides-template").html()
         var template = Handlebars.compile(source)
         var html = template({ historyItems: content, sublist: $sublist, isLoggedIn })
         //console.log(content)
         //console.log(html)
-        $('#glide__slides').append(html).slideDown('slow')
+        $('#glide__slides').append(html)
         addClassVisited()
         createPseudoFrame()
         gliderjs()
@@ -109,4 +108,3 @@ $(document).ready(function () {
     }
 
     /* 🛑 end local History */
-});

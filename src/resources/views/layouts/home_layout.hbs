@@ -3,18 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    
     {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
-    <title>Document</title>
+    <title>{{meta.home_title}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="description" content="{{meta.home_description}}">
+    <meta name="author" content="{{meta.home_sitename}}">
+    <meta name="keywords" itemprop="keywords" content="{{meta.home_keywords}}">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{meta.home_description}}">
+    <meta property="og:url" content="{{meta.home_url}}">
+    <meta property="og:image" content="{{#each config.banner_background}}{{../img_url}}/{{this.url}}-thumbnail.jpeg{{/each}}">
+    
+    <meta name="twitter:title" content="{{meta.home_title}}">
+    <meta name="twitter:description" content="{{meta.home_description}}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="{{meta.home_sitename}}">
+    <meta name="twitter:image" content="{{#each config.banner_background}}{{../img_url}}/{{this.url}}-thumbnail.jpeg{{/each}}">
+    <link rel="canonical" href="{{meta.home_url}}">
     {{!-- preconnect --}}
     <link rel="preconnect" href="https://s3.eu-central-1.wasabisys.com">
-    {{!-- FontAweSome cdn --}}
-    <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{!-- Bootstrap cdn --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{!-- FontAweSome cdn --}}
+    <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{!-- Font --}}
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link rel="preload" href="/font/hind/Hind-Regular.ttf" as="font" type="font/woff" crossorigin="anonymous">
-    <link rel="preload" href="/font/hind/Hind-Medium.ttf" as="font" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/font/hind/Hind-Regular.ttf"  type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/font/hind/Hind-Medium.ttf" type="font/woff" crossorigin="anonymous">
     {{!-- vendor css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css">
     {{!-- CSS --}}
@@ -22,30 +39,20 @@
     
 </head>
 
-<body >
+<body>
+        <header>
+            {{> homeHeader}}
+        </header>
 
-    {{!-- <div id="loader">
-        <section>
-            <div class="app-loader dark">
-                <h1 class="app-loader__text">
-                    <span><sup>S</sup><sub>S</sub></span><span><sup>t</sup><sub>t</sub></span><span><sup>i</sup><sub>i</sub></span><span><sup>r</sup><sub>r</sub></span><span><sup>r</sup><sub>r</sub></span><span><sup>i</sup><sub>i</sub></span><span><sup>n</sup><sub>n</sub></span><span><sup>g</sup><sub>g</sub></span><i></i><span><sup>U</sup><sub>U</sub></span><span><sup>p</sup><sub>p</sub></span><i></i><span><sup>S</sup><sub>S</sub></span><span><sup>o</sup><sub>o</sub></span><span><sup>m</sup><sub>m</sub></span><span><sup>e</sup><sub>e</sub></span><i></i><span><sup>R</sup><sub>R</sub></span><span><sup>e</sup><sub>e</sub></span><span><sup>s</sup><sub>s</sub></span><span><sup>u</sup><sub>u</sub></span><span><sup>l</sup><sub>l</sub></span><span><sup>t</sup><sub>t</sub></span><span><sup>s</sup><sub>s</sub></span><span><sup>.</sup><sub>.</sub></span><span><sup>.</sup><sub>.</sub></span><span><sup>.</sup><sub>.</sub></span>
-                </h1>
-                <div class="app-loader__wisk">
-                    <div class="app-loader__wisk-inner">
-                        <div class="app-loader__wisk-handle"></div>
-                        <div class="app-loader__wisk-wires"></div>
-                    </div>
-                </div>
-                <div class="app-loader__bowl"></div>
-            </div>
-        </section>
-    </div> --}}
-
-        {{> homeHeader}}
-
-            {{{body}}}
-            
-        {{> homeFooter}}
+        <main>
+            <article itemscope="" itemtype="http://schema.org/Article">
+                {{{body}}}  
+            </article>
+        </main>
+        
+        <footer>
+            {{> homeFooter}}
+        </footer>
 
     {{!-- JS cdn --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -55,10 +62,10 @@
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     {{!-- custom js --}}
-    <script src="/js/vendor/theme-switcher.js"></script>
-    <script src="/js/fetchDataAPI.js"></script>
-    <script src="/js/home.page.LazyLoader.js"></script>
-    <script src="/js/CustomScript.js"></script>
+    <script src="/js/vendor/theme-switcher.js" defer></script>
+    <script src="/js/fetchDataAPI.js" defer></script>
+    <script src="/js/CustomScript.js" defer></script>
+    <script src="/js/home.page.LazyLoader.js" defer></script>
     <script src="/js/homePage.script.js" defer></script>
     
 </body>

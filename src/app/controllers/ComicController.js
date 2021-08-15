@@ -116,47 +116,14 @@ class ComicController {
   };
 
   comicdetailsPage(req, res, next) {
-    let sort = (req.query.hasOwnProperty('_sort')) ? {[req.query.column]: parseInt(req.query.type)} : {commentArr: -1} 
-
-    let page = +req.body.page || 1;
-    let PageSize = 10;
-    let skipComment = (page - 1) * PageSize;
 
     Promise.all([
       Comic.findOne({ slug: req.params.comicSlug }).lean()
       .select('title description thumbnail slug updatedAt category chapters view rate')
       .populate('category', 'name')
       .populate({ path: 'chapters', select: '-_id chapter updatedAt', options: { sort: { 'chapter': 1 } }}),
-      Comment.aggregate([
-        { $match: { comicSlug: req.params.comicSlug, chapter: null } },
-        { $limit: 1 },
-        {
-          $addFields: {
-            maxComment: { $size: "$commentArr" }
-          }
-        },
-        { $unwind: "$commentArr" },
-        { $sort: sort },
-        { $skip: skipComment },
-        { $limit: PageSize },
-        {
-          $addFields: {
-            replyLength : { $size: "$commentArr.reply" },
-          }
-        },
-        {
-          $group: {
-          _id: '$_id',
-          title:      { $first: '$title'      }, 
-          chapter:    { $first: '$chapter'    }, 
-          comicSlug:  { $first: '$comicSlug'  }, 
-          maxComment: { $first: '$maxComment' }, 
-          commentArr: { $push: '$commentArr'  },
-          replyLength: { $push: '$replyLength'  },}
-        },
-      ])
     ])
-      .then(([comicdoc, commentdoc]) => {
+      .then(([comicdoc]) => {
         if (!comicdoc) {
           return next(new customError('Not found', 404));
         }
@@ -176,7 +143,6 @@ class ComicController {
           comic: comicdoc,
           rateValue: rateValue,
           rateCount: rateCount,
-          comments: commentdoc,
           firstChapter: comicdoc.chapters[0],
           lastChapter: comicdoc.chapters[chaptersLength - 1],
           user: singleMongooseToObject(req.user),
@@ -188,66 +154,24 @@ class ComicController {
   };
 
   chapterdetailsPage(req, res, next) {
-    let sort = (req.query.hasOwnProperty('_sort')) ? { [req.query.column]: parseInt(req.query.type) } : { commentArr: -1 }
-    let match = (req.query.hasOwnProperty('_match')) ? { comicSlug: req.params.comicSlug, chapter: { $ne: null } } : { comicSlug: req.params.comicSlug, chapter: req.params.chapter }
+    
     var userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
-    let page = +req.body.page || 1;
-    let PageSize = 10;
-    let firstLimit = (req.query.hasOwnProperty('_match')) ? PageSize : 1
-    let skipComment = (page - 1) * PageSize;
 
     Promise.all([
       Comic.findOne({ slug: req.params.comicSlug })
       .lean()
-      .select('-category')
-      .populate({ 
-        path: 'chapters', 
-        select: '-_id chapter', 
-        options: { sort: { 'chapter': 1 } } 
-      }),
+      .select('-category -description -lastest_chapters'),
       Chapter.findOne({ comicSlug: req.params.comicSlug, chapter: req.params.chapter }).lean(),
-      Comment.aggregate([
-        { $match: match },
-        { $limit: firstLimit },
-        {
-          $addFields: {
-            maxComment: { $size: "$commentArr" }
-          }
-        },
-        { $unwind: "$commentArr" },
-        { $sort: sort },
-        { $skip: skipComment },
-        { $limit: PageSize },
-        {
-          $addFields: {
-            replyLength: { $size: "$commentArr.reply" },
-          }
-        },
-        {
-          $group: {
-            _id: '$_id',
-            title: { $first: '$title' },
-            chapter: { $first: '$chapter' },
-            comicSlug: { $first: '$comicSlug' },
-            maxComment: { $first: '$maxComment' },
-            commentArr: { $push: '$commentArr' },
-            replyLength: { $push: '$replyLength' },
-          }
-        },
-        { $sort: sort },
-      ])
     ])
-      .then(([comicdoc, chapterdoc, commentdoc]) => {
+      .then(([comicdoc, chapterdoc]) => {
         if (!chapterdoc || !comicdoc) {
           return next(new customError('Not found', 404));
         }
         
-        
         setRedisKey(userIp).then(results => console.log(results))
 
 
-        renderChapterView(comicdoc, chapterdoc, commentdoc)
+        renderChapterView(comicdoc, chapterdoc)
       })
       .catch(err => next(err))
 
@@ -261,15 +185,11 @@ class ComicController {
       return { Success: `Set ${setResult} Key (${hllKey}) Successfully` }
     };
 
-    const log = data => console.log(data)
-
-    function renderChapterView(comicdoc, chapterdoc, commentdoc) {
+    function renderChapterView(comicdoc, chapterdoc) {
 
       //sort to make sure when chapters get deleted then this btn wont callapse
       comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0); });
-
       let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter))
-
       let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
       let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]
       res.status(200).render('chapter.details.hbs',
@@ -277,7 +197,6 @@ class ComicController {
           layout: 'chapter.details.layout.hbs',
           comics: comicdoc,
           chapter: chapterdoc,
-          comments: commentdoc,
           prevChapter: prevChapter,
           nextChapter: nextChapter,
           user: singleMongooseToObject(req.user),
@@ -349,9 +268,15 @@ class ComicController {
 
 
     function sendStufftoClient(newComment) {
+      let commentArr = [{
+        _id: newComment._id,
+        text: newComment.text,
+        updatedAt: new Date(newComment.updatedAt),
+        reply: newComment.reply,
+      }]
       res.status(200).render('template/comment.template.hbs', {
         layout: 'fetch_layout',
-        comments: newComment
+        commentArr: commentArr
       })
     };
   };
@@ -386,7 +311,7 @@ class ComicController {
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
     Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
       .then(commentDoc => {
-
+        console.log(commentDoc)
         return pushNewReply(commentDoc)
         
       })
@@ -410,13 +335,23 @@ class ComicController {
 
         sendStufftoClient(newReply, req.body.comment_id);
       };
+
       function sendStufftoClient(newReply, comment_id) {
+        let commentArr = [{
+          _id: comment_id,
+          reply: [{
+            _id: newReply._id,
+            text: newReply.text,
+            updatedAt: new Date(newReply.updatedAt),
+            reply: newReply.reply,
+          }]
+        }]
         res.status(200).render('template/reply.template.hbs', {
           layout: 'fetch_layout',
-          reply: newReply,
-          comment_id: comment_id
+          commentArr: commentArr
         })
       };
+
   };
 
   destroyReply(req, res, next) {
@@ -604,7 +539,8 @@ class ComicController {
           layout: 'fetch_layout',
           comics: results,
           empty: isEmpty,
-          leftover: leftover
+          leftover: leftover,
+          img_url: IMAGE_URL
         });
       })
     }

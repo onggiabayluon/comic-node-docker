@@ -1,13 +1,14 @@
 // Variables
 const AWS                   = require('aws-sdk');
 const sharp                 = require("sharp");
-const { WASABI_ENDPOINT, WASABI_ACCESS_KEY_ID, WASABI_SECRET_ACCESS_KEY, WASABI_BUCKET_NAME }   = require("../../config/config")
+const { WASABI_ENDPOINT, WASABI_ACCESS_KEY_ID, WASABI_SECRET_ACCESS_KEY, WASABI_BUCKET_NAME, WASABI_REGION }   = require("../../config/config")
 const endpoint = new AWS.Endpoint(WASABI_ENDPOINT)
 // S3 config
 const s3 = new AWS.S3({
     endpoint: endpoint,
     accessKeyId: WASABI_ACCESS_KEY_ID,
     secretAccessKey: WASABI_SECRET_ACCESS_KEY,
+    region: WASABI_REGION
 });
 
 var self = module.exports = {
@@ -86,7 +87,7 @@ var self = module.exports = {
                     Key: `${filename}-thumbnail-original.jpeg`,
                 }).promise())
             sharp(file.buffer)
-                .resize({ height: 160, fit: 'cover' })
+                .resize({ width: 160, fit: 'cover' })
                 .webp({ quality: 80 })
                 .toBuffer()
                 .then(resized => s3.upload({

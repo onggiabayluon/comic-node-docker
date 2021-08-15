@@ -1,4 +1,7 @@
-<replies-renderer id="reply-{{reply._id}}" class="expander__content expander__content--hide expander__content--show">
+
+{{#each commentArr}}
+{{#each reply}}
+<replies-renderer id="reply-{{this._id}}" class="expander__content expander__content--hide">
     <comment-renderer id="comment" class="comment">
         {{!-- body --}}
         <div id="body" class="comment__body">
@@ -11,19 +14,26 @@
             <div id="main" class="main">
                 {{!-- header info --}}
                 <header id="header" class="header">
-                    <div id="header-author" class="header__author">India Pagoda </div>
-                    <div id="header-timer" class="header__timer text-muted text-small">3 hours ago</div>
+                    <div id="header-author" itemprop="creator" itemscope itemtype="http://schema.org/Person"
+                        class="header__author">
+                        <span itemprop="name">India Pagoda</span>
+                    </div>
+                    <div id="header-timer" itemprop="commentTime" class="header__timer text-muted text-small">
+                        {{CalcTimeEnglish this.updatedAt}}
+                    </div>
                 </header>
 
                 {{!-- comment --}}
                 <comment id="content" class="content">
-                    <div id="text" class="content__text">{{reply.text}}</div>
-                    <form method="POST" onsubmit="return editReplyForm(this);" enctype="application/x-www-form-urlencoded">
-                        <input name="comment_id" value="{{comment_id}}" type="hidden">
-                        <input name="reply_id" value="{{reply._id}}" type="hidden">
+                    <div id="text" itemprop="commentText" class="content__text">{{this.text}}</div>
+                    <form method="POST" onsubmit="return editReplyForm(this);"
+                        enctype="application/x-www-form-urlencoded">
+                        <input name="comment_id" value="{{../this._id}}" type="hidden">
+                        <input name="reply_id" value="{{this._id}}" type="hidden">
                         <textarea name="text" style="display:none"></textarea>
                         <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
-                            <button onfocus="return normalState(this);" class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                            <button type="button" onclick="return normalState(this);"
+                                class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                             <button type="submit" class="ml-4 btn btn-primary default d-block ">
                                 Edit</button>
                         </div>
@@ -48,9 +58,8 @@
                                 <form method="POST" onsubmit="return postReply(this);"
                                     enctype="application/x-www-form-urlencoded">
                                     <label class="form-group has-float-label">
-                                        <input name="comment_id" value="{{comment_id}}" type="hidden"></input>
-                                        <input onfocus="return showInput(this);"
-                                        placeholder="Add a comment ..."
+                                        <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
+                                        <input onclick="return showInput(this);" placeholder="Add a comment ..."
                                             class="form-control custom-input customInput" name="text" required
                                             minlength="1">
 
@@ -62,7 +71,8 @@
                                         </svg>
                                     </label>
                                     <div id="buttonbox" class="buttonbox buttonbox--flex">
-                                        <button class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                                        <button type="button" onfocus="return resetInput(this);"
+                                            class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                         <button type="submit" class="ml-4 btn btn-primary default d-block ">
                                             POST</button>
                                     </div>
@@ -79,14 +89,13 @@
                         aria-expanded="false">
                         <i class="menu__icon fas fa-ellipsis-v"></i>
                         <div class="menu__dropdown dropdown-menu">
-                            <a class="dropdown-item" href="#">Report</a>
                             <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                            <a class="dropdown-item" href="#">Report</a>
                             <div class="dropdown-divider"></div>
                             <form method="POST" onclick="return destroyReply(this);"
                                 enctype="application/x-www-form-urlencoded">
-                                <input name="reply_id" value="{{reply._id}}" type="hidden"></input>
-                                {{log comment_id}}
-                                <input name="comment_id" value="{{comment_id}}" type="hidden"></input>
+                                <input name="reply_id" value="{{this._id}}" type="hidden"></input>
+                                <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
                                 <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
                             </form>
                         </div>
@@ -97,3 +106,5 @@
 
     </comment-renderer>
 </replies-renderer>
+{{/each}}
+{{/each}}

@@ -26,7 +26,7 @@
 
 @import "./mixins";
 @import "./themes/dark.red.scss";
-@import "./loader/loader.scss";
+// @import "./loader/loader.scss";
 
 
 body {
@@ -71,7 +71,7 @@ body {
 @import "./home.page/categories-nav.scss";
 @import "./home.page/bookmark-places.scss";
 @import "./home.page/categories-content.scss";
-@import "./home.page/newest-places.scss";
+@import "./home.page/lastest-update-places.scss";
 @import "./home.page/welcome-places.scss";
 @import "./home.page/comics-gridbox.scss";
 @import "./home.page/navbar.scss";

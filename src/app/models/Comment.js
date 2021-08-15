@@ -4,12 +4,12 @@ const Schema          = mongoose.Schema;
 const moment          = require('moment-timezone');
 const trimEng         = require('../../config/middleware/trimEng')
 
-const opts = { timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Bangkok") }};
+const opts = { timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") }};
 
 const Comment = new Schema({
-  comicSlug: { type: String },
+  comicSlug: { type: String, index: true },
   title: { type: String },
-  chapter: { type: String, default: null }, // chapter-1
+  chapter: { type: String, index: true, default: null }, // chapter-1
   commentArr: [{
     //1. user
     userId: {
@@ -40,7 +40,6 @@ const Comment = new Schema({
     
   }],
 }, opts);
-
 
 
 module.exports = mongoose.model('Comment', Comment);
