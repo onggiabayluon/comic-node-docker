@@ -24,7 +24,7 @@ const Comic = new Schema({
   titleForSearch: { type: String, trim: true },
   description: { type: String, trim: true },
   slug: { type: String, unique: true },
-  author: String,
+  author: { type: String, trim: true },
   user: {
     _id: String,
     name: String,
@@ -66,6 +66,11 @@ const Comic = new Schema({
   }
 }, opts);
 
+Comic.index(
+  { title: 'text', subtitle: 'text' }, 
+  {
+    name: 'My text index', weights: { title: 2, subtitle: 1 }
+});
 
 // Add plugin
 mongoose.plugin(slug);
@@ -74,11 +79,11 @@ Comic.plugin(mongooseDelete, {
   deletedAt: true
 });
 
-Comic.pre('findOne', function () {
+Comic.pre('find', function () {
   this._startTime = Date.now();
 });
 
-Comic.post('findOne', function () {
+Comic.post('find', function () {
   if (this._startTime != null) {
     console.log('Runtime in MS: ', Date.now() - this._startTime, 'ms');
   }

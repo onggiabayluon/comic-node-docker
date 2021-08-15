@@ -514,7 +514,9 @@ class ComicController {
   searchHandling(req, res, next) {
     let searchQ = req.body.data.toLowerCase()
     let limit = 20
-    let $find = { $or: [{ titleForSearch: { $regex: searchQ, $options: "i" } }, { title: { $regex: searchQ, $options: "i" } }] }
+    let $find = { $text : { $search : searchQ } }
+    console.log($find)
+    // let $find = { $or: [{ title: { $regex: searchQ, $options: "ix" } }, { subtitle: { $regex: searchQ, $options: "ix" } }] }
     if (searchQ.length > 0) {
       Promise.all([
         Comic
@@ -533,6 +535,7 @@ class ComicController {
         Comic.countDocuments($find)
       ])
       .then(([results, countedResults]) => {
+        console.log(results)
         var leftover = (countedResults > limit) ? countedResults - limit : 0
         var isEmpty = (results.length == 0) ? true : false
         res.render('template/search.template.hbs', {

@@ -28,34 +28,40 @@
 </categories-wrapper>
 
 
-<newest-places id="newest-places" style="padding: 3rem 0 0 0;"></newest-places>
+<section id="lastest-update-places" style="padding: 3rem 0 0 0;"></section>
 
 <script id="history-template" type="text/x-handlebars-template">
     <wrapper-big class="container">
 
         <heading class="container">
-            <title class="title">
-                Recently Viewed
-            </title>
+            <h2 class="title">
+                Lastest Update
+            </h2>
             <icon-right>
                 <i class="fas fa-chevron-right"></i>
             </icon-right>
         </heading>
-
+        
         <grid-container>
             \{{#each comics}}
             <item class="item item--border">
-                <img width="92" height="120" loading="lazy" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/\{{this.thumbnail}}-thumbnail.webp
-                    " alt="">
+                
+                <picture>
+                    <source srcset="\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
+                    <source srcset="\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
+            
+                    <img alt="\{{this.title}}" width="92" height="120" src="\{{this.thumbnail}}-thumbnail.jpeg"
+                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+                
                 <info>
-                    <a href="./comic/\{{this.comicSlug}}">
-                        <title class="title title--ellipsis">\{{this.title}}</title>
-                    </a>
-                    <chapter-box style="display: flex;flex-direction:column;">
-                        \{{#each (limitlast chapterNameList 2)}}
-                        <a href="/comic/\{{../this.comicSlug}}/\{{this.chapter}}">
-                            <chapter id="chapter-\{{this._id}}">\{{replaceHyphenIntoSpace this.chapter}}
-                                {{!-- <span class="left-auto">\{{CalcTimeEnglish this.updatedAt}}</span> --}}
+                    <a href="\{{this.comicUrl}}"><title class="title title--ellipsis">\{{this.title}}</title></a> 
+                    <chapter-box>
+                        
+                        \{{#each (limit chapterNameList 2)}}
+                        <a href="\{{../this.chapterUrl}}">
+                            <chapter class="chapter" id="chapter-\{{this._id}}">
+                                \{{this.chapter}}
                             </chapter>
                         </a>
                         \{{/each}}
@@ -64,6 +70,8 @@
             </item>
             \{{/each}}
         </grid-container>
+
+        
 
     </wrapper-big>
 </script>
@@ -90,11 +98,11 @@
             if (visited_chapters_list == null ) return
 
             var $glide2      = $('#glide_2')
-            var $newestplaces = $('#newest-places')
+            var $lastestupdateplaces = $('#lastest-update-places')
 
             for (let i = 0; i < visited_chapters_list.length; i++) {
                 $glide2.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
-                $newestplaces.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
+                $lastestupdateplaces.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
             }
             
         }
@@ -130,22 +138,21 @@
                         return options.inverse(this);
                 }
             })
-            Handlebars.registerHelper('limitlast', (arr, limit) => {
+            Handlebars.registerHelper('limit', (arr, limit) => {
                 if (!Array.isArray(arr)) { return []; }
-                return arr.slice(arr.length - limit, arr.length);
+                return arr.slice(0, limit);
             }) 
             Handlebars.registerHelper('replaceHyphenIntoSpace', (str) => {
                 str = str.toString().replace(/-/g, ' ').replace("apter", '.');
                 return str && str[0].toUpperCase() + str.slice(1);// replace '-' -> space 
             })
+            
             var content             = visited_comics_list
             var source              = $("#history-template").html()
+            console.log(source)
             var template            = Handlebars.compile(source)
             var html                = template({comics: content})
-            console.log(content)
-            //console.log(content)
-            //console.log(html)
-            $('#newest-places').append(html).slideDown('slow')
+            $('#lastest-update-places').append(html).slideDown('slow')
             addClassVisited()
         }
 

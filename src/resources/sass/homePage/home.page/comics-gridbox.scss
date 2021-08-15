@@ -39,6 +39,7 @@
 
     grid-container {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
         margin: 1rem auto;
         max-width: calc(160px * 5 + (1rem * (5 - 1)) );

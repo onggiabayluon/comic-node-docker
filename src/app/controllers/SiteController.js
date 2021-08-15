@@ -47,8 +47,7 @@ class SiteController {
         }]
         // TopView.insertMany([keys]).then(data => res.json(data))
         // Update && Upsert Data
-        let today = new Date();
-        let dd = today.getDate();
+        let dd = new Date().getDate();
         let bulkArr = []
         for (const i of keys) {
             bulkArr.push({
@@ -78,7 +77,6 @@ class SiteController {
                 }
             })
         }
-        console.log(bulkArr)
         var bulkwriteResult = await TopView.bulkWrite(bulkArr)
         res.json(bulkwriteResult)
 
@@ -101,6 +99,7 @@ class SiteController {
         let nextPage = +req.query.page + 1 || 2;
         let prevPage = +req.query.page - 1;
         let prevPage2 = +req.query.page - 2;
+        let limitTopView = 10;
 
         Promise.all([
             Comic.countDocuments({}),
@@ -110,41 +109,6 @@ class SiteController {
             .limit(PageSize)
             .lean(),
             Config.findOne({ category: "image" }).lean(),
-            // Comment.aggregate([
-            //     {
-            //         $match:  { }
-            //     },
-            //     {
-            //         $sort: {'updatedAt': -1}
-            //     },
-            //     {
-            //         //limit n document = n comments needed
-            //         $limit: 5
-            //     },
-            //     {
-            //         $unwind: "$commentArr"
-            //     },
-            //     {
-            //         $sort: {'commentArr.updatedAt': -1}
-            //     },
-            //     {
-            //         // comments needed
-            //         $limit: 5
-            //     },
-            //     {
-            //         $group: {
-            //         _id: '$_id', 
-            //         chapter:    { $first: '$chapter'    }, 
-            //         comicSlug:  { $first: '$comicSlug'  }, 
-            //         title:      { $first: '$title'      }, 
-            //         commentArr: { $push: '$commentArr'  }}
-            
-            //     },
-            //     {
-            //         $project: { commentArr: 1, chapter: 1, title: 1, comicSlug: 1,  _id: 0 }
-            
-            //     }
-            // ]), 
             User.findOne({ _id: id }).lean()
             .select('subscribed')
             .populate({
@@ -162,9 +126,14 @@ class SiteController {
                     limit: 5,
                     sort: { updatedAt: -1},
                 }
-            })
+            }),
+            Comic.find({})
+            .select('view rate title author slug thumbnail')
+            .sort({ "view.dayView.view": -1 })
+            .limit(limitTopView)
+            .lean(),
           ])
-          .then(([count, comicsDoc, config, subscribeList]) => {
+          .then(([count, comicsDoc, config, subscribeList, topComicsByView]) => {
             let meta = {
                 home_title: HOME_TITLE,
                 home_description: HOME_DESCRIPTION,
@@ -183,7 +152,7 @@ class SiteController {
                 user: singleMongooseToObject(req.user),
                 img_url: IMAGE_URL,
                 config: config,
-                // commentDoc: commentDoc,
+                topComicsByView: topComicsByView,
                 sublist: subscribeList,
                 meta
              });

@@ -435,12 +435,13 @@
 <section id="comics-gridbox" itemprop="articleSection" class="mb-4 border-top-bot-3">
     <intro-container class="intro">
         <h2>
-            WEBTOON <span>CANVAS</span> 
+            MOST POPULAR 
+            {{!-- <span>TODAY</span>  --}}
         </h2>
         <p>
-            Have a story to tell?
-            </br>Share it on WEBTOON CANVAS.
-            </br>Find everything you need to get it published.
+            Spend your free time 
+            </br>In Epic tales of grand journeys 
+            </br>All these Popular series on Dorecomic.
         </p>
         <btn-intro>
             Find out more
@@ -448,7 +449,7 @@
     </intro-container>
 
     <grid-container class="grid">
-        {{#each comics}}
+        {{#each topComicsByView}}
         <grid-comic-item class="grid__item">
             <a href="/comic/{{this.slug}}">
                 <background-overlay></background-overlay>
@@ -469,8 +470,8 @@
                     <title class="title title--ellipsis title--bot">
                         {{this.title}}
                     </title>
-                    <grade>
-                        amber
+                    <grade class="ellipsis">
+                        {{this.author}}
                     </grade>
                     <category class="d-none">
                         Action
@@ -500,7 +501,7 @@
         \{{#ifCond (compareListId this.comicId ../sublist.subscribed) '==' true}}
         \{{else}}
         <div id="comic-\{{this.comicId}}" class="glide__slide">
-                <picture >
+                <picture>
                     <source srcset="\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
                     <source srcset="\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
             
@@ -509,7 +510,7 @@
                 </picture>
             
             <bottom-info>
-                <a href="">
+                <a href="\{{this.comicUrl}}">
                     <info-title class="ellipsis">
                         \{{this.title}}
                     </info-title>

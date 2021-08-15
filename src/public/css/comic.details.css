@@ -460,6 +460,7 @@ heading icon-right {
 }
 
 .ellipsis {
+  line-height: 1;
   -webkit-line-clamp: 1;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -499,63 +500,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #8405f0;
+  background: #0bef8d;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #4f9475;
+  background: #a77d4d;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #115e3a;
+  background: #4fb2db;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #c2b597;
+  background: #908703;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #8f66f2;
+  background: #65321c;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #9e9076;
+  background: #8177d7;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #9de410;
+  background: #83e2a5;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #89ef64;
+  background: #ee62c3;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #6be539;
+  background: #57aeb9;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #967550;
+  background: #16d223;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #6cbd70;
+  background: #eff66d;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #ff5f3a;
+  background: #7d76f2;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #a0e0c8;
+  background: #11fa82;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #ae10e9;
+  background: #5325bd;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #523bb8;
+  background: #3f5614;
 }
 
 .num {

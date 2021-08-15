@@ -108,6 +108,7 @@ heading {
   }
 }
 .ellipsis {
+  line-height: 1;
   -webkit-line-clamp: 1;
   text-overflow: ellipsis;
   overflow: hidden;
