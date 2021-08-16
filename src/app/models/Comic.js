@@ -66,6 +66,7 @@ const Comic = new Schema({
   }
 }, opts);
 
+Comic.index({ title: 1 })
 Comic.index(
   { title: 'text', subtitle: 'text' }, 
   {

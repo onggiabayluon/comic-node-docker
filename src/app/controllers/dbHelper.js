@@ -390,10 +390,10 @@ const destroyComic_Helper = (exports.destroyComic_Helper
                 chapters.map(chapter => {
                   chapter.image.forEach(image => {
                     arrURL.push({
-                      url: image.url + '-large.jpeg'
+                      url: image.url + '-large.webp'
                     },
                     {
-                      url: image.url + '-medium.webp'
+                      url: image.url + '-medium.jpeg'
                     },
                     {
                       url: image.url + '-small.webp'
@@ -526,10 +526,10 @@ const handleFormActionForComics_Helper = (exports.handleFormActionForComics_Help
                       chapters.map(chapter => {
                         chapter.image.forEach(image => {
                           arrURL.push({
-                            url: image.url + '-large.jpeg'
+                            url: image.url + '-large.webp'
                           },
                           {
-                            url: image.url + '-medium.webp'
+                            url: image.url + '-medium.jpeg'
                           },
                           {
                             url: image.url + '-small.webp'
@@ -644,10 +644,10 @@ const destroyChapter_Helper = (exports.destroyChapter_Helper
         let arrURL = []
         currentChapter.image.forEach(image => {
           arrURL.push({
-            url: image.url + '-large.jpeg'
+            url: image.url + '-large.webp'
           },
           {
-            url: image.url + '-medium.webp'
+            url: image.url + '-medium.jpeg'
           },
           {
             url: image.url + '-small.webp'
@@ -717,10 +717,10 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
                   let arrURL = []
                   currentChapter.image.forEach(image => {
                     arrURL.push({
-                      url: image.url + '-large.jpeg'
+                      url: image.url + '-large.webp'
                     },
                     {
-                      url: image.url + '-medium.webp'
+                      url: image.url + '-medium.jpeg'
                     },
                     {
                       url: image.url + '-small.webp'

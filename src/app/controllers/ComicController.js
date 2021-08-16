@@ -116,7 +116,6 @@ class ComicController {
   };
 
   comicdetailsPage(req, res, next) {
-
     Promise.all([
       Comic.findOne({ slug: req.params.comicSlug }).lean()
       .select('title description thumbnail slug updatedAt category chapters view rate')
@@ -154,7 +153,6 @@ class ComicController {
   };
 
   chapterdetailsPage(req, res, next) {
-    
     var userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     Promise.all([
@@ -268,15 +266,9 @@ class ComicController {
 
 
     function sendStufftoClient(newComment) {
-      let commentArr = [{
-        _id: newComment._id,
-        text: newComment.text,
-        updatedAt: new Date(newComment.updatedAt),
-        reply: newComment.reply,
-      }]
       res.status(200).render('template/comment.template.hbs', {
         layout: 'fetch_layout',
-        commentArr: commentArr
+        comments: newComment
       })
     };
   };
@@ -311,7 +303,7 @@ class ComicController {
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
     Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
       .then(commentDoc => {
-        console.log(commentDoc)
+
         return pushNewReply(commentDoc)
         
       })
@@ -335,23 +327,13 @@ class ComicController {
 
         sendStufftoClient(newReply, req.body.comment_id);
       };
-
       function sendStufftoClient(newReply, comment_id) {
-        let commentArr = [{
-          _id: comment_id,
-          reply: [{
-            _id: newReply._id,
-            text: newReply.text,
-            updatedAt: new Date(newReply.updatedAt),
-            reply: newReply.reply,
-          }]
-        }]
         res.status(200).render('template/reply.template.hbs', {
           layout: 'fetch_layout',
-          commentArr: commentArr
+          reply: newReply,
+          comment_id: comment_id
         })
       };
-
   };
 
   destroyReply(req, res, next) {
@@ -514,13 +496,16 @@ class ComicController {
   searchHandling(req, res, next) {
     let searchQ = req.body.data.toLowerCase()
     let limit = 20
-    let $find = { $text : { $search : searchQ } }
-    console.log($find)
-    // let $find = { $or: [{ title: { $regex: searchQ, $options: "ix" } }, { subtitle: { $regex: searchQ, $options: "ix" } }] }
+    let $find = {$or: [ {$text: {$search: searchQ}}, {title: {$regex: searchQ}}] }
+    let $meta = { score : { $meta: "textScore" } }
     if (searchQ.length > 0) {
       Promise.all([
         Comic
-        .find($find)
+        .find(
+          $find,
+          $meta
+        )
+        .sort($meta)
         .lean()
         .select('title author slug thumbnail chapters -_id')
         .limit(limit)
@@ -535,7 +520,6 @@ class ComicController {
         Comic.countDocuments($find)
       ])
       .then(([results, countedResults]) => {
-        console.log(results)
         var leftover = (countedResults > limit) ? countedResults - limit : 0
         var isEmpty = (results.length == 0) ? true : false
         res.render('template/search.template.hbs', {
