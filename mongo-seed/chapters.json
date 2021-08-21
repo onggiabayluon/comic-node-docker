@@ -143,94 +143,6 @@
   "__v": 0
 },{
   "_id": {
-    "$oid": "60b45775ea600f0f6ca7c4b4"
-  },
-  "title": "chapter of reserved-villian",
-  "chapter": "chapter-1",
-  "chapterSlug": "reserved-villian-CBOp0w8m3",
-  "comicSlug": "kill-the-hero",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b45775ea600f0f6ca7c4b6"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431605357-0"
-    },
-    {
-      "_id": {
-        "$oid": "60b45775ea600f0f6ca7c4b7"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431605359-0_1"
-    },
-    {
-      "_id": {
-        "$oid": "60b45775ea600f0f6ca7c4b8"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431605361-0_2"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-05-31T03:26:45.416Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:11:58.880Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b4577cea600f0f6ca7c4b9"
-  },
-  "title": "chapter of reserved-villian",
-  "chapter": "chapter-2",
-  "chapterSlug": "reserved-villian-ABn7SLOb2",
-  "comicSlug": "kill-the-hero",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b4577cea600f0f6ca7c4bb"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431612842-0_3"
-    },
-    {
-      "_id": {
-        "$oid": "60b4577cea600f0f6ca7c4bc"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431612844-0_4"
-    },
-    {
-      "_id": {
-        "$oid": "60b4577cea600f0f6ca7c4bd"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431612845-0_5"
-    },
-    {
-      "_id": {
-        "$oid": "60b4577cea600f0f6ca7c4be"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431612846-1_02"
-    },
-    {
-      "_id": {
-        "$oid": "60b4577cea600f0f6ca7c4bf"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431612848-1_04"
-    },
-    {
-      "_id": {
-        "$oid": "60b4577cea600f0f6ca7c4c0"
-      },
-      "url": "reserved-villian/chapter-undefined/1622431612849-1_06"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-05-31T03:26:52.862Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:11:58.880Z"
-  },
-  "__v": 0
-},{
-  "_id": {
     "$oid": "60b4de4fa345290b7004c86c"
   },
   "title": "chapter of toi-la-nguoi-choi-duy-nhat-dang-nhap",
@@ -498,263 +410,6 @@
   "__v": 0
 },{
   "_id": {
-    "$oid": "60b6f23ef356f92b540632e8"
-  },
-  "title": "chapter of user-comic-2",
-  "chapter": "chapter-1",
-  "chapterSlug": "user-comic-2-3Y-MoziSe",
-  "comicSlug": "magic-emperor",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f23ef356f92b540632ea"
-      },
-      "url": "user-comic-2/chapter-undefined/1622602302028-9"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:51:42.064Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:12:33.585Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b6f26ff356f92b540632f5"
-  },
-  "title": "Survival Story of a Sword King in a Fantasy World",
-  "chapter": "chapter-1",
-  "chapterSlug": "test-publish-false-UOwlNWQ3k",
-  "comicSlug": "survival-story-of-a-sword-king-in-a-fantasy-world",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f26ff356f92b540632f7"
-      },
-      "url": "test-publish-false/chapter-undefined/1622602351665-1"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:52:31.675Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-24T03:19:11.685Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b6f274f356f92b540632f8"
-  },
-  "title": "Survival Story of a Sword King in a Fantasy World",
-  "chapter": "chapter-3",
-  "chapterSlug": "test-publish-false-FM_u-7A_q",
-  "comicSlug": "survival-story-of-a-sword-king-in-a-fantasy-world",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f274f356f92b540632fa"
-      },
-      "url": "test-publish-false/chapter-undefined/1622602356874-3"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:52:36.880Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-24T03:19:11.685Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b6f27ff356f92b540632fb"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-1",
-  "chapterSlug": "test-8HnOcDIfp",
-  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f27ff356f92b540632fd"
-      },
-      "url": "test/chapter-undefined/1622602367010-6"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:52:47.018Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:15:44.034Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b6f286f356f92b540632fe"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-100",
-  "chapterSlug": "test-E8b_RI7rB",
-  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f286f356f92b54063300"
-      },
-      "url": "test/chapter-undefined/1622602374081-4"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:52:54.092Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:15:44.034Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b6f28bf356f92b54063301"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-1000",
-  "chapterSlug": "test-CXHrGf2Bz",
-  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f28bf356f92b54063303"
-      },
-      "url": "test/chapter-undefined/1622602379232-5"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:52:59.239Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:15:44.034Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60bb4b67ce7f1e1178551212"
-  },
-  "title": "chapter of overgeared",
-  "chapter": "chapter-82",
-  "chapterSlug": "overgeared-88Sb4Xo9N",
-  "comicSlug": "overgeared",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551214"
-      },
-      "url": "overgeared/chapter-undefined/1622887271156-OG-82__0007_compress86"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551215"
-      },
-      "url": "overgeared/chapter-undefined/1622887271157-OG-82__0012_compress80"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551216"
-      },
-      "url": "overgeared/chapter-undefined/1622887271158-OG-82__0022_compress69"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551217"
-      },
-      "url": "overgeared/chapter-undefined/1622887271158-OG-82__0032_compress37"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551218"
-      },
-      "url": "overgeared/chapter-undefined/1622887271159-OG-82__0042_compress81"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551219"
-      },
-      "url": "overgeared/chapter-undefined/1622887271159-OG-82__0052_compress26"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e117855121a"
-      },
-      "url": "overgeared/chapter-undefined/1622887271160-OG-82__0062_compress87"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e117855121b"
-      },
-      "url": "overgeared/chapter-undefined/1622887271160-OG-82__0072_compress89"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e117855121c"
-      },
-      "url": "overgeared/chapter-undefined/1622887271161-OG-82__0082_compress7"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e117855121d"
-      },
-      "url": "overgeared/chapter-undefined/1622887271161-OG-82__0092_compress26"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e117855121e"
-      },
-      "url": "overgeared/chapter-undefined/1622887271162-OG-82__0181_compress5"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e117855121f"
-      },
-      "url": "overgeared/chapter-undefined/1622887271162-OG-82__0191_compress25"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551220"
-      },
-      "url": "overgeared/chapter-undefined/1622887271163-OG-82__0201_compress10"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551221"
-      },
-      "url": "overgeared/chapter-undefined/1622887271175-OG-82__0211_compress6"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551222"
-      },
-      "url": "overgeared/chapter-undefined/1622887271177-OG-82__0221_compress31"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551223"
-      },
-      "url": "overgeared/chapter-undefined/1622887271179-OG-82__0231_compress48"
-    },
-    {
-      "_id": {
-        "$oid": "60bb4b67ce7f1e1178551224"
-      },
-      "url": "overgeared/chapter-undefined/1622887271179-OG-82__999f3_compress28"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-05T10:01:11.206Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:01:11.206Z"
-  },
-  "__v": 0
-},{
-  "_id": {
     "$oid": "60bb797af8b6d00d14efc5b3"
   },
   "title": "chapter of the-strongest-dull-princes-secret-battle-for-the-throne",
@@ -797,29 +452,6 @@
   },
   "updatedAt": {
     "$date": "2021-07-14T08:25:32.963Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60eea00abe2b941a3cda891f"
-  },
-  "title": "chapter of kill-the-hero",
-  "chapter": "chapter-3",
-  "chapterSlug": "kill-the-hero-iVd7yZNea",
-  "comicSlug": "kill-the-hero",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60eea00abe2b941a3cda8921"
-      },
-      "url": "kill-the-hero/chapter-undefined/1626251274916-1c2cd52f-6d15-4fca-90c6-59649050fa2e"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-14T08:27:54.974Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-14T08:27:54.974Z"
   },
   "__v": 0
 },{
@@ -1017,6 +649,385 @@
   },
   "updatedAt": {
     "$date": "2021-07-18T03:08:31.242Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "610deb4df477db04c844a1b3"
+  },
+  "title": "chapter of an-a-ranked-adventurers-slow-living-5oVZ93zLH",
+  "chapter": "chapter-6.1",
+  "chapterSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH-fdfjn2B9P",
+  "comicSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
+  "image": [
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1b5"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157750-1"
+    },
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1b6"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157751-1"
+    },
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1b7"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157752-2"
+    },
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1b8"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157753-3"
+    },
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1b9"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157754-4"
+    },
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1ba"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157758-5"
+    },
+    {
+      "_id": {
+        "$oid": "610deb4df477db04c844a1bb"
+      },
+      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157758-6"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-07T02:09:17.770Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-07T02:09:17.770Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6118845aee95502e5032eed8"
+  },
+  "title": "chapter of kill-the-hero",
+  "chapter": "chapter-1",
+  "chapterSlug": "kill-the-hero-iFX_zS7aV",
+  "comicSlug": "kill-the-hero",
+  "image": [
+    {
+      "_id": {
+        "$oid": "6118845aee95502e5032eeda"
+      },
+      "url": "kill-the-hero/chapter-1/1628996698616-images-11-223x300"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:04:58.640Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:04:58.640Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61188460ee95502e5032ef21"
+  },
+  "title": "chapter of kill-the-hero",
+  "chapter": "chapter-2",
+  "chapterSlug": "kill-the-hero-mZfZkdeNq",
+  "comicSlug": "kill-the-hero",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61188460ee95502e5032ef23"
+      },
+      "url": "kill-the-hero/chapter-2/1628996704016-images-11-223x300"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:05:04.025Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:05:04.025Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61188944cbc64e07fc7a4c45"
+  },
+  "title": "chapter of survival-story-of-a-sword-king-in-a-fantasy-world",
+  "chapter": "chapter-1",
+  "chapterSlug": "survival-story-of-a-sword-king-in-a-fantasy-world-gPWOHAq2g",
+  "comicSlug": "survival-story-of-a-sword-king-in-a-fantasy-world",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61188944cbc64e07fc7a4c47"
+      },
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1628997956632-Survival-Story-of-a-Sword-King-333x500"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:25:56.649Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:25:56.649Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61188b26c753d11db42712aa"
+  },
+  "title": "chapter of magic-emperor",
+  "chapter": "chapter-1",
+  "chapterSlug": "magic-emperor-7ew1OzWQj",
+  "comicSlug": "magic-emperor",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61188b26c753d11db42712ac"
+      },
+      "url": "magic-emperor/chapter-1/1628998438736-43692"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:33:58.750Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:33:58.750Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61188bf60526910e7c9b9146"
+  },
+  "title": "chapter of overgeared",
+  "chapter": "chapter-82",
+  "chapterSlug": "overgeared-LPRyzVa-E",
+  "comicSlug": "overgeared",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9148"
+      },
+      "url": "overgeared/chapter-82/1628998646589-OG-82__0007_compress86"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9149"
+      },
+      "url": "overgeared/chapter-82/1628998646591-OG-82__0012_compress80"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b914a"
+      },
+      "url": "overgeared/chapter-82/1628998646592-OG-82__0022_compress69"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b914b"
+      },
+      "url": "overgeared/chapter-82/1628998646593-OG-82__0032_compress37"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b914c"
+      },
+      "url": "overgeared/chapter-82/1628998646594-OG-82__0042_compress81"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b914d"
+      },
+      "url": "overgeared/chapter-82/1628998646594-OG-82__0052_compress26"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b914e"
+      },
+      "url": "overgeared/chapter-82/1628998646595-OG-82__0062_compress87"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b914f"
+      },
+      "url": "overgeared/chapter-82/1628998646595-OG-82__0072_compress89"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9150"
+      },
+      "url": "overgeared/chapter-82/1628998646596-OG-82__0082_compress7"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9151"
+      },
+      "url": "overgeared/chapter-82/1628998646596-OG-82__0092_compress26"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9152"
+      },
+      "url": "overgeared/chapter-82/1628998646597-OG-82__0181_compress5"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9153"
+      },
+      "url": "overgeared/chapter-82/1628998646597-OG-82__0191_compress25"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9154"
+      },
+      "url": "overgeared/chapter-82/1628998646598-OG-82__0201_compress10"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9155"
+      },
+      "url": "overgeared/chapter-82/1628998646598-OG-82__0211_compress6"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9156"
+      },
+      "url": "overgeared/chapter-82/1628998646598-OG-82__0221_compress31"
+    },
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9157"
+      },
+      "url": "overgeared/chapter-82/1628998646599-OG-82__0231_compress48"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:37:26.613Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:37:26.613Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61188d300526910e7c9b92f6"
+  },
+  "title": "chapter of tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "chapter": "chapter-1",
+  "chapterSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai-TLjV-Oqin",
+  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61188d300526910e7c9b92f8"
+      },
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-1/1628998960053-34352-350x500"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:42:40.065Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:42:40.065Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61188d340526910e7c9b933d"
+  },
+  "title": "chapter of tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "chapter": "chapter-2",
+  "chapterSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai-54qjwDgxU",
+  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61188d340526910e7c9b933f"
+      },
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-2/1628998964915-34352-350x500"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T03:42:44.925Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:42:44.925Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6118942de430531d94bd47c3"
+  },
+  "title": "chapter of yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
+  "chapter": "chapter-1",
+  "chapterSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau-Z0CmEIPLi",
+  "comicSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
+  "image": [
+    {
+      "_id": {
+        "$oid": "6118942de430531d94bd47c5"
+      },
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1629000749236-35299-351x500"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T04:12:29.251Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T04:12:29.251Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61189433e430531d94bd480e"
+  },
+  "title": "chapter of yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
+  "chapter": "chapter-2",
+  "chapterSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau-tusQPgghW",
+  "comicSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
+  "image": [
+    {
+      "_id": {
+        "$oid": "61189433e430531d94bd4810"
+      },
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-2/1629000755336-35299-351x500"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T04:12:35.346Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T04:12:35.346Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "611894e0e430531d94bd495b"
+  },
+  "title": "chapter of the-begining-after-the-end",
+  "chapter": "chapter-1",
+  "chapterSlug": "the-begining-after-the-end-5C7dFKVv0",
+  "comicSlug": "the-begining-after-the-end",
+  "image": [
+    {
+      "_id": {
+        "$oid": "611894e0e430531d94bd495d"
+      },
+      "url": "the-begining-after-the-end/chapter-1/1629000928869-BAE-333x500"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-15T04:15:28.881Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T04:15:28.881Z"
   },
   "__v": 0
 }]

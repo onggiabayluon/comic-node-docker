@@ -16,6 +16,9 @@ const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 
 class SiteController {
 
+    test2(req, res, next) {
+        res.json(req.user)
+    }
     async test(req, res, next) {
         // const mongoose = require('mongoose')
         // mongoose.set('debug', true);

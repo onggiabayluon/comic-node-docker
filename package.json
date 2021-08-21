@@ -36,6 +36,7 @@
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "cron": "^1.8.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -48,6 +49,7 @@
     "mongoose": "^5.11.15",
     "mongoose-delete": "^0.5.3",
     "mongoose-slug-generator": "^1.0.4",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
@@ -56,8 +58,7 @@
     "sharp": "^0.28.2",
     "shortid": "^2.2.16",
     "socket.io": "^4.1.2",
-    "cors": "^2.8.5",
-    "morgan": "^1.10.0"
+    "workerpool": "^6.1.5"
   },
   "devDependencies": {
     "husky": "^4.3.8",

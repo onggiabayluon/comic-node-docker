@@ -10,4 +10,5 @@ const Sitecontroller = require('../app/controllers/SiteController');
 //HOME
 router.get('/', Sitecontroller.index);
 router.get('/test', Sitecontroller.test);
+router.get('/test2', Sitecontroller.test2);
 module.exports = router;

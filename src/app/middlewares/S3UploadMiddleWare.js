@@ -24,7 +24,6 @@ var self = module.exports = {
 
         const resizePromises = files.map(async (file) => {
             const filename = `${params.slug}/${params.chapter}/${Date.now()}-${file.originalname.replace(/\..+$/, "")}`;
-            // console.log(filename)
              sharp(file.buffer)
                 .resize({ width: 1000 , fit: 'contain'})
                 .webp({ quality: 80 })

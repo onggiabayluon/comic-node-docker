@@ -120,12 +120,12 @@ class ComicController {
       Comic.findOne({ slug: req.params.comicSlug }).lean()
       .select('title description thumbnail slug updatedAt category chapters view rate')
       .populate('category', 'name')
-      .populate({ path: 'chapters', select: '-_id chapter updatedAt', options: { sort: { 'chapter': 1 } }}),
     ])
       .then(([comicdoc]) => {
         if (!comicdoc) {
           return next(new customError('Not found', 404));
         }
+
         let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount) * 2).toFixed(2);
         let rateCount = comicdoc.rate.rateCount
         let subscribe = false

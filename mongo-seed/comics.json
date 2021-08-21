@@ -1,341 +1,230 @@
 [{
   "_id": {
-    "$oid": "603a068034d84d21247cdb22"
+    "$oid": "611520f494c435226ca2f333"
   },
-  "deleted": false,
-  "title": "An A-Ranked Adventurer’s “Slow-living",
-  "description": "",
-  "thumbnail": {
-    "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/thumbnail/1622887888331-A-rank-boukensha-351x500"
-  },
-  "slug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "createdAt": {
-    "$date": "2021-02-27T08:44:48.523Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-27T03:33:03.554Z"
-  },
-  "__v": 141,
-  "titleForSearch": "Toi la nguoi choi duy nhat dang nhap ",
-  "userId": "6084e73384620a19a88780da",
-  "userName": "user",
-  "isPublish": true,
-  "category": [
-    {
-      "$oid": "609f250ace319201845e45ce"
-    },
-    {
-      "$oid": "609f8d6ea1ea9f1eac820a2c"
-    }
-  ],
-  "chapters": [
-    {
-      "$oid": "60b4de4fa345290b7004c86c"
-    },
-    {
-      "$oid": "60b4de5ba345290b7004c87a"
-    },
-    {
-      "$oid": "60b6f1e36ce2a71ac0a4c413"
-    },
-    {
-      "$oid": "60f39b2f59d748350c1a9899"
-    }
-  ],
   "view": {
-    "totalView": 11,
+    "totalView": 6,
     "dayView": {
-      "thisDay": "21",
-      "view": 1
-    },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 9
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 9
+      "thisDay": 15,
+      "view": 6
     }
   },
   "rate": {
-    "rateCount": 1,
-    "rateValue": 4
-  }
-},{
-  "_id": {
-    "$oid": "603d8bebf7692e17d03cdb75"
+    "rateCount": 0,
+    "rateValue": 0
   },
+  "isPublish": true,
+  "isFinish": true,
+  "category": [
+    {
+      "$oid": "609f98005e7eec3690b7edfe"
+    },
+    {
+      "$oid": "60f38ed267cdcb11cc58649e"
+    }
+  ],
   "deleted": false,
-  "title": "Wizard of Anesia ",
-  "description": " Nope  ",
-  "thumbnail": {
-    "url": "wizard-of-anesia/thumbnail/1622345753265-0"
-  },
-  "slug": "wizard-of-anesia",
+  "title": "Kill The Hero",
+  "subtitle": "",
+  "description": "One day, the world transformed into a game. ‘Dungeons’ and ‘monsters’ emerged in the middle of cities, and ‘players’ who had received the gods’ authority appeared. Se-jun Lee, the guildmaster of the Messiah Guild that would bring salvation to the world. “Let us save the world together. Let’s put an end to this nightmare.” The whole world celebrated the hero’s appearance, And I became his comrade. But… He wasn’t a hero nor a messiah like the world was hailing him. He was a deceitful hero with the secret ambition to rule the world. “You did well. If it weren’t for you, I couldn’t have come up till here.” I lost my life at his blade in the last dungeon. …or so i thought. The announcement I heard next to my ear the moment I died. [Starting the game.]",
+  "author": "D-Dart",
+  "slug": "kill-the-hero",
+  "titleForSearch": "Kill The Hero",
   "createdAt": {
-    "$date": "2021-03-02T00:50:51.738Z"
+    "$date": "2021-08-12T13:24:04.084Z"
   },
   "updatedAt": {
-    "$date": "2021-07-27T03:25:19.825Z"
+    "$date": "2021-08-15T03:05:04.020Z"
   },
   "__v": 0,
-  "userId": "6084e73384620a19a88780da",
-  "userName": "user",
-  "titleForSearch": "Wizard of Anesia ",
+  "thumbnail": {
+    "url": "kill-the-hero/thumbnail/1628993728033-images-11-223x300"
+  },
+  "chapters": [
+    {
+      "_id": {
+        "$oid": "6118845aee95502e5032eedb"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:04:58.628Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "61188460ee95502e5032ef24"
+      },
+      "chapter": "chapter-2",
+      "updatedAt": {
+        "$date": "2021-08-15T03:05:04.019Z"
+      }
+    }
+  ],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "61188460ee95502e5032ef25"
+      },
+      "chapter": "chapter-2",
+      "updatedAt": {
+        "$date": "2021-08-15T03:05:04.019Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6118845aee95502e5032eedc"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:04:58.628Z"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "611884e5cbc64e07fc7a4b4a"
+  },
+  "view": {
+    "dayView": {
+      "view": 1,
+      "thisDay": 15
+    },
+    "totalView": 1
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  },
   "isPublish": true,
+  "isFinish": true,
   "category": [
     {
-      "$oid": "609f250ace319201845e45ce"
+      "$oid": "609f98005e7eec3690b7edfe"
     },
     {
-      "$oid": "609f8d6ea1ea9f1eac820a2c"
+      "$oid": "60f38ed267cdcb11cc58649e"
+    },
+    {
+      "$oid": "60f38ed867cdcb11cc58649f"
     }
   ],
+  "deleted": false,
+  "title": "Survival Story Of A Sword King In A Fantasy World",
+  "subtitle": "The Survival Record of the Sword King in Another World,Otherworldly Sword King's Survival Records,이계 검왕 생존기",
+  "description": "Ryu Han-Bin was a normal person who just had been discharged from his mandatory military service, when he was transported to another world. Left to fend for himself, he was given the goal of surviving and growing stronger in a desolate world riddled with monsters. The problem is the 'Guideline' that was supposed to be his guiding system to survive is filled with errors.",
+  "author": "Kwon Sun Kyu - Studio Chun - Lim Kyung-Bae",
   "chapters": [
     {
-      "$oid": "60b4575fea600f0f6ca7c49d"
-    },
-    {
-      "$oid": "60ee9f7c203fe42a60ac116c"
+      "_id": {
+        "$oid": "61188944cbc64e07fc7a4c48"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:25:56.639Z"
+      }
     }
   ],
-  "view": {
-    "totalView": 13,
-    "dayView": {
-      "thisDay": "21",
-      "view": 4
-    },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 4
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 4
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "61188944cbc64e07fc7a4c49"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:25:56.639Z"
+      }
     }
-  },
-  "rate": {
-    "rateCount": 1,
-    "rateValue": 5
-  }
-},{
-  "_id": {
-    "$oid": "608543c64441623214fdbf79"
-  },
-  "deleted": false,
-  "title": "Kill the hero",
-  "description": "",
-  "thumbnail": {
-    "url": "kill-the-hero/thumbnail/1622887926952-images-11-223x300"
-  },
-  "userId": "608542b81ff2a228dcb63d95",
-  "userName": "usermapdit",
-  "slug": "kill-the-hero",
-  "titleForSearch": "Reserved Villian",
+  ],
+  "slug": "survival-story-of-a-sword-king-in-a-fantasy-world",
+  "titleForSearch": "Survival Story Of A Sword King In A Fantasy World",
   "createdAt": {
-    "$date": "2021-04-25T10:26:14.461Z"
+    "$date": "2021-08-15T03:07:17.262Z"
   },
   "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
+    "$date": "2021-08-15T03:25:56.641Z"
   },
-  "__v": 3,
-  "isPublish": true,
-  "category": [],
-  "chapters": [
-    {
-      "$oid": "60b45775ea600f0f6ca7c4b4"
-    },
-    {
-      "$oid": "60b4577cea600f0f6ca7c4b9"
-    },
-    {
-      "$oid": "60eea00abe2b941a3cda891f"
-    }
-  ],
-  "view": {
-    "totalView": 123,
-    "dayView": {
-      "thisDay": "21",
-      "view": 23
-    },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 35
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 35
-    }
-  },
-  "rate": {
-    "rateCount": 1,
-    "rateValue": 5
+  "__v": 0,
+  "thumbnail": {
+    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1628996845842-Survival-Story-of-a-Sword-King-333x500"
   }
 },{
   "_id": {
-    "$oid": "60856bd53bb19903a44e0b7b"
+    "$oid": "61188b1ac753d11db4271220"
   },
+  "view": {
+    "dayView": {
+      "view": 0,
+      "thisDay": 0
+    },
+    "totalView": 0
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  },
+  "isPublish": true,
+  "isFinish": true,
+  "category": [
+    {
+      "$oid": "60a11c54080aea2b803cd9b6"
+    }
+  ],
   "deleted": false,
   "title": "Magic Emperor",
-  "description": "",
-  "userId": "6084e73384620a19a88780da",
-  "userName": "user",
+  "subtitle": "魔皇大管家, Devil Housekeeper",
+  "description": "Magic Emperor summary is updating. Come visit MangaNato.com sometime to read the latest chapter of Magic Emperor. If you have any question about this manga, Please don't hesitate to contact us or translate team. Hope you enjoy it.",
+  "author": "Nightingale (Original) + No Two Comics",
+  "chapters": [
+    {
+      "_id": {
+        "$oid": "61188b26c753d11db42712ad"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:33:58.741Z"
+      }
+    }
+  ],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "61188b26c753d11db42712ae"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:33:58.741Z"
+      }
+    }
+  ],
   "slug": "magic-emperor",
-  "titleForSearch": "user comic 2",
+  "titleForSearch": "Magic Emperor",
   "createdAt": {
-    "$date": "2021-04-25T13:17:09.969Z"
+    "$date": "2021-08-15T03:33:46.103Z"
   },
   "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
-  },
-  "__v": 2,
-  "isPublish": false,
-  "category": [
-    {
-      "$oid": "609f250ace319201845e45ce"
-    },
-    {
-      "$oid": "609f8d6ea1ea9f1eac820a2c"
-    }
-  ],
-  "thumbnail": {
-    "url": "magic-emperor/thumbnail/1622887960726-43692"
-  },
-  "chapters": [
-    {
-      "$oid": "60b6f23ef356f92b540632e8"
-    }
-  ],
-  "view": {
-    "totalView": 0,
-    "dayView": {
-      "thisDay": "20",
-      "view": 0
-    },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 0
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 0
-    }
-  },
-  "rate": {
-    "rateCount": 0,
-    "rateValue": 0
-  }
-},{
-  "_id": {
-    "$oid": "608a16fc2c381630b89c0f3d"
-  },
-  "deleted": false,
-  "title": "Survival Story of a Sword King in a Fantasy World",
-  "description": "1",
-  "isPublish": false,
-  "thumbnail": {
-    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1622887993393-Survival-Story-of-a-Sword-King-333x500"
-  },
-  "userId": "6084dd9dec23a633c03f96e7",
-  "userName": "adminlivip",
-  "slug": "survival-story-of-a-sword-king-in-a-fantasy-world",
-  "titleForSearch": "test publish false",
-  "createdAt": {
-    "$date": "2021-04-29T02:16:28.443Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
-  },
-  "__v": 1,
-  "chapters": [
-    {
-      "$oid": "60b6f26ff356f92b540632f5"
-    },
-    {
-      "$oid": "60b6f274f356f92b540632f8"
-    }
-  ],
-  "view": {
-    "totalView": 5,
-    "dayView": {
-      "thisDay": "21",
-      "view": 1
-    },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 1
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 1
-    }
-  },
-  "rate": {
-    "rateCount": 0,
-    "rateValue": 0
-  }
-},{
-  "_id": {
-    "$oid": "60b60a2f0a36ca09a46e773d"
-  },
-  "isPublish": true,
-  "chapters": [
-    {
-      "$oid": "60b6f27ff356f92b540632fb"
-    },
-    {
-      "$oid": "60b6f286f356f92b540632fe"
-    },
-    {
-      "$oid": "60b6f28bf356f92b54063301"
-    }
-  ],
-  "deleted": false,
-  "title": "Tensei Shite Inaka de Slowlife wo Okuritai",
-  "description": "1",
-  "userId": "6084dd9dec23a633c03f96e7",
-  "userName": "adminlivip",
-  "slug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
-  "titleForSearch": "test",
-  "createdAt": {
-    "$date": "2021-06-01T10:21:35.614Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
+    "$date": "2021-08-15T03:34:08.825Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1622888365802-34352-350x500"
+    "url": "magic-emperor/thumbnail/1628998448821-43692"
+  }
+},{
+  "_id": {
+    "$oid": "61188bcc0526910e7c9b902e"
   },
   "view": {
-    "totalView": 2,
     "dayView": {
-      "thisDay": "21",
-      "view": 0
+      "view": 0,
+      "thisDay": 15
     },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 2
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 2
-    }
+    "totalView": 1
   },
   "rate": {
     "rateCount": 0,
     "rateValue": 0
-  }
-},{
-  "_id": {
-    "$oid": "60bb4a5cce7f1e1178551211"
   },
   "isPublish": true,
-  "chapters": [
-    {
-      "$oid": "60bb4b67ce7f1e1178551212"
-    }
-  ],
+  "isFinish": true,
   "category": [
     {
       "$oid": "609f250ace319201845e45ce"
@@ -343,155 +232,278 @@
   ],
   "deleted": false,
   "title": "Overgeared",
-  "description": "1",
-  "userId": "6084dd9dec23a633c03f96e7",
-  "userName": "adminlivip",
+  "subtitle": "템빨",
+  "description": "Young Woo Shin, Username: Grid. In the words best virtual reality game , bad luck always revolves around him. But he stumbled across a job during a quest, the strongest legendary job out of over 2 billion players!",
+  "author": "Dong Wook Lee",
+  "chapters": [
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9158"
+      },
+      "chapter": "chapter-82",
+      "updatedAt": {
+        "$date": "2021-08-15T03:37:26.603Z"
+      }
+    }
+  ],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "61188bf60526910e7c9b9159"
+      },
+      "chapter": "chapter-82",
+      "updatedAt": {
+        "$date": "2021-08-15T03:37:26.603Z"
+      }
+    }
+  ],
   "slug": "overgeared",
   "titleForSearch": "Overgeared",
   "createdAt": {
-    "$date": "2021-06-05T09:56:44.629Z"
+    "$date": "2021-08-15T03:36:44.382Z"
   },
   "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
+    "$date": "2021-08-15T03:37:26.604Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "overgeared/thumbnail/1622887019250-mangatx"
-  },
-  "view": {
-    "totalView": 5,
-    "dayView": {
-      "thisDay": "21",
-      "view": 1
-    },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 1
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 1
-    }
-  },
-  "rate": {
-    "rateCount": 0,
-    "rateValue": 0
+    "url": "overgeared/thumbnail/1628998612827-mangatx"
   }
 },{
   "_id": {
-    "$oid": "60bb7904f8b6d00d14efc5b2"
-  },
-  "isPublish": true,
-  "chapters": [
-    {
-      "$oid": "60bb797af8b6d00d14efc5b3"
-    }
-  ],
-  "category": [
-    {
-      "$oid": "609f250ace319201845e45ce"
-    }
-  ],
-  "deleted": false,
-  "title": "The Strongest Dull Prince’s Secret Battle for the Throne",
-  "description": "1",
-  "userId": "6084dd9dec23a633c03f96e7",
-  "userName": "adminlivip",
-  "slug": "the-strongest-dull-princes-secret-battle-for-the-throne",
-  "titleForSearch": "The Strongest Dull Prince’s Secret Battle for the Throne",
-  "createdAt": {
-    "$date": "2021-06-05T13:15:48.421Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
-  },
-  "__v": 0,
-  "thumbnail": {
-    "url": "the-strongest-dull-princes-secret-battle-for-the-throne/thumbnail/1622898960004-44412-352x500"
+    "$oid": "61188ca20526910e7c9b91f1"
   },
   "view": {
-    "totalView": 1,
     "dayView": {
-      "thisDay": "21",
-      "view": 1
+      "view": 0,
+      "thisDay": 15
     },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 1
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 1
-    }
+    "totalView": 7
   },
   "rate": {
     "rateCount": 0,
     "rateValue": 0
+  },
+  "isPublish": true,
+  "isFinish": true,
+  "category": [
+    {
+      "$oid": "609f8d6ea1ea9f1eac820a2c"
+    },
+    {
+      "$oid": "60f38ed867cdcb11cc58649f"
+    },
+    {
+      "$oid": "60f38edd67cdcb11cc5864a0"
+    }
+  ],
+  "deleted": false,
+  "title": "Tensei Shite Inaka De Slowlife Wo Okuritai",
+  "subtitle": "I want a slow life in the countryside after reincarnation",
+  "description": "The protagonist, Inaka Yuuji, was ran over by a truck because his awareness was dulled from overworking.\r\n\r\n“Ahー, with this I don’t have to work so much anymore. I want to spend my next life leisurely……” was the wish Yuuji blurted out, He met God and it was decided he will be reincarnated in the countryside of the other world. He became Alfred Slowlet, 2nd son of a countryside noble, will he be able to enjoy and leisurely spend his slow life in the countryside?",
+  "author": "Renkinou",
+  "chapters": [
+    {
+      "_id": {
+        "$oid": "61188d300526910e7c9b92f9"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:42:40.057Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "61188d340526910e7c9b9340"
+      },
+      "chapter": "chapter-2",
+      "updatedAt": {
+        "$date": "2021-08-15T03:42:44.917Z"
+      }
+    }
+  ],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "61188d340526910e7c9b9341"
+      },
+      "chapter": "chapter-2",
+      "updatedAt": {
+        "$date": "2021-08-15T03:42:44.917Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "61188d300526910e7c9b92fa"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T03:42:40.057Z"
+      }
+    }
+  ],
+  "slug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "titleForSearch": "Tensei Shite Inaka De Slowlife Wo Okuritai",
+  "createdAt": {
+    "$date": "2021-08-15T03:40:18.256Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T03:42:44.919Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1628998826898-34352-350x500"
   }
 },{
   "_id": {
-    "$oid": "60ef99f4abe09323403b7468"
-  },
-  "isPublish": true,
-  "chapters": [
-    {
-      "$oid": "60ef9a04abe09323403b7469"
-    },
-    {
-      "$oid": "60ef9a9bedf6702150e5e88f"
-    },
-    {
-      "$oid": "60ef9aed8b4eeb0e7c5b74b6"
-    },
-    {
-      "$oid": "60ef9b051f60ee2714551665"
-    },
-    {
-      "$oid": "60ef9b3d1f60ee2714551668"
-    },
-    {
-      "$oid": "60efa40bd2cf7707588089ec"
-    }
-  ],
-  "category": [
-    {
-      "$oid": "609f250ace319201845e45ce"
-    }
-  ],
-  "deleted": false,
-  "title": "test",
-  "description": "1",
-  "userId": "6084dd9dec23a633c03f96e7",
-  "userName": "adminlivip",
-  "slug": "test",
-  "titleForSearch": "test",
-  "createdAt": {
-    "$date": "2021-07-15T02:14:12.721Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-27T03:25:03.719Z"
-  },
-  "__v": 0,
-  "thumbnail": {
-    "url": "test/thumbnail/1626575513924-item_3"
+    "$oid": "6118941ae430531d94bd470c"
   },
   "view": {
-    "totalView": 1,
     "dayView": {
-      "thisDay": "21",
-      "view": 1
+      "view": 0,
+      "thisDay": 16
     },
-    "monthView": {
-      "thisMonth": "07",
-      "view": 1
-    },
-    "yearView": {
-      "thisYear": "2021",
-      "view": 1
-    }
+    "totalView": 1
   },
   "rate": {
     "rateCount": 0,
     "rateValue": 0
+  },
+  "isPublish": true,
+  "isFinish": true,
+  "category": [
+    {
+      "$oid": "609f98005e7eec3690b7edfe"
+    },
+    {
+      "$oid": "60f38ed267cdcb11cc58649e"
+    }
+  ],
+  "deleted": false,
+  "title": "Yuusha Party Wo Tsuihou Sareta Beast Tamer, Saikyou Shuzoku Nekomimi Shojo To Deau",
+  "subtitle": "The Beast Tamer Exiled from the the Hero's Party and the Cat Eared Girl from the Strongest Race Meet, The Beast Tamer Exiled from the Hero’s Party and the Cat Eared Girl from the Strongest Race Meet, 勇者パーティーを追放されたビーストテイマー、最強種族の猫耳少女と出会う, Yuusha Party wo Tsuihou Sareta Beast Tamer, Saikyou Shu Nekomimi Shojo to Deau",
+  "description": "Because Rein was a weak and simple beast tamer, he was expelled from the hero's group but that didn't stop his desire to be an adventurer. By taking simple quests afterwards he has a destined encounter with a strong cat girl.",
+  "author": "Moto Shigemura - Suzu Miyama",
+  "chapters": [
+    {
+      "_id": {
+        "$oid": "6118942de430531d94bd47c6"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T04:12:29.240Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "61189433e430531d94bd4811"
+      },
+      "chapter": "chapter-2",
+      "updatedAt": {
+        "$date": "2021-08-15T04:12:35.339Z"
+      }
+    }
+  ],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "61189433e430531d94bd4812"
+      },
+      "chapter": "chapter-2",
+      "updatedAt": {
+        "$date": "2021-08-15T04:12:35.339Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6118942de430531d94bd47c7"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T04:12:29.240Z"
+      }
+    }
+  ],
+  "slug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
+  "titleForSearch": "Yuusha Party Wo Tsuihou Sareta Beast Tamer  Saikyou Shuzoku Nekomimi Shojo To Deau",
+  "createdAt": {
+    "$date": "2021-08-15T04:12:10.530Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T04:12:35.340Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/thumbnail/1629000740370-35299-351x500"
+  }
+},{
+  "_id": {
+    "$oid": "611894d0e430531d94bd48a2"
+  },
+  "view": {
+    "dayView": {
+      "view": 0,
+      "thisDay": 0
+    },
+    "totalView": 0
+  },
+  "rate": {
+    "rateCount": 0,
+    "rateValue": 0
+  },
+  "isPublish": true,
+  "isFinish": true,
+  "category": [
+    {
+      "$oid": "609f8d6ea1ea9f1eac820a2c"
+    },
+    {
+      "$oid": "609f98005e7eec3690b7edfe"
+    },
+    {
+      "$oid": "60f38ed267cdcb11cc58649e"
+    },
+    {
+      "$oid": "60f38ef267cdcb11cc5864a3"
+    }
+  ],
+  "deleted": false,
+  "title": "The begining after the end",
+  "subtitle": "",
+  "description": "King Grey has unrivaled strength, wealth, and prestige in a world governed by martial ability. However, solitude lingers closely behind those with great power. Beneath the glamorous exterior of a powerful king lurks the shell of man, devoid of purpose and will.\r\n\r\nReincarnated into a new world filled with magic and monsters, the king has a second chance to relive his life. Correcting the mistakes of his past will not be his only challenge, however. Underneath the peace and prosperity of the new world is an undercurrent threatening to destroy everything he has worked for, questioning his role and reason for being born again.",
+  "author": "Turtleme - Fuyuki23",
+  "chapters": [
+    {
+      "_id": {
+        "$oid": "611894e0e430531d94bd495e"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T04:15:28.873Z"
+      }
+    }
+  ],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "611894e0e430531d94bd495f"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2021-08-15T04:15:28.873Z"
+      }
+    }
+  ],
+  "slug": "the-begining-after-the-end",
+  "titleForSearch": "The begining after the end",
+  "createdAt": {
+    "$date": "2021-08-15T04:15:12.836Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-15T04:15:28.875Z"
+  },
+  "__v": 0,
+  "thumbnail": {
+    "url": "the-begining-after-the-end/thumbnail/1629000920821-BAE-333x500"
   }
 }]

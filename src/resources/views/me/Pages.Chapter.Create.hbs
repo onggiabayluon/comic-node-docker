@@ -142,7 +142,7 @@
                             window.location.replace(linkcomic);
                         });
                         this.on("error", function (file, responseText) {
-                            alert(responseText)
+                            alert(JSON.stringify(responseText))
                             if(responseText === "You can't upload files of this type.") {
                                message__wrongFileType.classList.remove("d-none");
                             } else {

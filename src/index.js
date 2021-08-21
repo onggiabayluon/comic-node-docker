@@ -25,8 +25,7 @@ const { UPDATE_PER_MIN } = require("./config/config")
 const route = require('./routes');
 const db    = require('./config/db');
 
-// connect to redis
-redis.connect();
+
 
 // CronJob 
 const MIN = UPDATE_PER_MIN
@@ -35,9 +34,9 @@ const job = new CronJob(`0 */${MIN} * * * *`, function () {
 }, null, true, 'Asia/Ho_Chi_Minh');
 job.start();
 
-// Passport Config
-require('./config/auth/passport')(passport);
 
+// connect to redis
+redis.connect();
 // connect to DB
 db.connect();
 const app   = express();
@@ -84,7 +83,7 @@ io.on('connection', client => {
     
 });
 
-// Cors and Proxy
+
 
 // sessionConfig
 const sessionConfig = {
@@ -98,19 +97,23 @@ const sessionConfig = {
         secure: false
     }
 };
+app.use(session(sessionConfig));
 
-app.set('trust proxy', 1); // trust first proxy
-    app.use(cors())
 
+// Cors and Proxy
+app.set('trust proxy', true); // trust first proxy
+app.use(cors())
 //❌
 // if (process.env.NODE_ENV === 'production') {
 //     app.set('trust proxy', 1); // trust first proxy
 //     app.use(cors())
 //     sessionConfig.cookie.secure = true; // serve secure cookies
+//     sessionConfig.store: new sessionStore() 
 // }
 
-app.use(session(sessionConfig));
 
+// Passport Config
+require('./config/auth/passport')(passport);
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
