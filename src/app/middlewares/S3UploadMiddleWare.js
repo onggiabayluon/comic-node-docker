@@ -19,54 +19,45 @@ var self = module.exports = {
      * Small image : width 400px (webp)
      */
 
-    uploadMultiple: async (files, params) => {
+    uploadMultiple: async (files, config) => {
         const images = [];
 
-        const resizePromises = files.map(async (file) => {
-            const filename = `${params.slug}/${params.chapter}/${Date.now()}-${file.originalname.replace(/\..+$/, "")}`;
-             sharp(file.buffer)
-                .resize({ width: 1000 , fit: 'contain'})
+        const resize = async (file, extension, imageType, width, path, now) => {
+            const filename = `${path}-${extension}`;
+
+            await sharp(file.buffer)
+                .resize({ width: width })
                 .webp({ quality: 80 })
                 .toBuffer()
                 .then(resized => s3.upload({
                     Body: resized,
                     Bucket: WASABI_BUCKET_NAME,
-                    ContentType: 'image/webp',
+                    ContentType: imageType,
                     CacheControl: 'max-age=31536000',
-                    Key: `${filename}-large.webp`,
+                    Key: `${filename}`,
                 }).promise())
-             sharp(file.buffer)
-                .resize({ width: 690 , fit: 'contain'})
-                .jpeg({ quality: 80 })
-                .toBuffer()
-                .then(resized => s3.upload({
-                    Body: resized,
-                    Bucket: WASABI_BUCKET_NAME,
-                    ContentType: 'image/jpeg',
-                    CacheControl: 'max-age=31536000',
-                    Key: `${filename}-medium.jpeg`,
-                }).promise())
-             sharp(file.buffer)
-                .resize({ width: 400 , fit: 'contain'})
-                .webp({ quality: 80 })
-                .toBuffer()
-                .then(resized => s3.upload({
-                    Body: resized,
-                    Bucket: WASABI_BUCKET_NAME,
-                    ContentType: 'image/webp',
-                    CacheControl: 'max-age=31536000',
-                    Key: `${filename}-small.webp`,
-                }).promise())
+                .then(() => {
+                    console.log('Runtime in MS: ', Date.now() - now, 'ms');
+                })
 
-                images.push({url: filename});
-               
-        });
+            return filename
+        };
 
-        
-        await Promise.all([...resizePromises])
-        .then(console.log('done upload'));
 
-        return images
+        const rightnow = Date.now()
+    
+        for (const file of files) {
+    
+            // Create path
+            let path = `${config.customPath}/${rightnow}-${file.originalname.replace(/\..+$/, "")}`;
+    
+            // Resize Each time 3 type 
+            await Promise.all([
+                resize(file, 'large.webp', 'webp', 1000, path, rightnow),
+                resize(file, 'medium.jpeg', 'jpeg', 690, path, rightnow),
+                resize(file, 'small.webp', 'webp', 400, path, rightnow),
+            ])
+        }
     },
     
     uploadThumbnail: async (files, params) => {

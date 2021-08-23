@@ -280,8 +280,10 @@ class meController {
 
   // 8. Render ChapterList: [GET] / me / stored / comics / :slug / chapter-list
   chapterListPage(req, res, next) {
-    var chapterList = Chapter.find({ comicSlug: req.params.slug })
-    dbHelper.chapterListPage_Helper(chapterList, req, res, next, null)
+    var chapterList = Chapter.find({ comicSlug: req.params.slug }).lean()
+    var chapterLength = Chapter.countDocuments({ comicSlug: req.params.slug })
+    dbHelper.chapterListPage_Helper(chapterList, chapterLength, req, res, next, null)
+    
   }
 
   // 9. Render create Chapter: [GET] / me / stored / comics / :slug / create-chapter

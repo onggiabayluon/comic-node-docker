@@ -9,6 +9,7 @@ const customError = require('../../util/customErrorHandler')
 const mongoose = require('mongoose');
 const deleteMiddleWare = require('../middlewares/S3DeleteMiddleware');
 const { singleMongooseToObject, multiMongooseToObject } = require('../../util/mongoose');
+const { IMAGE_URL } = require('../../config/config');
 
 
 /***** Comic Controller *****
@@ -47,11 +48,6 @@ const comicListPage_Pagination_Helper = (exports.comicListPage_Pagination_Helper
         if (comics.length == 0) { noComics = true }
         Comic.countDocuments((err, count) => {
           if (err) return next(err);
-          comics.map(comic => {
-            var time = TimeDifferent(comic.updatedAt)
-            // console.log(time)
-            comic["comicUpdateTime"] = time;
-          })
           res.render('me/Pages.Comics.List.hbs',
             {
               layout: 'admin',
@@ -63,6 +59,7 @@ const comicListPage_Pagination_Helper = (exports.comicListPage_Pagination_Helper
               user: singleMongooseToObject(req.user),
               pages: Math.ceil(count / PageSize),
               comics: comics,
+              img_url: IMAGE_URL
             })
         })
       })
@@ -432,8 +429,6 @@ const destroyComic_Helper = (exports.destroyComic_Helper
     function delete_chaptersRef() {
       return new Promise(async (resolve, reject) => {
         const chapter = Chapter.findOne({ comicSlug: req.params.slug })
-        console.log('chapter: ')
-        console.log(await chapter._id)
         Comic.updateOne(
           { slug: req.params.slug },
           { $pull: { chapter: chapter._id } }
@@ -588,13 +583,14 @@ const handleFormActionForComics_Helper = (exports.handleFormActionForComics_Help
 
 // 7. chapterListPage_Helper
 const chapterListPage_Helper = (exports.chapterListPage_Helper
-  = (chapterList, req, res, next, msg) => {
+  = async (chapterList, chapterLength, req, res, next, msg) => {
     let page = +req.query.page || 1;
     let PageSize = 10;
     let skipCourse = (page - 1) * PageSize;
     let nextPage = +req.query.page + 1 || 2;
     let prevPage = +req.query.page - 1;
     let prevPage2 = +req.query.page - 2;
+    let length = await chapterLength
 
     chapterList
       .select('title chapterSlug createdAt updatedAt description thumbnail comicSlug chapter')
@@ -606,10 +602,6 @@ const chapterListPage_Helper = (exports.chapterListPage_Helper
         if (chapters.length == 0) { noChapters = true }
         if (chapters) {
           var linkComics = req.params.slug;
-          chapters.map(chapter => {
-            var time = TimeDifferent(chapter.updatedAt)
-            chapter["chapterUpdateTime"] = time;
-          })
           res.status(200).render('me/Pages.Chapter.List.hbs', {
             layout: 'admin',
             linkComics,
@@ -618,7 +610,7 @@ const chapterListPage_Helper = (exports.chapterListPage_Helper
             nextPage,
             prevPage,
             prevPage2,
-            pages: Math.ceil(chapters.length / PageSize),
+            pages: Math.ceil(length / PageSize),
             chapters: chapters
           })
         }

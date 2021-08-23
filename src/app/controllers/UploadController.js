@@ -29,64 +29,27 @@ class UploadController {
             
             var pool = workerpool.pool(workDir);
             
-            pool.exec('main', [req.files, config])
-                .then(function (result) {
-                    console.log('Result: ' + result); // outputs 55
+            pool.exec('resize', [req.files, config])
+                .then((result) => {
+
+                    saveURLToDb(result)
+
+                    saveChapterRef(`chapter-${req.body.chapter}`)
+
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     console.error(err);
                 })
-                .then(function () {
+                .then(() => {
                     console.log('pool terminated')
                     pool.terminate(); 
                 });
                 
-            // Take buffer Only so The worker will using transfer for speed boost
-            // let bufferfiles = req.files.map(file => file.buffer);
-            // let sizefiles = req.files.map(file => file.size);
-
-            // let concatedBuffer = Buffer.concat(bufferfiles);
-            // var sizefilesarray = new Uint16Array(sizefiles);
-            // console.log(concatedBuffer)
-            // console.log(sizefilesarray)
-
-            //  var uint8View = new Uint8Array(newBufferArr);
-            //  console.log(uint8View)
-            // const buffer = new ArrayBuffer(newBufferArr);
-            // const view = new Int32Array(buffer);
-            // console.log(buffer)
-            // console.log(view)
-            
-            // if (isMainThread) {
-            //     // start worker
-            //     const worker = new Worker(workDir, {
-            //         workerData: {files: req.files, config: config}
-            //     });
-            //     console.log("Sending crawled data to dbWorker...");
-            //     // send formatted data to worker thread 
-            //     // worker.postMessage( {files: req.files, config: config} );
-
-            //     // worker.postMessage({concatedBuffer: concatedBuffer, sizefilesarray: sizefilesarray}
-            //     //                     [ concatedBuffer.buffer, sizefilesarray.buffer ]);
-            //     // listen to message from worker thread
-            //     // worker.on("message", (message) => {
-            //     //     console.log(message)
-            //     // });
-            // } 
-            // var imagesURL = await imagesMiddle.resize(req.files, config, options)
-
-            // var imagesURL = await S3UploadMiddleWare.uploadMultiple(req.files, params)
-
-            // var res_id = await saveURLToDb(imagesURL)
-
-            // saveChapterRef(res_id, params.chapter)
-
         })
         .then(() => res.redirect('back'))
         .catch(err => next(err))
         
         function saveURLToDb(imagesURL) {
-            // console.log(imagesURL)
             const newChapter = new Chapter({
                 _id: new ObjectID(),
                 title: `chapter of ${req.params.slug}`,
@@ -95,13 +58,12 @@ class UploadController {
                 comicSlug: req.params.slug,
             })
             imagesURL.forEach((url, index) => {
-                newChapter.image[index] = url
+                newChapter.image[index] = { url: url }
             });
             newChapter.save()
-            
-            return newChapter._id
         };
-        function saveChapterRef(res_id, chapterName) {
+
+        function saveChapterRef(chapterName) {
             let date = new Date()
             let IOSDate = date.toISOString()
             Comic.updateOne(
@@ -113,11 +75,11 @@ class UploadController {
                             $position: 0,
                             $slice: 3
                         },
-                        chapters: { chapter: chapterName, updatedAt: IOSDate }
-                    }
+                        chapters: { chapter: req.body.chapter, updatedAt: IOSDate }
+                    },
+                    "timestamps": true,
                 }
-                // { $push: { chapters: res_id } }
-            ).exec()
+            ).then(res => console.log(res))
         };
     };
 

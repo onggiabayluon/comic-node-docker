@@ -4,7 +4,7 @@ const imgOptions = {
     threshhold: 1, // 1 là toàn bộ bức ành
     rootMargin: "0px 0px 6000px 0px",
 }
-const baseUrl = `https://api.cloudimagewall.xyz`
+const baseUrl = `https://s3.eu-central-1.wasabisys.com`
 var flag = 0;
 var finalSize = 0
 function querry(clientWidth) {
@@ -47,7 +47,6 @@ const lazyLoad = target => {
                     {
                        
                         const { clientWidth, clientHeight } = img
-                        console.log("img WIDTH: " + clientWidth)
                         const pixelRatio = window.devicePixelRatio || 1.0
                         function setFinalSize() {
                             finalSize = finalSize + querry(clientWidth)

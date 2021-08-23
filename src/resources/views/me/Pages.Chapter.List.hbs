@@ -179,7 +179,7 @@
                                     </a>
 
                                     <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
-                                        {{this.chapterUpdateTime}}</p>
+                                        {{CalcTimeEnglish this.updatedAt}}</p>
 
                                     <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
                                         style="justify-content: space-evenly;">
@@ -274,7 +274,7 @@
                 </a>
 
                 <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
-                    \{{this.chapterUpdateTime}}</p>
+                    \{{CalcTimeEnglish this.updatedAt}}</p>
 
                 <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm" style="justify-content: space-evenly;">
 
@@ -309,7 +309,9 @@
         var chapterSlug = document.getElementById('chapterSlug');
         var chapterSlugValue = chapterSlug.getAttribute('data-id')
         var chapterData
-        var fetchAPIUrl = `http://localhost:3000/fetch/comics/${chapterSlugValue}`
+        var pathname = window.location.pathname
+        var domainName = window.location.href.split(`${pathname}`).shift() 
+        var fetchAPIUrl = `${domainName}/fetch/comics/${chapterSlugValue}`
         var search = document.getElementById('search');
         var matchList = document.getElementById('match-list');
         var source = document.getElementById("userSearch-template").innerHTML;

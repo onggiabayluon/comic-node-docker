@@ -130,6 +130,9 @@ class ComicController {
         let rateCount = comicdoc.rate.rateCount
         let subscribe = false
         let subscribedComic = (req.user) ? req.user.subscribed : []
+
+        comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
+        
         for (let i = 0; i <= subscribedComic.length; i++) {
           if (JSON.stringify(subscribedComic[i]) === JSON.stringify(comicdoc._id)) {
             subscribe = true
@@ -168,7 +171,6 @@ class ComicController {
         
         setRedisKey(userIp).then(results => console.log(results))
 
-
         renderChapterView(comicdoc, chapterdoc)
       })
       .catch(err => next(err))
@@ -186,7 +188,10 @@ class ComicController {
     function renderChapterView(comicdoc, chapterdoc) {
 
       //sort to make sure when chapters get deleted then this btn wont callapse
-      comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0); });
+     
+      comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
+     
+      // console.log(chaptersList)
       let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter))
       let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
       let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]

@@ -54,8 +54,7 @@
                                 </div>
                                 <div class="p-3 card infoLeft__title col-sm-12">
                                     <h1 id="main-title" class="font-weight-bold">{{comic.title}}</h1>
-                                    <h4 id="sub-title" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
-                                        Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
+                                    <h4 id="sub-title" class="text-muted text-small mb-3">{{comic.author}}</h4>
                                 </div>
                                 <div class="infoLeft__activities">
                                     <ul>
@@ -104,7 +103,13 @@
                                         <div class="box__name">Status</div> <span class="box__value text-muted">Ongoing</span>
                                     </div>
                                     <div class="box">
-                                        <div class="box__name">Author</div> <span class="box__value text-muted">Fuyuki, turtle me</span>
+                                        <div class="box__name">Author</div> <span class="box__value text-muted">
+                                            {{#if comic.author}}
+                                                {{this}}
+                                            {{else}}
+                                            Updating
+                                            {{/if}}
+                                            </span>
                                     </div>
                                     <div class="box">
                                         <div class="box__name">Views</div> <span class="box__value box__value--bold">{{comic.view.totalView}}</span>
@@ -116,8 +121,9 @@
                             <div class="infoRight card mb-4">
                                 <div class="infoRight__body card-body">
                                     <h1 id="main-title" itemprop="name" class="font-weight-bold">{{comic.title}}</h1>
-                                    <h4 id="sub-title" itemprop="alternativeHeadline" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
-                                        Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
+                                    <h4 id="sub-title" itemprop="alternativeHeadline" class="text-muted text-small mb-3">
+                                        {{comic.subtitle}}
+                                        </h4>
                                     <div id="tags" class="mb-3">
                                         {{#each comic.category}}
                                         <span class="badge badge-pill badge-outline-primary mb-1" style="font-weight: 500;">{{this.name}}</span>
@@ -125,19 +131,7 @@
                                     </div>
                                     <p class="font-weight-bold">Synopsis {{comic.title}}</p>
                                     <p itemprop="description">
-                                        Vivamus ultricies augue vitae commodo condimentum. Nullam
-                                        faucibus eros eu mauris feugiat, eget consectetur tortor tempus. Sed volutpat
-                                        mollis dui eget fringilla. Vestibulum blandit urna ut tellus lobortis tristique.
-                                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-                                        Curae; Pellentesque quis cursus mauris. Nam in ornare erat. Vestibulum convallis
-                                        enim ac massa dapibus consectetur. Maecenas facilisis eros ac felis mattis, eget
-                                        auctor sapien varius.
-                                        <br>
-                                        <br>
-                                        Nulla non purus fermentum, pulvinar dui condimentum,
-                                        malesuada nibh. Sed viverra quam urna, at condimentum ante viverra non. Mauris
-                                        posuere erat sapien, a convallis libero lobortis sit amet. Suspendisse in orci
-                                        tellus.
+                                        {{comic.description}}
                                     </p>
                         
                         
@@ -145,19 +139,19 @@
                             </div>
                             <div class="chapterRight card mb-4">
                                 <div class="btnbox card-body">
-                                    <a href="/comic/{{comic.slug}}/{{firstChapter.chapter}}" class="light-red btnbox__firstChapter btn btn-primary mb-1">
+                                    <a href="/comic/{{comic.slug}}/chapter-{{firstChapter.chapter}}" class="light-red btnbox__firstChapter btn btn-primary mb-1">
                                         <span> First Chapter </span>
-                                        <span style="font-size: 1.1rem;"> {{replaceHyphenIntoSpace firstChapter.chapter}}</span>
+                                        <span style="font-size: 1.1rem;"> Chapter {{firstChapter.chapter}}</span>
                                     </a>
-                                    <a href="/comic/{{comic.slug}}/{{lastChapter.chapter}}" class="light-red btnbox__lastChapter btn btn-primary mb-1">
+                                    <a href="/comic/{{comic.slug}}/chapter-{{lastChapter.chapter}}" class="light-red btnbox__lastChapter btn btn-primary mb-1">
                                         <span> Last Chapter </span>
-                                        <span style="font-size: 1.1rem;"> {{replaceHyphenIntoSpace lastChapter.chapter}} </span>
+                                        <span style="font-size: 1.1rem;"> Chapter {{lastChapter.chapter}} </span>
                                     </a>
                                 </div>
                                 <div class="listbox">
                                     {{#each comic.chapters}}
-                                    <a href="/comic/{{../comic.slug}}/{{this.chapter}}" class="listbox__chapterbtn">
-                                        <span class="chaptertext"> {{replaceHyphenIntoSpace this.chapter}} </span>
+                                    <a href="/comic/{{../comic.slug}}/chapter-{{this.chapter}}" class="listbox__chapterbtn">
+                                        <span class="chaptertext"> Chapter {{this.chapter}} </span>
                                         <span class="date text-muted"> {{CalcTimeEnglish this.updatedAt}}</span>
                                     </a>
                                     {{/each}}

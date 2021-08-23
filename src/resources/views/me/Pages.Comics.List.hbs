@@ -109,13 +109,17 @@
                         <div id="match-list">
                             {{#each comics}}
                             <div class=" card d-flex flex-row mb-3">
-                                <a class="d-flex thumbnail-frame" href="/me/stored/comics/{{this.slug}}/edit"
+                                <a class="align-items-center d-flex thumbnail-frame" href="/me/stored/comics/{{this.slug}}/edit"
                                     aria-label="{{this.slug}}">
                                     {{#if this.thumbnail}}
-                                    <img src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp"
-                                        type="image/webp"
-                                        class="list-thumbnail responsive border-0  my-thumb-style"
-                                        alt="image">
+                                    <picture class="lazy">
+                                        <source 
+                                            data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                                            data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/webp" />
+                                    
+                                        <img class="list-thumbnail responsive border-0  my-thumb-style"
+                                        width="130" height="130" alt="{{this.title}}" onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                    </picture>
                                     {{else}}
                                     <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
                                         class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
@@ -129,7 +133,7 @@
                                         </a>
 
                                         <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
-                                            {{this.comicUpdateTime}}</p>
+                                            {{CalcTimeEnglish this.updatedAt}}</p>
 
                                         <div class="mt-2 d-flex align-items-center mb-0 w-40 w-sm-100 myPadding-top-sm justify-content-around">
                                             <div class="w-20">
@@ -254,13 +258,18 @@
     \{{#each comics}}
     <div class=" card d-flex flex-row mb-3">
         <a class="d-flex thumbnail-frame" href="/me/stored/comics/\{{this.slug}}/edit" aria-label="\{{this.slug}}">
-            \{{#each thumbnail}}
-            <img data-bg="\{{this.url}}" class="thumbnailsLoader list-thumbnail responsive border-0  my-thumb-style"
-                alt="image">
+            \{{#if this.thumbnail}}
+            <picture class="lazy">
+                <source data-srcset="{{{img_url}}}/\{{this.thumbnail.url}}-thumbnail.webp"
+                    data-srcmain="{{{img_url}}}/\{{this.thumbnail.url}}-thumbnail.jpeg" type="image/webp" />
+            
+                <img class="list-thumbnail responsive border-0  my-thumb-style" width="130" height="130" alt="\{{this.title}}"
+                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+            </picture>
             \{{else}}
             <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
                 class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
-            \{{/each}}
+            \{{/if}}
         </a>
         <div class="pl-2 d-flex flex-grow-1 min-width-zero">
             <div
@@ -270,7 +279,7 @@
                 </a>
 
                 <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
-                    \{{this.comicUpdateTime}}</p>
+                    \{{CalcTimeEnglish this.updatedAt}}</p>
 
                 <div class="mt-2 d-flex align-items-center mb-0 w-40 w-sm-100 myPadding-top-sm justify-content-around">
                     <div class="w-20">
@@ -373,13 +382,16 @@
 </script>
 
 
-    <script src="/js/thumbnailsLoader.js"></script>
+<script src="/js/thumbnailsLoader.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
         /* Start Search */
         var userData
-        var fetchAPIUrl = 'http://localhost:3000/fetch/comics'
+        var pathname = window.location.pathname
+        var domainName = window.location.href.split(`${pathname}`).shift() 
+        var fetchAPIUrl = `${domainName}/fetch/comics`
         var search = document.getElementById('search');
         var matchList = document.getElementById('match-list');
         var source = document.getElementById("userSearch-template").innerHTML;
@@ -389,7 +401,7 @@
         search.addEventListener("click", runSearch_OneTime);
 
         function filterProperty(data, regex) {
-            return data.title.match(regex) || data.titleForSearch.match(regex) || data.userName.match(regex)
+            return data.title.match(regex) || data.subtitle.match(regex)
         }
         function runSearch_OneTime() {
             if (invoke_one_time) {
@@ -398,8 +410,8 @@
             }
         }
         runSearch = async () => {
-            userData = await getData(fetchAPIUrl)
-            SearchHandler(userData, search, matchList, source, templateObjProperty, filterProperty, awaitGetImages)  
+            comics = await getData(fetchAPIUrl)
+            SearchHandler(comics, search, matchList, source, templateObjProperty, filterProperty, lazyLoadSearch)  
         } /* End Search */
 
         var comicSlug;

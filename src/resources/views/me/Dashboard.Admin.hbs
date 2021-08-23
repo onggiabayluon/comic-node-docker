@@ -748,7 +748,9 @@
 
         /* Start Search */
         var userData
-        var fetchAPIUrl = 'http://localhost:3000/fetch/users'
+        var pathname = window.location.pathname
+        var domainName = window.location.href.split(`${pathname}`).shift() 
+        var fetchAPIUrl = `${domainName}/fetch/users`
         var search = document.getElementById('search');
         var matchList = document.getElementById('match-list');
         var source = document.getElementById("userSearch-template").innerHTML;
