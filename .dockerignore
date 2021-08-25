@@ -6,4 +6,3 @@ docker-compose*
 .gitignore
 .env
 gulpfile
-src/app/config/config.js

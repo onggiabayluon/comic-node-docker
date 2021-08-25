@@ -2,6 +2,10 @@
 
 /.env
 
+/data/certbot/*
+
+/src/app/config/config.js
+
 *.dev.yml
 *.seeds.2.yml
 *.prod.2.yml
