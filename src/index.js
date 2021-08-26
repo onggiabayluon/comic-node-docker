@@ -84,7 +84,6 @@ io.on('connection', client => {
 });
 
 
-
 // sessionConfig
 const sessionConfig = {
     secret: 'secret',
@@ -93,23 +92,22 @@ const sessionConfig = {
     cookie : {
         sameSite: 'strict',
         maxAge: 2592000,
-        httpOnly: true,
         secure: false
     }
 };
+
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1)
+    app.use(cors())
+    sessionConfig.cookie.secure = true // serve secure cookies
+    // sessionConfig.store: new sessionStore() 
+} else {
+    // Cors and Proxy
+    app.set('trust proxy', true); 
+    app.use(cors())
+}
+
 app.use(session(sessionConfig));
-
-
-// Cors and Proxy
-app.set('trust proxy', true); // trust first proxy
-app.use(cors())
-//❌
-// if (process.env.NODE_ENV === 'production') {
-//     app.set('trust proxy', 1); // trust first proxy
-//     app.use(cors())
-//     sessionConfig.cookie.secure = true; // serve secure cookies
-//     sessionConfig.store: new sessionStore() 
-// }
 
 
 // Passport Config
