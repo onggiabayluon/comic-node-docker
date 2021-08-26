@@ -106,7 +106,6 @@ if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', true); 
     app.use(cors())
 }
-
 app.use(session(sessionConfig));
 
 
@@ -356,5 +355,6 @@ app.set('views', path.join(__dirname, 'resources', 'views')); //__dirname/resour
 route(app);
 
 server.listen(port, () => {
+    console.log(`App listening at http://www.localhost.com:${port}`);
     console.log(`App listening at http://localhost:${port}`);
 });
