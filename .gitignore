@@ -2,7 +2,7 @@
 
 /.env
 
-/data/certbot/*
+/etc/certs/*
 
 /src/app/config/config.js
 
