@@ -6,6 +6,8 @@
 
 # /src/config/config.js
 
+gulpfile.js
+
 *.dev.yml
 *.seeds.2.yml
 *.prod.2.yml

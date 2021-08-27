@@ -142,9 +142,12 @@ app.use(compression({
 
 app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public'), {
-    setHeaders: (res, path) => {
-        const isRevved = /[a-f0-9]{7,}/.exec(path)
-        res.setHeader('Cache-Control', `max-age=${isRevved ? 31536000 : 0}`);
+    // setHeaders: (res, path) => {
+    //     const isRevved = /[a-f0-9]{7,}/.exec(path)
+    //     res.setHeader('Cache-Control', `max-age=${isRevved ? 31536000 : 0}`);
+    // }
+    setHeaders: (res) => {
+        res.setHeader('Cache-Control', 'public, max-age=6000');
     }
 }));
 
