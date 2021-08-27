@@ -24,7 +24,7 @@ gulp.task('hello', function() {
 
 gulp.task("sass", function(callback) {
   return gulp
-    .src("src/resources/sass/themes/*.scss") // compile sass
+    .src("src/resources/sass/adminPage/dore.light.purple.2.scss") // compile sass
     .pipe(wait(300))
     .pipe(sass())
     .pipe(gulp.dest("src/public/css"))        // destination
