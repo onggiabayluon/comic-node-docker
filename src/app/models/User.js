@@ -15,12 +15,13 @@ const opts = {
 const User = new Schema({
     name: {
       type: String,
+      index: true,
       required: true
     },
-    email: {
-      type: String,
-      required: true
-    },
+    // email: {
+    //   type: String,
+    //   required: true
+    // },
     password: {
       type: String,
       required: true
@@ -43,6 +44,20 @@ const User = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comic"
     }],
+
+    googleId: { 
+      type: String, 
+      unique: true,
+    },
+    facebookId: { 
+      type: String, 
+      unique: true,
+    },
+    avatar: String,
+    displayName: String,
+    userCreatedAt: String,
+    userUpdatedAt: String,
+    
   }, opts);
 
   module.exports = mongoose.model('User', User);

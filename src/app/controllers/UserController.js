@@ -18,7 +18,7 @@ class UserController {
 
     // Login
     login(req, res, next) {
-        let referer = (req.body.referer !== '' && req.body.referer !== null) ? req.body.referer : '/'
+        let referer = (req.body.referer) ? req.body.referer : '/'
         passport.authenticate('local', {
         successRedirect: referer,
         failureRedirect: '/users/login',
@@ -35,7 +35,8 @@ class UserController {
 
     // Register Page
     registerPage(req, res, next) {
-        res.render('users/register', {
+        res.render('users/login', {
+            registerSubmit: true,
             layout: 'login_register_layout'
         })
     }
@@ -43,27 +44,28 @@ class UserController {
     // Register
     register(req, res, next) {
         const layout = "login_register_layout"
-        const { name, email, password, password2 } = req.body;
+        const { name, password, password2 } = req.body;
         let errors = [];
 
-        checkInput(name, email, password, password2)
+        checkInput(name, password, password2)
 
-        if (errors.length > 0) {
-            res.render('users/register', {
+        if (errors.length > 0) return renderView(true)
+        return createUser(name)
+
+        function renderView(isRegisterPage) {
+            res.render('users/login', {
+                registerSubmit: isRegisterPage,
                 layout: layout,
                 errors,
                 name,
-                email,
                 password,
                 password2
-            });
-        } else {
-            return createUser(email)
-        }
+            })
+        };
 
-        function checkInput(name, email, password, password2) {
-            if (!name || !email || !password || !password2) {
-            errors.push({ msg: 'Please enter all fields' });
+        function checkInput(name, password, password2) {
+            if (!name || !password || !password2) {
+                errors.push({ msg: 'Please enter all fields' });
             }
 
             if (password != password2) {
@@ -75,23 +77,15 @@ class UserController {
             }
         }
         
-        function createUser(email) {
-            User.findOne({email: email})
+        function createUser(name) {
+            User.findOne({name: name})
             .then(user => {
                 if (user) {
-                    errors.push({ msg: 'Email Existed, Please use anothers' });
-                    res.render('users/register', {
-                        layout: layout,
-                        errors,
-                        name,
-                        email,
-                        password,
-                        password2
-                    });
+                    errors.push({ msg: 'This Name is already taken' });
+                    return renderView(true)
                 } else {
                     const newUser = new User({
                         name,
-                        email,
                         password
                       });
               
@@ -102,12 +96,13 @@ class UserController {
                           newUser
                             .save()
                             .then(user => {
-                              req.flash('success-message', 'You are now registered and can log in');
-                              res.render('users/login', {
-                                  layout: layout,
-                                  email,
-                                  password
-                              })
+                                let successMessage = 'You are now registered and can log in'
+                                res.render('users/login', {
+                                    layout: layout,
+                                    name,
+                                    password,
+                                    success_message: successMessage,
+                                })
                             })
                             .catch(next);
                         });

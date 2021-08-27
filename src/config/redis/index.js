@@ -13,7 +13,7 @@ function connect() {
     });
     client.on("error", function(error) {
         console.error(error);
-        setTimeout(connect, 5000)
+        setTimeout(connect, 15000)
     });
 
 }
