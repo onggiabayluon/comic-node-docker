@@ -4,7 +4,7 @@
 
 /etc/certs/*
 
-/src/config/config.js
+# /src/config/config.js
 
 *.dev.yml
 *.seeds.2.yml
