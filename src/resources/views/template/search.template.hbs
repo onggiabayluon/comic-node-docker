@@ -17,9 +17,11 @@
         </picture>
         <info class="info">
             <a href="/comic/{{this.slug}}" class="info__title">{{this.title}}</a>
-            <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}" class="info__chapter">
-                {{replaceHyphenIntoSpace (getObjValues (limit this.chapters 1) "chapter")}}
+            {{#if this.chapters}}
+            <a href="/comic/{{this.slug}}/chapter-{{getObjValues (limit this.chapters 1) 'chapter'}}" class="info__chapter">
+                Chapter {{getObjValues (limit this.chapters 1) 'chapter'}}
             </a>
+            {{/if}}
         </info>
     </item>
 {{/each}}

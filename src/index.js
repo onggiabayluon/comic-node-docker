@@ -93,7 +93,7 @@ const sessionConfig = {
         sameSite: 'strict',
         maxAge: 2592000,
         secure: false
-    }
+    },
 };
 
 if (process.env.NODE_ENV === 'production') {

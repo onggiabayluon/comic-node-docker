@@ -269,7 +269,7 @@ if ($("#glide_banner .glide__slide").length > 0) {
         focusAt: 0,
         perView: 1,
         startAt: 0,
-        autoplay: 10000,
+        autoplay: 7000,
         direction: 'ltr',
         breakpoints: {
             1200: { perView: 1, gap: 10, peek: {

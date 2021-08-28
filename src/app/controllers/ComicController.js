@@ -131,22 +131,26 @@ class ComicController {
         let subscribe = false
         let subscribedComic = (req.user) ? req.user.subscribed : []
 
-        comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
+        if (comicdoc?.chapters) comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
         
-        for (let i = 0; i <= subscribedComic.length; i++) {
-          if (JSON.stringify(subscribedComic[i]) === JSON.stringify(comicdoc._id)) {
-            subscribe = true
-            break;
+        if (subscribedComic) {
+          for (let i = 0; i <= subscribedComic.length; i++) {
+            if (JSON.stringify(subscribedComic[i]) === JSON.stringify(comicdoc._id)) {
+              subscribe = true
+              break;
+            }
           }
         }
-        let chaptersLength = comicdoc.chapters.length
+        let chaptersLength = (comicdoc?.chapters) ? comicdoc.chapters.length : 0 
+        let firstChapter = (comicdoc?.chapters) ? comicdoc.chapters[0] : 0 
+        let lastChapter = (comicdoc?.chapters) ? comicdoc.chapters[chaptersLength - 1] : 0 
         res.status(200).render('comic.details.hbs', {
           layout: 'comic.details_layout.hbs',
           comic: comicdoc,
           rateValue: rateValue,
           rateCount: rateCount,
-          firstChapter: comicdoc.chapters[0],
-          lastChapter: comicdoc.chapters[chaptersLength - 1],
+          firstChapter: firstChapter,
+          lastChapter: lastChapter,
           user: singleMongooseToObject(req.user),
           subscribe: subscribe,
           img_url: IMAGE_URL
@@ -501,7 +505,7 @@ class ComicController {
   searchHandling(req, res, next) {
     let searchQ = req.body.data.toLowerCase()
     let limit = 20
-    let $find = {$or: [ {$text: {$search: searchQ}}, {title: {$regex: searchQ}}] }
+    let $find = {$or: [ {$text: {$search: searchQ}}, {title: {$regex: searchQ, $options: 'i'}}] }
     let $meta = { score : { $meta: "textScore" } }
     if (searchQ.length > 0) {
       Promise.all([
@@ -513,18 +517,12 @@ class ComicController {
         .sort($meta)
         .lean()
         .select('title author slug thumbnail chapters -_id')
-        .limit(limit)
-        .populate({
-          path: 'chapters',
-          select: 'chapter _id',
-          options: {
-            limit: 3,
-            sort: { chapter: -1},
-          }
-        }),
+        .limit(limit),
         Comic.countDocuments($find)
       ])
       .then(([results, countedResults]) => {
+
+        if (results?.chapters) results.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
         var leftover = (countedResults > limit) ? countedResults - limit : 0
         var isEmpty = (results.length == 0) ? true : false
         res.render('template/search.template.hbs', {

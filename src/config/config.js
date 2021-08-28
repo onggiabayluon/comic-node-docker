@@ -14,6 +14,8 @@ module.exports = {
     WASABI_REGION: process.env.WASABI_REGION || "ap-northeast-1",
     IMAGE_URL: process.env.URL || "https://s3.ap-northeast-1.wasabisys.com/cloudimagewallbucket",
 
+    
+
     UPDATE_PER_MIN: 10,
 
     HOME_TITLE: "Read Manga Online - Dorecomic",
