@@ -5,7 +5,6 @@ const Comic     = require('../models/Comic');
 const Config    = require('../models/Config');
 const User      = require('../models/User');
 const TopView      = require('../models/TopView');
-const { singleMongooseToObject } =  require('../../util/mongoose');
 const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 , HOME_KEYWORDS, HOME_URL, HOME_SITENAME } = require('../../config/config');
 
@@ -109,31 +108,13 @@ class SiteController {
             .limit(PageSize)
             .lean(),
             Config.findOne({ category: "image" }).lean(),
-            User.findOne({ _id: id }).lean()
-            .select('subscribed')
-            .populate({
-                path: 'subscribed',
-                populate: {
-                    path: "chapters",
-                    select: "chapter updatedAt _id",
-                    options: {
-                        limit: 2,
-                        sort: { updatedAt: -1},
-                    }
-                },
-                select: 'title thumbnail slug updatedAt chapters',
-                options: {
-                    limit: 5,
-                    sort: { updatedAt: -1},
-                }
-            }),
             Comic.find({})
             .select('view rate title author slug thumbnail')
             .sort({ "view.dayView.view": -1 })
             .limit(limitTopView)
             .lean(),
           ])
-          .then(([count, comicsDoc, config, subscribeList, topComicsByView]) => {
+          .then(([count, comicsDoc, config, topComicsByView]) => {
             let meta = {
                 home_title: HOME_TITLE,
                 home_description: HOME_DESCRIPTION,
@@ -141,6 +122,7 @@ class SiteController {
                 home_url: HOME_URL,
                 home_sitename: HOME_SITENAME
             }
+            // res.setHeader('Cache-Control', 'public, max-age=1000');
             res.status(200).render('home', { 
                 layout: 'home_layout',
                 comics: comicsDoc,
@@ -149,11 +131,10 @@ class SiteController {
                 prevPage,
                 prevPage2,
                 pages: Math.ceil(count / PageSize),
-                user: singleMongooseToObject(req.user),
+                user: req.user,
                 img_url: IMAGE_URL,
                 config: config,
                 topComicsByView: topComicsByView,
-                sublist: subscribeList,
                 meta
              });
           })

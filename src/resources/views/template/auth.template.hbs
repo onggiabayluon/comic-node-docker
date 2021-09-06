@@ -1,0 +1,28 @@
+
+{{#if user}}
+{{!-- <a href="/users/logout" type="button" class="btn btn-background mb-1">Log out</a> --}}
+<div id="dropdownMenuButton" class="dropdown d-inline-block btn btn-outline mb-1" type="button" 
+data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="user">
+        <avatar class="user__avatar">
+            <img width="23" height="23" alt="Profile Picture" 
+            src="https://avatars.dicebear.com/api/human/{{user.name}}.svg">
+        </avatar>
+        <name class="user__name">
+            {{user.name}}
+        </name>
+    </div>
+    <div class="dropdown-menu mt-3">
+        <a onclick="location = this.href" class="dropdown-item" href="#">Account</a>
+        <a onclick="location = this.href" class="dropdown-item" href="#">Features</a>
+        <a onclick="location = this.href" class="dropdown-item" href="#">History</a>
+        <a onclick="location = this.href" class="dropdown-item" href="#">Support</a>
+        <a onclick="location = this.href" class="dropdown-item" href="/users/logout">Sign out</a>
+    </div>
+</div>
+
+{{else}}
+<a href="/users/login" type="button" class="btn btn-background mb-1">Log in</a>
+<a href="/users/register" type="button" class="btn btn-outline mb-1">Sign up</a>
+
+{{/if}}

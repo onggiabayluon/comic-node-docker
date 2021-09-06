@@ -500,63 +500,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #eb25ea;
+  background: #c4a8e4;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #c3c9e4;
+  background: #aa6204;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #f760b1;
+  background: #5015bf;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #92414f;
+  background: #a4735e;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #8b6d06;
+  background: #a26b96;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #e562e1;
+  background: #c4d7d9;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #892551;
+  background: #32c0a0;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #ee68a8;
+  background: #fcd53c;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #557eeb;
+  background: #d5aa72;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #b50718;
+  background: #d27e81;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #2443a5;
+  background: #c17e52;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #47127f;
+  background: #6a87f0;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #7b6189;
+  background: #ebe588;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #f43414;
+  background: #e6bf25;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #453b11;
+  background: #423fd1;
 }
 
 .num {
@@ -802,6 +802,9 @@ badges:hover {
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+#glide_1 .glide__slide, #glide_2 .glide__slide {
+  min-width: 210px;
 }
 #glide_1 .glide__slide img, #glide_2 .glide__slide img {
   object-position: top;
@@ -2010,6 +2013,25 @@ button {
 .hotkeyright {
   display: flex;
   flex-direction: row;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+}
+.user__avatar {
+  position: relative;
+  left: -10px;
+}
+.user__avatar img {
+  border-radius: 30px;
+}
+.user__name {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 96px;
+  margin-top: 2px;
 }
 
 search-places {

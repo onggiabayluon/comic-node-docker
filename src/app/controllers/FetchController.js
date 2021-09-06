@@ -6,6 +6,29 @@ const { singleMongooseToObject, multiMongooseToObject } =  require('../../util/m
 
 class SiteController {
 
+    fetchBookmarkContents(req, res, next) {
+      const localStorageContents = req.body.data
+      console.log(localStorageContents)
+
+      // if (req.user) return renderBookmarkData()
+      // return renderLocalData()
+
+      // function renderLocalData() {
+
+      // };
+
+      // function renderBookmarkData() {
+
+      // };
+    }
+
+    getAuth(req, res, next) {
+      res.status(200).render('template/auth.template.hbs', {
+        layout: 'fetch_layout',
+        user: req.user
+      })
+    }
+
     fetchUsers(req, res, next) {
         User
         .find({}).lean()
@@ -19,6 +42,7 @@ class SiteController {
         User
         .findOne({ _id: req.user._id}).lean()
         .select('subscribed -_id')
+        .populate('subscribed')
         // .then(subList => console.log(subList))
         .then(subList => res.send(subList))
         .catch(next)
@@ -83,9 +107,10 @@ class SiteController {
             {
               layout: 'fetch_layout.hbs',
               comments: commentdoc,
-              user: singleMongooseToObject(req.user),
+              user: req.user,
             })
           })
+          .catch(err => console.log(err))
     }
 }
 

@@ -15,5 +15,8 @@ router.get('/comics', Fetchcontroller.fetchComics);
 router.get('/users', Fetchcontroller.fetchUsers);
 // Route: fetch / sublist
 router.get('/sublist', Fetchcontroller.fetchSubList);
-
+// Route: fetch / auth
+router.get('/getAuth', Fetchcontroller.getAuth);
+// Route: fetch / bookmarkContents
+router.post('/bookmarkContents', Fetchcontroller.fetchBookmarkContents);
 module.exports = router;

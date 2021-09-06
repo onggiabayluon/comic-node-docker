@@ -18,9 +18,14 @@ const { IMAGE_URL } = require('../../config/config');
 class ComicController {
 
   historyPage(req, res, next) {
+    let scripts = [
+      'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js',
+      '/js/othersPage/historyPage.scripts.js'
+    ]
     res.status(200).render('history.hbs', {
-      layout: 'home_layout',
-      user: singleMongooseToObject(req.user),
+      layout: 'utility_layout.hbs',
+      user: req.user,
+      scripts: scripts
     })
   };
 
@@ -29,7 +34,7 @@ class ComicController {
     .select('-_id subscribed')
     .populate({
       path: 'subscribed',
-      select: 'title slug thumbnail _id chapters',
+      select: 'title slug thumbnail _id chapters updatedAt',
       populate : {
         path: 'chapters',
         select: 'chapter updatedAt',
@@ -39,12 +44,16 @@ class ComicController {
         }
       }
     })
-    .then(comics => {
-      let subscribedComics = comics.subscribed
+    .then(subscribedComics => {
+      let scripts = [
+        '/js/othersPage/bookmarkPage.scripts.js'
+      ]
       res.status(200).render('bookmark.hbs', {
-        layout: 'home_layout',
-        comics: subscribedComics,
-        user: singleMongooseToObject(req.user),
+        layout: 'utility_layout.hbs',
+        sublist: subscribedComics,
+        img_url: IMAGE_URL,
+        user: req.user,
+        scripts: scripts
       })
     })
     .catch(err => next(err))
@@ -99,17 +108,21 @@ class ComicController {
       let remainingCategories = categoriesDoc.slice(size, categoriesDoc.length)
       let comics = comicsDoc.shift().comic
       let count = countDoc.shift().count
+      let scripts = [
+        '/js/utilityScripts/LazyLoader.js'
+      ]
       res.status(200).render('categories.hbs', {
-        layout: 'home_layout',
+        layout: 'utility_layout.hbs',
         firstCategories: firstCategories,
         remainingCategories: remainingCategories,
-        user: singleMongooseToObject(req.user),
+        user: req.user,
         comics: comics,
         current: page,
                 nextPage,
                 prevPage,
                 prevPage2,
                 pages: Math.ceil(count / PageSize),
+        scripts: scripts
       })
     })
     .catch(err => next(err))
@@ -151,7 +164,7 @@ class ComicController {
           rateCount: rateCount,
           firstChapter: firstChapter,
           lastChapter: lastChapter,
-          user: singleMongooseToObject(req.user),
+          user: req.user,
           subscribe: subscribe,
           img_url: IMAGE_URL
         })
@@ -206,7 +219,7 @@ class ComicController {
           chapter: chapterdoc,
           prevChapter: prevChapter,
           nextChapter: nextChapter,
-          user: singleMongooseToObject(req.user),
+          user: req.user,
           img_url: IMAGE_URL
         })
     };
@@ -214,7 +227,7 @@ class ComicController {
   };
 
   postComment(req, res, next) {
-    // if (!req.user) return res.redirect('back')
+    if (!req.user) return res.send({msg: 'You not logged In yet'})
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
     
     //check nếu truyện đã có 
@@ -238,10 +251,10 @@ class ComicController {
       //không trùng truyện => tạo mới
       const comment = new Comment();
       const newComicComment = {
-          user_id: req.body.user_id,
-          userName: req.body.user_id,
+          user_id: req.user._id,
+          userName: req.user.name,
           text: req.body.text,
-          updatedAt: req.body.updatedAt,
+          updatedAt: new Date().toISOString(),
           reply: []
       }
       
@@ -257,13 +270,12 @@ class ComicController {
     function pushNewComment() {
       const newComment = {
         _id: new ObjectID(),
-        user_id: req.body.user_id,
-        userName: req.body.userName,
+        userId: req.user._id,
+        userName: req.user.name,
         text: req.body.text,
-        updatedAt: req.body.updatedAt,
+        updatedAt: new Date().toISOString(),
         reply: []
       }
-
       Comment.findOneAndUpdate(
         { comicSlug: req.body.comicSlug, "chapter": chapter},
         { $push: { [`commentArr`]: {$each: [newComment], $position: 0} } },
@@ -275,15 +287,17 @@ class ComicController {
 
 
     function sendStufftoClient(newComment) {
+      const commentArr = []
+      commentArr.push(newComment)
       res.status(200).render('template/comment.template.hbs', {
         layout: 'fetch_layout',
-        comments: newComment
+        commentArr: commentArr
       })
     };
   };
   
   destroyComment(req, res, next) {
-    // if (!req.user) return res.redirect('back')
+    if (!req.user) return res.send({error: 'You not logged In yet'})
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
     Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
       .then(commentDoc => {
@@ -308,7 +322,7 @@ class ComicController {
   };
 
   postReply(req, res, next) {
-    // if (!req.user) return res.redirect('back')
+    if (!req.user) return res.send({msg: 'You not logged In yet'})
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
     Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
       .then(commentDoc => {
@@ -321,10 +335,10 @@ class ComicController {
       function pushNewReply(commentDoc) {
         const newReply = {
           _id: new ObjectID(),
-          userName: req.body.userName,
-          user_id: req.body.user_id,
+          userName: req.user.name,
+          user_id: req.user._id,
           text: req.body.text,
-          updatedAt: req.body.updatedAt,
+          updatedAt: new Date().toISOString(),
         }
 
         const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(req.body.comment_id))
@@ -337,16 +351,18 @@ class ComicController {
         sendStufftoClient(newReply, req.body.comment_id);
       };
       function sendStufftoClient(newReply, comment_id) {
+        const reply = []
+        reply.push(newReply)
         res.status(200).render('template/reply.template.hbs', {
           layout: 'fetch_layout',
-          reply: newReply,
+          reply: reply,
           comment_id: comment_id
         })
       };
   };
 
   destroyReply(req, res, next) {
-    // if (!req.user) return res.redirect('back')
+    if (!req.user) return res.send({msg: 'You not logged In yet'})
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
     Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
       .then(commentDoc => {
@@ -375,7 +391,7 @@ class ComicController {
   };
 
   editComment(req, res, next) {
-    // if (!req.user) return res.redirect('back')
+    if (!req.user) return res.send({msg: 'You not logged In yet'})
     // chapter = null => edit comic
     // chapter = number => edit chapter
     const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
@@ -470,7 +486,7 @@ class ComicController {
   subscribeHandling(req, res, next) {
     if (!req.user) return res.send({success: false})
     
-    const userId = req.body.userId
+    const userId = req.user._id
     const comicId = req.body.comicId
 
     if (req.body.subscribeHandling == 'sub') {

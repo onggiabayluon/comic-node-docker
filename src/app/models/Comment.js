@@ -12,10 +12,7 @@ const Comment = new Schema({
   chapter: { type: String, index: true, default: null }, // chapter-1
   commentArr: [{
     //1. user
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    },
+    userId: { type: String },
     //2. User name
     userName: { type: String },
     //3. text

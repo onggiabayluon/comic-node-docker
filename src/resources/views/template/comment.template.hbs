@@ -7,7 +7,7 @@
         <div id="body" class="comment__body">
             {{!-- thumbnail --}}
             <thumbnail id="author-thumbnail" class="author-thumbnail">
-                <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.userName}} Profile Picture" width="40" height="40">
             </thumbnail>
 
             {{!-- main --}}
@@ -16,7 +16,7 @@
                 <header id="header" class="header">
                     <div id="header-author" itemprop="creator" itemscope itemtype="http://schema.org/Person"
                         class="header__author">
-                        <span itemprop="name">India pagoda</span>
+                        <span itemprop="name">{{this.userName}}</span>
                     </div>
                     <div id="header-timer" itemprop="commentTime" class="header__timer text-muted text-small">
                         {{CalcTimeEnglish this.updatedAt}}
@@ -51,7 +51,7 @@
                     <simplebox id="replybox" class="comment mb-4">
                         <div class="comment__body">
                             <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
-                                <img src="/img/profile-pic-l.jpg" alt="" width="40" height="40">
+                                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.userName}} Profile Picture" width="40" height="40">
                             </thumbnail>
                             <div class="comment__form">
                                 <form method="POST" onsubmit="return postReply(this);"

@@ -31,16 +31,8 @@
         </search-places>
         {{> theme-switcher}}
     
-        {{#unless user}}
-        <div class="hotkeyright">
-            <a href="/users/login" type="button" class="btn btn-background mb-1">Log in</a>
-            <a href="/users/register" type="button" class="btn btn-outline mb-1">Sign up</a>
-        </div>
-        {{else}}
-        <div class="hotkeyright">
-            <a href="/users/logout" type="button" class="btn btn-background mb-1">Log out</a>
-        </div>
-        {{/unless}}
+        <div id="hotkeyright" class="hotkeyright"></div>
+        
     </right>
     <mobile-nav>
         <top-info>

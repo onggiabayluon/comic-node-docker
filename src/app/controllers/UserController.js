@@ -1,24 +1,21 @@
-const Comic                     = require('../models/Comic');
-const Chapter                   = require('../models/Chapter');
 const User                      = require('../models/User')
-const TimeDifferent             = require('../../config/middleware/CalcTimeVnmese')
 const bcrypt                    = require('bcrypt');
 const passport                  = require('passport');
-const { multiMongooseToObject } = require('../../util/mongoose');
 const { canChangeRole, canDeleteUser, canChangeBannedStatus }         = require('../../config/permissions/users.permission')
 class UserController {
 
     // login Page
     loginPage(req, res, next) {
+        res.setHeader('Cache-Control', 'private, max-age=0');
         res.render('users/login', {
             layout: 'login_register_layout',
-            referer: req.headers.referer,
+            referer: req.headers.referer || req.headers.referrer,
         })
     }
 
     // Login
     login(req, res, next) {
-        let referer = (req.body.referer) ? req.body.referer : '/'
+        let referer = req.body.referer || '/'
         passport.authenticate('local', {
         successRedirect: referer,
         failureRedirect: '/users/login',
@@ -35,6 +32,7 @@ class UserController {
 
     // Register Page
     registerPage(req, res, next) {
+        res.setHeader('Cache-Control', 'private, max-age=0');
         res.render('users/login', {
             registerSubmit: true,
             layout: 'login_register_layout'

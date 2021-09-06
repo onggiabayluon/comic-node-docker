@@ -88,6 +88,23 @@
 .hotkeyright {
     display: flex;
     flex-direction: row;
+    
+}
+.user {
+    display: flex;
+    flex-direction: row;
+    &__avatar {
+        position: relative;
+        left: -10px;
+        img { border-radius: 30px; }
+    }
+    &__name {
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 96px;
+        margin-top: 2px;
+    }
 }
 search-places {
     position: relative;

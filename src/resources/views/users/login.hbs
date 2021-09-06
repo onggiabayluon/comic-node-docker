@@ -3,6 +3,8 @@
     <form action="/users/register" method="POST" class="sign-form">
       <h1 class="sign-title">Đăng ký</h1>
 
+      <input class="sign-input form-control" value="{{referer}}"
+      name="referer" type="hidden"/>
 
       <input class="sign-input form-control" value="{{name}}"
       name="name" type="text" placeholder="Username" required minlength="6"/>
@@ -26,7 +28,8 @@
     <form action="/users/login" method="POST" class="sign-form">
       <h1 class="sign-title">Đăng Nhập</h1>
 
-
+      <input class="sign-input form-control" value="{{referer}}"
+      name="referer" type="hidden"/>
       <input class="sign-input form-control {{#ifCond name '==' 0}} is-invalid {{/ifCond}} {{#ifCond wrongUsername '==' true}} is-invalid {{/ifCond}} {{#ifCond wrongUsername '==' false}} is-valid {{/ifCond}}" {{#ifCond name '!=' 0}} 
       value="{{../name}}" {{/ifCond}} name="name" type="text" placeholder="Username" required minlength="6"/>
       <input class="sign-input form-control {{#ifCond name '==' 0}} is-invalid {{/ifCond}} {{#ifCond wrongPassword '==' true}} is-invalid {{/ifCond}}" {{#ifCond password '!=' 0}} value="{{../password}}" {{/ifCond}}  

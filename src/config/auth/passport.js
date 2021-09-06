@@ -2,7 +2,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcrypt');
-var mongoose = require('mongoose');
 // Load User model
 const User = require('../../app/models/User');
 
@@ -10,9 +9,10 @@ module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: 'name' }, (name , password, done) => {
       // Match user
-      User.findOne({
-        name : name 
-      }).then(user => {
+      User
+      .findOne({ name : name })
+      .lean()
+      .then(user => {
         if (!user) {
           return done(null, false, { message: 'This user is not registered' });
         }
@@ -34,7 +34,7 @@ module.exports = function(passport) {
   passport.use(new GoogleStrategy({
     clientID: '885722097368-aoh1lfihdgdvef92h8u0a96letbcsh6j.apps.googleusercontent.com',
     clientSecret: 'URETJgo_KhJRHmC-053NQklU',
-    callbackURL: "http://localhost:3000/users/google/callback"
+    callbackURL: "https://cloudimagewall.xyz/users/google/callback"
   }, function (accessToken, refreshToken, profile, done) {
     console.log(profile)
     User.findOne({ googleId: profile.id }).then((googleUserExist) => {
@@ -60,7 +60,7 @@ module.exports = function(passport) {
   passport.use(new FacebookStrategy({
     clientID: '1494820264187159',
     clientSecret: 'e8f94ba8462024f4a4bf0c248953349e',
-    callbackURL: "http://localhost:3000/users/facebook/callback",
+    callbackURL: "https://cloudimagewall.xyz/users/facebook/callback",
     profileFields: ['id', 'displayName', 'picture.type(large)']
   },
     function (accessToken, refreshToken, profile, done) {
@@ -86,12 +86,14 @@ module.exports = function(passport) {
   ));
 
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user._id);
   });
 
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
+    User.findOne({ _id: id})
+    .lean()
+    .select("-password")
+    .then(user => done(null, user))
+    .catch(err => done(err, null))
   });
 };

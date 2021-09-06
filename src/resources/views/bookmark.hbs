@@ -8,6 +8,34 @@
     #card-wrapper grid-container {
         grid-auto-rows: 310px;
     }
+    .glide__slides {
+        flex-wrap: wrap !important;
+    }
+    .glide__slide {
+        width: auto !important;
+        min-width: 200px;
+        padding-bottom: 20px;
+    }
+    @media (max-width: 576px) {
+        #bookmark-places heading {
+            padding: 0px 7% 0 7%!important;
+        }
+        #bookmark-places .container {
+            padding: 0 1rem;
+        }
+        .glide__slides {
+            justify-content: space-around;
+        }
+        .glide__slide {
+            min-width: 45%;
+        }
+        heading .title, heading icon-right {
+            margin: 0;
+        }
+        icon-right, h2 {
+            margin: 0;
+        }
+    }
 </style>
 {{!-- <categories-wrapper id="categories-wrapper">
     <div class="categories-inner">
@@ -28,56 +56,67 @@
     </div>
 </categories-wrapper> --}}
 
-<section id="card-wrapper">
-    <grid-container>
-        {{#unless comics}}
-        <h1>You Not Bookmark Anything Yet.</h1>
-        {{else}}
-        {{#each comics}}
-        <div id="comic-{{this._id}}" class="glide__slide">
-            <glide-img>
-                <img width="198" height="160"
-                    src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp"
-                    alt="">
-            </glide-img>
-            <bottom-info>
-                <a href="/comic/wizard-of-anesia">
-                    <info-title class="ellipsis-2">
-                        {{this.title}}
-                    </info-title>
-                </a>
-                {{#each this.chapters}}
-                <a href="/comic/{{../this.slug}}/{{this.chapter}}">
-                    <info-chapter id="chapter-{{this._id}}">
-                        {{chapterText this.chapter}}
-                        <span>{{CalcTimeEnglish this.updatedAt}}</span>
-                    </info-chapter>
-                </a>
-                {{/each}}
-                <form onclick="return subscribe(this);" class="info-sub info-sub--subscribed">
-                    <input name="comicId" value="{{this._id}}" type="hidden">
-                    <i class="far fa-xs fa-check"></i>
-                </form>
-            </bottom-info>
+<section id="bookmark-places" itemprop="articleSection"class="foreground-color">
+    <heading class="container">
+        <h2 class="title">
+            My Bookmarks
+        </h2>
+        <icon-right>
+            <i class="fas fa-chevron-right"></i>
+        </icon-right>
+    </heading>
+
+    <slider-container id="slider-container" class="d-block container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-12 pl-0 pr-0">
+                        <div id="glide_2" class="glide basic">
+                            <div class="glide__track" data-glide-el="track">
+                                <div id="glide__slides" class="glide__slides">
+
+                                    {{#if user}}
+                                    {{#each sublist.subscribed}}
+                                    <div class="glide__slide">
+                                            <picture>
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" type="image/webp" />
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/jpeg" />
+                                                <img width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                                                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                            </picture>
+                                        {{!-- <badges>
+                                            Up
+                                        </badges> --}}
+                                        <bottom-info>
+                                            <a href="/comic/{{this.slug}}">
+                                                <info-title class="ellipsis">
+                                                    {{this.title}}
+                                                </info-title>
+                                            </a>
+                                            <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}">
+                                                <info-chapter id="chapter-{{getObjValues (limit this.chapters 1) "_id"}}">
+                                                    CH. {{getObjValues (limit this.chapters 1) 'chapter'}}
+                                                    <span>{{CalcTimeEnglish this.updatedAt}}</span>
+                                                </info-chapter>
+                                            </a>
+                                            <form
+                                                onclick="return subscribe(this);" 
+                                                class="info-sub info-sub--subscribed">
+                                                <input name="comicId" value="{{this._id}}" type="hidden">
+                                                <i class="fas fa-check"></i>
+                                            </form>
+                                        </bottom-info>
+                                    </div>
+                                    {{/each}}
+                                    {{/if}}
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        {{/each}}
-        {{/unless}}
-    </grid-container>
+    </slider-container>
 </section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/js/CustomScript.js"></script>
-<script>
-    addClassVisited()
-    function addClassVisited() {
-            //filter remove empty string in array
-            var visited_chapters_list = JSON.parse(localStorage.getItem('visited_chapters')).filter(items => items);
-            if (visited_chapters_list == null ) return
-
-            var $cardWrapper = $('#card-wrapper')
-
-            for (let i = 0; i < visited_chapters_list.length; i++) {
-                $cardWrapper.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
-            }
-        }
-</script>
