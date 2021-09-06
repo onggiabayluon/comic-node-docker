@@ -77,7 +77,7 @@ const updateMongodb = async (keys, counts) => {
                         "view.totalView": {
                             $cond: {
                                 if: { $gt: [ "$view.totalView", null ] },
-                                then: { $add: [ i.count, "$view.dayView.view" ] },
+                                then: { $add: [ i.count, "$view.totalView" ] },
                                 else: { $add: [ i.count, 0 ] }
                             }
                         },
