@@ -1,25 +1,39 @@
-/*************** Global Var ***************/
+/*************************** Global Var ***************************/
+// Comic Info
 var $isComicComment = $("input[type=hidden][name=isComicComment]").val()
 var $isComicReply = $("input[type=hidden][name=isComicReply]").val()
-var $isChapterComment = $("input[type=hidden][name=isChapterComment]").val()
-var $isChapterReply = $("input[type=hidden][name=isChapterReply]").val()
 var isComicDetailPage = ($isComicComment === "true") ? true : false
-// If ComicDetailPage then null Else Nothing
-var fetchParams = (isComicDetailPage) ? '/null' : ''
-/*************** Global Var ***************/
-
-/*************** Fetch bottom Comments when into view ***************/
+var $title = $("input[type=hidden][name=title]").val()
+var $comicSlug = $("input[type=hidden][name=comicSlug]").val()
+var $comicId = $("input[type=hidden][name=comicId]").val()
+// Chapter Info
+var $chapter = $("input[type=hidden][name=chapter]").val() || null
+var $isChapterComment = $("input[type=hidden][name=isChapterComment]").val() || null
+var $isChapterReply = $("input[type=hidden][name=isChapterReply]").val() || null
+// User Info
+var $user_id = $("input[type=hidden][name=user_id]").val()
+var $username = $("input[type=hidden][name=username]").val()
+// Others
+var formData
 var $pathname = window.location.pathname;
 var $search = window.location.search
-
 var $commentBox = $('#commentbox')
 var flag = 0;
+var $userAvatarSrc
+/*  
+**   If ComicDetailPage then fetch using 
+**   add route null Else add nothing 
+*/
+var fetchParams = (isComicDetailPage) ? '/null' : ''
+/*************************** Global Var ***************************/
+
+/*************** Fetch bottom Comments when into view ***************/
 $.fn.isVisible = function () {
     var elementTop = $(this).offset().top;
-    var elementBottom = elementTop + $(this).outerHeight();
+    var elementBottom = elementTop + $(this).outerHeight() + 10;
 
     var viewportTop = $(window).scrollTop();
-    var viewportBottom = viewportTop + $(window).height();
+    var viewportBottom = viewportTop + $(window).height() + 10;
 
     return elementBottom > viewportTop && elementTop < viewportBottom;
 }
@@ -35,6 +49,7 @@ $(window).scroll(function () {
                 contentType: "application/json; charset=utf-8",
                 success: function(result) {
                     $commentBox.append(result)
+                    $userAvatarSrc = $commentBox.find("#my-avatar img").attr('src')
                 },
                 error: function(result) {
                     console.log(result)
@@ -44,6 +59,39 @@ $(window).scroll(function () {
     }
 })
 /*************** Fetch bottom Comments when into view ***************/
+
+/*************** handle fetch more comments button ***************/
+window.fetchMoreComments = function (form) {
+    formData = {
+        page: $(form).data('page'),
+        comicSlug: $comicSlug,
+    }
+    if (!isComicDetailPage) {
+        Object.assign(formData, {
+            chapter: $chapter,
+            isChapterComment: $isChapterComment,
+        })
+    }
+
+    $.ajax({
+        type: "POST",
+        url:`/fetch${$pathname}${fetchParams}/comments${$search}`,
+        data: JSON.stringify(formData),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            if (response) {
+                $(form).data().page++
+                $('#commentcontainer').append(response)
+            } else {
+                $('.tfooter__btn').fadeOut("slow", () => { $(this).remove();});
+            }
+        }
+    })
+    return false;
+}
+
+/*************** handle fetch more comments button ***************/
+
 
 
 /*************** Function ***************/
@@ -55,16 +103,21 @@ window.showInput = function (e) {
 window.resetInput = function (e) {
     $thisbtnbox = $(e).parents('.buttonbox')
     $thisbtnbox.removeClass('buttonbox--flex');
+    $thisbtnbox.parents(".replydialog").toggleClass('d-none')
     $(e).parents('form').trigger("reset");
 };
 
 window.hideReplydialog = function (e) {
     $thisreplydialog = $(e).parents('.replydialog')
     $thisreplydialog.toggleClass('d-none');
+    console.log($thisreplydialog)
 };
 
 window.showReplyBox = function (e) {
     $thisreplybox = $(e).parents('.toolbar').siblings('#replydialog')
+    
+    $thisBoxThumbnail = $thisreplybox.find('#author-thumbnail img');
+    $thisBoxThumbnail.attr('src', $userAvatarSrc);
     $thisreplybox.toggleClass('d-none');
 };
 
@@ -99,6 +152,12 @@ window.editableContent = function (e) {
     $thisContentBox.find('.content__text').val("1").trigger('change');
     $thisContentBox.children('.content__text').attr('contenteditable','true');
     $thisContentBox.find('.buttonbox').toggleClass('buttonbox--flex')
+    // $thisContentBox.addEventListener('keydown', event => {
+    //     if (event.key === 'Enter') {
+    //       document.execCommand('insertLineBreak')
+    //       event.preventDefault()
+    //     }
+    //   })
 };
 
 window.normalState = function (e) {
@@ -116,41 +175,25 @@ window.normalState = function (e) {
 
 
 /*************** Form ***************/
-var $user_id = $("input[type=hidden][name=user_id]").val()
-var $username = $("input[type=hidden][name=username]").val()
-var $title = $("input[type=hidden][name=title]").val()
-var $comicSlug = $("input[type=hidden][name=comicSlug]").val()
-var $chapter = $("input[type=hidden][name=chapter]").val()
-var $comicId = $("input[type=hidden][name=comicId]").val()
-var formData
-var loaded = false;
-
-
-
 
 //  Start POST comment
 window.postComment = function (form) {
-    if (isComicDetailPage) {
-        formData = {
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            isComicComment: $isComicComment,
-            updatedAt: new Date().toISOString()
-        }
-    } else {
-        formData = {
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
+    appendCloneMsg()
+    toggleLoading()
+    formData = {
+        text: form.text.value,
+        title: $title,
+        userId: $user_id,
+        userName: $username,
+        comicSlug: $comicSlug,
+        updatedAt: new Date().toISOString(),
+        isComicDetailPage: true,
+    }
+    if (!isComicDetailPage) {
+        Object.assign(formData, {
+            isComicDetailPage: false,
             chapter: $chapter,
-            isChapterComment: $isChapterComment,
-            updatedAt: new Date().toISOString()
-        }
+        })
     }
     
     $.ajax({
@@ -159,72 +202,36 @@ window.postComment = function (form) {
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            handleSuccessMsg(response)
             socket.emit('new_comment', response)
         },
         error: function (response) {
-            console.log(response)
+            handleErrorMsg(response)
         }
     })
     return false;
 }; 
 
-//  Start destroy comment 
-window.destroyComment = function (form) {
-    if (isComicDetailPage) {
-        formData = {
-            comment_id: form.comment_id.value,
-            comicSlug: $comicSlug,
-        }
-    } else {
-        formData = {
-            comment_id: form.comment_id.value,
-            comicSlug: $comicSlug,
-            chapter: $chapter,
-            isChapterComment: $isChapterComment,
-        }
-    }
-    
-    if (confirm("Delete this Comment ? ?")) {
-        $.ajax({
-            type: "POST",
-            url: `/comic/comment/destroyComment?_method=DELETE`,
-            data: JSON.stringify(formData),
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                if (response?.error) return
-                else socket.emit('delete_comment', formData)
-            }
-        })
-    }
-    return false;
-}; 
-
 //  Start POST reply
 window.postReply = function (form) {
-    if (isComicDetailPage) {
-        formData = {
-            comment_id: form.comment_id.value,
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            updatedAt:  new Date().toISOString()
-        }
-    } else {
-        formData = {
-            comment_id: form.comment_id.value,
-            isChapterReply: $isChapterReply,
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            chapter: $chapter,
-            updatedAt:  new Date().toISOString()
-        }
+    appendCloneMsg()
+    toggleLoading()
+    formData = {
+        comment_id: form.comment_id.value,
+        text: form.text.value,
+        title: $title,
+        userId: $user_id,
+        userName: $username,
+        comicSlug: $comicSlug,
+        updatedAt:  new Date().toISOString(),
+        isComicDetailPage: true,
     }
-    
+    if (!isComicDetailPage) {
+        Object.assign(formData, {
+            chapter: $chapter,
+            isComicDetailPage: false,
+        })
+    }
     $.ajax({
         type: "POST",
         url: `/comic/reply`,
@@ -232,42 +239,80 @@ window.postReply = function (form) {
         contentType: "application/json; charset=utf-8",
         success: function (response) {
             hideReplydialog(form)
-            socket.emit('new_reply', response) 
+            handleSuccessMsg(response)
+            socket.emit('new_reply', {html: response, comment_id: formData.comment_id}) 
         },
         error: function (response) {
-            console.log(response)
+            handleErrorMsg(response)
         }
     })
     return false;
 }; 
 
-//  Start destroy reply 
-window.destroyReply = function (form) {
-    if (isComicDetailPage) {
-        formData = {
-            reply_id: form.reply_id.value,
-            comment_id: form.comment_id.value,
-            comicSlug: $comicSlug,
-        }
-    } else {
-        formData = {
-            reply_id: form.reply_id.value,
-            comment_id: form.comment_id.value,
-            comicSlug: $comicSlug,
+//  Start destroy comment 
+window.destroyComment = function (form) {
+    
+    formData = {
+        comment_id: form.comment_id.value,
+        comicSlug: $comicSlug,
+        isComicDetailPage: true,
+    }
+    if (!isComicDetailPage) {
+        Object.assign(formData, {
             chapter: $chapter,
-            isChapterReply: $isChapterReply,
-        }
+            isComicDetailPage: false,
+        })
     }
     
+    if (confirm("Delete this Comment ? ?")) {
+        appendCloneMsg()
+        toggleLoading()
+        $.ajax({
+            type: "POST",
+            url: `/comic/comment/destroyComment?_method=DELETE`,
+            data: JSON.stringify(formData),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                handleSuccessMsg(response)
+                socket.emit('delete_comment', formData)
+            },
+            error: function (response) {
+                handleErrorMsg(response)
+            }
+        })
+    }
+    return false;
+}; 
+
+//  Start destroy reply 
+window.destroyReply = function (form) {
+    
+    formData = {
+        reply_id: form.reply_id.value,
+        comment_id: form.comment_id.value,
+        comicSlug: $comicSlug,
+        isComicDetailPage: true,
+    }
+    if (!isComicDetailPage) {
+        Object.assign(formData, {
+            chapter: $chapter,
+            isComicDetailPage: false,
+        })
+    }
     if (confirm("Delete this Reply ?")) {
+        appendCloneMsg()
+        toggleLoading()
         $.ajax({
             type: "POST",
             url: `/comic/comment/destroyReply?_method=DELETE`,
             data: JSON.stringify(formData),
             contentType: "application/json; charset=utf-8",
             success: function (response) {
-                if (response?.error) return
-                else socket.emit('delete_reply', formData)
+                handleSuccessMsg(response)
+                socket.emit('delete_reply', formData)
+            },
+            error: function (response) {
+                handleErrorMsg(response)
             }
         })
     }
@@ -276,34 +321,26 @@ window.destroyReply = function (form) {
 
 // Start edit Comment 
 window.editCommentForm = function (form) {
+    appendCloneMsg()
+    toggleLoading()
     $thisVal = $(form).parent().find('.content__text').html()
     form.text.value = $thisVal
-
-    if (isComicDetailPage) {
-        formData = {
-            comment_id: form.comment_id.value,
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            updatedAt: new Date().toISOString(),
-            isComicComment: $isComicComment,
-        }
-    } else {
-        formData = {
-            comment_id: form.comment_id.value,
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            chapter: $chapter,
-            updatedAt: new Date().toISOString(),
-            isChapterComment: $isChapterComment,
-        }
+    formData = {
+        comment_id: form.comment_id.value,
+        text: form.text.value,
+        title: $title,
+        userId: $user_id,
+        userName: $username,
+        comicSlug: $comicSlug,
+        updatedAt: new Date().toISOString(),
+        isComicDetailPage: true,
+        isComment: true,
     }
-    
+    if (!isComicDetailPage) {
+        Object.assign(formData, {
+            isComicDetailPage: false,
+        })
+    }
     
     $.ajax({
         type: "POST",
@@ -311,44 +348,41 @@ window.editCommentForm = function (form) {
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            handleSuccessMsg(response)
             normalState(form)
             socket.emit('edited_comment', response)
+        },
+        error: function (response) {
+            handleErrorMsg(response)
         }
     })
     return false;
 };
 // Start edit reply
 window.editReplyForm = function (form) {
+    appendCloneMsg()
+    toggleLoading()
     $thisVal = $(form).parent().find('.content__text').html()
     form.text.value = $thisVal
-    
-    if (isComicDetailPage) {
-        formData = {
-            comment_id: form.comment_id.value,
-            reply_id: form.reply_id.value,
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            updatedAt: new Date().toISOString(),
-            isComicReply: $isComicReply,
-        }
-    } else {
-        formData = {
-            comment_id: form.comment_id.value,
-            reply_id: form.reply_id.value,
-            text: form.text.value,
-            title: $title,
-            userId: $user_id,
-            userName: $username,
-            comicSlug: $comicSlug,
-            chapter: $chapter,
-            updatedAt: new Date().toISOString(),
-            isChapterReply: $isChapterReply,
-        }
+    formData = {
+        comment_id: form.comment_id.value,
+        reply_id: form.reply_id.value,
+        text: form.text.value,
+        title: $title,
+        userId: $user_id,
+        userName: $username,
+        comicSlug: $comicSlug,
+        updatedAt: new Date().toISOString(),
+        isComicDetailPage: true,
+        isReply: true,
     }
-    
+    if (!isComicDetailPage) {
+        delete formData.isComicReply
+        Object.assign(formData, {
+            chapter: $chapter,
+            isComicDetailPage: false,
+        })
+    }
     
     $.ajax({
         type: "POST",
@@ -356,8 +390,13 @@ window.editReplyForm = function (form) {
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+
+            handleSuccessMsg(response)
             normalState(form)
             socket.emit('edited_reply', response)
+        },
+        error: function (response) {
+            handleErrorMsg(response)
         }
     })
     return false;
@@ -376,9 +415,8 @@ socket.on('new_comment', response => {
 });
 
 socket.on('new_reply', response => {
-    
-    $(`#comment-${formData.comment_id}`).append(response)
-    $(`#comment-${formData.comment_id} > :last-child`).css('display','block').hide().show("slow")
+    $(`#comment-${response.comment_id}`).append(response.html)
+    $(`#comment-${response.comment_id} > :last-child`).css('display','block').hide().show("slow")
 });
 
 socket.on('delete_comment', formData => {
@@ -390,46 +428,12 @@ socket.on('delete_reply', formData => {
 })
 
 socket.on('edited_comment', formData => {
-    $(`#comment-${formData.comment_id}`).find('.content__text').hide().show("slow");
+    $(`#comment-${formData.comment_id}`).find('.content__text').html(formData.text).hide().show("slow");
 })
 socket.on('edited_reply', formData => {
-    $(`#reply-${formData.reply_id}`).find('.content__text').hide().show("slow");
+    $(`#reply-${formData.reply_id}`).find('.content__text').html(formData.text).hide().show("slow");
 })
 /*************** Socket IO ***************/
 
 
-/*************** handle fetch more comments button ***************/
-var _sort = window.location.search;
-window.fetchMoreComments = function (form) {
-    if (isComicDetailPage) {
-        formData = {
-            page: $(form).data('page'),
-            comicSlug: $comicSlug,
-        }
-    } else {
-        formData = {
-            page: $(form).data('page'),
-            comicSlug: $comicSlug,
-            chapter: $chapter,
-            isChapterComment: $isChapterComment,
-        }
-    }
-    
-    $.ajax({
-        type: "POST",
-        url: `/comic/comment/fetch${_sort}`,
-        data: JSON.stringify(formData),
-        contentType: "application/json; charset=utf-8",
-        success: function (response) {
-            if (response) {
-                $(form).data().page++
-                $('#commentcontainer').append(response)
-            } else {
-                $('.tfooter__btn').fadeOut("slow", () => { $(this).remove();});
-            }
-        }
-    })
-    return false;
-}
 
-/*************** handle fetch more comments button ***************/

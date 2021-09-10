@@ -179,6 +179,18 @@ app.engine(
         extname: '.hbs',
           //Hàm tự thêm vào nhờ express handlebars
           helpers: {
+            eq: (v1, v2) => v1 === v2,
+            ne: (v1, v2) => v1 !== v2,
+            lt: (v1, v2) => v1 < v2,
+            gt: (v1, v2) => v1 > v2,
+            lte: (v1, v2) => v1 <= v2,
+            gte: (v1, v2) => v1 >= v2,
+            and() {
+                return Array.prototype.every.call(arguments, Boolean);
+            },
+            or() {
+                return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+            },
             setVar: (varName, varValue, options) => {
                 if (!options.data.root) {
                     options.data.root = {};
@@ -235,6 +247,9 @@ app.engine(
             },
             ifCond: (a,operator,b,options) => {
                 switch (operator) {
+                    case 'authRole':
+                        const filtered = b.split(':').filter(role => role === a);
+                        return (filtered.length > 0) ? options.fn(this) : options.inverse(this);
                     case '%':
                         a++
                         return (a % b == 0) ? options.fn(this) : options.inverse(this);

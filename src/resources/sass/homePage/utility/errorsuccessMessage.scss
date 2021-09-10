@@ -1,0 +1,137 @@
+.message-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.message-box {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    &--danger {
+        background: var(--danger);
+    }
+    &--success {
+        background: var(--success);
+    }
+}
+.small-rounded {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-color);
+    z-index: 1
+}
+.msg-box {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 2;
+    
+    &--fail {
+        background: url('/img/fail.svg') center center no-repeat;
+        &:hover {
+            transform: scale(1.3); 
+        }
+    }
+
+    &--success {
+        background: url('/img/success.svg') center center no-repeat;
+        background-size: 70px 70px;
+        &:hover {
+            transform: scale(1.3); 
+        }
+    }
+
+    
+}
+
+.lds-ellipsis {
+display: inline-block;
+position: relative;
+width: 80px;
+height: 80px;
+z-index: 2
+}
+.lds-ellipsis div {
+position: absolute;
+top: 33px;
+width: 13px;
+height: 13px;
+border-radius: 50%;
+background: var(--danger);
+animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+left: 8px;
+animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+left: 8px;
+animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+left: 32px;
+animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+left: 56px;
+animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+0% {
+transform: scale(0);
+}
+100% {
+transform: scale(1);
+}
+}
+@keyframes lds-ellipsis3 {
+0% {
+transform: scale(1);
+}
+100% {
+transform: scale(0);
+}
+}
+@keyframes lds-ellipsis2 {
+0% {
+transform: translate(0, 0);
+}
+100% {
+transform: translate(24px, 0);
+}
+}
+.ld-float-btt-in {
+animation: ld-float-btt-in 1s 1 linear;
+animation-fill-mode: forwards;
+transform: matrix(1,0,0,1,0,14.925);
+opacity: .05;
+}
+  
+@keyframes ld-float-btt-in {
+    0% {
+        animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
+        transform: translate(0,14.925px);
+        opacity: .05
+    }
+
+    100% {
+        transform: translate(0,0);
+        opacity: 1
+    }
+}

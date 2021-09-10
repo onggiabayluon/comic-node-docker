@@ -183,7 +183,7 @@
     {{#if prevChapter}}
     <div class="container mb-4" style="min-height: unset;">
         <chaptercard>
-            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/{{prevChapter.chapter}}">
+            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/chapter-{{prevChapter.chapter}}">
                 <picture>
                     <source 
                     srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.webp"
@@ -200,7 +200,7 @@
                 
                 <info id="info">
                     <div class="maintext">Prev Chapter</div>
-                    <div class="subtext">{{replaceHyphenIntoSpace prevChapter.chapter}}</div>
+                    <div class="subtext">Chapter {{prevChapter.chapter}}</div>
                 </info>
                 <right-icon id="right-icon">
                     <i class="far fa-chevron-circle-left"></i>
@@ -233,7 +233,7 @@
     {{#if nextChapter}}
     <div class="container mt-4" style="min-height: unset;">
         <chaptercard>
-            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/{{nextChapter.chapter}}">
+            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/chapter-{{nextChapter.chapter}}">
                 <picture>
                     <source 
                     srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.webp"
@@ -251,7 +251,7 @@
                 <info id="info">
                     <div class="maintext">Next Chapter</div>
                     <div class="subtext">
-                        {{replaceHyphenIntoSpace nextChapter.chapter}}
+                        Chapter {{nextChapter.chapter}}
                     </div>
                 </info>
                 <right-icon id="right-icon">

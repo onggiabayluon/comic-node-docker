@@ -1,0 +1,54 @@
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="msgmodal--title" class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="msgmodal--text" class="modal-body">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="loginModal--title" class="modal-title text-danger">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="loginModal--text" class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <div class="social-container mr-auto">
+                    <a href="/users/facebook/login" class="social social-facebook-icon"><img src="/icon/iconmonstr-facebook-1.svg"/></a>
+                    <a href="/users/google/login" class="social social-google-icon"><img src="/icon/iconmonstr-google-plus-1.svg"/></a>
+                </div>
+                <a href="/users/login" type="button" class="btn btn-background-utility mb-1" style="">Log in</a>
+                <a href="/users/register" type="button" class="btn btn-outline-utility mb-1">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<msg-container id="msg-container" class="ld-float-btt-in message-container"></msg-container>
+<message id="msg-box" class="ld-float-btt-in message-box d-none">
+    <div id="msg-box--smallRounded" class="small-rounded d-none"></div>
+    <div id="msg-box--ellipsis" class="lds-ellipsis d-none">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div id="msg-box--fail" class="msg-box msg-box--fail d-none" data-toggle="modal" data-target="#messageModal"></div>
+    <div id="msg-box--success" class="msg-box msg-box--success d-none" data-toggle="modal" data-target="#messageModal"></div>
+</message>

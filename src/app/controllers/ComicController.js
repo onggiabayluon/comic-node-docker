@@ -5,9 +5,8 @@ const User      = require('../models/User');
 const Rate      = require('../models/Rate');
 const Category  = require('../models/Category')
 const ObjectID  = require('mongodb').ObjectID;
-const customError = require('../../util/customErrorHandler')
-const { singleMongooseToObject, multiMongooseToObject } = require('../../util/mongoose');
-
+const customError = require('../../util/customErrorHandler');
+const { okToModifyThisComment, okToModifyThisReply } = require('../middlewares/comments.middleware.js') 
 // Redis
 const path  = require('path');
 const redis = require(path.resolve('./src/config/redis'))
@@ -22,6 +21,7 @@ class ComicController {
       'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js',
       '/js/othersPage/historyPage.scripts.js'
     ]
+    res.setHeader('Cache-Control', 'private, max-age=0');
     res.status(200).render('history.hbs', {
       layout: 'utility_layout.hbs',
       user: req.user,
@@ -30,33 +30,52 @@ class ComicController {
   };
 
   bookmarkPage(req, res, next) {
-    User.findOne({_id: req.user._id}).lean()
-    .select('-_id subscribed')
-    .populate({
-      path: 'subscribed',
-      select: 'title slug thumbnail _id chapters updatedAt',
-      populate : {
-        path: 'chapters',
-        select: 'chapter updatedAt',
-        options: {
-            limit: 2,
-            sort: { updatedAt: -1},
-        }
-      }
-    })
-    .then(subscribedComics => {
-      let scripts = [
-        '/js/othersPage/bookmarkPage.scripts.js'
-      ]
+    const scripts = [
+      '/js/othersPage/bookmarkPage.scripts.js',
+      '/js/utilityScripts/message.scripts.js',
+      '/js/utilityScripts/subscribe.scripts.js'
+    ]
+
+    const renderWithoutUserAuth = () => {
+      res.setHeader('Cache-Control', 'private, max-age=0');
       res.status(200).render('bookmark.hbs', {
         layout: 'utility_layout.hbs',
-        sublist: subscribedComics,
-        img_url: IMAGE_URL,
-        user: req.user,
-        scripts: scripts
+        scripts: scripts,
       })
-    })
-    .catch(err => next(err))
+    };
+
+    const renderWithUserAuth = () => {
+      User.findOne({ _id: req.user._id }).lean()
+        .select('-_id subscribed')
+        .populate({
+          path: 'subscribed',
+          select: 'title slug thumbnail _id chapters updatedAt',
+          populate: {
+            path: 'chapters',
+            select: 'updatedAt',
+            options: {
+              limit: 2,
+              sort: { updatedAt: -1 },
+            },
+            // match: { chapter: { $ne: undefined } }
+          },
+        })
+        .then(subscribedComics => {
+          res.setHeader('Cache-Control', 'private, max-age=0');
+          res.status(200).render('bookmark.hbs', {
+            layout: 'utility_layout.hbs',
+            sublist: subscribedComics,
+            img_url: IMAGE_URL,
+            user: req.user,
+            scripts: scripts
+          })
+        })
+        .catch(err => next(err))
+    };
+
+    if (!req.user) return renderWithoutUserAuth()
+    else return renderWithUserAuth()
+    
   };
 
   categoriesPage(req, res, next) {
@@ -111,6 +130,7 @@ class ComicController {
       let scripts = [
         '/js/utilityScripts/LazyLoader.js'
       ]
+      res.setHeader('Cache-Control', 'public, max-age=1000');
       res.status(200).render('categories.hbs', {
         layout: 'utility_layout.hbs',
         firstCategories: firstCategories,
@@ -131,7 +151,6 @@ class ComicController {
   comicdetailsPage(req, res, next) {
     Promise.all([
       Comic.findOne({ slug: req.params.comicSlug }).lean()
-      .select('title description thumbnail slug updatedAt category chapters view rate')
       .populate('category', 'name')
     ])
       .then(([comicdoc]) => {
@@ -141,22 +160,13 @@ class ComicController {
 
         let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount) * 2).toFixed(2);
         let rateCount = comicdoc.rate.rateCount
-        let subscribe = false
-        let subscribedComic = (req.user) ? req.user.subscribed : []
 
         if (comicdoc?.chapters) comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
         
-        if (subscribedComic) {
-          for (let i = 0; i <= subscribedComic.length; i++) {
-            if (JSON.stringify(subscribedComic[i]) === JSON.stringify(comicdoc._id)) {
-              subscribe = true
-              break;
-            }
-          }
-        }
         let chaptersLength = (comicdoc?.chapters) ? comicdoc.chapters.length : 0 
         let firstChapter = (comicdoc?.chapters) ? comicdoc.chapters[0] : 0 
         let lastChapter = (comicdoc?.chapters) ? comicdoc.chapters[chaptersLength - 1] : 0 
+        res.setHeader('Cache-Control', 'public, max-age=7200');
         res.status(200).render('comic.details.hbs', {
           layout: 'comic.details_layout.hbs',
           comic: comicdoc,
@@ -165,7 +175,6 @@ class ComicController {
           firstChapter: firstChapter,
           lastChapter: lastChapter,
           user: req.user,
-          subscribe: subscribe,
           img_url: IMAGE_URL
         })
       })
@@ -208,10 +217,10 @@ class ComicController {
      
       comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
      
-      // console.log(chaptersList)
-      let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter))
+      let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter).replace("chapter-", ""))
       let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
       let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]
+      res.setHeader('Cache-Control', 'public, max-age=2592000'); // 1 month
       res.status(200).render('chapter.details.hbs',
         {
           layout: 'chapter.details.layout.hbs',
@@ -227,264 +236,393 @@ class ComicController {
   };
 
   postComment(req, res, next) {
-    if (!req.user) return res.send({msg: 'You not logged In yet'})
-    const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
+
+    const reqUserId   = req.user._id,
+          reqUserName = req.user.name,
+          isComicDetailPage = req.body.isComicDetailPage,
+          comments    = [] 
+
+    const chapter = (isComicDetailPage) ? null : req.body.chapter
     
-    //check nếu truyện đã có 
-    Comment.findOne({comicSlug: req.body.comicSlug, chapter: chapter}).lean()
-    .then(commentDoc => {
-      if (!commentDoc) { 
-        // Trường hợp Chưa có comment của truyện này => tạo mới
+    const newComment = {
+      _id: new ObjectID(),
+      userId: reqUserId,
+      userName: reqUserName,
+      text: req.body.text,
+      updatedAt: new Date().toISOString(),
+      reply: []
+    }
 
-        return createNewComicComment()
+    comments.push({commentArr: [newComment]})
 
-      } else {
-        // Trường hợp đã có comment của truyện này => push vô thêm
+    const handlingPush = async () => {
+      try {
 
-        return pushNewComment()
+        const [pushResult, error1]  = await pushNewComment()
+        if (error1) throw new customError(error1, 404)
 
-      }
-    })
-    .catch(err => next(err))
+        return { Status: `Push ${pushResult} comment successfully` }
 
-    function createNewComicComment() {
-      //không trùng truyện => tạo mới
-      const comment = new Comment();
-      const newComicComment = {
-          user_id: req.user._id,
-          userName: req.user.name,
-          text: req.body.text,
-          updatedAt: new Date().toISOString(),
-          reply: []
-      }
-      
-      comment.title = req.body.title
-      comment.comicSlug = req.body.comicSlug
-      comment.chapter = chapter
-      comment.commentArr.push(newComicComment)
-      comment.save()
-      sendStufftoClient(newComicComment);
+      } catch (err) { next(err) }
     };
 
-    
-    function pushNewComment() {
-      const newComment = {
-        _id: new ObjectID(),
-        userId: req.user._id,
-        userName: req.user.name,
-        text: req.body.text,
-        updatedAt: new Date().toISOString(),
-        reply: []
-      }
-      Comment.findOneAndUpdate(
-        { comicSlug: req.body.comicSlug, "chapter": chapter},
-        { $push: { [`commentArr`]: {$each: [newComment], $position: 0} } },
-        {safe: true, upsert: true})
-        .exec()
-      
-      sendStufftoClient(newComment);
+    const pushNewComment = async () => {
+      return Comment
+        .findOneAndUpdate(
+          { comicSlug: req.body.comicSlug, "chapter": chapter },
+          { $push: { [`commentArr`]: { $each: [newComment], $position: 0 } } },
+          { safe: true, upsert: true })
+
+        .then(result => {
+          if (!result) return [null, "Error happen when push comment in db"]
+          else return [1, null]
+        })
+        .catch(err => {
+          return [null, err]
+        })
     };
 
-
-    function sendStufftoClient(newComment) {
-      const commentArr = []
-      commentArr.push(newComment)
-      res.status(200).render('template/comment.template.hbs', {
+    handlingPush()
+    .then(result => {
+      // console.log(result)
+      if(!result) return; 
+      else res.status(200).render('template/comment.template.hbs', {
         layout: 'fetch_layout',
-        commentArr: commentArr
+        comments: comments,
+        user: req.user
       })
-    };
+    })
+    .catch(err => console.log(err))
+    
   };
   
-  destroyComment(req, res, next) {
-    if (!req.user) return res.send({error: 'You not logged In yet'})
-    const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
-    Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
-      .then(commentDoc => {
-        if(!commentDoc) { return next(new customError('Comment Not found', 404)); }
-        return pullComment()
-      })
-      .catch(err => next(err))
+  postReply(req, res, next) {
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
 
-    function pullComment() {
-      Comment.updateOne(
-        { comicSlug: req.body.comicSlug, chapter: chapter },
-        { $pull: { [`commentArr`]: { _id: req.body.comment_id } } },
-      ).exec().catch(next)
+    const isComicDetailPage = req.body.isComicDetailPage,
+          chapter           = (isComicDetailPage) ? null : req.body.chapter,
+          reqUserId         = req.user._id,
+          reqUserName       = req.user.name,
+          clientcomicSlug   = req.body.comicSlug,
+          clientComment_id  = req.body.comment_id,
+          reply             = [],
+          $find             = { comicSlug: clientcomicSlug, chapter: chapter },
+          $match            = { commentArr : { $elemMatch : { _id : clientComment_id } } }
+    
+    const newReply = {
+      _id       : new ObjectID(),
+      userName  : reqUserName,
+      userId    : reqUserId,
+      text      : req.body.text,
+      updatedAt : new Date().toISOString(),
+    }
 
-      sendStufftoClient()
+    reply.push(newReply)
+
+    const handlingPush = async () => {
+      try {
+
+        const [commentDoc, error1]  = await getCommentDoc()
+        if (error1) throw new customError(error1, 404)
+
+        const [pushResult, error2]  = await pushNewReply(commentDoc)
+        if (error2) throw new customError(error2, 500)
+
+        return { Status: `Push ${pushResult} reply successfully` }
+
+      } catch (err) { next(err) }
     };
-    function sendStufftoClient() {
-      res.send({
-        text: 'delete succesfully'
+
+    const getCommentDoc = async () => {
+      return Comment
+        .findOne($find, $match)
+        .lean()
+        .then(commentDoc => {
+          if (!commentDoc) return [null, "comment not existed"]
+          else return [commentDoc, null]
+        })
+        .catch(err => {
+          return [null, err]
+        })
+    };
+
+    const pushNewReply = async (commentDoc) => {
+      const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(clientComment_id))
+      return Comment
+        .updateOne(
+            $find,
+          { $push: { [`commentArr.${commentIndex}.reply`]: newReply } },
+          { safe : true, upsert: true })
+
+        .then(result => {
+          if (!result) return [null, "Error happen when push new reply to db"]
+          else return [1, null]
+        })
+        .catch(err => {
+          return [null, err]
+        })
+    };
+
+    handlingPush()
+    .then(result => {
+      // console.log(result)
+      if(!result) return; 
+      else res.status(200).render('template/reply.template.hbs', {
+        layout: 'fetch_layout',
+        reply: reply,
+        comment_id: clientComment_id,
+        user: req.user
       })
-    };
+      
+    })
+    .catch(err => console.log(err))
+    
   };
 
-  postReply(req, res, next) {
-    if (!req.user) return res.send({msg: 'You not logged In yet'})
-    const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
-    Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
+  destroyComment(req, res, next) {
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
+
+    const clientComicSlug   = req.body.comicSlug,
+          clientChapter     = req.body.chapter,
+          clientComment_id  = req.body.comment_id,
+          userRequest       = req.user,
+          isComicDetailPage = req.body.isComicDetailPage
+
+    const $find = (isComicDetailPage)
+      ? { comicSlug: clientComicSlug, chapter: null }
+      : { comicSlug: clientComicSlug, chapter: clientChapter }
+    
+    // retrieved only qureried element in array
+    const $match = { commentArr : { $elemMatch : { _id : clientComment_id } } }
+
+    const handlingDestroy = async () => {
+      try {
+
+        const [commentDoc, error1]  = await getCommentDoc()
+        if (error1) throw new customError(error1, 404)
+
+        const [ok, error2] = await authUserId(commentDoc)
+        if (error2) throw new customError(error2, 403)
+
+        const [deleteResult, error3] = await pullComment()
+        if (error3) throw new customError(error3, 500)
+        
+        return { message: `Delete ${deleteResult} comment successfully`, status: 200 }
+
+      } catch (err) { 
+        next(err)
+      }
+    };
+
+    const getCommentDoc = async () => {
+      return Comment
+      .findOne($find,$match)
+      .lean()
       .then(commentDoc => {
-
-        return pushNewReply(commentDoc)
-        
+        if (!commentDoc) return [null, "comment not existed"]
+        else return [commentDoc, null]
       })
-      .catch(err => next(err))
+      .catch(err => {
+        return [null, err]
+      })
+    };
 
-      function pushNewReply(commentDoc) {
-        const newReply = {
-          _id: new ObjectID(),
-          userName: req.user.name,
-          user_id: req.user._id,
-          text: req.body.text,
-          updatedAt: new Date().toISOString(),
-        }
+    const authUserId = async (commentDoc) => {
+      const [ok, error] = okToModifyThisComment(commentDoc, userRequest, clientComment_id)
+      if (error) return [null, error]
+      if (!ok)   return [null, "You Dont have permission to delete this Comment"]
+      else return [ok, null]
+    };
 
-        const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(req.body.comment_id))
-        
-        Comment.updateOne(
-          { comicSlug: req.body.comicSlug, "chapter": chapter },
-          { $push: { [`commentArr.${commentIndex}.reply`]: newReply } },
-          { safe : true, upsert: true }).exec()
+    const pullComment = async () => {
+      return Comment
+      .updateOne(
+        { comicSlug: clientComicSlug, chapter: clientChapter },
+        { $pull: { [`commentArr`]: { _id: clientComment_id } } },
+      )
+      .then(updateResult => {
+        if (updateResult.nModified === 0) return [null, "Error happen when delete comment in db"]
+        else return [updateResult.nModified, null]
+      })
+      .catch(err => {
+        return [null, err]
+      })
+    };
 
-        sendStufftoClient(newReply, req.body.comment_id);
-      };
-      function sendStufftoClient(newReply, comment_id) {
-        const reply = []
-        reply.push(newReply)
-        res.status(200).render('template/reply.template.hbs', {
-          layout: 'fetch_layout',
-          reply: reply,
-          comment_id: comment_id
-        })
-      };
+    handlingDestroy()
+      .then(result => {if(!result) return; else res.send(result);})
+      .catch(err => console.log(err))
   };
 
   destroyReply(req, res, next) {
-    if (!req.user) return res.send({msg: 'You not logged In yet'})
-    const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
-    Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean()
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
+    
+    const clientComicSlug   = req.body.comicSlug,
+          clientChapter     = req.body.chapter,
+          clientComment_id  = req.body.comment_id,
+          clientReply_id    = req.body.reply_id,
+          userRequest       = req.user,
+          isComicDetailPage = req.body.isComicDetailPage
+
+    const $find = (isComicDetailPage)
+      ? { comicSlug: clientComicSlug, chapter: null }
+      : { comicSlug: clientComicSlug, chapter: clientChapter }
+    
+    // retrieved only qureried element in array
+    const $match = { commentArr : { $elemMatch : { "reply._id" : clientReply_id } } }
+    
+    const handlingDestroy = async () => {
+      try {
+
+        const [commentDoc, error1]  = await getCommentDoc()
+        if (error1) throw new customError(error1, 404)
+
+        const [ok, error2] = await authUserId(commentDoc)
+        if (error2) throw new customError(error2, 403)
+
+        const [deleteResult, error3] = await pullReply()
+        if (error3) throw new customError(error3, 500)
+        
+        return { message: `Delete ${deleteResult} Reply successfully`, status: 200 }
+      } catch (err) { next(err) }
+    };
+
+    const getCommentDoc = async () => {
+      return Comment
+      .findOne($find,$match)
+      .lean()
       .then(commentDoc => {
-
-        return pullReply(commentDoc)
-
+        if (!commentDoc) return [null, "Reply not existed"]
+        else return [commentDoc, null]
       })
-      .catch(err => next(err))
-
-    function pullReply(commentDoc) {
-      const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(req.body.comment_id))
-     
-      Comment.updateOne(
-        { comicSlug: req.body.comicSlug, chapter: chapter },
-        { $pull: { [`commentArr.${commentIndex}.reply`]: { _id: req.body.reply_id } } },
-      ).exec()
-
-      sendStufftoClient()
+      .catch(err => { return [null, err] })
     };
 
-    function sendStufftoClient() {
-      res.send({
-        text: 'delete succesfully'
-      })
+    const authUserId = async (commentDoc) => {
+      const [ok, error] = okToModifyThisReply(commentDoc, userRequest, clientComment_id, clientReply_id)
+      if (error) return [null, error]
+      if (!ok)   return [null, "You Dont have permission to delete this Comment"]
+      else return [ok, null]
     };
+
+    const pullReply = async () => {
+      return Comment
+      .updateOne(
+        { comicSlug: clientComicSlug, chapter: clientChapter },
+        { $pull: { [`commentArr.0.reply`]: { _id: clientReply_id } } },
+      )
+      .then(updateResult => {
+        if (updateResult.nModified === 0) return [null, "Error happen when delete Reply in db"]
+        else return [updateResult.nModified, null]
+      })
+      .catch(err => { return [null, err] })
+    };
+
+    handlingDestroy()
+      .then(result => {if(!result) return; else res.send(result);})
+      .catch(err => console.log(err))
   };
 
   editComment(req, res, next) {
-    if (!req.user) return res.send({msg: 'You not logged In yet'})
-    // chapter = null => edit comic
-    // chapter = number => edit chapter
-    const chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
-    
-    Comment.findOne({ comicSlug: req.body.comicSlug, chapter: chapter }).lean().select('commentArr')
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
+    const clientComicSlug   = req.body.comicSlug,
+          clientComment_id  = req.body.comment_id,
+          clientReply_id    = req.body.reply_id,
+          clientText        = req.body.text,
+          isComicDetailPage = req.body.isComicDetailPage,
+          userRequest       = req.user,
+          isComment         = req.body.isComment,
+          message           = (isComment) ? 'comment' : 'reply',
+          chapter           = (isComicDetailPage) ? null : req.body.chapter,
+          $find             = { comicSlug: req.body.comicSlug, chapter: chapter }
+
+    const $sendData = (req.body.isComment === true)
+    ? { 
+      comment_id: clientComment_id,
+      text: clientText
+    }
+    : {
+      comment_id: clientComment_id,
+      reply_id: clientReply_id,
+      text: clientText
+    }
+
+    const handlingUpdate = async () => {
+      try {
+
+        const [commentDoc, error1]  = await getCommentDoc()
+        if (error1) throw new customError(error1, 404)
+
+        const [ok, error2] = await authUserId(commentDoc)
+        if (error2) throw new customError(error2, 403)
+
+        const [updateResult, error3] = await update(commentDoc)
+        if (error3) throw new customError(error3, 500)
+
+        return { message: `Update ${updateResult} ${message} successfully`, status: 200 }
+
+      } catch (err) { next(err) }
+    };
+
+    const getCommentDoc = async () => {
+      return Comment
+      .findOne($find)
+      .lean()
       .then(commentDoc => {
-
-        if (req.body.isComicComment == 'true' || req.body.isChapterComment == 'true')
-        return updateComment(commentDoc)
-        
-        if (req.body.isComicReply == 'true' || req.body.isChapterReply == 'true')
-        return updateReply(commentDoc)
-    
+        if (!commentDoc) return [null, "CommentDoc not existed"]
+        else return [commentDoc, null]
       })
-      .catch(err => next(err))
+      .catch(err => { return [null, err] })
+    };
 
-
-    function updateComment(commentDoc) {
-
-      const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(req.body.comment_id))
+    const authUserId = async (commentDoc) => {
+      const [ok, error] = (isComment === true)
+      ? okToModifyThisComment(commentDoc, userRequest, clientComment_id)
+      : okToModifyThisReply(commentDoc, userRequest, clientComment_id, clientReply_id)
       
-      Comment.updateOne(
-        { comicSlug: req.body.comicSlug, chapter: chapter},
-        { $set: { [`commentArr.${commentIndex}.text`]: req.body.text } })
-        .then(() => {
-          res.send({comment_id: req.body.comment_id})
+      if (error) return [null, error]
+      if (!ok)   return [null, "You Dont have permission to delete this Comment"]
+      else return [ok, null]
+    };
+    
+    const update = async (commentDoc) => {
+      
+      const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(clientComment_id))
+      const replyIndex = commentDoc.commentArr[commentIndex]?.reply.findIndex(x => JSON.stringify(x._id) === JSON.stringify(clientReply_id))
+      
+      const $query = { comicSlug: clientComicSlug, chapter: chapter }
+      const $set   = (req.body.isComment === true)
+      ? { $set: { [`commentArr.${commentIndex}.text`]: clientText } }
+      : { $set: { [`commentArr.${commentIndex}.reply.${replyIndex}.text`]: clientText } }
+      
+      return Comment
+        .updateOne(
+          $query,
+          $set,
+        )
+        .then(updateResult => {
+          if (updateResult.nModified === 0) return [null, "Error happen when Set Comment/Reply in db"]
+          else return [updateResult.nModified, null]
         })
-        .catch(next)
+        .catch(err => { return [null, err] })
+        
     };
 
-    function updateReply(commentDoc) {
-
-      const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(req.body.comment_id))
-      const replyIndex = commentDoc.commentArr[commentIndex].reply.findIndex(x => JSON.stringify(x._id) === JSON.stringify(req.body.reply_id))
-
-      Comment.updateOne(
-        { comicSlug: req.body.comicSlug, chapter: chapter},
-        { $set: { [`commentArr.${commentIndex}.reply.${replyIndex}.text`]: req.body.text } })
-        .then(() => {
-          res.send({
-            comment_id: req.body.comment_id,
-            reply_id: req.body.reply_id,
-          })
-        })
-        .catch(next)
-    };
-
-  }
-
-  fetchMoreComments(req, res, next) {
-    let chapter = (req.body.isChapterComment == "true" || req.body.isChapterReply == "true") ? req.body.chapter : null
-    let sort = (req.query.hasOwnProperty('_sort')) ? {[req.query.column]: parseInt(req.query.type)} : {commentArr: -1} 
-    let match = (req.query.hasOwnProperty('_match')) ? {} : { comicSlug: req.body.comicSlug, chapter: chapter }
-    let firstLimit = (req.query.hasOwnProperty('_match')) ? PageSize : 1
-
-    let page = +req.body.page || 1;
-    let PageSize = 10;
-    let skipComment = (page - 1) * PageSize;
-    Comment.aggregate([
-      { $match: match },
-      { $limit: firstLimit },
-      { $unwind: "$commentArr" },
-      { $sort: sort },
-      { $skip: skipComment },
-      { $limit: PageSize },
-      {
-        $addFields: {
-          replyLength : { $size: "$commentArr.reply" }
-        }
-      },
-      {
-        $group: {
-        _id: '$_id',
-        title:      { $first: '$title'      }, 
-        chapter :   { $first: '$chapter'    }, 
-        comicSlug : { $first: '$comicSlug'  }, 
-        commentArr: { $push: '$commentArr'  },
-        replyLength: { $push: '$replyLength'  },}
-      },
-      { $sort: sort },
-    ])
-    .then(commentdoc => {
-      if(!commentdoc) { res.send(false) }
-      res.status(200).render('template/fetch.comments.template.hbs', {
-        layout: 'fetch_layout',
-        comments: commentdoc[0]
-      })
+    handlingUpdate()
+    .then(result => {
+      if(!result) return; 
+      else {
+        Object.assign($sendData, result)
+        res.send($sendData)
+      } 
     })
-    .catch(next)
+    .catch(err => console.log(err))
+    
   };
 
   subscribeHandling(req, res, next) {
-    if (!req.user) return res.send({success: false})
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
     
     const userId = req.user._id
     const comicId = req.body.comicId
@@ -501,9 +639,12 @@ class ComicController {
         { _id: userId },
         { $addToSet: { subscribed: comicId }})
         .then(() => {
-          res.send({ sub: true })
+          res.send({ sub: true, status: 200, message: 'Subscribe successfully' })
         })
-        .catch(next)
+        .catch(err => {
+          console.log(err)
+          next(err)
+        })
     };
     function unSub(userId, comicId) {
       User.updateOne(
@@ -511,9 +652,12 @@ class ComicController {
         { $pull: { subscribed: comicId }})
         .exec()
         .then(() => {
-          res.send({ unsub: true })
+          res.send({ unsub: true, status: 200, message: 'UnSubscribe successfully' })
         })
-        .catch(next)
+        .catch(err => {
+          console.log(err)
+          next(err)
+        })
     };
     
   };
@@ -555,9 +699,8 @@ class ComicController {
 
 
   async rateHandling(req, res, next) {
-
     // If LoggedIn
-    if (!req.user) return res.send({success: false, loggedIn: false})
+    if (!req.user) return next(new customError("You have not logged In yet", 401))
     const $userId = req.user._id
     const $comicId = req.body.comicId
     const $rateVal = req.body.rateVal
@@ -580,11 +723,14 @@ class ComicController {
         )
       ])
       .then(([result1, result2]) => {
-        if (result1.ok && result2.ok) res.send({success: true})
-        else {res.send({success: false})}
+        if (result1.ok && result2.ok) res.send({success: true, status: 200, message: "Rating successfully"})
+        else return next(new customError("someshit happening on server", 500))
       })
-      .catch(err => log(err))
-    } else { res.send({success: false}) }
+      .catch(err => {
+        console.log(err)
+        next(err)
+      })
+    } else { return next(new customError("Not allow to rate second time", 405)) }
   };
 }
 

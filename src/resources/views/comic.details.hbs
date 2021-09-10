@@ -7,7 +7,7 @@
         padding: 0 !important;
     }
 </style>
-
+        
         <section class="cover"> 
             <picture>
                 <source srcset="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" type="image/jpeg" 
@@ -54,17 +54,17 @@
                                 </div>
                                 <div class="p-3 card infoLeft__title col-sm-12">
                                     <h1 id="main-title" class="font-weight-bold">{{comic.title}}</h1>
-                                    <h4 id="sub-title" class="text-muted text-small mb-3">{{comic.author}}</h4>
+                                    <h4 id="sub-title" class="text-muted text-small mb-3">{{comic.subtitle}}</h4>
                                 </div>
                                 <div class="infoLeft__activities">
                                     <ul>
-                                        <form onclick="return subscribe(this);" 
-                                        class="{{#ifCond subscribe '==' true}}bookmark--subscribed{{/ifCond}}
-                                        light-red bookmark btn btn-primary default btn-block mb-1">
-                                            <input type="hidden" name="comicId" value="{{comic._id}}">
-                                            <i class="bookmark__icon far fa-bookmark"></i>
+                                        <form id="subscribe-btn" onclick="return subscribe(this);" 
+                                        class="bookmark light-red btn btn-primary default btn-block mb-1">
+                                            <input id="comicId" type="hidden" name="comicId" value="{{comic._id}}">
+                                            <i id="bookmarkIco" class="bookmark__ico"></i>
                                             <span class="bookmark__text"></span>
                                         </form>
+                                        
                                         <div class="group" style="box-shadow: 0 1px 15px rgb(0 0 0 / 10%), 0 1px 8px rgb(0 0 0 / 10%);">
                                             <div class="group__item">
                                                 <i class="fas fa-user-alt"></i>
@@ -105,7 +105,7 @@
                                     <div class="box">
                                         <div class="box__name">Author</div> <span class="box__value text-muted">
                                             {{#if comic.author}}
-                                                {{this}}
+                                                {{comic.author}}
                                             {{else}}
                                             Updating
                                             {{/if}}

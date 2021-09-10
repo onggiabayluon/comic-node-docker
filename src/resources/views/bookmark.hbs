@@ -2,6 +2,9 @@
     #navbar {
         background: var(--background-color);
     }
+    main {
+        height: 100vw;
+    }
     html, body {
         background: var(--foreground-color);
     }
@@ -13,9 +16,11 @@
     }
     .glide__slide {
         width: auto !important;
-        min-width: 200px;
+        min-width: 210px;
+        max-width: 210px;
         padding-bottom: 20px;
     }
+    
     @media (max-width: 576px) {
         #bookmark-places heading {
             padding: 0px 7% 0 7%!important;
@@ -93,12 +98,14 @@
                                                     {{this.title}}
                                                 </info-title>
                                             </a>
+                                            {{#if this.chapters}}
                                             <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}">
                                                 <info-chapter id="chapter-{{getObjValues (limit this.chapters 1) "_id"}}">
                                                     CH. {{getObjValues (limit this.chapters 1) 'chapter'}}
                                                     <span>{{CalcTimeEnglish this.updatedAt}}</span>
                                                 </info-chapter>
                                             </a>
+                                            {{/if}}
                                             <form
                                                 onclick="return subscribe(this);" 
                                                 class="info-sub info-sub--subscribed">
@@ -108,6 +115,10 @@
                                         </bottom-info>
                                     </div>
                                     {{/each}}
+                                    {{else}}
+                                    
+                                        <h2>Please <a href="/users/login" type="button" class="btn">Log in</a> 
+                                        to View your Bookmarks</h2>
                                     {{/if}}
 
                                 </div>
@@ -120,3 +131,4 @@
         </div>
     </slider-container>
 </section>
+

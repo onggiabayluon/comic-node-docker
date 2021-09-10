@@ -16,9 +16,6 @@ router.get('/categories/:category', ComicController.categoriesPage);
 // comic /  :comicSlug / :chapterSlug 
 router.get('/:comicSlug/:chapter', ComicController.chapterdetailsPage);
 
-// comic /  comment / fetch
-router.post('/comment/fetch', ComicController.fetchMoreComments);
-
 
 // comic / subscribe
 router.post('/rate', ComicController.rateHandling);

@@ -6,7 +6,9 @@ const { authRole, ensureAuthenticated, forwardAuthenticated } = require('../conf
 const Fetchcontroller = require('../app/controllers/FetchController');
 
 // Route: fetch / comics /:comicSlug / :chapter / comments
-router.get('/comic/:comicSlug/:chapter/comments', Fetchcontroller.fetchChapterComments);
+router
+.get('/comic/:comicSlug/:chapter/comments', Fetchcontroller.fetchComments)
+.post('/comic/:comicSlug/:chapter/comments', Fetchcontroller.fetchComments);
 // Route: fetch / comics / :chapterSlug
 router.get('/comics/:chapterSlug', Fetchcontroller.fetchChapters);
 // Route: fetch / comics
@@ -19,4 +21,6 @@ router.get('/sublist', Fetchcontroller.fetchSubList);
 router.get('/getAuth', Fetchcontroller.getAuth);
 // Route: fetch / bookmarkContents
 router.post('/bookmarkContents', Fetchcontroller.fetchBookmarkContents);
+// Route: fetch / getSubsbribeStatus
+router.post('/getSubsbribeStatus', Fetchcontroller.getSubsbribeStatus);
 module.exports = router;

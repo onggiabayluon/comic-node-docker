@@ -5,7 +5,6 @@ const Config   = require('../models/Config');
 const Category   = require('../models/Category');
 const User      = require('../models/User');
 const dbHelper  = require('./dbHelper')
-const { singleMongooseToObject, multiMongooseToObject } = require('../../util/mongoose');
 const { canViewProject, canDeleteProject } = require('../../config/permissions/comics.permission');
 const { IMAGE_URL } = require('../../config/config');
 class meController {
@@ -109,7 +108,7 @@ class meController {
       res.status(200).render('me/Pages.Category.List.hbs',
       {
         layout: 'admin',
-        user: singleMongooseToObject(req.user),
+        user: req.user,
         categories
       })
     })
@@ -124,7 +123,7 @@ class meController {
       , Comic.find({}).lean().select('view title slug').sort({view:-1}).limit(12) // desc
       , Comic.countDocuments({isPublish: true})
       , Comic.countDocuments({isPublish: false})
-      , User.find({}).select('banned role name _id')
+      , User.find({}).select('banned role name _id').lean()
     ])
 
       .then(([comics, comicListView, publishedComic, pendingComic, users]) => {
@@ -134,8 +133,8 @@ class meController {
             publishedComic, pendingComic,
             comicListView: (comicListView),
             comics: (comics),
-            users: multiMongooseToObject(users),
-            user: singleMongooseToObject(req.user),
+            users: users,
+            user: req.user,
           })
       })
       .catch(next);
@@ -152,7 +151,7 @@ class meController {
           {
             layout: 'admin',
             deletedCount,
-            user: singleMongooseToObject(req.user),
+            user: req.user,
           })
       )
       .catch(next);
@@ -162,7 +161,7 @@ class meController {
     res.render('me/faqPage.hbs',
       {
         layout: 'admin',
-        user: singleMongooseToObject(req.user),
+        user: req.user,
       })
   }
 
@@ -172,7 +171,7 @@ class meController {
         res.render('me/Config.banner.hbs',
           {
             layout: 'admin',
-            user: singleMongooseToObject(req.user),
+            user: req.user,
             title: 'Config - Banner',
             config: config,
             configString: JSON.stringify(config),
@@ -224,7 +223,7 @@ class meController {
       res.status(200).render('me/Pages.Comic.Create.hbs',
         {
           layout: 'admin',
-          user: singleMongooseToObject(req.user),
+          user: req.user,
           categories: categories
         })
     });

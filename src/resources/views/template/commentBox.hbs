@@ -1,62 +1,70 @@
-<tools-header id="theader" class="theader">
-    <div itemprop="userInteractionCount" class="title">
-        Comments
-        <span class="title__counter text-small"> ({{#if comments.[0].maxComment}} {{comments.[0].maxComment}} {{else}} 0
-            {{/if}}) </span>
-    </div>
-    <div class="sort-menu">
-        <div class="sort-text dropdown show">
-            <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="sort-icon"></i>
-                Sort
-            </a>
 
-            <div id="sort-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="?">Default</a>
-                <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Newest</a>
-                <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Oldest</a>
-                <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">All</a>
+{{#ifCond withUIContainer '==' true}}
+    <tools-header id="theader" class="theader">
+        <div itemprop="userInteractionCount" class="title">
+            Comments
+            <span class="title__counter text-small"> ({{#if comments.[0].maxComment}} {{comments.[0].maxComment}} {{else}} 0
+                {{/if}}) </span>
+        </div>
+        <div class="sort-menu">
+            <div class="sort-text dropdown show">
+                <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="sort-icon"></i>
+                    Sort
+                </a>
+
+                <div id="sort-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="?">Default</a>
+                    <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Newest</a>
+                    <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Oldest</a>
+                    <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">All</a>
+                </div>
             </div>
         </div>
-    </div>
-</tools-header>
+    </tools-header>
 
-{{#if user}}
-<simplebox id="simplebox" class="comment mb-4">
-    <div id="body" class="comment__body">
-        <thumbnail id="author-thumbnail" class="author-thumbnail">
-            <img src="https://avatars.dicebear.com/api/human/{{user.name}}.svg" alt="{{user.name}} Profile Picture" width="40" height="40">
-        </thumbnail>
-        <div id="main" class="main comment__form">
-            <form id="postCommentForm" method="POST" onsubmit="return postComment(this);"
-                enctype="application/x-www-form-urlencoded">
-                <label class="form-group has-float-label">
+    {{#if ../user}}
+    <simplebox id="simplebox" class="comment mb-4">
+        <div id="body" class="comment__body">
+            <thumbnail id="my-avatar" class="author-thumbnail">
+                {{#unless ../user.avatar}}
+                <img src="https://avatars.dicebear.com/api/human/{{../user.name}}.svg" alt="{{../user.name}} Profile Picture" width="40" height="40">
+                {{else}}
+                <img src="{{../user.avatar}}" alt="{{../user.name}} Profile Picture" width="40" height="40">
+                {{/unless}}
+            </thumbnail>
+            <div id="main" class="main comment__form">
+                <form id="postCommentForm" method="POST" onsubmit="return postComment(this);"
+                    enctype="application/x-www-form-urlencoded">
+                    <label class="form-group has-float-label">
 
-                    <input onclick="return showInput(this);" placeholder="Add a comment ..." name="text"
-                        class="form-control custom-input customInput" required minlength="1">
+                        <input onclick="return showInput(this);" placeholder="Add a comment ..." name="text"
+                            class="form-control custom-input customInput" required minlength="1">
 
-                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
-                        <path d="M0 1 L40 1"></path>
-                        <path d="M0 1 L40 1" class="focus"></path>
-                        <path d="M0 1 L40 1" class="invalid"></path>
-                        <path d="M0 1 L40 1" class="valid"></path>
-                    </svg>
-                </label>
-                <div id="buttonbox" class="buttonbox">
-                    <button type="button" onclick="return resetInput(this);"
-                        class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
-                    <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                        POST</button>
-                </div>
-            </form>
+                        <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                            <path d="M0 1 L40 1"></path>
+                            <path d="M0 1 L40 1" class="focus"></path>
+                            <path d="M0 1 L40 1" class="invalid"></path>
+                            <path d="M0 1 L40 1" class="valid"></path>
+                        </svg>
+                    </label>
+                    <div id="buttonbox" class="buttonbox">
+                        <button type="button" onclick="return resetInput(this);"
+                            class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
+                        <button type="submit" class="ml-4 btn btn-primary default d-block ">
+                            POST</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</simplebox>
-{{else}}
-<p class="text-medium">Login to comment</p>
-<a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
-<a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
-{{/if}}
+    </simplebox>
+    {{else}}
+    <p class="text-medium">Login to comment</p>
+    <a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
+    <a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
+    {{/if}}
+
+{{/ifCond}}
 
 <comments-container id="commentcontainer" itemscope itemtype="http://schema.org/UserComments">
     {{#each comments}}
@@ -68,7 +76,12 @@
             <div id="body" class="comment__body">
                 {{!-- thumbnail --}}
                 <thumbnail id="author-thumbnail" class="author-thumbnail">
-                    <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                    {{#unless this.avatar}}
+                    <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.name}} Profile Picture" width="40"
+                        height="40">
+                    {{else}}
+                    <img src="{{this.avatar}}" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                    {{/unless}}
                 </thumbnail>
 
                 {{!-- main --}}
@@ -114,7 +127,7 @@
                         <simplebox id="replybox" class="comment mb-4">
                             <div class="comment__body">
                                 <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
-                                    <img src="https://avatars.dicebear.com/api/human/{{../../user.name}}.svg" alt="{{../../user.name}} Profile Picture" width="40" height="40">
+                                    <img src="" width="40" height="40">
                                 </thumbnail>
                                 <div class="comment__form">
                                     <form method="POST" onsubmit="return postReply(this);"
@@ -173,13 +186,22 @@
                             <div class="menu__dropdown dropdown-menu">
                                 <a class="dropdown-item" href="#">Report</a>
                                 
-                                {{#ifCond ../../user._id '==' this.userId}}
+                                {{#ifCond ../../user.role 'authRole' 'admin:extraadmin'}}
                                     <div class="dropdown-divider"></div>
                                     <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
                                     <form method="POST" onclick="return destroyComment(this);" enctype="application/x-www-form-urlencoded">
-                                        <input class="form-control" name="comment_id" value="{{this._id}}" type="hidden"></input>
+                                        <input class="form-control" name="comment_id" value="{{../this._id}}" type="hidden"></input>
                                         <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
                                     </form>
+                                {{else}}
+                                    {{#ifCond ../../../user._id '==' ../this.userId}}
+                                        <div class="dropdown-divider"></div>
+                                        <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                                        <form method="POST" onclick="return destroyComment(this);" enctype="application/x-www-form-urlencoded">
+                                            <input class="form-control" name="comment_id" value="{{../this._id}}" type="hidden"></input>
+                                            <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
+                                        </form>
+                                    {{/ifCond}}
                                 {{/ifCond}}
                                 
                             </div>
@@ -199,7 +221,12 @@
                 <div id="body" class="comment__body">
                     {{!-- thumbnail --}}
                     <thumbnail id="author-thumbnail" class="author-thumbnail">
-                        <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                        {{#unless this.avatar}}
+                        <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.name}} Profile Picture"
+                            width="40" height="40">
+                        {{else}}
+                        <img src="{{this.avatar}}" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                        {{/unless}}
                     </thumbnail>
 
                     {{!-- main --}}
@@ -242,11 +269,12 @@
                         </toolbar>
 
                         {{!-- replydialog --}}
+                        {{#if ../../../user}}
                         <replydialog id="replydialog" class="replydialog d-none">
                             <simplebox id="replybox" class="comment mb-4">
                                 <div class="comment__body">
                                     <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
-                                        <img src="https://avatars.dicebear.com/api/human/{{../../../user.name}}.svg" alt="{{../../../user.name}} Profile Picture" width="40" height="40">
+                                        <img src="" width="40" height="40">
                                     </thumbnail>
                                     <div class="comment__form">
                                         <form method="POST" onsubmit="return postReply(this);"
@@ -275,27 +303,39 @@
                                 </div>
                             </simplebox>
                         </replydialog>
-
+                        {{/if}}
 
                         {{!-- Edit menu --}}
                         <action-menu-renderer class="action-menu-renderer">
-                            <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="menu__icon fas fa-ellipsis-v"></i>
                                 <div class="menu__dropdown dropdown-menu">
-                                    <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
                                     <a class="dropdown-item" href="#">Report</a>
-                                    <div class="dropdown-divider"></div>
-                                    <form method="POST" onclick="return destroyReply(this);"
-                                        enctype="application/x-www-form-urlencoded">
-                                        <input name="reply_id" value="{{this._id}}" type="hidden"></input>
-                                        <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
-                                        <button type="submit" aria-label="Close"
-                                            class="text-danger dropdown-item">Delete</a>
-                                    </form>
+                        
+                                    {{#ifCond ../../../user.role 'authRole' 'admin:extraadmin'}}
+                                        <div class="dropdown-divider"></div>
+                                        <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                                        <form method="POST" onclick="return destroyReply(this);" enctype="application/x-www-form-urlencoded">
+                                            <input name="reply_id" value="{{../this._id}}" type="hidden"></input>
+                                            <input name="comment_id" value="{{../../this._id}}" type="hidden"></input>
+                                            <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
+                                        </form>
+                                    {{else}}
+                                        {{#ifCond ../../../../user._id '==' ../this.userId}}
+                                        <div class="dropdown-divider"></div>
+                                        <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                                        <form method="POST" onclick="return destroyReply(this);" enctype="application/x-www-form-urlencoded">
+                                            <input name="reply_id" value="{{../this._id}}" type="hidden"></input>
+                                            <input name="comment_id" value="{{../../this._id}}" type="hidden"></input>
+                                            <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
+                                        </form>
+                                        {{/ifCond}}
+                                    {{/ifCond}}
+
                                 </div>
                             </action-menu>
                         </action-menu-renderer>
+
                     </div> {{!-- End main --}}
                 </div> {{!-- End body --}}
 
@@ -308,12 +348,14 @@
     {{/each}}
 </comments-container>
 
-{{#ifCond comments.[0].maxComment '>=' 10}}
-<tools-footer id="tfooter" class="tfooter">
-    <a data-page="2" onclick="return fetchMoreComments(this);"
-        class="light-red tfooter__btn btn btn-primary default mb-1">
-        More comments
-    </a>
-</tools-footer>
+{{#ifCond withUIContainer '==' true}}
+    {{#ifCond ../comments.[0].maxComment '>=' 10}}
+    <tools-footer id="tfooter" class="tfooter">
+        <a data-page="2" onclick="return fetchMoreComments(this);"
+            class="light-red tfooter__btn btn btn-primary default mb-1">
+            More comments
+        </a>
+    </tools-footer>
+    {{/ifCond}}
 {{/ifCond}}
 </div>

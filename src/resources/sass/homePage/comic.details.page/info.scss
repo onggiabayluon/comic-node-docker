@@ -33,7 +33,7 @@
         text-align: center;
         padding: 0.9rem;
         
-
+        
         &--subscribed {
             color: var(--button-text-color) !important;
             background-color: darkness(--theme-color-1, 8%);
@@ -45,6 +45,14 @@
                     content: "Subscribed";
                 }
             }
+            .bookmark__ico {
+                &::before {
+                    content: "\f02e";
+                    font-family: "Font Awesome 5 Free";
+                    font-style: normal;
+                    font-weight: 900;
+                }
+            }
         }
 
         &__text {
@@ -52,6 +60,14 @@
 
             &::after {
                 content: "Subscribe";
+            }
+        }
+
+        &__ico {
+            &::before {
+                content: "\f02e";
+                font-family: "Font Awesome 5 Free";
+                font-style: normal;
             }
         }
     }
@@ -69,9 +85,15 @@
         &__name {
             font-weight: 500;
         }
+
         &__value {
             font-weight: 100;
             font-size: 0.8rem;
+            white-space: nowrap;
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: right;
 
             &--bold {
                 letter-spacing: 0.2em;

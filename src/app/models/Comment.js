@@ -7,29 +7,26 @@ const trimEng         = require('../../config/middleware/trimEng')
 const opts = { timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") }};
 
 const Comment = new Schema({
-  comicSlug: { type: String, index: true },
-  title: { type: String },
-  chapter: { type: String, index: true, default: null }, // chapter-1
+  comicSlug: { type: String, require: true, index: true },
+  title: { type: String, require: true },
+  chapter: { type: String, require: true, index: true, default: null }, // chapter-1
   commentArr: [{
     //1. user
-    userId: { type: String },
+    userId: { type: String, require: true },
     //2. User name
-    userName: { type: String },
+    userName: { type: String, require: true },
     //3. text
-    text: { type: String, trim: true },
+    text: { type: String, require: true, trim: true },
     //4. updated time
     updatedAt: { type: Date },
     //5. reply
     reply: [{
       //5.1 user 
-      userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      },
+      userId: { type: String, require: true },
       //5.1 user name
-      userName: { type: String },
+      userName: { type: String, require: true },
       //5.3 text
-      text: { type: String },
+      text: { type: String, require: true },
       //5.4 updated time
       updatedAt: { type: Date },
     }],

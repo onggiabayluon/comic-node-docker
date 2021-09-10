@@ -13,6 +13,12 @@ data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         </name>
     </div>
     <div class="dropdown-menu mt-3">
+        {{#if (or
+        (eq user.role "admin")
+        (eq user.role "extraAdmin"))}}
+        <a onclick="location = this.href" class="dropdown-item text-danger" href="/me/stored/comics/dashboard/admin">
+        Admin Dashboard</a>
+        {{/if}}
         <a onclick="location = this.href" class="dropdown-item" href="#">Account</a>
         <a onclick="location = this.href" class="dropdown-item" href="#">Features</a>
         <a onclick="location = this.href" class="dropdown-item" href="#">History</a>

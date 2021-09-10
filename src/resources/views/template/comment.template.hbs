@@ -1,5 +1,6 @@
 
-{{#each commentArr}}
+{{#each comments}}
+{{#each this.commentArr}}
 <comment-thread-renderer id="comment-{{this._id}}">
 
     <comment-renderer id="comment" class="comment">
@@ -7,7 +8,12 @@
         <div id="body" class="comment__body">
             {{!-- thumbnail --}}
             <thumbnail id="author-thumbnail" class="author-thumbnail">
-                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                {{#unless this.avatar}}
+                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg"
+                    alt="{{this.name}} Profile Picture" width="40" height="40">
+                {{else}}
+                <img src="{{this.avatar}}" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                {{/unless}}
             </thumbnail>
 
             {{!-- main --}}
@@ -31,7 +37,7 @@
                         <input name="comment_id" value="{{this._id}}" type="hidden">
                         <textarea name="text" style="display:none"></textarea>
                         <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
-                            <button type="button" onfocus="return normalState(this);"
+                            <button type="button" onclick="return normalState(this);"
                                 class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                             <button type="submit" class="ml-4 btn btn-primary default d-block ">
                                 Edit</button>
@@ -51,7 +57,7 @@
                     <simplebox id="replybox" class="comment mb-4">
                         <div class="comment__body">
                             <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
-                                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                                <img src="" width="40" height="40">
                             </thumbnail>
                             <div class="comment__form">
                                 <form method="POST" onsubmit="return postReply(this);"
@@ -70,7 +76,7 @@
                                         </svg>
                                     </label>
                                     <div id="buttonbox" class="buttonbox buttonbox--flex">
-                                        <button type="button" onfocus="return resetInput(this);"
+                                        <button type="button" onclick="return resetInput(this);"
                                             class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                         <button type="submit" class="ml-4 btn btn-primary default d-block ">
                                             POST</button>
@@ -81,45 +87,23 @@
                     </simplebox>
                 </replydialog>
 
-                {{!-- replies expander --}}
-                {{#if ../this.replyLength}}
-                {{setVar "replyLength" (getValues ../this.replyLength @index)}}
-                {{#ifCond @root.replyLength '>=' 1}}
-                <expander id="replies" class="replies">
-                    <comment-replies-renderer>
-                        <expanderbtn onclick="return expander(this);" id="expander" class="expander"
-                            data-expander="hide">
-                            <div id="more-replies" class="expander__more">
-                                <i class="expander__icon fas fa-caret-down"></i>
-                                <span class="expander__text">{{@root.replyLength}} more replies</span>
-                            </div>
-                            <div id="less-replies" class="expander__less d-none">
-                                <i class="expander__icon fas fa-caret-up"></i>
-                                <span class="expander__text">Hide {{@root.replyLength}} replies</span>
-                            </div>
-                        </expanderbtn>
-                    </comment-replies-renderer>
-                </expander>
-                {{/ifCond}}
-                {{/if}}
-
                 {{!-- Edit menu --}}
                 <action-menu-renderer class="action-menu-renderer">
                     <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="menu__icon fas fa-ellipsis-v"></i>
                         <div class="menu__dropdown dropdown-menu">
-                            <a onclick="return editableContent(this);" class="dropdown-item" href="#">
-                                Edit</a>
                             <a class="dropdown-item" href="#">Report</a>
-                            <div class="dropdown-divider"></div>
 
+                            <div class="dropdown-divider"></div>
+                            <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
                             <form method="POST" onclick="return destroyComment(this);"
                                 enctype="application/x-www-form-urlencoded">
                                 <input class="form-control" name="comment_id" value="{{this._id}}"
                                     type="hidden"></input>
                                 <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
                             </form>
+
                         </div>
                     </action-menu>
                 </action-menu-renderer>
@@ -131,4 +115,5 @@
     </comment-renderer>
 
 </comment-thread-renderer>
+{{/each}}
 {{/each}}

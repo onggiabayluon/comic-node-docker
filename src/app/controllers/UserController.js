@@ -10,6 +10,7 @@ class UserController {
         res.render('users/login', {
             layout: 'login_register_layout',
             referer: req.headers.referer || req.headers.referrer,
+            title: 'Sign in to your Account'
         })
     }
 
@@ -35,7 +36,8 @@ class UserController {
         res.setHeader('Cache-Control', 'private, max-age=0');
         res.render('users/login', {
             registerSubmit: true,
-            layout: 'login_register_layout'
+            layout: 'login_register_layout',
+            title: 'Register new Account'
         })
     }
     

@@ -12,7 +12,12 @@ const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 class SiteController {
 
     test2(req, res, next) {
-        res.json(req.user)
+        const Comment      = require('../models/Comment');
+        const   $find = { comicSlug: "kill-the-hero", chapter: null },
+                $match = { commentArr : { $elemMatch : { "reply._id" : '61375c28d291b036c8068b03' } } }
+        Comment.findOne($find,$match)
+        .then(resu=>res.json(resu))
+        // res.json(req.user)
         // Comic.updateMany({}, {$unset: {lastest_chapters: 1 }}).then(res => console.log(res))
 
     }
@@ -122,7 +127,7 @@ class SiteController {
                 home_url: HOME_URL,
                 home_sitename: HOME_SITENAME
             }
-            // res.setHeader('Cache-Control', 'public, max-age=1000');
+            res.setHeader('Cache-Control', 'public, max-age=1000');
             res.status(200).render('home', { 
                 layout: 'home_layout',
                 comics: comicsDoc,

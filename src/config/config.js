@@ -14,9 +14,11 @@ module.exports = {
     WASABI_REGION: process.env.WASABI_REGION || "ap-northeast-1",
     IMAGE_URL: process.env.URL || "https://s3.ap-northeast-1.wasabisys.com/cloudimagewallbucket",
 
+    
+
     UPDATE_PER_MIN: 10,
 
-    HOME_TITLE: "Dorecomic - Read Manga Online",
+    HOME_TITLE: "Read Manga Online - Dorecomic",
     HOME_DESCRIPTION: "Read manga online free at Dorecomic with fastest update",
     HOME_KEYWORDS: "read manga online, dorecomic, dorecomic.com, manga online free, free manga, manga reader, manga scans, manga raw, manga, manhwa, manhua",
     HOME_URL: "https://139.59.240.138:3000",

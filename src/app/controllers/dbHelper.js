@@ -1,14 +1,11 @@
 const Comic = require('../models/Comic');
 const Chapter = require('../models/Chapter')
 const Category = require('../models/Category')
-const TimeDifferent = require('../../config/middleware/CalcTimeVnmese')
 const removeVietnameseTones = require('../../config/middleware/VnameseToEng');
 const trimEng = require('../../config/middleware/trimEng')
 const shortid = require('shortid');
 const customError = require('../../util/customErrorHandler')
-const mongoose = require('mongoose');
 const deleteMiddleWare = require('../middlewares/S3DeleteMiddleware');
-const { singleMongooseToObject, multiMongooseToObject } = require('../../util/mongoose');
 const { IMAGE_URL } = require('../../config/config');
 
 
@@ -56,7 +53,7 @@ const comicListPage_Pagination_Helper = (exports.comicListPage_Pagination_Helper
               nextPage,
               prevPage,
               prevPage2,
-              user: singleMongooseToObject(req.user),
+              user: req.user,
               pages: Math.ceil(count / PageSize),
               comics: comics,
               img_url: IMAGE_URL
@@ -170,7 +167,7 @@ const comicEditPage_Helper = (exports.comicEditPage_Helper
             .status(200)
             .render('me/Pages.Comic.edit.hbs', {
               layout: 'admin',
-              user: singleMongooseToObject(req.user),
+              user: req.user,
               comic: comic,
               intersection: (intersection) ,
               difference: (difference),

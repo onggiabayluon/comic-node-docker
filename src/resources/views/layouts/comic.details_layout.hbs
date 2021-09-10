@@ -47,6 +47,10 @@
             <article itemscope itemtype="http://schema.org/Article">
                 {{{body}}}  
             </article>
+
+            <modal>
+                {{> errorsuccessMessage}}
+            </modal>
         </main>
         
         <footer>
@@ -64,8 +68,10 @@
     <script src="/js/vendor/stars.js"></script>
     <script src="/js/vendor/theme-switcher.js"></script>
     <script src="/js/utilityScripts/getAuth.js"></script>
+    <script src="/js/utilityScripts/message.scripts.js"></script>
+    <script src="/js/utilityScripts/subscribe.scripts.js"></script>
     <script src="/js/utilityScripts/navbar.user.main.js"></script>
-    <script src="/js/utilityScripts/comments.scripts.js" defer></script>
+    <script src="/js/utilityScripts/comments.scripts.js?v1.0.3.3" defer></script>
     <script src="/js/comicDetailsPage/comic.details.js" defer></script>
 
 </body>

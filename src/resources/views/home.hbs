@@ -518,10 +518,10 @@
                     </info-chapter>
                 \{{/each}}
             </a>
-            <info-sub onclick="return subscribe(this);" class="info-sub">
-                <input name="comicId" value="temp" type="hidden">
+            <form onclick="return subscribe(this);" class="info-sub">
+                <input name="comicId" value="\{{this.comicId}}" type="hidden">
                 <i class="fas fa-check"></i>
-            </info-sub>
+            </form>
         </bottom-info>
     </div>
     \{{/each}}

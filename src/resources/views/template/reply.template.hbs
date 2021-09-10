@@ -1,13 +1,17 @@
 
-{{#each reply}}
+{{#each this.reply}}
 <replies-renderer id="reply-{{this._id}}" class="expander__content expander__content--hide">
     <comment-renderer id="comment" class="comment">
         {{!-- body --}}
         <div id="body" class="comment__body">
             {{!-- thumbnail --}}
             <thumbnail id="author-thumbnail" class="author-thumbnail">
+                {{#unless this.avatar}}
                 <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg"
-                    alt="{{this.userName}} Profile Picture" width="40" height="40">
+                    alt="{{this.name}} Profile Picture" width="40" height="40">
+                {{else}}
+                <img src="{{this.avatar}}" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                {{/unless}}
             </thumbnail>
 
             {{!-- main --}}
@@ -44,9 +48,7 @@
                 <toolbar id="toolbar" class="toolbar">
                     <div id="like"><i class="fas fa-thumbs-up"></i></div>
                     <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
-                    {{#if ../../user}}
                     <div onclick="return showReplyBox(this);" id="reply">Reply</div>
-                    {{/if}}
                 </toolbar>
 
                 {{!-- replydialog --}}
@@ -54,8 +56,7 @@
                     <simplebox id="replybox" class="comment mb-4">
                         <div class="comment__body">
                             <thumbnail id="author-thumbnail" class="author-thumbnail author-thumbnail--small">
-                                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg"
-                                    alt="{{this.userName}} Profile Picture" width="40" height="40">
+                                <img src="" width="40" height="40">
                             </thumbnail>
                             <div class="comment__form">
                                 <form method="POST" onsubmit="return postReply(this);"
@@ -85,8 +86,27 @@
                     </simplebox>
                 </replydialog>
 
-
                 {{!-- Edit menu --}}
+                <action-menu-renderer class="action-menu-renderer">
+                    <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="menu__icon fas fa-ellipsis-v"></i>
+                        <div class="menu__dropdown dropdown-menu">
+                            <a class="dropdown-item" href="#">Report</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                            <form method="POST" onclick="return destroyReply(this);"
+                                enctype="application/x-www-form-urlencoded">
+                                <input name="reply_id" value="{{this._id}}" type="hidden"></input>
+                                <input name="comment_id" value="{{../comment_id}}" type="hidden"></input>
+                                <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
+                            </form>
+
+                        </div>
+                    </action-menu>
+                </action-menu-renderer>
+
                 <action-menu-renderer class="action-menu-renderer">
                     <action-menu class="menu menu--style" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
