@@ -145,7 +145,7 @@
 
         <mid-items id="mid-items">
             {{#if prevChapter}}
-            <a href="/comic/{{comics.slug}}/{{prevChapter.chapter}}"><i class="fad fa-2x fa-caret-square-left"></i></a>
+            <a href="/comic/{{comics.slug}}/chapter-{{prevChapter.chapter}}"><i class="fad fa-2x fa-caret-square-left"></i></a>
             {{else}}
             <a href="#"><i class="fad fa-2x fa-caret-square-left"></i></a>
             {{/if}}
@@ -158,7 +158,7 @@
             </select>
 
             {{#if nextChapter}}
-            <a href="/comic/{{comics.slug}}/{{nextChapter.chapter}}"><i class="fad fa-2x fa-caret-square-right"></i></a>
+            <a href="/comic/{{comics.slug}}/chapter-{{nextChapter.chapter}}"><i class="fad fa-2x fa-caret-square-right"></i></a>
             {{else}}
             <a href="#"><i class="fad fa-2x fa-caret-square-right"></i></a>
             {{/if}}

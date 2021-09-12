@@ -19,7 +19,7 @@ var url = document.location.href;
 if (url.match(/\?page./)) {
     document.location = url + `#${page}`;
     if (url.match(/\#./)) document.location = url;
-}
+} 
 
 /*************** Tooltip ***************/
 $('[data-toggle="tooltip"]').tooltip()

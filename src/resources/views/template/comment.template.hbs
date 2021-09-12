@@ -8,11 +8,11 @@
         <div id="body" class="comment__body">
             {{!-- thumbnail --}}
             <thumbnail id="author-thumbnail" class="author-thumbnail">
-                {{#unless this.avatar}}
-                <img src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg"
-                    alt="{{this.name}} Profile Picture" width="40" height="40">
+                {{#unless ../../user.avatar}}
+                <img src="https://avatars.dicebear.com/api/human/{{../../user.name}}.svg"
+                    alt="{{../../user.name}} Profile Picture" width="40" height="40">
                 {{else}}
-                <img src="{{this.avatar}}" alt="{{this.userName}} Profile Picture" width="40" height="40">
+                <img src="{{../../user.avatar}}" alt="{{../../user.name}} Profile Picture" width="40" height="40">
                 {{/unless}}
             </thumbnail>
 

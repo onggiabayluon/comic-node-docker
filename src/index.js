@@ -6,20 +6,21 @@ const express       = require('express');
 const cookieParser  = require('cookie-parser')
 const morgan        = require('morgan');
 const compression   = require('compression');
-const session       = require('express-session');
 const passport      = require('passport');
 const flash         = require('connect-flash')
 const sortMiddleWare= require('./app/middlewares/meControllerSort.middleware')
 const favicon       = require('serve-favicon');
 const CalcTimeEnglish      = require('./config/middleware/CalcTimeEnglish')
 const methodOverride = require('method-override');
-const redis     = require(path.resolve('./src/config/redis'))
 const auto      = require(path.resolve('./src/util/autoUpdateView.js'))
 const cors      = require("cors");
 const CronJob   = require('cron').CronJob;
 const handlebars = require('express-handlebars');
 const Handlebars = require('handlebars');
 const { UPDATE_PER_MIN } = require("./config/config")
+const session       = require('express-session');
+const redis     = require(path.resolve('./src/config/redis'))
+const RedisStore = require('connect-redis')(session)
 
 // db and route
 const route = require('./routes');
@@ -86,12 +87,13 @@ io.on('connection', client => {
 
 // sessionConfig
 const sessionConfig = {
+    store: new RedisStore({ client: redis.client }),
     secret: 'secret',
     resave: false,
     saveUninitialized: false,
     cookie : {
         sameSite: 'strict',
-        maxAge: 2592000,
+        maxAge: 2592000 * 1000, // 1month
         secure: false
     },
 };

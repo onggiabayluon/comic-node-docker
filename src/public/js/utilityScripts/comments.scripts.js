@@ -110,7 +110,6 @@ window.resetInput = function (e) {
 window.hideReplydialog = function (e) {
     $thisreplydialog = $(e).parents('.replydialog')
     $thisreplydialog.toggleClass('d-none');
-    console.log($thisreplydialog)
 };
 
 window.showReplyBox = function (e) {

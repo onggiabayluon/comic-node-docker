@@ -240,18 +240,20 @@ class ComicController {
 
     const reqUserId   = req.user._id,
           reqUserName = req.user.name,
+          reqUserAvatar = req.user.avatar,
           isComicDetailPage = req.body.isComicDetailPage,
           comments    = [] 
 
     const chapter = (isComicDetailPage) ? null : req.body.chapter
     
     const newComment = {
-      _id: new ObjectID(),
-      userId: reqUserId,
-      userName: reqUserName,
-      text: req.body.text,
-      updatedAt: new Date().toISOString(),
-      reply: []
+      _id       : new ObjectID(),
+      userId    : reqUserId,
+      userName  : reqUserName,
+      avatar    : reqUserAvatar,
+      text      : req.body.text,
+      updatedAt : new Date().toISOString(),
+      reply     : []
     }
 
     comments.push({commentArr: [newComment]})
@@ -272,8 +274,7 @@ class ComicController {
         .findOneAndUpdate(
           { comicSlug: req.body.comicSlug, "chapter": chapter },
           { $push: { [`commentArr`]: { $each: [newComment], $position: 0 } } },
-          { safe: true, upsert: true })
-
+          { safe: true, upsert: true, new: true })
         .then(result => {
           if (!result) return [null, "Error happen when push comment in db"]
           else return [1, null]
@@ -304,16 +305,18 @@ class ComicController {
           chapter           = (isComicDetailPage) ? null : req.body.chapter,
           reqUserId         = req.user._id,
           reqUserName       = req.user.name,
+          reqUserAvatar     = req.user.avatar,
           clientcomicSlug   = req.body.comicSlug,
           clientComment_id  = req.body.comment_id,
-          reply             = [],
-          $find             = { comicSlug: clientcomicSlug, chapter: chapter },
-          $match            = { commentArr : { $elemMatch : { _id : clientComment_id } } }
+          reply             = []
+          // $find             = { comicSlug: clientcomicSlug, chapter: chapter },
+          // $match            = { commentArr : { $elemMatch : { _id : clientComment_id } } }
     
     const newReply = {
       _id       : new ObjectID(),
       userName  : reqUserName,
       userId    : reqUserId,
+      avatar    : reqUserAvatar,
       text      : req.body.text,
       updatedAt : new Date().toISOString(),
     }
@@ -322,11 +325,7 @@ class ComicController {
 
     const handlingPush = async () => {
       try {
-
-        const [commentDoc, error1]  = await getCommentDoc()
-        if (error1) throw new customError(error1, 404)
-
-        const [pushResult, error2]  = await pushNewReply(commentDoc)
+        const [pushResult, error2]  = await pushNewReply()
         if (error2) throw new customError(error2, 500)
 
         return { Status: `Push ${pushResult} reply successfully` }
@@ -334,27 +333,14 @@ class ComicController {
       } catch (err) { next(err) }
     };
 
-    const getCommentDoc = async () => {
-      return Comment
-        .findOne($find, $match)
-        .lean()
-        .then(commentDoc => {
-          if (!commentDoc) return [null, "comment not existed"]
-          else return [commentDoc, null]
-        })
-        .catch(err => {
-          return [null, err]
-        })
-    };
+    
 
-    const pushNewReply = async (commentDoc) => {
-      const commentIndex = commentDoc.commentArr.findIndex(x => JSON.stringify(x._id) === JSON.stringify(clientComment_id))
+    const pushNewReply = async () => {
       return Comment
         .updateOne(
-            $find,
-          { $push: { [`commentArr.${commentIndex}.reply`]: newReply } },
+          { comicSlug: clientcomicSlug, "commentArr._id": clientComment_id, chapter: chapter },
+          { $push: { "commentArr.$.reply": newReply } },
           { safe : true, upsert: true })
-
         .then(result => {
           if (!result) return [null, "Error happen when push new reply to db"]
           else return [1, null]
@@ -509,8 +495,8 @@ class ComicController {
     const pullReply = async () => {
       return Comment
       .updateOne(
-        { comicSlug: clientComicSlug, chapter: clientChapter },
-        { $pull: { [`commentArr.0.reply`]: { _id: clientReply_id } } },
+        { comicSlug: clientComicSlug, "commentArr._id": clientComment_id, chapter: clientChapter, },
+        { $pull: { "commentArr.$.reply": { _id: clientReply_id } } },
       )
       .then(updateResult => {
         if (updateResult.nModified === 0) return [null, "Error happen when delete Reply in db"]

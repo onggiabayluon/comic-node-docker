@@ -15,6 +15,8 @@ const Comment = new Schema({
     userId: { type: String, require: true },
     //2. User name
     userName: { type: String, require: true },
+    //2. User avatar
+    avatar: { type: String },
     //3. text
     text: { type: String, require: true, trim: true },
     //4. updated time
@@ -25,6 +27,8 @@ const Comment = new Schema({
       userId: { type: String, require: true },
       //5.1 user name
       userName: { type: String, require: true },
+      //5.1 user avatar
+      avatar: { type: String },
       //5.3 text
       text: { type: String, require: true },
       //5.4 updated time

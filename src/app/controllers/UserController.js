@@ -9,15 +9,38 @@ class UserController {
         res.setHeader('Cache-Control', 'private, max-age=0');
         res.render('users/login', {
             layout: 'login_register_layout',
-            referer: req.headers.referer || req.headers.referrer,
+            // referer: req.headers.referer || req.headers.referrer,
             title: 'Sign in to your Account'
         })
     }
 
     // Login
     login(req, res, next) {
-        let referer = req.body.referer || '/'
+        let referer = req.session.redirectTo || '/'
+        delete req.session.redirectTo;
         passport.authenticate('local', {
+        successRedirect: referer,
+        failureRedirect: '/users/login',
+        failureFlash: true
+        })(req, res, next);
+    };
+
+    // Login Google
+    loginGoogle(req, res, next) {
+        let referer = req.body.referer || '/'
+        delete req.session.redirectTo;
+        passport.authenticate('google', {
+        successRedirect: referer,
+        failureRedirect: '/users/login',
+        failureFlash: true
+        })(req, res, next);
+    };
+    
+    // Login Facebook
+    loginFacebook(req, res, next) {
+        let referer = req.body.referer || '/'
+        delete req.session.redirectTo;
+        passport.authenticate('facebook', {
         successRedirect: referer,
         failureRedirect: '/users/login',
         failureFlash: true

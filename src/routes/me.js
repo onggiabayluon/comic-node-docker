@@ -6,6 +6,10 @@ const meController          = require('../app/controllers/meController');
 const UploadController      = require('../app/controllers/UploadController');
 // Load Middleware
 const { authRole, ensureAuthenticated, forwardAuthenticated } = require('../config/auth/auth');
+const { noCache } = require('../config/header/header');
+
+// Set Private header and auth role
+router.get('/*', noCache, authRole('admin:extraAdmin'))
 
 // Admin Dashboard
 router.get('/stored/comics/dashboard/admin', meController.adminDashboard);
@@ -32,7 +36,7 @@ router.get('/stored/comics/:slug/edit', meController.comicEditPage);
 // User Page Comic List 
 router.get('/stored/comics/comic-list/:comicId', ensureAuthenticated, meController.comicListPage);
 // Comic Page List 
-router.get('/stored/comics/comic-list', ensureAuthenticated, authRole('admin'), meController.comicListPage);
+router.get('/stored/comics/comic-list', ensureAuthenticated, meController.comicListPage);
 // Category Page List
 router.get('/stored/comics/category-list', meController.categoryListPage);
 // Page Create Comic

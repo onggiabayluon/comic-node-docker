@@ -5,8 +5,12 @@
 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <div class="user">
         <avatar class="user__avatar">
-            <img width="23" height="23" alt="Profile Picture" 
-            src="https://avatars.dicebear.com/api/human/{{user.name}}.svg">
+            {{#unless user.avatar}}
+            <img src="https://avatars.dicebear.com/api/human/{{user.name}}.svg" alt="{{user.name}} Profile Picture" width="23"
+                height="23">
+            {{else}}
+            <img src="{{user.avatar}}" alt="{{user.name}} Profile Picture" width="23" height="23">
+            {{/unless}}
         </avatar>
         <name class="user__name">
             {{user.name}}

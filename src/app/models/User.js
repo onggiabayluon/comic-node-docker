@@ -15,21 +15,23 @@ const opts = {
 const User = new Schema({
     name: {
       type: String,
-      index: true,
-      required: true
+      required: true,
+      index: true
     },
     // email: {
     //   type: String,
     //   required: true
     // },
     password: {
-      type: String,
-      required: true
+      type: String
     },
     role: {
       type: String,
       required: true,
       default: ROLE.USER
+    },
+    avatar: {
+      type: String,
     },
     banned: {
       type: String,
@@ -45,16 +47,8 @@ const User = new Schema({
       ref: "Comic"
     }],
 
-    googleId: { 
-      type: String, 
-      unique: true,
-    },
-    facebookId: { 
-      type: String, 
-      unique: true,
-    },
-    avatar: String,
-    displayName: String,
+    googleId: String,
+    facebookId: String,
     userCreatedAt: String,
     userUpdatedAt: String,
     

@@ -34,52 +34,59 @@ module.exports = function(passport) {
   passport.use(new GoogleStrategy({
     clientID: '885722097368-aoh1lfihdgdvef92h8u0a96letbcsh6j.apps.googleusercontent.com',
     clientSecret: 'URETJgo_KhJRHmC-053NQklU',
-    callbackURL: "https://cloudimagewall.xyz/users/google/callback"
+    callbackURL: "http://localhost:3000/users/google/callback"
   }, function (accessToken, refreshToken, profile, done) {
-    console.log(profile)
-    User.findOne({ googleId: profile.id }).then((googleUserExist) => {
-      if (googleUserExist) {
-        console.log('already have this account so its not saving')
-        done(null, googleUserExist)
-      } else {
+    // console.log(profile)
+    User
+    .findOne({ googleId: profile.id })
+    .lean()
+    .then((googleUser) => {
+      // Already have this account so its not saving
+      if (googleUser) return done(null, googleUser);
+      else return createGoogleUser();
+      
+      function createGoogleUser() {
         new User({
-          displayname: profile.displayName,
+          name: profile.displayName,
           avatar: profile.photos[0].value,
           googleId: profile.id,
-          role: 'user'
-        }).save().then((newUser) => {
-          console.log('new google User:' + newUser)
-          done(null, newUser)
         })
-      }
+        .save()
+        .then(newUser => done(null, newUser))
+        .catch(err => console.log(err))
+      };
+      
     });
   }
   ));
 
   // Facebook
   passport.use(new FacebookStrategy({
-    clientID: '1494820264187159',
-    clientSecret: 'e8f94ba8462024f4a4bf0c248953349e',
+    clientID: '198247612131034',
+    clientSecret: 'b2fd578f561a46e92e3a4d71cdda2f31',
     callbackURL: "https://cloudimagewall.xyz/users/facebook/callback",
     profileFields: ['id', 'displayName', 'picture.type(large)']
   },
     function (accessToken, refreshToken, profile, done) {
-      console.log(profile)
-      User.findOne({ facebookId: profile.id }).then((facebookUserExist) => {
-        if (facebookUserExist) {
-          console.log('already have this account so its not saving')
-          done(null, facebookUserExist)
-        } else {
+      // console.log(profile)
+      User
+      .findOne({ facebookId: profile.id })
+      .lean()
+      .then((facebookUser) => {
+        // Already have this account so its not saving
+        if (facebookUser) return done(null, facebookUser);
+        else return createFacebookUser();
+
+        function createFacebookUser() {
           new User({
-            displayname: profile.displayName,
+            name: profile.displayName,
             avatar: profile.photos[0].value,
             facebookId: profile.id,
-            role: 'user'
-          }).save().then((newUser) => {
-            console.log('new facebook User:' + newUser)
-            done(null, newUser)
           })
-        }
+          .save()
+          .then(newUser => done(null, newUser))
+          .catch(err => console.log(err))
+        };
 
       });
     }

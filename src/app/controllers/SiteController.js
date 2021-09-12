@@ -16,10 +16,12 @@ class SiteController {
         const   $find = { comicSlug: "kill-the-hero", chapter: null },
                 $match = { commentArr : { $elemMatch : { "reply._id" : '61375c28d291b036c8068b03' } } }
         Comment.findOne($find,$match)
-        .then(resu=>res.json(resu))
+        .then(result => testfunc(result))
         // res.json(req.user)
         // Comic.updateMany({}, {$unset: {lastest_chapters: 1 }}).then(res => console.log(res))
-
+        function testfunc(result) {
+            return res.json(result)
+        }
     }
     async test(req, res, next) {
         // const mongoose = require('mongoose')
