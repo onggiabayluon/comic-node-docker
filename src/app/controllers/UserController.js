@@ -6,7 +6,6 @@ class UserController {
 
     // login Page
     loginPage(req, res, next) {
-        res.setHeader('Cache-Control', 'private, max-age=0');
         res.render('users/login', {
             layout: 'login_register_layout',
             // referer: req.headers.referer || req.headers.referrer,
@@ -56,7 +55,6 @@ class UserController {
 
     // Register Page
     registerPage(req, res, next) {
-        res.setHeader('Cache-Control', 'private, max-age=0');
         res.render('users/login', {
             registerSubmit: true,
             layout: 'login_register_layout',

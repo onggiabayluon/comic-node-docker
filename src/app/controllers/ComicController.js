@@ -21,7 +21,6 @@ class ComicController {
       'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js',
       '/js/othersPage/historyPage.scripts.js'
     ]
-    res.setHeader('Cache-Control', 'private, max-age=0');
     res.status(200).render('history.hbs', {
       layout: 'utility_layout.hbs',
       user: req.user,
@@ -37,7 +36,6 @@ class ComicController {
     ]
 
     const renderWithoutUserAuth = () => {
-      res.setHeader('Cache-Control', 'private, max-age=0');
       res.status(200).render('bookmark.hbs', {
         layout: 'utility_layout.hbs',
         scripts: scripts,
@@ -61,7 +59,6 @@ class ComicController {
           },
         })
         .then(subscribedComics => {
-          res.setHeader('Cache-Control', 'private, max-age=0');
           res.status(200).render('bookmark.hbs', {
             layout: 'utility_layout.hbs',
             sublist: subscribedComics,
@@ -243,7 +240,6 @@ class ComicController {
           reqUserAvatar = req.user.avatar,
           isComicDetailPage = req.body.isComicDetailPage,
           comments    = [] 
-
     const chapter = (isComicDetailPage) ? null : req.body.chapter
     
     const newComment = {

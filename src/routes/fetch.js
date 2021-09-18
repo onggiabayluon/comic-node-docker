@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// Load Middleware
-const { authRole, ensureAuthenticated, forwardAuthenticated } = require('../config/auth/auth');
 // Load Fetchcontroller
 const Fetchcontroller = require('../app/controllers/FetchController');
+const { noCache } = require('../config/header/header');
+
+// Set Private header 
+router.get('/*', noCache)
 
 // Route: fetch / comics /:comicSlug / :chapter / comments
 router

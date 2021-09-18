@@ -3,28 +3,50 @@ const Chapter   = require('../models/Chapter');
 const Comment   = require('../models/Comment');
 const User   = require('../models/User');
 const { singleMongooseToObject, multiMongooseToObject } =  require('../../util/mongoose');
+const { IMAGE_URL } = require('../../config/config');
 
 class SiteController {
 
 
     fetchBookmarkContents(req, res, next) {
-      const localStorageContents = req.body.data
-      console.log(localStorageContents)
+      if (!req.user) return renderLocalData()
+      else return renderBookmarkData()
 
-      // if (req.user) return renderBookmarkData()
-      // return renderLocalData()
+      function renderLocalData() {
+        res.status(200).render('template/history_bookmark.template.hbs', {
+          layout: 'fetch_layout',
+          isLoggedIn: false,
+          historyItems: req.body
+        })
+      };
 
-      // function renderLocalData() {
+      function renderBookmarkData() {
+        const userBookmarks = (req.user.subscribed) ? req.user.subscribed : []
+        
+        if (userBookmarks.length == 0) return res.send({message: "false", status: 404});
+        else return findBookmarkedComic()
+        
+        function findBookmarkedComic() {
+          Comic
+          .find({ _id: { $in: userBookmarks } })
+          .lean()
+          .select("-category -description -lastest_chapters")
+          .then(subList => {
+            res.status(200).render('template/history_bookmark.template.hbs', {
+              layout: 'fetch_layout',
+              isLoggedIn: true,
+              sublist: subList,
+              img_url: IMAGE_URL
+            })
+          })
+          .catch(err => console.log(err))
+        };
 
-      // };
-
-      // function renderBookmarkData() {
-
-      // };
+      };
     }
 
     getAuth(req, res, next) {
-      res.setHeader('Cache-Control', 'private, max-age=0');
+      
       res.status(200).render('template/auth.template.hbs', {
         layout: 'fetch_layout',
         user: req.user
@@ -46,7 +68,7 @@ class SiteController {
         }
       }
 
-      res.setHeader('Cache-Control', 'private, max-age=0');
+      
       res.send({
         isSub: subscribe,
         status: 200,
@@ -55,7 +77,7 @@ class SiteController {
     }
 
     fetchUsers(req, res, next) {
-        res.setHeader('Cache-Control', 'private, max-age=0');
+        
         User
         .find({}).lean()
         .select('banned role name _id')
@@ -65,7 +87,7 @@ class SiteController {
     
     fetchSubList(req, res, next) {
         if (!req.user) return res.send({login: false})
-        res.setHeader('Cache-Control', 'private, max-age=0');
+        
         User
         .findOne({ _id: req.user._id}).lean()
         .select('subscribed -_id')
@@ -76,7 +98,7 @@ class SiteController {
     }
 
     fetchComics(req, res, next) {
-        res.setHeader('Cache-Control', 'private, max-age=0');
+        
         Comic
         .find({}).lean()
         .select('-userId')
@@ -85,7 +107,7 @@ class SiteController {
     }
 
     fetchChapters(req, res, next) {
-        res.setHeader('Cache-Control', 'private, max-age=0');
+        
         Chapter
         .find({comicSlug: req.params.chapterSlug}).lean()
         .select('-image')
@@ -136,7 +158,7 @@ class SiteController {
             { $sort: sort },
           ])
           .then(commentdoc => {
-            res.setHeader('Cache-Control', 'private, max-age=0');
+            
             res.render('template/commentBox.hbs',
             {
               layout: 'fetch_layout.hbs',

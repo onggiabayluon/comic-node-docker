@@ -99,7 +99,7 @@ const sessionConfig = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    app.set('trust proxy', 1)
+    app.set('trust proxy', true)
     app.use(cors())
     sessionConfig.cookie.secure = true // serve secure cookies
     // sessionConfig.store: new sessionStore() 
@@ -214,6 +214,10 @@ app.engine(
             limit: (arr, limit) => {
                 if (!Array.isArray(arr)) { return []; }
                 return arr.slice(0, limit);
+            },
+            limitLast: (arr, limit) => {
+                if (!Array.isArray(arr)) { return []; }
+                return arr.slice(arr.length - limit, arr.length);
             },
             limitFrom: (arr, startLimit, endLimit) => {
                 if (!Array.isArray(arr)) { return []; }

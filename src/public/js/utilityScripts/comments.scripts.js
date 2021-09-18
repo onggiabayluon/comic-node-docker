@@ -10,15 +10,13 @@ var $comicId = $("input[type=hidden][name=comicId]").val()
 var $chapter = $("input[type=hidden][name=chapter]").val() || null
 var $isChapterComment = $("input[type=hidden][name=isChapterComment]").val() || null
 var $isChapterReply = $("input[type=hidden][name=isChapterReply]").val() || null
-// User Info
-var $user_id = $("input[type=hidden][name=user_id]").val()
-var $username = $("input[type=hidden][name=username]").val()
 // Others
 var formData
 var $pathname = window.location.pathname;
 var $search = window.location.search
 var $commentBox = $('#commentbox')
 var flag = 0;
+// Users
 var $userAvatarSrc
 /*  
 **   If ComicDetailPage then fetch using 
@@ -182,11 +180,11 @@ window.postComment = function (form) {
     formData = {
         text: form.text.value,
         title: $title,
-        userId: $user_id,
-        userName: $username,
+        
+        
         comicSlug: $comicSlug,
         updatedAt: new Date().toISOString(),
-        isComicDetailPage: true,
+        isComicDetailPage: isComicDetailPage,
     }
     if (!isComicDetailPage) {
         Object.assign(formData, {
@@ -219,8 +217,8 @@ window.postReply = function (form) {
         comment_id: form.comment_id.value,
         text: form.text.value,
         title: $title,
-        userId: $user_id,
-        userName: $username,
+        
+        
         comicSlug: $comicSlug,
         updatedAt:  new Date().toISOString(),
         isComicDetailPage: true,
@@ -328,8 +326,8 @@ window.editCommentForm = function (form) {
         comment_id: form.comment_id.value,
         text: form.text.value,
         title: $title,
-        userId: $user_id,
-        userName: $username,
+        
+        
         comicSlug: $comicSlug,
         updatedAt: new Date().toISOString(),
         isComicDetailPage: true,
@@ -368,8 +366,8 @@ window.editReplyForm = function (form) {
         reply_id: form.reply_id.value,
         text: form.text.value,
         title: $title,
-        userId: $user_id,
-        userName: $username,
+        
+        
         comicSlug: $comicSlug,
         updatedAt: new Date().toISOString(),
         isComicDetailPage: true,

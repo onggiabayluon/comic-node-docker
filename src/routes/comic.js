@@ -3,12 +3,13 @@ const router = express.Router();
 
 
 const ComicController = require('../app/controllers/ComicController');
+const { noCache } = require('../config/header/header');
 
 
 // comic / bookmark
-router.get('/history', ComicController.historyPage);
+router.get('/history', noCache, ComicController.historyPage);
 // comic / bookmark
-router.get('/bookmark', ComicController.bookmarkPage);
+router.get('/bookmark', noCache, ComicController.bookmarkPage);
 // comic / :comicSlug 
 router.get('/:comicSlug', ComicController.comicdetailsPage);
 // comic / categories 

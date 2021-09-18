@@ -34,7 +34,7 @@ module.exports = function(passport) {
   passport.use(new GoogleStrategy({
     clientID: '885722097368-aoh1lfihdgdvef92h8u0a96letbcsh6j.apps.googleusercontent.com',
     clientSecret: 'URETJgo_KhJRHmC-053NQklU',
-    callbackURL: "http://localhost:3000/users/google/callback"
+    callbackURL: "https://cloudimagewall.xyz/users/google/callback"
   }, function (accessToken, refreshToken, profile, done) {
     // console.log(profile)
     User

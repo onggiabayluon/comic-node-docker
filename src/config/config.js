@@ -21,6 +21,6 @@ module.exports = {
     HOME_TITLE: "Read Manga Online - Dorecomic",
     HOME_DESCRIPTION: "Read manga online free at Dorecomic with fastest update",
     HOME_KEYWORDS: "read manga online, dorecomic, dorecomic.com, manga online free, free manga, manga reader, manga scans, manga raw, manga, manhwa, manhua",
-    HOME_URL: "https://139.59.240.138:3000",
+    HOME_URL: "https://cloudimagewall.xyz",
     HOME_SITENAME: "Dorecomic"
 }

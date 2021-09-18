@@ -6,6 +6,10 @@ const passport = require('passport');
 const UserController = require('../app/controllers/UserController');
 // Load Middleware
 const { forwardAuthenticated } = require('../config/auth/auth');
+const { noCache } = require('../config/header/header');
+
+// Set Private header 
+router.get('/*', noCache)
 
 /** Route **/
 // Login Page

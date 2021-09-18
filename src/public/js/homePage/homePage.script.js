@@ -3,6 +3,7 @@
 //     // PAGE IS FULLY LOADED  
 //     // FADE OUT YOUR OVERLAYING DIV
 //     $('#loader').fadeOut("slow");
+
     
 //     let page = 'newest-places'
 //     var url = document.location.href;
@@ -133,10 +134,7 @@ function gliderjs() {
 /*************** local History ***************/
 var $href = window.location.href.split('#')[0];
 var $user_id = $("input[type=hidden][name=user_id]").val()
-var isLoggedIn = ($user_id) ? true : false
-
-
-constructHistory()
+var flag = 0
 
 function addClassVisited() {
 
@@ -154,13 +152,6 @@ function addClassVisited() {
 
 }
 
-function fetchSubList() {
-    if ($user_id) {
-        return $sublist = getData(`${$href}fetch/sublist`)
-    }
-    return
-}
-
 function createPseudoFrame() {
     let glide__slides = $('#glide_2 #glide__slides')
     let glideLength = glide__slides.children().length
@@ -175,70 +166,54 @@ function createPseudoFrame() {
     } while (glideLength < 5)
 }
 
-async function constructHistory() {
+/*************** Fetch bottom Comments when into view ***************/
+$.fn.isVisible = function () {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight() + 10;
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height() + 10;
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+}
+
+$(window).scroll(function () {
+    if ($("#bookmark-places").isVisible()) {
+        if (flag == 0) {
+            // do something
+            flag = 1
+            constructHistory()
+        }
+    }
+})
+/*************** Fetch bottom Comments when into view ***************/
+
+function constructHistory() {
     var visited_comics_list = JSON.parse(localStorage.getItem('visited_comics'));
     if (visited_comics_list == null) return createPseudoFrame()
+    else return fetchBookmarkContents()
 
-    /* helper */
-    Handlebars.registerHelper('ifCond', function (a, operator, b, options) {
-        switch (operator) {
-            case '==':
-                return (a == b) ? options.fn(this) : options.inverse(this);
-            case '===':
-                return (a === b) ? options.fn(this) : options.inverse(this);
-            case '!=':
-                return (a != b) ? options.fn(this) : options.inverse(this);
-            case '!==':
-                return (a !== b) ? options.fn(this) : options.inverse(this);
-            case '<':
-                return (a < b) ? options.fn(this) : options.inverse(this);
-            case '<=':
-                return (a <= b) ? options.fn(this) : options.inverse(this);
-            case '>':
-                return (a > b) ? options.fn(this) : options.inverse(this);
-            case '>=':
-                return (a >= b) ? options.fn(this) : options.inverse(this);
-            case '&&':
-                return (a && b) ? options.fn(this) : options.inverse(this);
-            case '||':
-                return (a || b) ? options.fn(this) : options.inverse(this);
-            default:
-                return options.inverse(this);
-        }
-    })
-    Handlebars.registerHelper('limitlast', (arr, limit) => {
-        if (!Array.isArray(arr)) { return []; }
-        return arr.slice(arr.length - limit, arr.length);
-    })
-    Handlebars.registerHelper('chapterText', (str) => {
-        str = str.toString().replace(/-/g, ' ').replace("apter", '.');
-        return str && str[0].toUpperCase() + str.slice(1);// replace '-' -> space 
-    })
-    Handlebars.registerHelper('compareListId', function (a, list, options) {
-        let result = false
-        for (i = 0; i < list.length; i++) {
-            if (JSON.stringify(list[i]) === JSON.stringify(a)) {
-                result = true
-                break;
-            }
-        }
-        return result
-    })
-    Handlebars.registerHelper('minus', (a, b) => a - b)
-    /* helper */
+    function fetchBookmarkContents() {
+        var content = visited_comics_list.slice(Math.max(visited_comics_list.length - 6, 0))
 
-    var $sublist = (isLoggedIn) ? await fetchSubList() : {}
-    var content = visited_comics_list.slice(Math.max(visited_comics_list.length - 6, 0))
-    var source = $("#glides-template").html()
-    var template = Handlebars.compile(source)
-    var html = (isLoggedIn)
-        ? template({ historyItems: content, sublist: $sublist, isLoggedIn })
-        : template({ historyItems: content, isLoggedIn })
-    $('#glide__slides').append(html)
-    addClassVisited()
-    createPseudoFrame()
-    gliderjs()
-
+        $.ajax({
+            type: 'POST',
+            url:`/fetch/bookmarkContents`,
+            data: JSON.stringify(content),
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                if (result.status == 404) return createPseudoFrame()
+                $('#glide__slides').append(result)
+                addClassVisited()
+                createPseudoFrame()
+                gliderjs()
+            },
+            error: function(err) {
+                console.log(err)
+            },
+        });
+        return false
+    }
 }
 
 /*************** local History ***************/
