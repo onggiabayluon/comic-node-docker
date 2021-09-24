@@ -65,7 +65,7 @@ if (visited_comics == null) {
         const newchapterNameList = [...visited_comics[comic_index].chapterNameList, {chapter: $chapter, _id: $chapterId}] // construct old chapter list '[]'
         //console.table(newchapterNameList)
         this_visit.chapterNameList = newchapterNameList // replace old chapter list '[]'
-        
+        this_visit.thumbnail = $thumbnail // replace new thumbnail every new chapter
         newComicList = [...visited_comics.filter(x => x.comicSlug != $comicSlug), this_visit] // replace old visited comics '[]'
         
         localStorage.setItem('visited_comics', JSON.stringify(newComicList));

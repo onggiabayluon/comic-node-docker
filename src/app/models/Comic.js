@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const slug = require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
 const moment = require('moment-timezone');
-const trimEng = require('../../config/middleware/trimEng')
-
+const Category = require('./Category')
 const opts = {
   // set lại time zone sang asia
   timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
@@ -30,10 +29,18 @@ const Comic = new Schema({
     name: String,
   },
   view: {
-    totalView: { type: Number, default: 0, index: true },
+    totalView: { type: Number, default: 0 },
     dayView: {
-      view: { type: Number, default: 0, index: true },
+      view: { type: Number, default: 0 },
       thisDay: { type: Number, default: new Date().getDay() }
+    },
+    monthView: {
+      view: { type: Number, default: 0 },
+      thisMonth: { type: Number, default: new Date().getMonth() }
+    },
+    yearView: {
+      view: { type: Number, default: 0 },
+      thisYear: { type: Number, default: new Date().getFullYear() }
     }
   },
   isPublish: {
@@ -79,6 +86,28 @@ Comic.plugin(mongooseDelete, {
   overrideMethods: 'all',
   deletedAt: true
 });
+
+// Comic.pre('save', function (next) {
+//   // Only run this function if category was moddified (not on other update functions)
+//   if (!this.isModified('category')) return next();
+
+//   addComicIdToCategories(this._id, this.category);
+  
+//   function addComicIdToCategories(comic_id, categories_id) {
+//     const bulkUpdateOfCategories = []
+//     for (const category_id of categories_id) {
+//       bulkUpdateOfCategories.push({
+//         updateOne: {
+//             "filter": { _id: category_id }, 
+//             "update": { $push: { comic: comic_id } },
+//         }})
+//     }
+//     Category
+//     .bulkWrite(bulkUpdateOfCategories)
+//     .then(result => console.log({result: `Add Comic_id into ${result.nModified} Categories succesfully`}))
+//     .catch(err => next(err))
+//   };
+// });
 
 Comic.pre('find', function () {
   this._startTime = Date.now();

@@ -101,7 +101,7 @@
 <section id="welcome-places" itemprop="articleSection" class="foreground-color border-bottom-2">
     <heading class="container">
         <h2 class="title">
-            New To DORE
+            <a href="/comic/categories/all"> New To DORE</a>
         </h2>
         <icon-right>
             <i class="fas fa-chevron-right"></i>
@@ -312,7 +312,7 @@
 <section id="bookmark-places" itemprop="articleSection"class="foreground-color">
     <heading class="container">
         <h2 class="title">
-            My Series
+            <a href="/comic/bookmark"> My Series</a>
         </h2>
         <icon-right>
             <i class="fas fa-chevron-right"></i>
@@ -351,7 +351,7 @@
 
         <heading class="container">
             <h2 class="title">
-                Lastest Update
+                <a href="/comic/categories/all?_sort&column=updatedAt&order=-1"> Lastest Update</a>
             </h2>
             <icon-right>
                 <i class="fas fa-chevron-right"></i>
@@ -360,20 +360,25 @@
         
         <grid-container>
             {{#each comics}}
-            <item class="item item--border">
+            <item class="item item--border position-relative">
                 
                 <picture class="lazy">
                     <source
-                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" 
                     data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
                     type="image/webp"
                     />
                 
                     <img width="92" height="120"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== "
                     alt="{{this.title}}" 
                     onerror="this.onerror=null;this.src='/img/404.jpg';" />
                 </picture>
                 
+                <div class="grade-overlay"></div>
+                <div class="grade grade--bottom">
+                    <i class="far fa-star"><span class="num">{{totalRating this.rate.rateCount this.rate.rateValue}}</span></i>
+                </div>
                 <info>
                     <a href="./comic/{{this.slug}}"><title class="title title--ellipsis">{{this.title}}</title></a> 
                     <chapter-box>
@@ -397,8 +402,7 @@
 <section id="comics-gridbox" itemprop="articleSection" class="mb-4 border-top-bot-3">
     <intro-container class="intro">
         <h2>
-            MOST POPULAR 
-            {{!-- <span>TODAY</span>  --}}
+            <a href="/comic/categories/all?_sort&column=view.totalView&order=-1"> MOST POPULAR </a>
         </h2>
         <p>
             Spend your free time 
@@ -406,7 +410,7 @@
             </br>All these Popular series on Dorecomic.
         </p>
         <btn-intro>
-            Find out more
+            <a href="/comic/categories/all?_sort&column=view.totalView&order=-1">Find out more</a> 
         </btn-intro>
     </intro-container>
 

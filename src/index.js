@@ -149,7 +149,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
     //     res.setHeader('Cache-Control', `max-age=${isRevved ? 31536000 : 0}`);
     // }
     setHeaders: (res) => {
-        res.setHeader('Cache-Control', 'public, max-age=6000');
+        res.setHeader('Cache-Control', 'public, max-age=86400');
     }
 }));
 
@@ -192,6 +192,9 @@ app.engine(
             },
             or() {
                 return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+            },
+            totalRating: (rateCount, rateValue) => {
+                return ((rateValue / rateCount) * 2).toFixed(2)
             },
             setVar: (varName, varValue, options) => {
                 if (!options.data.root) {

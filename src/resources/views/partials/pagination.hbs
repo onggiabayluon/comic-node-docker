@@ -10,7 +10,7 @@
                 </a>
             </li> --}}
             <li class="page-item">
-                <a class="page-link prev" rel="prev" {{#ifCond ../current '==' 1}}href="#" {{else}}  href="?page=1"
+                <a class="page-link prev" rel="prev" {{#ifCond ../current '==' 1}}href="#" {{else}}  href="?page=1{{../sortUrl}}"
                     aria-label="prev" {{/ifCond}}>
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
@@ -21,17 +21,17 @@
             <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
             {{/ifCond}}
             {{#ifCond ../prevPage2 '>' 0}}
-            <li class="page-item"><a class="page-link" href="?page={{../prevPage2}}">{{../prevPage2}}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{../prevPage2}}{{../sortUrl}}">{{../prevPage2}}</a></li>
             {{/ifCond}}
             {{#ifCond ../prevPage '>' 0}}
-            <li class="page-item"><a class="page-link" href="?page={{../prevPage}}">{{../prevPage}}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{../prevPage}}{{../sortUrl}}">{{../prevPage}}</a></li>
             {{/ifCond}}
-            <li class="page-item active "><a class="page-link" href="?page={{../current}}">{{../current}}</a></li>
+            <li class="page-item active "><a class="page-link" href="?page={{../current}}{{../sortUrl}}">{{../current}}</a></li>
             {{#ifCond ../current '<' ../pages}} <li class="page-item"><a class="page-link"
-                    href="?page={{../nextPage}}">{{../nextPage}}</a></li>
+                    href="?page={{../nextPage}}{{../sortUrl}}">{{../nextPage}}</a></li>
                 {{/ifCond}}
                 {{#ifCond ../nextPage '<' ../pages}} <li class="page-item"><a class="page-link"
-                        href="?page={{sum ../nextPage 1}}">{{sum ../nextPage 1}}</a></li>
+                        href="?page={{sum ../nextPage 1}}{{../sortUrl}}">{{sum ../nextPage 1}}</a></li>
                     {{/ifCond}}
                     {{#ifCond ../current '<' (minus ../pages 2)}} <li class="page-item disabled"><a class="page-link"
                             href="#">...</a></li>
@@ -39,7 +39,7 @@
 
                         <li class="page-item">
                             <a class="page-link next" rel="next" {{#ifCond ../current '==' ../pages}}href="#" {{else}}
-                                href="?page={{../pages}}" aria-label="next" {{/ifCond}}>
+                                href="?page={{../pages}}{{../sortUrl}}" aria-label="next" {{/ifCond}}>
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>

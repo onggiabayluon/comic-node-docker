@@ -318,6 +318,11 @@
     .col-left {
         padding: 0;
     }
+
+    .infoRight, .chapterRight {
+        width: 92%;
+        margin-left: auto;
+    }
 }
 
 @media (min-width: 768px) {
@@ -325,6 +330,11 @@
 } 
 @media (max-width: 768px) {
    
+    .infoRight, .chapterRight {
+        width: 100%;
+        margin-left: unset;
+    }
+
     #rightbox {
         margin: 0;
         padding: 0;

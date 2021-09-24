@@ -537,67 +537,67 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #01c78c;
+  background: #3b240f;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #5b1c98;
+  background: #93286f;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #16aa21;
+  background: #247b28;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #f93b66;
+  background: #609563;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #aec782;
+  background: #1360b2;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #b03da4;
+  background: #a7902f;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #886e99;
+  background: #bc496e;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #e8c88f;
+  background: #3baebb;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #c88d86;
+  background: #dbb697;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #367d8e;
+  background: #4266c6;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #e4cd9d;
+  background: #f21fea;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #72c206;
+  background: #9929e6;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #c4625b;
+  background: #91ddf0;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #6369c5;
+  background: #fcc9d2;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #3a0a3e;
+  background: #536773;
 }
 
 .num {
-  margin-left: 0.6rem;
+  margin-left: 0.4rem;
   font-family: "hind_m";
   font-weight: 600;
 }
@@ -620,9 +620,21 @@ comic-info {
   flex-direction: column;
   padding: 0.6rem 0.6rem 0.3rem 0.6rem;
   color: white;
-  /* title */
   /* grade */
+  /* title */
   /* category */
+}
+comic-info .author {
+  font-size: 0.9rem;
+  font-family: "hind";
+}
+comic-info grade {
+  font-size: 0.9rem;
+  line-height: 0.7rem;
+  margin-top: 0.3rem;
+}
+comic-info grade a {
+  color: white;
 }
 comic-info .title {
   font-size: 1.3rem;
@@ -679,13 +691,6 @@ comic-info description {
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   margin: 0.5rem 0;
-}
-comic-info grade {
-  font-size: 16px;
-  line-height: 0.7rem;
-}
-comic-info grade a {
-  color: white;
 }
 comic-info category {
   color: red;
@@ -2212,15 +2217,7 @@ button {
   margin-top: 2px;
 }
 
-search-places {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-search-places .fa-search:hover {
-  color: var(--theme-color-2);
-}
-search-places .fa-search {
+.fa-search {
   font-size: 1.3rem;
   color: var(--button-text-color);
   cursor: pointer;
@@ -2228,7 +2225,7 @@ search-places .fa-search {
   display: flex;
   align-items: center;
 }
-search-places .fa-search::after {
+.fa-search::after {
   display: inline-block;
   width: 1px;
   height: 1.1rem;
@@ -2236,29 +2233,48 @@ search-places .fa-search::after {
   background: #d6d6d6;
   content: "";
 }
+
+.fa-search:hover {
+  color: var(--theme-color-2);
+}
+
+search-places {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 80vw;
+  justify-content: center;
+  margin: 0 auto;
+}
 search-places input {
   position: relative;
   border: initial;
   background: transparent;
   outline: initial !important;
   font-size: 0.8rem;
-  width: 300px;
+  width: 80vw;
+  height: 50px;
+  padding: 0;
+  margin: 0;
   color: var(--primary-color);
-  padding: 0 1rem 0.5rem 1rem;
-  line-height: 2;
   border-bottom: 1px solid var(--button-text-unimportant);
-  margin: 0 1rem;
+}
+search-places #closeSearch {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  z-index: 2;
 }
 
 search-output {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 35px;
-  right: 62px;
   z-index: 100;
   overflow: auto;
-  width: 300px;
+  width: 80vw;
+  top: 55px;
+  right: 0;
   max-height: calc(66px * 5);
   background: var(--foreground-color-2);
 }
@@ -2276,6 +2292,7 @@ search-output item {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--button-text-unimportant);
   padding: 0.7rem;
+  min-height: 100px;
 }
 search-output empty {
   padding: 0.7rem;
@@ -2385,9 +2402,6 @@ search-output .lds-ellipsis div:nth-child(4) {
   #navbar .hotkeyright {
     display: none;
   }
-  #navbar search-places input {
-    width: 40vw;
-  }
   #navbar mobile-nav {
     display: flex;
     flex-direction: column;
@@ -2409,11 +2423,6 @@ search-output .lds-ellipsis div:nth-child(4) {
     font-size: 1.7rem;
     width: 20%;
     text-align: center;
-  }
-
-  search-output {
-    width: 40vw;
-    top: 42px;
   }
 }
 /*************** star rating ***************/
@@ -2701,6 +2710,11 @@ search-output .lds-ellipsis div:nth-child(4) {
   .col-left {
     padding: 0;
   }
+
+  .infoRight, .chapterRight {
+    width: 92%;
+    margin-left: auto;
+  }
 }
 @media (min-width: 768px) {
   .infoLeft__title {
@@ -2708,6 +2722,11 @@ search-output .lds-ellipsis div:nth-child(4) {
   }
 }
 @media (max-width: 768px) {
+  .infoRight, .chapterRight {
+    width: 100%;
+    margin-left: unset;
+  }
+
   #rightbox {
     margin: 0;
     padding: 0;

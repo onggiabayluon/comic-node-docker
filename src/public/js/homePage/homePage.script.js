@@ -13,9 +13,11 @@
 //     }
     
 // });
+
+
 /*************** Loader ***************/
 
-let page = 'newest-places'
+let page = 'lastest-update-places'
 var url = document.location.href;
 if (url.match(/\?page./)) {
     document.location = url + `#${page}`;

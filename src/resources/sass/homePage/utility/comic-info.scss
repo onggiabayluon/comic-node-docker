@@ -10,7 +10,7 @@ $count: 15;
   }
 
 .num {
-margin-left: 0.6rem;
+margin-left: 0.4rem;
 font-family: 'hind_m';
 font-weight: 600;
 }
@@ -31,6 +31,21 @@ comic-info {
     flex-direction: column;
     padding: 0.6rem 0.6rem 0.3rem 0.6rem;
     color: white;
+
+    .author {
+        font-size: 0.9rem;
+        font-family: 'hind';
+    }
+
+    /* grade */
+    grade {
+        font-size: 0.9rem;
+        line-height: 0.7rem;
+        margin-top: 0.3rem;
+        a {
+            color: white;
+        }
+    }
 
     /* title */
     .title {
@@ -94,14 +109,7 @@ comic-info {
         margin: 0.5rem 0;
     }
 
-    /* grade */
-    grade {
-        font-size: 16px;
-        line-height: 0.7rem;
-        a {
-            color: white;
-        }
-    }
+    
 
     /* category */
     category {

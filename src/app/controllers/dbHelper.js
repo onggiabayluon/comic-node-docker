@@ -165,12 +165,13 @@ const comicEditPage_Helper = (exports.comicEditPage_Helper
 
           res
             .status(200)
-            .render('me/Pages.Comic.edit.hbs', {
+            .render('me/Pages.Comic.Edit.hbs', {
               layout: 'admin',
               user: req.user,
               comic: comic,
               intersection: (intersection) ,
               difference: (difference),
+              img_url: IMAGE_URL
             })
         }
       })
@@ -661,10 +662,9 @@ const destroyChapter_Helper = (exports.destroyChapter_Helper
       Comic.updateOne(
         { slug: req.body.comicSlug },
         { $pull: { 
-            lastest_chapters: { chapter: req.body.chapter }, 
-            chapters: { chapter: req.body.chapter }
-          }
-        }
+          lastest_chapters: { _id: req.params.chapter_id }, 
+          chapters: { _id: req.params.chapter_id } }
+        },
       ).exec()
     };
 
@@ -694,8 +694,6 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
         async function delete_Chapter_Images_s3() {
           chapter_ids.map((chapter_id, index) => {
 
-            delete_chaptersRef(chapter_id, index)
-
             Chapter.findOne({ _id: chapter_id })
               .then(currentChapter => {
                 // Nếu image length > 0 thì tức là có chapter image
@@ -721,7 +719,7 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
                 }
               }).catch(next)
           })
-        }
+        };
 
         async function delete_Chapter_mongodb() {
           Chapter.deleteMany({ _id: { $in: req.body.chapter_id } })
@@ -732,15 +730,15 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
             .catch(next)
         };
 
-        async function delete_chaptersRef(chapter_id, index) {
+        async function delete_chaptersRef() {
           Comic.updateOne(
-            { slug: req.body.comicSlug[0] },
+            { slug: req.body.comicSlug },
             { $pull: { 
-              lastest_chapters: { chapter: req.body.chapter[index] }, 
-              chapters: { chapter: req.body.chapter[index] }
-            }
-          }
-          ).exec()
+              lastest_chapters: { _id: { $in: req.body.chapter_id } }, 
+              chapters: { _id: { $in: req.body.chapter_id } } }
+            },
+            { multi: true }
+          ).then(result => console.log(result))
         };
 
         break;

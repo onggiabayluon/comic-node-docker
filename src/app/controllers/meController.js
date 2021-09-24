@@ -1,10 +1,12 @@
 const Comic     = require('../models/Comic');
 const Chapter   = require('../models/Chapter');
+const Config    = require('../models/Config');
+const Category  = require('../models/Category');
 const Comment   = require('../models/Comment');
-const Config   = require('../models/Config');
-const Category   = require('../models/Category');
 const User      = require('../models/User');
+const ObjectID  = require('mongodb').ObjectID;
 const dbHelper  = require('./dbHelper')
+const removeVietnameseTones = require('../../config/middleware/VnameseToEng');
 const { canViewProject, canDeleteProject } = require('../../config/permissions/comics.permission');
 const { IMAGE_URL } = require('../../config/config');
 class meController {
@@ -120,21 +122,63 @@ class meController {
 
     Promise.all([
         Comic.find({ $and: [{ title: { $exists: true } }, { chaptername: { $not: { $exists: true } } }] }).lean()
-      , Comic.find({}).lean().select('view title slug').sort({view:-1}).limit(12) // desc
+      , Comic.find({}).lean().select('view title slug').sort({"view.totalView":-1}).limit(12) // desc
       , Comic.countDocuments({isPublish: true})
       , Comic.countDocuments({isPublish: false})
       , User.find({}).select('banned role name _id').lean()
+      , Category.countDocuments()
+      , Category.find().select("name -_id").lean()
+      , Comment.aggregate([
+            {
+                $match:  { }
+            },
+            {
+                $sort: {'updatedAt': -1}
+            },
+            {
+                //limit n document = n comments needed
+                $limit: 5
+            },
+            {
+                $unwind: "$commentArr"
+            },
+            {
+                $sort: {'commentArr.updatedAt': -1}
+            },
+            {
+                // comments needed
+                $limit: 5
+            },
+            {
+                $group: {
+                _id: '$_id', 
+                chapter:    { $first: '$chapter'    }, 
+                comicSlug:  { $first: '$comicSlug'  }, 
+                title:      { $first: '$title'      }, 
+                commentArr: { $push: '$commentArr'  }}
+
+            },
+            {
+                $project: { commentArr: 1, chapter: 1, title: 1, comicSlug: 1,  _id: 0 }
+            }
+        ]), 
     ])
 
-      .then(([comics, comicListView, publishedComic, pendingComic, users]) => {
+      .then(([comics, comicListView, publishedComic, pendingComic, users, categoriesCount, categories, comments]) => {
+        const firstListCate = categories.slice(0, categories.length / 2)
+        const secondListCate = categories.slice(categories.length / 2 , categories.length)
         res.render('me/Dashboard.Admin.hbs',
           {
             layout: 'admin',
             publishedComic, pendingComic,
+            categoriesCount: categoriesCount,
+            firstListCate: firstListCate,
+            secondListCate: secondListCate,
             comicListView: (comicListView),
             comics: (comics),
             users: users,
             user: req.user,
+            comments: comments
           })
       })
       .catch(next);
@@ -230,8 +274,64 @@ class meController {
   }
 
   // 3. Create comics: [Post] / me / stored / comics / create [create comic]
-  createComic(req, res, next) {
-    dbHelper.CreateComic_Helper(req, res, next, null)
+  async createComic(req, res, next) {
+    const errors = []
+    const { title, description } = req.body
+    const categoriesInput = req.body.categories
+    const slug = removeVietnameseTones(title)
+    const obj1 = { 
+      _id : new ObjectID(),
+      user: { _id: req.user._id, name: req.user.name },
+      slug: slug,
+      category: categoriesInput,
+    }
+
+    const obj2 = {...obj1, ...req.body}
+
+    const comicExisted = await Comic.findOne({ slug: slug }).lean().countDocuments()
+
+    if (!comicExisted) return createNewComic()
+    else return sendError()
+
+    function createNewComic() {
+      const comic = new Comic(obj2);
+      comic
+        .save()
+        .then(addComicIdToCategories(obj2._id, obj2.category))
+        .then(() => {
+          res
+            .status(201)
+            .redirect('/me/stored/comics/comic-list');
+          req.flash('success-message', `Create Comic ${title} Successfully`)
+        })
+        .catch(next);
+    };
+
+    function sendError() {
+      errors.push({ msg: `Comic name "${comicExisted.title}" already existed, please change to different Title` });
+      res.render('me/Pages.Comic.Create.hbs', {
+        layout: 'admin',
+        errors,
+        title,
+        description
+      })
+    };
+  
+    function addComicIdToCategories(comic_id, categories_id) {
+      const bulkUpdateOfCategories = []
+      for (const category_id of categories_id) {
+        bulkUpdateOfCategories.push({
+          updateOne: {
+              "filter": { _id: category_id }, 
+              "update": { $push: { comic: comic_id } },
+          }})
+      }
+      Category
+      .bulkWrite(bulkUpdateOfCategories)
+      .then(result => console.log({result: `Add Comic_id into ${result.nModified} Categories succesfully`}))
+      .catch(err => next(err))
+    };
+  
   };
 
   // 4. Edit Page: [GET] / me / stored /comics /:slug / edit
@@ -240,8 +340,119 @@ class meController {
   }
   // 5. Update comic: [GET] / me / stored / comics / :slug -> update
   updateComic(req, res, next) {
-    dbHelper.UpdateComic_Helper(req, res, next, null)
+    const newtitle = req.body.title,
+          oldSlug = req.params.slug,
+          newSlug = removeVietnameseTones(newtitle),
+          categoriesInput = req.body.categories,
+          $comicSlug = req.params.slug
 
+    delete req.body.categories
+    
+    const obj1 = { 
+      slug: newSlug,
+      category: categoriesInput,
+    }
+
+    const editedVersion = {...obj1, ...req.body}
+    
+    // Main
+    if (oldSlug === newSlug) return editComic()
+    else return editComicWithSlug()
+    
+     // Function
+    async function editComicWithSlug() {
+      const slugExisted = await Comic.findOne({ slug: editedVersion.slug }).lean().countDocuments()
+
+      if (!slugExisted) return editComic() + editChapter()
+      else return sendError()
+    };
+
+    async function editComic() {
+
+      await updateCategory($comicSlug)
+
+      Comic.updateOne({ slug: $comicSlug }, editedVersion)
+        .then(result => console.log({result: `Edit ${result.nModified} Comic succesfully`}))
+        .then(() => {
+          req.flash('success-message', `Edit Comic ${newtitle} Successfully`)
+          res.status(200).redirect('/me/stored/comics/comic-list')
+        })
+        .catch(next)
+    };
+
+    function editChapter() {
+      Chapter.updateMany(
+        { comicSlug: $comicSlug },
+        { $set: { comicSlug: editedVersion.slug}})
+        .then(result => console.log({result: `Edit comicSlug of ${result.nModified} Chapter succesfully`}))
+        .catch(next)
+    };
+
+    function sendError() {
+      res.status(200).redirect('back');
+      req.flash('error-message', `Comic name "${newtitle}" already existed, please change to different name`)
+    };
+
+    async function updateCategory(slug) {
+
+      const comic = await Comic.findOne({ slug: slug }).select("category")
+      const comicCategory = (comic.category).toString().split(",")
+      const comicCategoryLength = comic.category.length
+      let cateInput = (categoriesInput) ? categoriesInput.toString().split(",") : []
+
+      if(cateInput.length == 0 && comicCategoryLength == 1) {
+        //console.log("delete single")
+        handleDeleteSingleCategoryModel(comic);
+        handleDeleteComicCategory(comic);
+      };
+
+      if (cateInput.length < comicCategoryLength && !(cateInput.length == 0 && comicCategoryLength == 1)) {
+        //console.log("delete multiple")
+        var categoriesNeedDelete = comicCategory.filter(x => !cateInput.includes(x));
+        handleDeleteCategoryModel(comic, categoriesNeedDelete);
+        handleComicCategory(comic, cateInput);
+      };
+      if (cateInput.length > comicCategoryLength) {
+        //console.log("add")
+        var categoriesNeedAdd = cateInput.filter(x => !comicCategory.includes(x));
+        handleAddCategoryModel(comic, categoriesNeedAdd);
+        handleComicCategory(comic, cateInput);
+      };
+
+      function handleComicCategory(comic, cateInput) {
+        comic.category = cateInput
+        comic.save()
+      };
+      function handleDeleteComicCategory(comic) {
+        comic.category = []
+        comic.save()
+      };
+      function handleDeleteSingleCategoryModel(comic) {
+        Category.updateOne(
+          { _id: comic.category[0] },
+          { $pull: { comic: comic._id } })
+          .then(result => console.log({result: `Pull ${result.nModified} Comic_id out of Category succesfully`,test: result}))
+          .catch(err => console.log(err))
+      };
+      function handleDeleteCategoryModel(comic, categoriesNeedDelete) {
+        categoriesNeedDelete.forEach(categoryToDelete_id => {
+          Category.updateOne(
+            { _id: categoryToDelete_id }, 
+            { $pull: { comic: comic._id } })
+            .then(result => console.log({result: `Pull ${result.nModified} Comic_id out of Category succesfully`,test: result}))
+            .catch(err => console.log(err))
+        })
+      };
+      function handleAddCategoryModel(comic, categoriesNeedAdd) {
+        categoriesNeedAdd.forEach(categoriesNeedAdd_id => {
+          Category.updateOne(
+            { _id: categoriesNeedAdd_id }, 
+            { $addToSet: { comic: comic._id } })
+            .then(result => console.log({result: `Add ${result.nModified} Comic_id to Category succesfully`,test: result}))
+            .catch(err => console.log(err))
+        })
+      };
+    };
   }
 
   // 6. Destroy comic: [DELETE] / me / stored / destroyComic / :slug

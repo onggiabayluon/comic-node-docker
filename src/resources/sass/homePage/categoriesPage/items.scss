@@ -1,13 +1,17 @@
 #card-wrapper {
     background: var(--foreground-color);
     
+    .custom-container {
+        max-width: 81%;
+    }
+
     grid-container {
         display: grid;
-        gap: 1.4rem;
-        max-width: 81%;
+        gap: 1rem;
         margin: 3rem auto;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         grid-auto-rows: 200px;
+        place-items: center;
     }
     grid-comic-item:hover {
         background-overlay {
@@ -57,7 +61,8 @@
 }
 
 @media (max-width: 1000px) {
-    #card-wrapper grid-container {
+    #card-wrapper .custom-container {
         max-width: 100%;
+        margin: 2rem;
     }
 }

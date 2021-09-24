@@ -160,14 +160,14 @@
                         {{/ifCond}}
                         {{#each chapters}}
 
-                        <div class="card d-flex flex-row mb-3">
+                        <div class="card d-flex flex-row mb-3 my-max-height">
                             <a class="d-flex thumbnail-frame" href="#">
                                 {{#each thumbnail}}
                                 <img src="#" alt="Chưa có thumbnail"
-                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style my-max-height" />
                                 {{else}}
                                 <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
-                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style my-max-height" />
                                 {{/each}}
                             </a>
                             <div class="pl-2 d-flex flex-grow-1 min-width-zero">
@@ -182,7 +182,7 @@
                                         {{CalcTimeEnglish this.updatedAt}}</p>
 
                                     <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
-                                        style="justify-content: space-evenly;">
+                                        >
 
                                         <a href="#" class="tooltipIcon delete-icon-red" style="align-items: center;">
                                             <span class="tooltiptext"> Xóa </span>
@@ -276,7 +276,7 @@
                 <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
                     \{{CalcTimeEnglish this.updatedAt}}</p>
 
-                <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm" style="justify-content: space-evenly;">
+                <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm" >
 
                     <a href="#" class="tooltipIcon delete-icon-red" style="align-items: center;">
                         <span class="tooltiptext"> Xóa </span>

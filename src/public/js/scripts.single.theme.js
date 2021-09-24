@@ -79,14 +79,24 @@ Table of Contents
   // 02. Active PAGE
   var home = $('#home')
   var pages = $('#pages')
-  var user = $('#user')
+  var users = $('#users')
   var setting = $('#setting')
-  var currentPathname = window.location.pathname;
-  var checkpages = currentPathname.includes("/me/stored/comics");
 
-  if (checkpages) {
-    pages.addClass('active')
-  } else {
-    home.addClass('active')
+  var pathname = window.location.pathname;
+  switch (pathname) {
+    case '/me/stored/comics/dashboard/admin':
+    case '/me/stored/comics/faqPage':
+      home.addClass('active')
+      break;
+    case '/me/stored/comics/comic-list':
+    case '/me/stored/comics/create':
+      pages.addClass('active')
+      break;
+    case '/me/stored/config/banner':
+      setting.addClass('active')
+      break;
+    default:
+      // code block
   }
+
 })(jQuery);

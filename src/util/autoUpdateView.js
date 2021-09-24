@@ -65,6 +65,8 @@ const updateMongodb = async (keys, counts) => {
 
     // update
     let dd = new Date().getDate();
+    let mm = new Date().getMonth();
+    let yy = new Date().getFullYear();
 
     for (const i of newKeysArr) {
         log(newKeysArr)
@@ -74,17 +76,27 @@ const updateMongodb = async (keys, counts) => {
                 "update": [{ 
                     $addFields: {
                         "view.dayView.thisDay": dd,
-                        "view.totalView": {
-                            $cond: {
-                                if: { $gt: [ "$view.totalView", null ] },
-                                then: { $add: [ i.count, "$view.totalView" ] },
-                                else: { $add: [ i.count, 0 ] }
-                            }
-                        },
+                        "view.monthView.thisMonth": mm,
+                        "view.yearView.thisYear": yy,
+                        "view.totalView": { $add: [ i.count, "$view.totalView" ] },
                         "view.dayView.view": {
                             $cond: {
                                 if: { $eq: [ "$view.dayView.thisDay", dd ] },
                                 then: { $add: [ "$view.dayView.view", i.count ] },
+                                else: 0
+                            }
+                        },
+                        "view.monthView.view": {
+                            $cond: {
+                                if: { $eq: [ "$view.monthView.thisMonth", mm ] },
+                                then: { $add: [ "$view.monthView.view", i.count ] },
+                                else: 0
+                            }
+                        },
+                        "view.yearView.view": {
+                            $cond: {
+                                if: { $eq: [ "$view.yearView.thisYear", yy ] },
+                                then: { $add: [ "$view.yearView.view", i.count ] },
                                 else: 0
                             }
                         },

@@ -1,8 +1,4 @@
-<style>
-    body {
-        background: var(--foreground-color);
-    }
-</style>
+
 <categories-wrapper id="categories-wrapper">
     <div class="categories-inner">
         <ul class="categories">
@@ -10,7 +6,7 @@
             <a href="/comic/categories/all">All</a>
             </li>
             {{#each firstCategories}}
-            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
+            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}" class="category__text">{{this.name}}</a></li>
             {{/each}}
             <li class="category"><div onclick="return drop(this);" class="more">More<i class="fas fa-sort-down"></i></div></li>
         </ul>
@@ -18,28 +14,102 @@
     <div id="categories-outer" class="categories-outer">
         <ul class="categories">
             {{#each remainingCategories}}
-            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
+            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}" class="category__text">{{this.name}}</a></li>
             {{/each}}
         </ul>
     </div>
 </categories-wrapper>
 
-<section id="card-wrapper">
-    <grid-container>
+<section id="card-wrapper" style="background: var(--background-color);">
+
+    <div class="sort-box custom-container">
+            <h5>Sort By: </h5>
+            <div class="sort-list">
+                <a href="?" class="checkbox-wrapper mr-2 mb-2 d-inline-block d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Default</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=updatedAt&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Lastest Update</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=createdAt&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Newest</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=createdAt&order=1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Oldest</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=view.totalView&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Most Popular</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=rate.rateCount&order=-1" 
+                class="checkbox-wrapper mr-2 mb-2 d-inline-block"
+                data-toggle="tooltip" data-placement="top" title="by Number of Votes"
+                >
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Most Rating</span>
+                    </span>
+                </label>
+                {{!-- <a href="?_sort&column=isFinish&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Finished</span>
+                    </span>
+                </a> --}}
+                <a href="?_sort&column=view.dayView.view&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Top Day</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=view.monthView.view&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Top Month</span>
+                    </span>
+                </a>
+                <a href="?_sort&column=view.yearView.view&order=-1" class="checkbox-wrapper mr-2 mb-2 d-inline-block">
+                    <input type="checkbox" class="checkbox-input">
+                    <span class="checkbox-tile">
+                        <span class="checkbox-label">Top Year</span>
+                    </span>
+                </a>
+            </div>
+    </div>
+
+    <grid-container class="custom-container">
         {{#each comics}}
         <grid-comic-item class="grid__item">
             <a href="/comic/{{this.slug}}">
                 <background-overlay></background-overlay>
-                <img width="200" height="200" loading="lazy" src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{this.thumbnail.url}}-thumbnail.webp
+                <img width="200" height="200" loading="lazy" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp
                 " alt="">
                 <comic-info>
-                    <title class="title title--ellipsis title--bot">
+                    <title class="title title--ellipsis title--top">
                         {{this.title}}
                     </title>
-                    <grade>
+                    <the-author class="author ellipsis">
                         {{this.author}}
+                    </the-author>
+                    <grade class="grade">
+                        <i class="far fa-eye mr-2"><span class="num">{{this.view.totalView}}</span></i>
+                        <i class="far fa-star"><span class="num">{{totalRating this.rate.rateCount this.rate.rateValue}}</span></i>
                     </grade>
-                    <category class="d-none">
+                    <category class="mt-auto d-none">
                         Action
                     </category>
                 </comic-info>
@@ -51,3 +121,4 @@
     
 {{> pagination}} 
 </section>
+

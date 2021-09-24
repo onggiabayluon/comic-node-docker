@@ -10,7 +10,6 @@ const s3 = new AWS.S3({
     secretAccessKey: WASABI_SECRET_ACCESS_KEY,
     region: WASABI_REGION
 });
-
 const resize = async (file, extension, imageType, width, path, now) => {
     try {
 
@@ -25,11 +24,11 @@ const resize = async (file, extension, imageType, width, path, now) => {
                 Bucket: WASABI_BUCKET_NAME,
                 ContentType: imageType,
                 CacheControl: 'max-age=31536000',
-                Key: `${filename}`,
+                Key: filename,
             }).promise())
-            .then(() => {
-                console.log('Runtime in MS: ', Date.now() - now, 'ms');
-            })
+            // .then(() => {
+            //     console.log('Runtime in MS: ', Date.now() - now, 'ms');
+            // })
 
         return filename
         

@@ -5,10 +5,6 @@ const okToModifyThisComment = (commentDoc, userRequest, clientComment_id) => {
         const $thisDocCommentIndex = commentDoc.commentArr.findIndex(serverComment => JSON.stringify(serverComment._id) === JSON.stringify(clientComment_id))
         // This Json Comment
         const $thisServerComment = commentDoc.commentArr[$thisDocCommentIndex]
-        console.log({
-            $thisDocCommentIndex: $thisDocCommentIndex,
-            $thisServerComment: $thisServerComment
-        })
         // Compare UserIddb in db With req.user in request
         return [(JSON.stringify($thisServerComment.userId) === JSON.stringify(userRequest._id)), null]
     } catch (err) {

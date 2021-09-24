@@ -3,7 +3,9 @@
 var $searchOutput = $('.search-output')
 var $searchInput = $('.search-input')
 var $loaderBox = $('.loader-box')
-$('.search-icon').on('click', () => {
+var $closeSearch = $('#closeSearch')
+
+$('.search-icon , #closeSearch').on('click', () => {
 
     if ($searchOutput.is(":hidden") && $searchInput.is(":visible")) {
         $searchOutput.hide("slow")

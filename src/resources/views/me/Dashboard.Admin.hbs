@@ -122,7 +122,7 @@
                                             <div class="card-body text-center">
                                                 <i class="iconsminds-arrow-refresh"></i>
                                                 <p class="card-text mb-0">Categories</p>
-                                                <p class="lead text-center">2</p>
+                                                <p class="lead text-center">{{categoriesCount}}</p>
                                             </div>
                                         </a>
                                     </li>
@@ -259,7 +259,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <p class="text-muted">{{this.view}}</p>
+                                            <p class="text-muted">{{this.view.totalView}}</p>
                                         </td>
                                     </tr>
                                     {{/each}}
@@ -280,83 +280,22 @@
                             <div class="d-flex flex-row">
                                 <div class="w-50">
                                     <ul class="list-unstyled mb-0">
+                                        {{#each firstListCate}}
                                         <li class="mb-1">
-                                            <a href="#">Marble Cake</a>
+                                            <a href="/me/stored/comics/category-list">{{this.name}}</a>
                                         </li>
-                                        <li class="mb-1">
-                                            <a href="#">Fruitcake</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Chocolate Cake</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Fat Rascal</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Financier</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Genoise</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Gingerbread</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Goose Breast</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Parkin</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Petit Gâteau</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Salzburger Nockerl</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Soufflé</a>
-                                        </li>
+                                        {{/each}}
                                     </ul>
                                 </div>
 
                                 <div class="w-50">
                                     <ul class="list-unstyled mb-0">
+                                        {{#each secondListCate}}
                                         <li class="mb-1">
-                                            <a href="#">Streuselkuchen</a>
+                                            <a href="/me/stored/comics/category-list">{{this.name}}</a>
                                         </li>
-                                        <li class="mb-1">
-                                            <a href="#">Tea Loaf</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Napoleonshat</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Merveilleux</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Magdalena</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Cremeschnitte</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Cheesecake</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Bebinca</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Fruitcake</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Chocolate Cake</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Fat Rascal</a>
-                                        </li>
-                                        <li class="mb-1">
-                                            <a href="#">Financier</a>
-                                        </li>
+                                        {{/each}}
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -367,90 +306,39 @@
                 <div class="col-md-12 col-lg-8 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Comments</h5>
+                            <h5 class="card-title">Recently Comments</h5>
 
                             <div class="scroll dashboard-list-with-user">
+                                {{#each comments}}
+                                {{#each this.commentArr}}
                                 <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                                     <a href="#">
-                                        <img alt="Profile Picture" src="/img/goose-breast-thumb.jpg"
-                                            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+                                        {{#unless this.avatar}}
+                                        <img 
+                                        class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" 
+                                        src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" 
+                                        alt="{{this.name}} Profile Picture" 
+                                        >
+                                        {{else}}
+                                        <img 
+                                        class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall"
+                                        src="{{this.avatar}}" 
+                                        alt="{{this.userName}} Profile Picture"
+                                        >
+                                        {{/unless}}
                                     </a>
                                     <div class="pl-3">
-                                        <a href="#">
-                                            <p class="font-weight-medium mb-0">Very informative content, thank you. </p>
-                                            <p class="text-muted mb-0 text-small">Mayra Sibley | Tea Loaf with Fresh
-                                                Oranges | 17.09.2018 - 04:45</p>
+                                        <a href="/comic/{{../this.comicSlug}}{{#ifCond ../this.chapter '!=' null}}/{{../../this.chapter}}{{/ifCond}}">
+                                            <p class="font-weight-bold mb-0">{{replaceHyphenIntoSpace ../this.comicSlug}}
+                                                {{#ifCond ../this.chapter '!=' null}} - {{replaceHyphenIntoSpace ../../this.chapter}}</p>{{/ifCond}}
+                                            <p class="font-weight-medium mb-0">{{this.text}}</p>
+                                            <p class="text-muted mb-0 text-small">{{this.userName}} | {{CalcTimeEnglish this.updatedAt}}</p>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                                    <a href="#">
-                                        <img alt="Profile Picture" src="/img/goose-breast-thumb.jpg"
-                                            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
-                                    </a>
-                                    <div class="pl-3">
-                                        <a href="#">
-                                            <p class="font-weight-medium mb-0">This article was delightful to read.
-                                                Please keep them coming.</p>
-                                            <p class="text-muted mb-0 text-small">Barbera Castiglia | Cheesecake with
-                                                Chocolate Cookies | 15.08.2018 - 01:18</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                                    <a href="#">
-                                        <img alt="Profile Picture" src="/img/goose-breast-thumb.jpg"
-                                            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
-                                    </a>
-                                    <div class="pl-3">
-                                        <a href="#">
-                                            <p class="font-weight-medium mb-0">Your post is bad and you should feel
-                                                bad.</p>
-                                            <p class="text-muted mb-0 text-small">Bao Hathaway | Homemade Cheesecake |
-                                                26.07.2018 - 11:14</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                                    <a href="#">
-                                        <img alt="Profile Picture" src="/img/goose-breast-thumb.jpg"
-                                            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
-                                    </a>
-                                    <div class="pl-3">
-                                        <a href="#">
-                                            <p class="font-weight-medium mb-0">Very original idea!</p>
-                                            <p class="text-muted mb-0 text-small">Lenna Majeed | Tea Loaf with Fresh
-                                                Oranges | 17.06.2018 - 09:20</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                                    <a href="#">
-                                        <img alt="Profile Picture" src="/img/goose-breast-thumb.jpg"
-                                            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
-                                    </a>
-                                    <div class="pl-3">
-                                        <a href="#">
-                                            <p class="font-weight-medium mb-0">This article was delightful to read.
-                                                Please keep them coming.</p>
-                                            <p class="text-muted mb-0 text-small">Esperanza Lodge | Cheesecake with
-                                                Fresh Berries | 16.06.2018 - 16:45</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                                    <a href="#">
-                                        <img alt="Profile Picture" src="/img/goose-breast-thumb.jpg"
-                                            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
-                                    </a>
-                                    <div class="pl-3">
-                                        <a href="#">
-                                            <p class="font-weight-medium mb-0">Nah, did not like it.</p>
-                                            <p class="text-muted mb-0 text-small">Brynn Bragg | Wedding Cake with
-                                                Flowers | 12.04.2018 - 12:45</p>
-                                        </a>
-                                    </div>
-                                </div>
+                                {{/each}}
+                                {{/each}}
+                               
                             </div>
                         </div>
                     </div>

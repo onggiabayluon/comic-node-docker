@@ -106,52 +106,71 @@
         margin-top: 2px;
     }
 }
+
+
+.fa-search {
+    font-size: 1.3rem;
+    color: var(--button-text-color);
+    cursor: pointer;
+    height: 1.9rem;
+    display: flex;
+    align-items: center;
+
+    &::after {
+        display: inline-block;
+        width: 1px;
+        height: 1.1rem;
+        margin-left: 25px;
+        background: #d6d6d6;
+        content: "";
+    }
+}
+
+.fa-search:hover { color: var(--theme-color-2); }
+
 search-places {
     position: relative;
     display: flex;
     align-items: center;
-    .fa-search:hover { color: var(--theme-color-2); }
-    .fa-search {
-        font-size: 1.3rem;
-        color: var(--button-text-color);
-        cursor: pointer;
-        height: 1.9rem;
-        display: flex;
-        align-items: center;
-
-        &::after {
-            display: inline-block;
-            width: 1px;
-            height: 1.1rem;
-            margin-left: 25px;
-            background: #d6d6d6;
-            content: "";
-        }
-    }
-
+    width: 80vw;
+    justify-content: center;
+    margin: 0 auto;
+    
     input {
         position: relative;
         border: initial;
         background: transparent;
         outline: initial !important;
         font-size: 0.8rem;
-        width: 300px;
+        width: 80vw;
+        height: 50px;
+        padding: 0;
+        margin: 0;
         color: var(--primary-color);
-        padding: 0 1rem 0.5rem 1rem;
-        line-height: 2;
         border-bottom: 1px solid var(--button-text-unimportant);
-        margin: 0 1rem;
-        }
+    }
+
+    #closeSearch {
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+        z-index: 2;
+    }
 }
+
+
 search-output {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 35px;
-    right: 62px;
     z-index: 100;
     overflow: auto;
-    width: 300px;
+    // width: 300px;
+    // top: 35px;
+    // right: 15px;
+    width: 80vw;
+    top: 55px;
+    right: 0;
     max-height: calc(66px * 5);
     background: var(--foreground-color-2);
     left-over {
@@ -171,6 +190,7 @@ search-output {
         padding-bottom: 0.5rem;
         border-bottom: 1px solid var(--button-text-unimportant);
         padding: 0.7rem;
+        min-height: 100px;
     }
     empty {
         padding: 0.7rem;
@@ -268,6 +288,8 @@ search-output {
       }
 }
 @media (max-width: 1200px) {
+    
+
     #navbar {
         height: 132px;
         desktop-nav {
@@ -280,11 +302,6 @@ search-output {
         .hotkeyright {
             display: none;
         }
-
-        search-places input {
-            width: 40vw;
-        }
-
 
         mobile-nav {
             display: flex;
@@ -311,8 +328,5 @@ search-output {
         }
         
     }
-    search-output {
-        width: 40vw;
-        top: 42px;
-    }
+    
 }

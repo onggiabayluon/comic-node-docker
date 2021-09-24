@@ -76,73 +76,136 @@ class ComicController {
   };
 
   categoriesPage(req, res, next) {
-    let category = req.params.category
-    let _find = (category != 'all') ? {name: { $regex: category, $options: 'i'}} : {}
-    let _sort = (req.query.hasOwnProperty('_sort')) ? {[req.query.columnSort]: req.query.typeSort} : {_id : 1} 
-    //?_sort&columnSort=_id&type=1
-    let page = +req.query.page || 1;
-    let PageSize = 20;
-    let skipCourse = (page - 1) * PageSize;
-    let nextPage = +req.query.page + 1 || 2;
-    let prevPage = +req.query.page - 1;
-    let prevPage2 = +req.query.page - 2;
+    const category = req.params.category,
+          _order = req.query.order,
+          _column = req.query.column
 
-    Promise.all([
+    const page = +req.query.page || 1,
+          PageSize = 40,
+          nameSize = 10,
+          skipCourse = (page - 1) * PageSize,
+          nextPage = (+req.query.page + 1 || 2),
+          prevPage = +req.query.page - 1,
+          prevPage2 = +req.query.page - 2
 
-      Category.find({}).lean()
-      .select('id name'),
+    const queryAll = (category === 'all') ? true : false
+    const $find = (category !== 'all') ? {name: { $regex: category, $options: 'i'}} : {}
+    const $sort = (req.query.hasOwnProperty('_sort')) ? {[_column]: Number(_order)} : {_id: 1} 
+    const sortUrl = (req.query.hasOwnProperty('_sort')) ? `&_sort&column=${_column}&order=${_order}` : '';
+    //?page=1&_sort&column=updatedAt&order=-1
+    // Example: $sort = {view.totalView: -1}
+    
 
-      Category.find(_find).lean()
-      .select('-_id comic')
-      .populate({
-        path: 'comic',
-        select: 'title slug thumbnail _id',
-        options: {
-          skip: skipCourse,
-          limit: PageSize,
-          sort: _sort,
-        }
-      }),
-
-      Category.aggregate([
-        {
-          $match: _find,
-        },
-        {
-          $project: {
-            _id: 0 ,
-            count: { $size: "$comic" }
-          }
-        }
-      ])
-      
-    ])
-    .then(([categoriesDoc, comicsDoc, countDoc]) => {
-      if (comicsDoc.length == 0 ) return next(new customError(`Category ${category} Not found`, 404)); 
-      let size = 10
-      let firstCategories = categoriesDoc.slice(0, size)
-      let remainingCategories = categoriesDoc.slice(size, categoriesDoc.length)
-      let comics = comicsDoc.shift().comic
-      let count = countDoc.shift().count
+    main()
+    .then(([[categoriesName, error1], [sortedList, error2], [countOfList, error3]]) => {
+      if (error1 || error2 || error3) return next(new customError((error1 || error2 || error3), 401))
+      let firstBatch = categoriesName.slice(0, nameSize)
+      let secondBatch = categoriesName.slice(nameSize, categoriesName.length)
       let scripts = [
-        '/js/utilityScripts/LazyLoader.js'
+        '/js/utilityScripts/LazyLoader.js',
+        '/js/othersPage/categoryPage.scripts.js'
       ]
       res.setHeader('Cache-Control', 'public, max-age=1000');
       res.status(200).render('categories.hbs', {
         layout: 'utility_layout.hbs',
-        firstCategories: firstCategories,
-        remainingCategories: remainingCategories,
+        firstCategories: firstBatch,
+        remainingCategories: secondBatch,
         user: req.user,
-        comics: comics,
+        comics: sortedList,
         current: page,
-                nextPage,
-                prevPage,
-                prevPage2,
-                pages: Math.ceil(count / PageSize),
-        scripts: scripts
+        nextPage,
+        prevPage,
+        prevPage2,
+        sortUrl,
+        pages: Math.ceil(countOfList / PageSize),
+        scripts: scripts,
+        img_url: IMAGE_URL
       })
     })
-    .catch(err => next(err))
+    .catch(err => console.log(err))
+
+    async function main() {
+      try {
+        const categoriesName = getCategoriesName()
+        const sortedList = getSortedList()
+        const countOfList = getCountOfList()
+        return await Promise.all([categoriesName, sortedList, countOfList])
+
+      } catch (err) { console.log(err) }
+    };
+
+
+    async function getCategoriesName () {
+      return Category
+        .find({})
+        .lean()
+        .select('id name')
+        .then(result => { return [result, null] })
+        .catch(err => { return [null, err] })
+    };
+
+    async function getSortedList () {
+      if (queryAll) return queryByComic()
+      else return queryByCategory()
+
+      function queryByComic() {
+        return Comic
+        .find({})
+        .sort($sort)
+        .select('-description -chapters -category')
+        .skip(skipCourse)
+        .limit(PageSize)
+        .lean()
+        .then(result => { return [result, null]  })
+        .catch(err => { return [null, err] })
+      };
+      function queryByCategory() {
+        return Category
+        .find($find)
+        .select('-_id comic')
+        .populate({
+          path: 'comic',
+          select: '-description -chapters -category',
+          options: {
+            skip: skipCourse,
+            limit: PageSize,
+            sort: $sort,
+          }
+        })
+        .lean()
+        .then(result => { return [result.pop().comic, null]  })
+        .catch(err => { return [null, err] })
+      };
+      
+    };
+
+    async function getCountOfList () {
+      if (queryAll) return countAllComic()
+      else return countComicsInCategory()
+
+      function countAllComic() {
+        return Comic
+        .countDocuments({})
+        .then(result => {  return [result, null] })
+        .catch(err => { return [null, err] })
+      };
+
+      function countComicsInCategory() {
+        return Category
+        .aggregate([
+          { $match: $find },
+          { $sort : $sort },
+          { $project: {
+              _id: 0 ,
+              count: { $size: "$comic" }
+          }}
+        ])
+        .then(result => { return [result.pop().count, null] })
+        .catch(err => { return [null, err] })
+      };
+
+    };
+
   };
 
   comicdetailsPage(req, res, next) {
@@ -260,7 +323,7 @@ class ComicController {
         const [pushResult, error1]  = await pushNewComment()
         if (error1) throw new customError(error1, 404)
 
-        return { Status: `Push ${pushResult} comment successfully` }
+        return { message: `Push ${pushResult} comment successfully`, status: 200 }
 
       } catch (err) { next(err) }
     };
@@ -324,7 +387,7 @@ class ComicController {
         const [pushResult, error2]  = await pushNewReply()
         if (error2) throw new customError(error2, 500)
 
-        return { Status: `Push ${pushResult} reply successfully` }
+        return { message: `Push ${pushResult} reply successfully`, status: 200 }
 
       } catch (err) { next(err) }
     };

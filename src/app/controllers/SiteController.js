@@ -3,7 +3,6 @@
 // từ model truyền sang views --> 5. views render trả về client
 const Comic     = require('../models/Comic');
 const Config    = require('../models/Config');
-const User      = require('../models/User');
 const TopView      = require('../models/TopView');
 const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 , HOME_KEYWORDS, HOME_URL, HOME_SITENAME } = require('../../config/config');
@@ -12,16 +11,26 @@ const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 class SiteController {
 
     test2(req, res, next) {
-        const Comment      = require('../models/Comment');
-        const   $find = { comicSlug: "kill-the-hero", chapter: null },
-                $match = { commentArr : { $elemMatch : { "reply._id" : '61375c28d291b036c8068b03' } } }
-        Comment.findOne($find,$match)
-        .then(result => testfunc(result))
-        // res.json(req.user)
-        // Comic.updateMany({}, {$unset: {lastest_chapters: 1 }}).then(res => console.log(res))
-        function testfunc(result) {
-            return res.json(result)
-        }
+        // updateMany(
+        //     { },
+        //     { $set: { "view.monthView.view": 0,"view.monthView.thisMonth": 9,"view.yearView.view": 0,"view.yearView.thisYear": 2021 }},
+        //     { }
+        // )
+        // Chapter.updateMany(
+        //     { comicSlug: 'kill-the-hero' },
+        //     { $set: { comicSlug: 'kill-the-hero-2'}})
+        //     .then(result => console.log({result: result}))
+        //     .catch(next)
+        // const Comment      = require('../models/Comment');
+        // const   $find = { comicSlug: "kill-the-hero", chapter: null },
+        //         $match = { commentArr : { $elemMatch : { "reply._id" : '61375c28d291b036c8068b03' } } }
+        // Comment.findOne($find,$match)
+        // .then(result => testfunc(result))
+        // // res.json(req.user)
+        // // Comic.updateMany({}, {$unset: {lastest_chapters: 1 }}).then(res => console.log(res))
+        // function testfunc(result) {
+        //     return res.json(result)
+        // }
     }
     async test(req, res, next) {
         // const mongoose = require('mongoose')
@@ -111,6 +120,7 @@ class SiteController {
             Comic.countDocuments({}),
             Comic.find({})
             .select('-description -chapters')
+            .sort({ updatedAt: -1 })
             .skip(skipCourse)
             .limit(PageSize)
             .lean(),

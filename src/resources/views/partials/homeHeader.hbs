@@ -1,3 +1,22 @@
+<search-places>
+    <button id="closeSearch" type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <input type="text" class="search-input" placeholder="Search..." style="display: none;">
+    <search-output id="search-output" class="search-output" style="display: none;">
+
+        <!-- item Here -->
+        <loader-box class="loader-box" style="display: none;">
+            <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </loader-box>
+    </search-output>
+</search-places>
+
 <navbar id="navbar">
     <desktop-nav>
         <a class="navbar-logo d-flex" href="/">
@@ -6,29 +25,16 @@
             <span class="logo-mobile d-block d-xs-none"></span>
         </a>
         <ul>
-            <li><a href="/comic/popular">Popular</a></li>
+            <li><a href="/comic/categories/all?_sort&column=view.totalView&order=-1">Popular</a></li>
             <li><a href="/comic/categories/all">Categories</a></li>
             <li><a href="/comic/bookmark">bookmark</a></li>
             <li><a href="/comic/history">History</a></li>
         </ul>
     </desktop-nav>
     <right class="right">
-        <search-places>
-            <input type="text" class="search-input" placeholder="Search..." style="display: none;">
-            <i id="search-icon" class="search-icon fas fa-search"></i>
-            <search-output id="search-output" class="search-output" style="display: none;">
-    
-                <!-- item Here -->
-                <loader-box class="loader-box" style="display: none;">
-                    <div class="lds-ellipsis">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </loader-box>
-            </search-output>
-        </search-places>
+        
+        <i id="search-icon" class="search-icon fas fa-search"></i>
+
         {{> theme-switcher}}
     
         <div id="hotkeyright" class="hotkeyright"></div>
@@ -46,19 +52,19 @@
         </top-info>
         <bot-info>
             <ul>
-                <a href=".">
+                <a href="/">
                     <i class="fas fa-home"></i>
                 </a>
-                <a href="">
+                <a href="/comic/categories/all">
                     <i class="far fa-image"></i>
                 </a>
-                <a href="">
+                <a href="#">
                     <i class="far fa-user"></i>
                 </a>
-                <a href="">
+                <a href="/comic/bookmark">
                     <i class="far fa-bookmark"></i>
                 </a>
-                <a href="">
+                <a href="#">
                     <i class="fas fa-ellipsis-h"></i>
                 </a>
             </ul>

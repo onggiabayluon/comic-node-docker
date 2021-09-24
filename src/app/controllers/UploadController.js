@@ -12,7 +12,7 @@ const S3DeleteMiddleware = require('../middlewares/S3DeleteMiddleware');
 const imagesMiddle = require("../middlewares/ResizeMiddleware")
 
 // const { Worker, isMainThread, parentPort }  = require('worker_threads');
-var workerpool = require('workerpool');
+const workerpool = require('workerpool');
 
 class UploadController {
 
@@ -21,20 +21,22 @@ class UploadController {
     multipleUpload = async (req, res, next) => {
         MulterUploadMiddleware(req, res)
         .then(async () => { 
-            let workDir = path.join(__dirname, '..', 'middlewares', 'worker.js')
+            const $chapter_id = new ObjectID()
 
-            let config = {
+            const workDir = path.join(__dirname, '..', 'middlewares', 'worker.js')
+
+            const config = {
                 customPath: `${req.params.slug}/chapter-${req.body.chapter}`
             }
             
-            var pool = workerpool.pool(workDir);
+            const pool = workerpool.pool(workDir);
             
             pool.exec('resize', [req.files, config])
                 .then((result) => {
 
-                    saveURLToDb(result)
+                    saveURLToDb(result, $chapter_id)
 
-                    saveChapterRef(`chapter-${req.body.chapter}`)
+                    saveChapterRef(`chapter-${req.body.chapter}`, $chapter_id)
 
                 })
                 .catch((err) => {
@@ -49,9 +51,9 @@ class UploadController {
         .then(() => res.redirect('back'))
         .catch(err => next(err))
         
-        function saveURLToDb(imagesURL) {
+        function saveURLToDb(imagesURL, $chapter_id) {
             const newChapter = new Chapter({
-                _id: new ObjectID(),
+                _id: $chapter_id,
                 title: `chapter of ${req.params.slug}`,
                 chapter: `chapter-${req.body.chapter}`,
                 chapterSlug: `${req.params.slug}-${shortid()}`,
@@ -63,7 +65,7 @@ class UploadController {
             newChapter.save()
         };
 
-        function saveChapterRef(chapterName) {
+        function saveChapterRef(chapterName, $chapter_id) {
             let date = new Date()
             let IOSDate = date.toISOString()
             Comic.updateOne(
@@ -71,11 +73,11 @@ class UploadController {
                 {
                     $push: {
                         lastest_chapters: {
-                            $each: [{ chapter: chapterName, updatedAt: IOSDate }],
+                            $each: [{ _id: $chapter_id, chapter: chapterName, updatedAt: IOSDate }],
                             $position: 0,
                             $slice: 3
                         },
-                        chapters: { chapter: req.body.chapter, updatedAt: IOSDate }
+                        chapters: { _id: $chapter_id, chapter: req.body.chapter, updatedAt: IOSDate }
                     },
                     "timestamps": true,
                 }

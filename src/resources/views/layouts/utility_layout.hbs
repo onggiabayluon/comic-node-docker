@@ -45,9 +45,7 @@
         </header>
 
         <main>
-            <article itemscope="" itemtype="http://schema.org/Article">
-                {{{body}}}  
-            </article>
+            {{{body}}}  
             <message>
                 {{> errorsuccessMessage}}
             </message>
@@ -65,11 +63,12 @@
     <script src="/js/vendor/theme-switcher.js" defer></script>
     <script src="/js/utilityScripts/getAuth.js" defer></script>
     <script src="/js/utilityScripts/fetchDataAPI.js" defer></script>
+    <script src="/js/utilityScripts/navbar.user.main.js" defer></script>
     {{#if scripts}}
     {{#each scripts}}
     <script src="{{this}}" defer></script>
     {{/each}}
     {{/if}}
-    
+        
 </body>
 </html>

@@ -10,12 +10,11 @@ module.exports = {
     WASABI_ACCESS_KEY_ID: process.env.WASABI_ACCESS_KEY_ID,
     WASABI_SECRET_ACCESS_KEY: process.env.WASABI_SECRET_ACCESS_KEY,
     WASABI_ENDPOINT: process.env.WASABI_ENDPOINT || 's3.ap-northeast-1.wasabisys.com',
-    WASABI_BUCKET_NAME: process.env.WASABI_BUCKET_NAME || "cloudimagewallbucket",
+    WASABI_BUCKET_NAME: process.env.WASABI_BUCKET_NAME || "storagepongpong",
     WASABI_REGION: process.env.WASABI_REGION || "ap-northeast-1",
-    IMAGE_URL: process.env.URL || "https://s3.ap-northeast-1.wasabisys.com/cloudimagewallbucket",
+    IMAGE_URL: process.env.URL || "https://s3.ap-northeast-1.wasabisys.com/storagepongpong",
 
     
-
     UPDATE_PER_MIN: 10,
 
     HOME_TITLE: "Read Manga Online - Dorecomic",

@@ -39,17 +39,8 @@
                             <div class="infoLeft">
                                 <div class="card infoLeft__img p-xl-3 col-5 col-xl-12 col-md-12 col-sm-4">
                                     {{#if comic.thumbnail}}
-                                    <img src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg"
+                                    <img src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg"
                                         type="image/jpeg" alt="img">
-                                    {{else}}
-                                    <div id="message__missingThumbnail"
-                                        style="vertical-align: middle;position: unset;position: relative;padding: .75rem 1.25rem;margin-bottom: 1rem;border: 1px solid transparent;"
-                                        class="alert alert-warning alert-dismissible fade show rounded pl-2 pr-1" role="alert">
-                                        <strong class="ml-2">Bạn chưa upload Thumbnail</strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span style="vertical-align: middle;" aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
                                     {{/if}}
                                 </div>
                                 <div class="p-3 card infoLeft__title col-sm-12">
