@@ -9,158 +9,150 @@
 /*************** star rating ***************/
 
 
-#main-title {
-    font-size: 1.4rem;
-}
+
 //  LEFT
-.infoLeft__img {
-    background: var(--foreground-color);
-    padding: 1rem;
-}
-.infoLeft__activities {
-    margin: 1.5rem 0;
-
-    & ul {
-        list-style:none;
-        margin: 0;
-        padding: 0;
-    }
-
-    & .bookmark {
-        // background-color: #282B30;
-        // border-color: #282B30;
-        border-radius: 0.5rem;
-        text-align: center;
-        padding: 0.9rem;
+#leftbox {
+    .l-grid {
         
-        
-        &--subscribed {
-            color: var(--button-text-color) !important;
-            background-color: darkness(--theme-color-1, 8%);
-            border-color: darkness(--theme-color-1, 8%);
-            transition: 0.5s ease-in-out;
+        &__image {
+            background: var(--foreground-color);
+            padding: 1rem;
+        };
 
-            .bookmark__text {
-                &::after {
-                    content: "Subscribed";
+        &__mobile-title {
+            display: flex;
+            background: var(--foreground-color);
+            margin-top: 1rem;
+        };
+
+        &__activites {
+            margin: 1.5rem 0;
+            
+            .activities-wrapper {
+                display: flex;
+                background: var(--foreground-color);
+                margin-top: 1rem;
+            }
+            .view, .rate {
+                display: block;
+                padding: 1rem 0;
+                width: 40%;
+                text-align: center;
+                margin-top: .7rem;
+                &__value { margin-left: 5px; }
+                &__ico { margin-top: 3px; }
+            }
+            .rate {
+                width: 60%;
+                margin-left: auto;
+                position: relative;
+                top: 2px;
+                &__wrapper {
+                    &__btn {
+                        margin-left: 0.5rem;
+                        position: relative;
+                        top: -1px;
+                        font-weight: unset;
+                        font-family: 'hind_m';
+                    }
                 }
             }
-            .bookmark__ico {
-                &::before {
-                    content: "\f02e";
-                    font-family: "Font Awesome 5 Free";
-                    font-style: normal;
-                    font-weight: 900;
+           
+            & ul {
+                list-style:none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .bookmark {
+                border-radius: 0.5rem;
+                text-align: center;
+                padding: 0.9rem;
+                
+                
+                &--subscribed {
+                    color: var(--button-text-color) !important;
+                    background-color: darkness(--theme-color-1, 8%);
+                    border-color: darkness(--theme-color-1, 8%);
+                    transition: 0.5s ease-in-out;
+        
+                    .bookmark__text {
+                        &::after {
+                            content: "Subscribed";
+                        }
+                    }
+                    .bookmark__ico {
+                        &::before {
+                            content: "\f02e";
+                            font-family: "Font Awesome 5 Free";
+                            font-style: normal;
+                            font-weight: 900;
+                        }
+                    }
+                }
+        
+                &__text {
+                    margin-left: 0.3rem;
+        
+                    &::after {
+                        content: "Subscribe";
+                    }
+                }
+        
+                &__ico {
+                    &::before {
+                        content: "\f02e";
+                        font-family: "Font Awesome 5 Free";
+                        font-style: normal;
+                    }
                 }
             }
-        }
+        };
 
-        &__text {
-            margin-left: 0.3rem;
+        &__itemList {
+            background: var(--foreground-color);
+            padding: 0.5rem 1rem;
+            margin-bottom: 2rem;
 
-            &::after {
-                content: "Subscribe";
+            & .item {
+                display: flex;
+                justify-content: space-between;
+                margin: 0.5rem 0;
+
+                &__name {
+                    font-weight: 500;
+                }
+
+                &__value {
+                    font-weight: 100;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    max-width: 140px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    text-align: right;
+
+                    &--bold {
+                        letter-spacing: 0.2em;
+                    }
+                }
             }
-        }
+        };
 
-        &__ico {
-            &::before {
-                content: "\f02e";
-                font-family: "Font Awesome 5 Free";
-                font-style: normal;
-            }
-        }
-    }
-}
-.infoLeft__info {
-    background: var(--foreground-color);
-    padding: 0.5rem 1rem;
-    margin-bottom: 2rem;
-    
-    & .box {
-        display: flex;
-        justify-content: space-between;
-        margin: 0.5rem 0;
-
-        &__name {
-            font-weight: 500;
-        }
-
-        &__value {
-            font-weight: 100;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            max-width: 140px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: right;
-
-            &--bold {
-                letter-spacing: 0.2em;
-            }
-        }
-    }
-}
-.group {
-    display: flex;
-    background: var(--foreground-color);
-    margin-top: 1rem;
-
-    &__item {
-        display: block;
-        padding: 1rem 0rem;
-        width: 40%;
-        text-align: center;
-        margin-top: 0.7rem;
-
-
-        span {
-            margin-left: 5px;
-        }
-        &.fas {
-            color: var(--theme-color-1);
-            margin-top: 3px;
-        }
-        
-        &:nth-child(2) {
-            width: 60%;
-            margin-left: auto;
-            position: relative;
-            top: 2px;
-        }
-    }
-    
-    .rate {
-        margin-left: 0.5rem;
-        position: relative;
-        top: -1px;
-        font-weight: unset;
-        font-family: 'hind_m';
-    }
-
-    .bar {
-        width: 2px;
-        height: 21px;
-        background: var(--button-text-unimportant);
-        vertical-align: middle;
-        margin: 1rem;
-    }
-
-    
-}
-
-
+    };
+};
 
 
 //  RIGHT 
+#rightbox {
 
-
-.chapterRight {
-    & .btnbox {
+    & .button-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
         align-content: center;
+        margin: 1.75rem 1.75rem 0 1.75rem;
+        padding: 0 1.5rem 0 0;
 
         &__firstChapter, &__lastChapter {
             display: inline-flex;
@@ -168,37 +160,48 @@
             width: 48%;
             margin: 0px 0.5rem;
             border-radius: 0.5rem;
+
+            &.text { font-size: 1.1rem; }
         }
     }
 
-    & .listbox {
+    & .chapter-wrapper {
         max-height: 375px;
         overflow: auto;
         margin: 1.75rem;
         padding: 0 1.5rem 0 0;
 
-        &__chapterbtn {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0.5rem 1rem;
-            margin-bottom: 0.6em;
-            border: 2px solid var(--foreground-color-2);
+        &__list {
+            list-style-type: none;
+            padding: 0;
+        }
 
-            & .chaptertext {
-                font-size: 1rem;
-            }
-            & .date {
-                font-size: 0.9rem;
+        &__item {
+            & .chapter {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.5rem 1rem;
+                margin-bottom: 0.6em;
+                border: 2px solid var(--foreground-color-2);
+    
+                &:hover, &:focus{
+                    background: var(--foreground-color-2);
+                    border: 2px solid var(--foreground-color-2);
+                    color: var(--theme-color-3);
+                }
+    
+                &__text {
+                    font-size: 1rem;
+                }
+                &__date {
+                    font-size: 0.9rem;
+                }
             }
         }
 
-        &__chapterbtn:hover, &__chapterbtn:focus{
-            background: var(--foreground-color-2);
-            border: 2px solid var(--foreground-color-2);
-            color: var(--theme-color-3);
-        }
     }
+
 }
 
 // Codepen HeartSwitch
@@ -319,25 +322,60 @@
         padding: 0;
     }
 
-    .infoRight, .chapterRight {
-        width: 92%;
-        margin-left: auto;
+    #rightbox  {
+
+        .l-grid {
+
+            &__item {
+                width: 92%;
+                margin-left: auto;
+            }
+        }
     }
+    
 }
 
 @media (min-width: 768px) {
-    .infoLeft__title  { display: none; }
+    #leftbox .l-grid__mobile-title  { display: none; }
 } 
 @media (max-width: 768px) {
    
-    .infoRight, .chapterRight {
-        width: 100%;
-        margin-left: unset;
+    
+    #rightbox  {
+        padding: 0 !important;
+        .l-grid {
+            &__item {
+                width: 100%;
+                margin-left: unset;
+                &.c-card {
+                    &__title, &__sub-title {
+                        display: none;
+                    }
+                }
+            }
+        }
+        
     }
 
-    #rightbox {
-        margin: 0;
-        padding: 0;
+    #leftbox  {
+        .l-grid {
+
+            &__image {
+                margin: 0 auto;
+                padding: 0.4rem;
+            }
+
+            
+
+            &__mobile-title {
+                text-align: center;
+                flex-direction: column;
+                padding: 1rem;
+                margin: 1.1rem 0;
+                color: var(--button-text-color);
+            }
+        }
+        
     }
     
     #resize {
@@ -364,15 +402,6 @@
         }
     }
     
-    .infoLeft__img {
-        margin: 0 auto;
-        padding: 0.4rem;
-    }
-    .infoLeft__title {
-        text-align: center;
-        margin: 1.1rem 0;
-        color: var(--button-text-color);
-    }
     .infoLeft__activities {
         margin: 1.5rem 0;
 
@@ -387,10 +416,6 @@
             padding: 0.6rem;
         }
     }
-    .infoRight__body {
-
-        #main-title { display: none; }
-        #sub-title { display: none; }
-    }
+    
 }
 

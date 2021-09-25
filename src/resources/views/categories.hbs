@@ -96,8 +96,11 @@
         <grid-comic-item class="grid__item">
             <a href="/comic/{{this.slug}}">
                 <background-overlay></background-overlay>
-                <img width="200" height="200" loading="lazy" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp
-                " alt="">
+                <picture>
+                    <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" type="image/webp" />
+                    <img alt="{{this.title}}" width="200" height="200" 
+                    src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"/>
+                </picture>
                 <comic-info>
                     <title class="title title--ellipsis title--top">
                         {{this.title}}

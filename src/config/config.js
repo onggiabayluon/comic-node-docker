@@ -15,11 +15,13 @@ module.exports = {
     IMAGE_URL: process.env.URL || "https://s3.ap-northeast-1.wasabisys.com/storagepongpong",
 
     
+
     UPDATE_PER_MIN: 10,
 
     HOME_TITLE: "Read Manga Online - Dorecomic",
     HOME_DESCRIPTION: "Read manga online free at Dorecomic with fastest update",
+    DETAIL_PAGE_DESCRIPTION: "with high quality images, update fastest at",
     HOME_KEYWORDS: "read manga online, dorecomic, dorecomic.com, manga online free, free manga, manga reader, manga scans, manga raw, manga, manhwa, manhua",
     HOME_URL: "https://cloudimagewall.xyz",
-    HOME_SITENAME: "Dorecomic"
+    HOME_SITENAME: "Dorecomic",
 }

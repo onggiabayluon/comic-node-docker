@@ -330,3 +330,9 @@ search-output {
     }
     
 }
+@media (max-width: 576px) {
+    #navbar .right {
+        margin-right: unset;
+        margin-top: 1rem;
+    }
+}

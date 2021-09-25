@@ -20,7 +20,8 @@
             </picture>
         </section>
 
-        <section id="resize" class="container mb-4">
+        <section itemprop="mainEntity" itemscope itemtype="https://schema.org/Book"
+        id="resize" class="container mb-4">
             <div class="row">
                 <div class="col-12">
                     <nav class="breadcrumb-container d-lg-inline-block" aria-label="breadcrumb">
@@ -35,47 +36,47 @@
                     </nav>
                     <div class="separator mb-4"></div>
                     <div class="row">
-                        <div id="leftbox" class="col-12 col-xl-3 col-md-4 col-sm-12 col-left" style="margin: 0 0 auto 0;">
-                            <div class="infoLeft">
-                                <div class="card infoLeft__img p-xl-3 col-5 col-xl-12 col-md-12 col-sm-4">
-                                    {{#if comic.thumbnail}}
-                                    <img src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg"
-                                        type="image/jpeg" alt="img">
-                                    {{/if}}
-                                </div>
-                                <div class="p-3 card infoLeft__title col-sm-12">
-                                    <h2 id="main-title" class="font-weight-bold">{{comic.title}}</h2>
-                                    <h4 id="sub-title" class="text-muted text-small mb-3">{{comic.subtitle}}</h4>
-                                </div>
-                                <div class="infoLeft__activities">
-                                    <ul>
-                                        <form id="subscribe-btn" onclick="return subscribe(this);" 
-                                        class="bookmark light-red btn btn-primary default btn-block mb-1">
-                                            <input id="comicId" type="hidden" name="comicId" value="{{comic._id}}">
-                                            <i id="bookmarkIco" class="bookmark__ico"></i>
+
+                        <div id="leftbox" class="l-grid col-12 col-xl-3 col-md-4 col-sm-12 col-left" style="margin: 0 0 auto 0;">
+                            <div class="l-grid__image card p-xl-3 col-5 col-xl-12 col-md-12 col-sm-4">
+                                <img itemprop="image" alt="{{comic.title}} Main" width="100%" height="auto"
+                                src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" 
+                                />
+                            </div>
+
+                            <div class="l-grid__mobile-title">
+                                <h2 id="main-title" class="font-weight-bold">{{comic.title}}</h2>
+                                <h4 id="sub-title" class="text-muted text-small mb-3">{{comic.subtitle}}</h4>
+                            </div>
+
+                            <div class="l-grid__activites">
+                                <ul class="activites__list">
+                                    <li class="activites__item">
+                                        <form onclick="return subscribe(this);"
+                                            class="bookmark light-red btn btn-primary default btn-block mb-1">
+                                            <input class="bookmark__id" type="hidden" name="comicId" value="{{comic._id}}">
+                                            <i class="bookmark__ico"></i>
                                             <span class="bookmark__text"></span>
                                         </form>
-                                        
-                                        <div class="group" style="box-shadow: 0 1px 15px rgb(0 0 0 / 10%), 0 1px 8px rgb(0 0 0 / 10%);">
-                                            <div class="group__item">
-                                                <i class="fas fa-user-alt"></i>
-                                                <span>{{comic.view.totalView}}</span>
+                                    </li>
+                                    <li class="activites__item">
+                                        <div class="activities-wrapper" style="box-shadow: 0 1px 15px rgb(0 0 0 / 10%), 0 1px 8px rgb(0 0 0 / 10%);">
+                                            <div class="view">
+                                                <i class="view__ico fas fa-user-alt"></i>
+                                                <span class="view__value">{{comic.view.totalView}}</span>
                                             </div>
-
-                                            {{!-- <div class="bar"></div> --}}
-                                            
-                                            <div class="mt-2 group__item">
-                                                <i class="fas fa-star"></i>
-                                                <span class="rateNum">{{rateValue}}</span>
-                                                <div class="dropdown d-inline-block">
-                                                    <div class="light-red rate badge badge-pill badge-primary mb-1" role="button" id="dropdownMenuLink"
+                                            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating" class="rate mt-2">
+                                                <i class="rate__ico fas fa-star"></i>
+                                                <span itemprop="ratingValue" class="rate__value">{{rateValue}}</span>
+                                                <div class="rate__wrapper dropdown d-inline-block">
+                                                    <div class="rate__wrapper__btn light-red badge badge-pill badge-primary mb-1" role="button" id="dropdownMenuLink"
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         RATE
                                                     </div>
-                                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" x-placement="bottom-start"
+                                                    <div class="rate__wrapper__dropdown dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start"
                                                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
                                                         <div id="rating" class="rating" data-rate-value=5></div>
-                                                        <div class="rateCount text-info text-center mt-2"> ( <span class="countNum">{{rateCount}}</span> votes ) </div>
+                                                        <div class="rateCount text-info text-center mt-2"> ( <span itemprop="reviewCount" class="countNum">{{rateCount}}</span> votes ) </div>
                                                         <div class="msg-success text-success text-center mt-2 d-none"> Rated </div>
                                                         <div class="msg-fail text-danger text-center mt-2 d-none"> You already Rated </div>
                                                     </div>
@@ -84,68 +85,78 @@
                                                 
                                             </div>
                                         </div>
-                                        
-                                    </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="l-grid__itemList card">
+                                <div class="item">
+                                    <div class="item__name">Status</div> <span class="item__value text-muted">Ongoing</span>
                                 </div>
-                                
-                    
-                                <div class="card infoLeft__info">
-                                    <div class="box">
-                                        <div class="box__name">Status</div> <span class="box__value text-muted">Ongoing</span>
-                                    </div>
-                                    <div class="box">
-                                        <div class="box__name">Author</div> <span class="box__value text-muted">
-                                            {{#if comic.author}}
-                                                {{comic.author}}
-                                            {{else}}
-                                            Updating
-                                            {{/if}}
-                                            </span>
-                                    </div>
-                                    <div class="box">
-                                        <div class="box__name">Views</div> <span class="box__value box__value--bold">{{comic.view.totalView}}</span>
-                                    </div>
+                                <div class="item">
+                                    <div class="item__name">Author</div> 
+                                    <span itemprop="author" class="item__value text-muted">
+                                        {{#if comic.author}}{{comic.author}}
+                                        {{else}}
+                                        Updating
+                                        {{/if}}
+                                    </span>
+                                </div>
+                                <div class="item">
+                                    <div class="item__name">Views</div> <span class="item__value item__value--bold">{{comic.view.totalView}}</span>
                                 </div>
                             </div>
+                            
                         </div>
-                        <div id="rightbox" class="col-12 col-xl-9 col-md-8 col-sm-12 col-right">
-                            <div class="infoRight card mb-4">
-                                <div class="infoRight__body card-body">
-                                    <h2 id="main-title" itemprop="name" class="font-weight-bold">{{comic.title}}</h2>
-                                    <h4 id="sub-title" itemprop="alternativeHeadline" class="text-muted text-small mb-3">
+
+                        <div id="rightbox" class="l-grid col-12 col-xl-9 col-md-8 col-sm-12">
+                            <div class="l-grid__item card mb-4">
+                                <div class="c-card card-body">
+                                    <h2 itemprop="name" class="c-card__title font-weight-bold">{{comic.title}}</h2>
+                                    <h4 itemprop="alternativeHeadline" class="c-card__sub-title text-muted text-small mb-3">
                                         {{comic.subtitle}}
                                         </h4>
-                                    <div id="tags" class="mb-3">
+                                    <div class="c-card__tags mb-3">
                                         {{#each comic.category}}
                                         <span class="badge badge-pill badge-outline-primary mb-1" style="font-weight: 500;">{{this.name}}</span>
                                         {{/each}}
                                     </div>
-                                    <p class="font-weight-bold">Synopsis {{comic.title}}</p>
-                                    <p itemprop="description">
+                                    <p class="c-card__heading font-weight-bold">Synopsis {{comic.title}}</p>
+                                    <p class="c-card__description" itemprop="description">
                                         {{comic.description}}
                                     </p>
-                        
-                        
                                 </div>
                             </div>
-                            <div class="chapterRight card mb-4">
-                                <div class="btnbox card-body">
-                                    <a href="/comic/{{comic.slug}}/chapter-{{firstChapter.chapter}}" class="light-red btnbox__firstChapter btn btn-primary mb-1">
-                                        <span> First Chapter </span>
-                                        <span style="font-size: 1.1rem;"> Chapter {{firstChapter.chapter}}</span>
+
+                            <div class="l-grid__item card mb-4">
+                                <div class="button-wrapper">
+                                    <a href="/comic/{{comic.slug}}/chapter-{{firstChapter.chapter}}"
+                                        class="button-wrapper__firstChapter btn btn-primary light-red mb-1">
+                                        <span class="firstChapter__name"> First Chapter </span>
+                                        <span class="firstChapter__text"> Chapter {{firstChapter.chapter}}</span>
                                     </a>
-                                    <a href="/comic/{{comic.slug}}/chapter-{{lastChapter.chapter}}" class="light-red btnbox__lastChapter btn btn-primary mb-1">
-                                        <span> Last Chapter </span>
-                                        <span style="font-size: 1.1rem;"> Chapter {{lastChapter.chapter}} </span>
+                                    <a href="/comic/{{comic.slug}}/chapter-{{lastChapter.chapter}}"
+                                        class="button-wrapper__lastChapter btn btn-primary light-red mb-1">
+                                        <span class="lastChapter__name"> Last Chapter </span>
+                                        <span class="lastChapter__name"> Chapter {{lastChapter.chapter}} </span>
                                     </a>
                                 </div>
-                                <div class="listbox">
-                                    {{#each comic.chapters}}
-                                    <a href="/comic/{{../comic.slug}}/chapter-{{this.chapter}}" class="listbox__chapterbtn">
-                                        <span class="chaptertext"> Chapter {{this.chapter}} </span>
-                                        <span class="date text-muted"> {{CalcTimeEnglish this.updatedAt}}</span>
-                                    </a>
-                                    {{/each}}
+                                
+                                <div class="chapter-wrapper">
+                                    <ul itemscope itemtype="https://schema.org/BreadcrumbList" class="chapter-wrapper__list">
+                                        {{#each comic.chapters}}
+                                        <li itemprop="itemListElement" itemscope
+                                        itemtype="https://schema.org/ListItem" 
+                                        class="chapter-wrapper__item">
+                                            <a itemprop="item" class="chapter" href="/comic/{{../comic.slug}}/chapter-{{this.chapter}}" >
+                                                <span itemprop="name" class="chapter__text" id="chapter-{{this._id}}" > Chapter {{this.chapter}} </span>
+                                                <meta itemprop="position" content="{{sum @index 1}}" />
+                                                <span class="chapter__date text-muted"> {{CalcTimeEnglish this.updatedAt}}</span>
+                                            </a>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                    
                                 </div>
                             </div>
                         </div>

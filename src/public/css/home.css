@@ -348,6 +348,34 @@ p {
   padding: 0;
 }
 
+.btn-background-utility {
+  background: #666;
+  border: 2px solid #666;
+  color: #fff;
+  border-radius: 1rem;
+}
+.btn-background-utility:hover {
+  border: 2px solid #666;
+  color: #666;
+  background: #fff;
+}
+
+.btn-outline-utility {
+  border: 2px solid #666;
+  color: #666;
+  border-radius: 1rem;
+}
+.btn-outline-utility:hover {
+  background: #666;
+  color: #fff;
+}
+
+.disabled {
+  --fa-primary-color: var(--button-text-unimportant) !important;
+  color: var(--button-text-unimportant) !important;
+  border: unset !important;
+}
+
 img {
   object-fit: cover;
 }
@@ -503,28 +531,6 @@ heading icon-right {
   width: 45px;
 }
 
-.btn-background-utility {
-  background: #666;
-  border: 2px solid #666;
-  color: #fff;
-  border-radius: 1rem;
-}
-.btn-background-utility:hover {
-  border: 2px solid #666;
-  color: #666;
-  background: #fff;
-}
-
-.btn-outline-utility {
-  border: 2px solid #666;
-  color: #666;
-  border-radius: 1rem;
-}
-.btn-outline-utility:hover {
-  background: #666;
-  color: #fff;
-}
-
 @media (max-width: 576px) {
   #newest-places .container, #bookmark-places .container {
     max-width: 100%;
@@ -545,63 +551,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #ea28a5;
+  background: #6d1d51;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #db7103;
+  background: #245b78;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #c8e792;
+  background: #89eef8;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #9d3d3d;
+  background: #19b4cb;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #92736c;
+  background: #0c9cd8;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #6bdf1a;
+  background: #1002ca;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #76a070;
+  background: #7b20d7;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #c9dcad;
+  background: #556cbb;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #160fd5;
+  background: #76599a;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #54e71e;
+  background: #06ee92;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #7607b7;
+  background: #7d77a1;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #4d7d86;
+  background: #146a4f;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #8b81f0;
+  background: #ff7e3f;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #bd7ba9;
+  background: #565426;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #527684;
+  background: #07520c;
 }
 
 .num {
@@ -3577,6 +3583,12 @@ search-output .lds-ellipsis div:nth-child(4) {
     font-size: 1.7rem;
     width: 20%;
     text-align: center;
+  }
+}
+@media (max-width: 576px) {
+  #navbar .right {
+    margin-right: unset;
+    margin-top: 1rem;
   }
 }
 #categories-wrapper .more {

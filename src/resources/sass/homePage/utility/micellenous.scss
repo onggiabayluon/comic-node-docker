@@ -318,3 +318,33 @@ p {
   font-size: 1.3rem;
   padding: 0;
 }
+
+.btn-background-utility {
+  background: #666;
+  border: 2px solid #666;
+  color: #fff;
+  border-radius: 1rem;
+
+  &:hover {
+      border: 2px solid #666;
+      color: #666;
+      background: #fff;
+  }
+}
+
+.btn-outline-utility {
+  border: 2px solid #666;
+  color: #666;
+  border-radius: 1rem;
+
+  &:hover {
+      background: #666;
+      color: #fff;
+  }
+}
+
+.disabled {
+  --fa-primary-color: var(--button-text-unimportant) !important;
+  color: var(--button-text-unimportant) !important;
+  border: unset !important;
+}

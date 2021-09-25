@@ -112,10 +112,9 @@ function chapterisvisited(visited_chapters) {
 }
 /* 🛑 End local History */
 
+const pathname = window.location.pathname;
+const chapter = pathname.split('/').pop()
+$(`option[data-chapter=${chapter}]`).attr('selected', true);
 
-
-$('#remove').on("click", function() {
-    $("option").eq(0).hide();
-});
 
 

@@ -89,7 +89,7 @@ io.on('connection', client => {
 const sessionConfig = {
     store: new RedisStore({ client: redis.client }),
     secret: 'secret',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     cookie : {
         sameSite: 'strict',
@@ -194,7 +194,7 @@ app.engine(
                 return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
             },
             totalRating: (rateCount, rateValue) => {
-                return ((rateValue / rateCount) * 2).toFixed(2)
+                return ((rateValue / rateCount)).toFixed(2)
             },
             setVar: (varName, varValue, options) => {
                 if (!options.data.root) {
@@ -213,7 +213,7 @@ app.engine(
             },
             CalcTimeEnglish: (time) => CalcTimeEnglish(time),
             minus: (a,b) => a - b,
-            sum: (a, b) =>  a + b,
+            sum: (a, b) =>  Number(a) + Number(b),
             limit: (arr, limit) => {
                 if (!Array.isArray(arr)) { return []; }
                 return arr.slice(0, limit);

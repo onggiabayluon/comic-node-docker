@@ -5,7 +5,7 @@ const Comic     = require('../models/Comic');
 const Config    = require('../models/Config');
 const TopView      = require('../models/TopView');
 const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
-, HOME_KEYWORDS, HOME_URL, HOME_SITENAME } = require('../../config/config');
+, HOME_KEYWORDS, HOME_URL, HOME_SITENAME, IMAGE_URL_HTTP } = require('../../config/config');
 
 
 class SiteController {
@@ -117,15 +117,15 @@ class SiteController {
         let limitTopView = 10;
 
         Promise.all([
-            Comic.countDocuments({}),
-            Comic.find({})
+            Comic.countDocuments({})
+            , Comic.find({})
             .select('-description -chapters')
             .sort({ updatedAt: -1 })
             .skip(skipCourse)
             .limit(PageSize)
-            .lean(),
-            Config.findOne({ category: "image" }).lean(),
-            Comic.find({})
+            .lean()
+            , Config.findOne({ category: "image" }).lean()
+            , Comic.find({})
             .select('view rate title author slug thumbnail')
             .sort({ "view.dayView.view": -1 })
             .limit(limitTopView)
@@ -137,7 +137,8 @@ class SiteController {
                 home_description: HOME_DESCRIPTION,
                 home_keywords: HOME_KEYWORDS,
                 home_url: HOME_URL,
-                home_sitename: HOME_SITENAME
+                home_sitename: HOME_SITENAME,
+                image_url_http: IMAGE_URL_HTTP
             }
             res.setHeader('Cache-Control', 'public, max-age=1000');
             res.status(200).render('home', { 

@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{comics.title}} Chap {{currentChapter.chapter}} Next Chap {{sum nextChapter.chapter 1}} - {{meta.home_sitename}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="description" content="Read manga {{comics.title}} Chapter {{currentChapter.chapter}} {{meta.detail_page_description}} {{meta.home_sitename}}">
+    <meta name="author" content="{{meta.home_sitename}}">
+    <meta name="keywords" itemprop="keywords" content="{{meta.home_keywords}}">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{meta.home_description}}">
+    <meta property="og:url" content="{{meta.home_url}}/comic/{{comics.slug}}/chapter-{{currentChapter.chapter}}">
+    <meta property="og:image" content="{{meta.image_url_http}}/{{comics.thumbnail.url}}-thumbnail-original.jpeg">
+    <meta property="og:image:secure_url" content="{{img_url}}/{{comics.thumbnail.url}}-thumbnail-original.jpeg">
+    <meta property="og:image:type" content="image/jpeg" /> 
+    <meta property="og:image:width" content="400"/> 
+    <meta property="og:image:height" content="300" />
+    
+    <meta name="twitter:title" content="{{meta.home_title}}">
+    <meta name="twitter:description" content="{{meta.home_description}}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="{{meta.home_sitename}}">
+    <meta name="twitter:image" content="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg">
+    <link rel="canonical" href="{{meta.home_url}}/comic/{{comics.slug}}/chapter-{{currentChapter.chapter}}">
     {{!-- preconnect --}}
-    <link rel="preconnect" href="https://s3.eu-central-1.wasabisys.com">
+    <link rel="preconnect" href="{{img_url}}">
     {{!-- FontAweSome cdn --}}
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     {{!-- Bootstrap cdn --}}

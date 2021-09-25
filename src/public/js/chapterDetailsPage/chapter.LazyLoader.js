@@ -23,7 +23,7 @@ var w = window.innerWidth
 //     autoType = 'image/webp'
 // }
 
-if (w > 1000) {
+if (w > 1024) {
     size = "-large.webp"
     // autoMedia = "(min-width: 1000px)"
     autoType = 'image/webp'

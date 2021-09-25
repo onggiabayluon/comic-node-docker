@@ -12,7 +12,15 @@ const path  = require('path');
 const redis = require(path.resolve('./src/config/redis'))
 const { promisify } = require("util");
 const { Promise } = require('mongoose');
-const { IMAGE_URL } = require('../../config/config');
+const { 
+  IMAGE_URL
+  , HOME_TITLE
+  , HOME_DESCRIPTION
+  , HOME_KEYWORDS
+  , HOME_URL
+  , HOME_SITENAME
+  , DETAIL_PAGE_DESCRIPTION,
+  IMAGE_URL_HTTP} = require('../../config/config');
 
 class ComicController {
 
@@ -21,10 +29,18 @@ class ComicController {
       'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js',
       '/js/othersPage/historyPage.scripts.js'
     ]
+    let meta = {
+      title: 'History - ' + HOME_SITENAME,
+      home_description: 'History Comic ' + HOME_SITENAME,
+      home_keywords: HOME_KEYWORDS,
+      home_url: HOME_URL,
+      home_sitename: HOME_SITENAME,
+    }
     res.status(200).render('history.hbs', {
       layout: 'utility_layout.hbs',
       user: req.user,
-      scripts: scripts
+      scripts: scripts,
+      meta
     })
   };
 
@@ -34,11 +50,22 @@ class ComicController {
       '/js/utilityScripts/message.scripts.js',
       '/js/utilityScripts/subscribe.scripts.js'
     ]
+    const meta = {
+      title: 'Followed Comic' + HOME_SITENAME,
+      home_description: 'Followed Comic ' + HOME_SITENAME,
+      home_keywords: HOME_KEYWORDS,
+      home_url: HOME_URL,
+      home_sitename: HOME_SITENAME,
+      detail_page_description: DETAIL_PAGE_DESCRIPTION,
+      image_url_http: IMAGE_URL_HTTP
+    }
 
     const renderWithoutUserAuth = () => {
       res.status(200).render('bookmark.hbs', {
         layout: 'utility_layout.hbs',
         scripts: scripts,
+        meta,
+        img_url: IMAGE_URL
       })
     };
 
@@ -64,7 +91,8 @@ class ComicController {
             sublist: subscribedComics,
             img_url: IMAGE_URL,
             user: req.user,
-            scripts: scripts
+            scripts: scripts,
+            meta
           })
         })
         .catch(err => next(err))
@@ -94,7 +122,13 @@ class ComicController {
     const sortUrl = (req.query.hasOwnProperty('_sort')) ? `&_sort&column=${_column}&order=${_order}` : '';
     //?page=1&_sort&column=updatedAt&order=-1
     // Example: $sort = {view.totalView: -1}
-    
+    const meta = {
+      title: 'Categories - ' + HOME_SITENAME,
+      home_description: 'Genres, Categories of all comics, mangas at' + HOME_SITENAME,
+      home_keywords: "genres, categories, " + HOME_KEYWORDS,
+      home_url: HOME_URL,
+      home_sitename: HOME_SITENAME,
+    }
 
     main()
     .then(([[categoriesName, error1], [sortedList, error2], [countOfList, error3]]) => {
@@ -119,7 +153,8 @@ class ComicController {
         sortUrl,
         pages: Math.ceil(countOfList / PageSize),
         scripts: scripts,
-        img_url: IMAGE_URL
+        img_url: IMAGE_URL,
+        meta
       })
     })
     .catch(err => console.log(err))
@@ -210,7 +245,9 @@ class ComicController {
 
   comicdetailsPage(req, res, next) {
     Promise.all([
-      Comic.findOne({ slug: req.params.comicSlug }).lean()
+      Comic
+      .findOne({ slug: req.params.comicSlug })
+      .lean()
       .populate('category', 'name')
     ])
       .then(([comicdoc]) => {
@@ -218,7 +255,16 @@ class ComicController {
           return next(new customError('Not found', 404));
         }
 
-        let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount) * 2).toFixed(2);
+        let meta = {
+          home_title: HOME_TITLE,
+          home_description: HOME_DESCRIPTION,
+          home_keywords: HOME_KEYWORDS,
+          home_url: HOME_URL,
+          home_sitename: HOME_SITENAME,
+          detail_page_description: DETAIL_PAGE_DESCRIPTION,
+          image_url_http: IMAGE_URL_HTTP
+        }
+        let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount)).toFixed(2);
         let rateCount = comicdoc.rate.rateCount
 
         if (comicdoc?.chapters) comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
@@ -235,7 +281,8 @@ class ComicController {
           firstChapter: firstChapter,
           lastChapter: lastChapter,
           user: req.user,
-          img_url: IMAGE_URL
+          img_url: IMAGE_URL,
+          meta
         })
       })
       .catch(next)
@@ -278,18 +325,30 @@ class ComicController {
       comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
      
       let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter).replace("chapter-", ""))
+      let currentChapter = comicdoc.chapters[$thisChapterIndex]
       let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
       let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]
+      let meta = {
+        home_title: HOME_TITLE,
+        home_description: HOME_DESCRIPTION,
+        home_keywords: HOME_KEYWORDS,
+        home_url: HOME_URL,
+        home_sitename: HOME_SITENAME,
+        detail_page_description: DETAIL_PAGE_DESCRIPTION,
+        image_url_http: IMAGE_URL_HTTP
+      }
       res.setHeader('Cache-Control', 'public, max-age=2592000'); // 1 month
       res.status(200).render('chapter.details.hbs',
         {
           layout: 'chapter.details.layout.hbs',
           comics: comicdoc,
           chapter: chapterdoc,
+          currentChapter: currentChapter,
           prevChapter: prevChapter,
           nextChapter: nextChapter,
           user: req.user,
-          img_url: IMAGE_URL
+          img_url: IMAGE_URL,
+          meta
         })
     };
 

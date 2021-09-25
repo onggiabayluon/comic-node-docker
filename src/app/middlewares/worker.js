@@ -12,12 +12,13 @@ const s3 = new AWS.S3({
 });
 const resize = async (file, extension, imageType, width, path, now) => {
     try {
-
         const filename = `${path}-${extension}`;
+        const sharpResize = sharp(file.buffer).resize({ width: width })
 
-        await sharp(file.buffer)
-            .resize({ width: width })
-            .webp({ quality: 80 })
+        if (imageType === 'image/webp') sharpResize.webp({ quality: 80 })
+        else sharpResize.jpeg({ quality: 80 })
+
+        await sharpResize
             .toBuffer()
             .then(resized => s3.upload({
                 Body: resized,
@@ -26,9 +27,6 @@ const resize = async (file, extension, imageType, width, path, now) => {
                 CacheControl: 'max-age=31536000',
                 Key: filename,
             }).promise())
-            // .then(() => {
-            //     console.log('Runtime in MS: ', Date.now() - now, 'ms');
-            // })
 
         return filename
         
@@ -57,9 +55,9 @@ const main = async (files, config) => {
 
         // Resize Each time 3 type 
         await Promise.all([
-            resize(file, 'large.webp', 'webp', 1000, path, rightnow),
-            resize(file, 'medium.jpeg', 'jpeg', 690, path, rightnow),
-            resize(file, 'small.webp', 'webp', 400, path, rightnow),
+            resize(file, 'large.webp', 'image/webp', 1000, path, rightnow),
+            resize(file, 'medium.jpeg', 'image/jpeg', 690, path, rightnow),
+            resize(file, 'small.webp', 'image/webp', 400, path, rightnow),
         ])
 
         // Prepare Path to db

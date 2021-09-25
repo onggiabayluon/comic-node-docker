@@ -24,11 +24,31 @@
             {{!-- <h1 class="logo__title">Dore</h1> --}}
             <span class="logo-mobile d-block d-xs-none"></span>
         </a>
-        <ul>
-            <li><a href="/comic/categories/all?_sort&column=view.totalView&order=-1">Popular</a></li>
-            <li><a href="/comic/categories/all">Categories</a></li>
-            <li><a href="/comic/bookmark">bookmark</a></li>
-            <li><a href="/comic/history">History</a></li>
+        <ul itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="/comic/categories/all?_sort&column=view.totalView&order=-1">
+                    <span itemprop="name">Popular</span>
+                    <meta itemprop="position" content="1" />
+                </a>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="/comic/categories/all">
+                    <span itemprop="name">Categories</span>
+                    <meta itemprop="position" content="2" />
+                </a>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="/comic/bookmark">
+                    <span itemprop="name">Bookmark</span>
+                    <meta itemprop="position" content="3" />
+                </a>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="/comic/history">
+                    <span itemprop="name">History</span>
+                    <meta itemprop="position" content="4" />
+                </a>
+            </li>
         </ul>
     </desktop-nav>
     <right class="right">

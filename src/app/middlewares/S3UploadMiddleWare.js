@@ -26,7 +26,7 @@ var self = module.exports = {
             const filename = `${path}-${extension}`;
 
             await sharp(file.buffer)
-                .resize({ width: width })
+                .resize({ width: width, fit: 'cover' })
                 .webp({ quality: 80 })
                 .toBuffer()
                 .then(resized => s3.upload({
@@ -34,7 +34,7 @@ var self = module.exports = {
                     Bucket: WASABI_BUCKET_NAME,
                     ContentType: imageType,
                     CacheControl: 'max-age=31536000',
-                    Key: `${filename}`,
+                    Key: filename,
                 }).promise())
                 .then(() => {
                     console.log('Runtime in MS: ', Date.now() - now, 'ms');

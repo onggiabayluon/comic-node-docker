@@ -340,6 +340,34 @@ p {
   padding: 0;
 }
 
+.btn-background-utility {
+  background: #666;
+  border: 2px solid #666;
+  color: #fff;
+  border-radius: 1rem;
+}
+.btn-background-utility:hover {
+  border: 2px solid #666;
+  color: #666;
+  background: #fff;
+}
+
+.btn-outline-utility {
+  border: 2px solid #666;
+  color: #666;
+  border-radius: 1rem;
+}
+.btn-outline-utility:hover {
+  background: #666;
+  color: #fff;
+}
+
+.disabled {
+  --fa-primary-color: var(--button-text-unimportant) !important;
+  color: var(--button-text-unimportant) !important;
+  border: unset !important;
+}
+
 img {
   object-fit: cover;
 }
@@ -495,28 +523,6 @@ heading icon-right {
   width: 45px;
 }
 
-.btn-background-utility {
-  background: #666;
-  border: 2px solid #666;
-  color: #fff;
-  border-radius: 1rem;
-}
-.btn-background-utility:hover {
-  border: 2px solid #666;
-  color: #666;
-  background: #fff;
-}
-
-.btn-outline-utility {
-  border: 2px solid #666;
-  color: #666;
-  border-radius: 1rem;
-}
-.btn-outline-utility:hover {
-  background: #666;
-  color: #fff;
-}
-
 @media (max-width: 576px) {
   #newest-places .container, #bookmark-places .container {
     max-width: 100%;
@@ -537,63 +543,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #3b240f;
+  background: #69ceff;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #93286f;
+  background: #3d64de;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #247b28;
+  background: #2f3bb3;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #609563;
+  background: #679eaf;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #1360b2;
+  background: #231ce7;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #a7902f;
+  background: #cc7c8a;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #bc496e;
+  background: #160761;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #3baebb;
+  background: #52671b;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #dbb697;
+  background: #948b96;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #4266c6;
+  background: #8af36c;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #f21fea;
+  background: #8ea76f;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #9929e6;
+  background: #9d0395;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #91ddf0;
+  background: #fde25f;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #fcc9d2;
+  background: #83512e;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #536773;
+  background: #82c372;
 }
 
 .num {
@@ -2425,6 +2431,12 @@ search-output .lds-ellipsis div:nth-child(4) {
     text-align: center;
   }
 }
+@media (max-width: 576px) {
+  #navbar .right {
+    margin-right: unset;
+    margin-top: 1rem;
+  }
+}
 /*************** star rating ***************/
 .rating {
   display: inline-block;
@@ -2441,69 +2453,99 @@ search-output .lds-ellipsis div:nth-child(4) {
 }
 
 /*************** star rating ***************/
-#main-title {
-  font-size: 1.4rem;
-}
-
-.infoLeft__img {
+#leftbox .l-grid__image {
   background: var(--foreground-color);
   padding: 1rem;
 }
-
-.infoLeft__activities {
+#leftbox .l-grid__mobile-title {
+  display: flex;
+  background: var(--foreground-color);
+  margin-top: 1rem;
+}
+#leftbox .l-grid__activites {
   margin: 1.5rem 0;
 }
-.infoLeft__activities ul {
+#leftbox .l-grid__activites .activities-wrapper {
+  display: flex;
+  background: var(--foreground-color);
+  margin-top: 1rem;
+}
+#leftbox .l-grid__activites .view, #leftbox .l-grid__activites .rate {
+  display: block;
+  padding: 1rem 0;
+  width: 40%;
+  text-align: center;
+  margin-top: 0.7rem;
+}
+#leftbox .l-grid__activites .view__value, #leftbox .l-grid__activites .rate__value {
+  margin-left: 5px;
+}
+#leftbox .l-grid__activites .view__ico, #leftbox .l-grid__activites .rate__ico {
+  margin-top: 3px;
+}
+#leftbox .l-grid__activites .rate {
+  width: 60%;
+  margin-left: auto;
+  position: relative;
+  top: 2px;
+}
+#leftbox .l-grid__activites .rate__wrapper__btn {
+  margin-left: 0.5rem;
+  position: relative;
+  top: -1px;
+  font-weight: unset;
+  font-family: "hind_m";
+}
+#leftbox .l-grid__activites ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.infoLeft__activities .bookmark {
+#leftbox .l-grid__activites .bookmark {
   border-radius: 0.5rem;
   text-align: center;
   padding: 0.9rem;
 }
-.infoLeft__activities .bookmark--subscribed {
+#leftbox .l-grid__activites .bookmark--subscribed {
   color: var(--button-text-color) !important;
   background-color: hsl(var(--theme-color-1-h), var(--theme-color-1-s), calc(var(--theme-color-1-l) - 8%));
   border-color: hsl(var(--theme-color-1-h), var(--theme-color-1-s), calc(var(--theme-color-1-l) - 8%));
   transition: 0.5s ease-in-out;
 }
-.infoLeft__activities .bookmark--subscribed .bookmark__text::after {
+#leftbox .l-grid__activites .bookmark--subscribed .bookmark__text::after {
   content: "Subscribed";
 }
-.infoLeft__activities .bookmark--subscribed .bookmark__ico::before {
+#leftbox .l-grid__activites .bookmark--subscribed .bookmark__ico::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-style: normal;
   font-weight: 900;
 }
-.infoLeft__activities .bookmark__text {
+#leftbox .l-grid__activites .bookmark__text {
   margin-left: 0.3rem;
 }
-.infoLeft__activities .bookmark__text::after {
+#leftbox .l-grid__activites .bookmark__text::after {
   content: "Subscribe";
 }
-.infoLeft__activities .bookmark__ico::before {
+#leftbox .l-grid__activites .bookmark__ico::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-style: normal;
 }
-
-.infoLeft__info {
+#leftbox .l-grid__itemList {
   background: var(--foreground-color);
   padding: 0.5rem 1rem;
   margin-bottom: 2rem;
 }
-.infoLeft__info .box {
+#leftbox .l-grid__itemList .item {
   display: flex;
   justify-content: space-between;
   margin: 0.5rem 0;
 }
-.infoLeft__info .box__name {
+#leftbox .l-grid__itemList .item__name {
   font-weight: 500;
 }
-.infoLeft__info .box__value {
+#leftbox .l-grid__itemList .item__value {
   font-weight: 100;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -2512,70 +2554,39 @@ search-output .lds-ellipsis div:nth-child(4) {
   text-overflow: ellipsis;
   text-align: right;
 }
-.infoLeft__info .box__value--bold {
+#leftbox .l-grid__itemList .item__value--bold {
   letter-spacing: 0.2em;
 }
 
-.group {
-  display: flex;
-  background: var(--foreground-color);
-  margin-top: 1rem;
-}
-.group__item {
-  display: block;
-  padding: 1rem 0rem;
-  width: 40%;
-  text-align: center;
-  margin-top: 0.7rem;
-}
-.group__item span {
-  margin-left: 5px;
-}
-.group__item.fas {
-  color: var(--theme-color-1);
-  margin-top: 3px;
-}
-.group__item:nth-child(2) {
-  width: 60%;
-  margin-left: auto;
-  position: relative;
-  top: 2px;
-}
-.group .rate {
-  margin-left: 0.5rem;
-  position: relative;
-  top: -1px;
-  font-weight: unset;
-  font-family: "hind_m";
-}
-.group .bar {
-  width: 2px;
-  height: 21px;
-  background: var(--button-text-unimportant);
-  vertical-align: middle;
-  margin: 1rem;
-}
-
-.chapterRight .btnbox {
+#rightbox .button-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
+  margin: 1.75rem 1.75rem 0 1.75rem;
+  padding: 0 1.5rem 0 0;
 }
-.chapterRight .btnbox__firstChapter, .chapterRight .btnbox__lastChapter {
+#rightbox .button-wrapper__firstChapter, #rightbox .button-wrapper__lastChapter {
   display: inline-flex;
   flex-direction: column;
   width: 48%;
   margin: 0px 0.5rem;
   border-radius: 0.5rem;
 }
-.chapterRight .listbox {
+#rightbox .button-wrapper__firstChapter.text, #rightbox .button-wrapper__lastChapter.text {
+  font-size: 1.1rem;
+}
+#rightbox .chapter-wrapper {
   max-height: 375px;
   overflow: auto;
   margin: 1.75rem;
   padding: 0 1.5rem 0 0;
 }
-.chapterRight .listbox__chapterbtn {
+#rightbox .chapter-wrapper__list {
+  list-style-type: none;
+  padding: 0;
+}
+#rightbox .chapter-wrapper__item .chapter {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -2583,16 +2594,16 @@ search-output .lds-ellipsis div:nth-child(4) {
   margin-bottom: 0.6em;
   border: 2px solid var(--foreground-color-2);
 }
-.chapterRight .listbox__chapterbtn .chaptertext {
-  font-size: 1rem;
-}
-.chapterRight .listbox__chapterbtn .date {
-  font-size: 0.9rem;
-}
-.chapterRight .listbox__chapterbtn:hover, .chapterRight .listbox__chapterbtn:focus {
+#rightbox .chapter-wrapper__item .chapter:hover, #rightbox .chapter-wrapper__item .chapter:focus {
   background: var(--foreground-color-2);
   border: 2px solid var(--foreground-color-2);
   color: var(--theme-color-3);
+}
+#rightbox .chapter-wrapper__item .chapter__text {
+  font-size: 1rem;
+}
+#rightbox .chapter-wrapper__item .chapter__date {
+  font-size: 0.9rem;
 }
 
 .heart__switch {
@@ -2711,25 +2722,38 @@ search-output .lds-ellipsis div:nth-child(4) {
     padding: 0;
   }
 
-  .infoRight, .chapterRight {
+  #rightbox .l-grid__item {
     width: 92%;
     margin-left: auto;
   }
 }
 @media (min-width: 768px) {
-  .infoLeft__title {
+  #leftbox .l-grid__mobile-title {
     display: none;
   }
 }
 @media (max-width: 768px) {
-  .infoRight, .chapterRight {
+  #rightbox {
+    padding: 0 !important;
+  }
+  #rightbox .l-grid__item {
     width: 100%;
     margin-left: unset;
   }
+  #rightbox .l-grid__item.c-card__title, #rightbox .l-grid__item.c-card__sub-title {
+    display: none;
+  }
 
-  #rightbox {
-    margin: 0;
-    padding: 0;
+  #leftbox .l-grid__image {
+    margin: 0 auto;
+    padding: 0.4rem;
+  }
+  #leftbox .l-grid__mobile-title {
+    text-align: center;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1.1rem 0;
+    color: var(--button-text-color);
   }
 
   #resize {
@@ -2756,17 +2780,6 @@ search-output .lds-ellipsis div:nth-child(4) {
     object-position: center;
   }
 
-  .infoLeft__img {
-    margin: 0 auto;
-    padding: 0.4rem;
-  }
-
-  .infoLeft__title {
-    text-align: center;
-    margin: 1.1rem 0;
-    color: var(--button-text-color);
-  }
-
   .infoLeft__activities {
     margin: 1.5rem 0;
   }
@@ -2779,13 +2792,6 @@ search-output .lds-ellipsis div:nth-child(4) {
   }
   .infoLeft__activities .bookmark {
     padding: 0.6rem;
-  }
-
-  .infoRight__body #main-title {
-    display: none;
-  }
-  .infoRight__body #sub-title {
-    display: none;
   }
 }
 comment-thread-renderer:target {
