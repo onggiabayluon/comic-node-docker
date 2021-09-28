@@ -1,4 +1,5 @@
-/*-- Lazy loader Image --*/
+function chapterLazyLoad () {
+    /*-- Lazy loader Image --*/
 var targets =[].slice.call(
     document.querySelectorAll(".lazy > source")
    )
@@ -82,3 +83,4 @@ if ("IntersectionObserver" in window) {
 }
 
 /*-- End Lazy loader Image --*/
+}

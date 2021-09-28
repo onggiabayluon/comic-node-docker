@@ -162,13 +162,24 @@
 
                         <div class="card d-flex flex-row mb-3 my-max-height">
                             <a class="d-flex thumbnail-frame" href="#">
-                                {{#each thumbnail}}
-                                <img src="#" alt="Chưa có thumbnail"
-                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style my-max-height" />
+                                {{#if this.thumbnail.url}}
+                                <picture>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.thumbnail.url}}-small.webp"
+                                    type="image/webp" />
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.thumbnail.url}}-medium.jpeg"
+                                    type="image/jpeg" />
+                                
+                                    <img width="92" height="98"
+                                    alt="Img"  
+                                    src="{{../img_url}}/{{this.thumbnail.url}}-medium.jpeg"
+                                    />
+                                </picture>
                                 {{else}}
                                 <img src="/img/goose-breast-thumb.jpg" alt="Chưa có thumbnail"
-                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style my-max-height" />
-                                {{/each}}
+                                    class="list-thumbnail responsive border-0 card-img-left my-thumb-style" />
+                                {{/if}}
                             </a>
                             <div class="pl-2 d-flex flex-grow-1 min-width-zero">
                                 <div
@@ -181,11 +192,29 @@
                                     <p class="mb-0 text-muted text-small w-15 w-sm-100 myPadding-top-sm">
                                         {{CalcTimeEnglish this.updatedAt}}</p>
 
+                                    <div class="mt-2 d-flex align-items-center mb-0 w-40 w-sm-100 myPadding-top-sm justify-content-around">
+                                        <div class="">
+                                            <span class="badge badge-primary">{{agoFormat this.coin.expiredAt}}</span>
+                                        </div>
+                                        <div class="">
+                                            <span class="badge badge-primary">{{this.coin.required}}</span>
+                                        </div>
+                                    </div>
+
                                     <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
-                                        >
+                                            style="justify-content: space-evenly;">
+                                            
+                                        <a aria-label="Set Coin" type="button" href="#" class="tooltipIcon"
+                                            data-toggle="modal" 
+                                            data-id="{{this._id}}"
+                                            data-target="#set-coin-modal"
+                                            style="align-items: center;">
+                                            <span class="tooltiptext"> Set Coin </span>
+                                            <i class="iconsminds-coins"></i>
+                                        </a>
 
                                         <a href="#" class="tooltipIcon delete-icon-red" style="align-items: center;">
-                                            <span class="tooltiptext"> Xóa </span>
+                                            <span class="tooltiptext"> Delete </span>
                                             <div class="icon-container" data-toggle="modal"
                                                 data-id="{{this._id}}" 
                                                 data-slug="{{this.comicSlug}}"
@@ -228,18 +257,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Xóa Chapter !!</h5>
+                <h5 class="modal-title">Delete Chapter !!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Bạn chắc chắn muốn xóa Chapter này ?? </p>
+                <p>Bạn chắc chắn muốn Delete Chapter này ?? </p>
                 <p class="text-danger"> Không thể hoàn tác lại nếu xóa!!</p>
             </div>
             <div class="modal-footer">
                 <button id="btn-delete-course" type="button" class="btn btn-danger">
-                    Xóa bỏ</button>
+                    Delete </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Hủy</button>
             </div>
@@ -247,10 +276,43 @@
     </div>
 </div>
 
+<div class="modal fade" id="set-coin-modal" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Set Coin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form onsubmit="return setCoin(this);" id="set-coin-form" action="/me/stored/setCoin" method="POST">
+                    <div class="form-group">
+                        <label for="coin-value" class="col-form-label">Value</label>
+                        <input type="number" class="form-control" name="coinValue">
+                        <input type="hidden" name="_id">
+                        {{!-- <input type="hidden" class="form-control" name="date"> --}}
+                        <input name="date" placeholder="Click me to Pick time" type="text" class="mt-3 form-control" type="text" data-field="datetime" readonly>
+                        <div id="dtBox"></div>
+                        {{!-- <input placeholder="Click me to Pick time" type="text" class="mt-3 form-control" id="datetime-picker"> --}}
+                    </div>
+                    <button  id="btn-set-coin" type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 {{!-- hidden form to delete stuff --}}
 <form name="hidden-form" method="POST">
     <input type="hidden" name="comicSlug" >
     <input type="hidden" name="chapter" >
+    <input type="hidden" name="chapter_id" >
+    <input type="hidden" name="coinValue" >
 </form>
 
 {{!-- Search Template --}}
@@ -305,6 +367,10 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
+        $("#dtBox").DateTimePicker({
+            dateTimeFormat: "MM-dd-yyyy HH:mm:ss"
+        });
+
         /* Start Search */
         var chapterSlug = document.getElementById('chapterSlug');
         var chapterSlugValue = chapterSlug.getAttribute('data-id')
@@ -358,5 +424,23 @@
             hiddenForm.submit();
         }; /* End Form */
 
+
+        // Set Coin
+        $('#set-coin-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            chapter_id = button.data('id');
+        });
+
+        window.setCoin = function (form) {
+            form._id.value = chapter_id
+            $.ajax({
+                url: "/me/stored/setCoin",
+                type: "POST",
+                data: $(this).serialize(),
+                
+            });
+        }; 
+        
+        
     });
 </script>

@@ -1,6 +1,7 @@
 const okToModifyThisComment = (commentDoc, userRequest, clientComment_id) => {
     try {
         if (userRequest.role === 'admin' || userRequest.role === 'extraAdmin') return [true, null]
+        if (userRequest.isBanned === true) return [null, 'User is banned']
         // Find comment index location
         const $thisDocCommentIndex = commentDoc.commentArr.findIndex(serverComment => JSON.stringify(serverComment._id) === JSON.stringify(clientComment_id))
         // This Json Comment
@@ -16,6 +17,7 @@ const okToModifyThisComment = (commentDoc, userRequest, clientComment_id) => {
 const okToModifyThisReply = (commentDoc, userRequest, clientComment_id, clientReply_id) => {
     try {
         if (userRequest.role === 'admin' || userRequest.role === 'extraAdmin') return [true, null]
+        if (userRequest.isBanned === true) return [null, 'User is banned']
         // Find comment index location
         const $thisDocCommentIndex = commentDoc.commentArr.findIndex(serverComment => JSON.stringify(serverComment._id) === JSON.stringify(clientComment_id))
         // Find Reply index location

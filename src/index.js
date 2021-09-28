@@ -20,6 +20,7 @@ const Handlebars = require('handlebars');
 const { UPDATE_PER_MIN } = require("./config/config")
 const session       = require('express-session');
 const redis     = require(path.resolve('./src/config/redis'))
+const moment = require('moment-timezone')
 const RedisStore = require('connect-redis')(session)
 
 // db and route
@@ -193,6 +194,32 @@ app.engine(
             or() {
                 return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
             },
+            isBefore: (myDate) => moment( myDate ).isBefore(),
+            agoFormat: (myDate) => {
+                // get from-now for this date
+                const fromNow = moment( myDate ).fromNow();
+
+                // ensure the date is displayed with today and yesterday
+                return moment( myDate ).calendar( null, {
+                    // when the date is closer, specify custom values
+                    lastWeek: '[Free]',
+                    lastDay : '[Free]',
+                    sameDay : function (now) {
+                        if (this.isBefore(now)) return '[Free]';
+                        else return `[Free in ${fromNow}]`;
+                    },
+                    nextDay : '[Free Tomorrow]',
+                    nextWeek: '[Free in] dddd',
+                    // when the date is further away, use from-now functionality             
+                    sameElse: function (now) {
+                        if (this.isBefore(now)) return '[Free]';
+                        else return `[Free ${fromNow}]`;
+                    }
+                });
+            },
+            timeFormat: (myDate) => {
+                return moment( myDate ).fromNow();
+            },
             totalRating: (rateCount, rateValue) => {
                 return ((rateValue / rateCount)).toFixed(2)
             },
@@ -256,6 +283,8 @@ app.engine(
             },
             ifCond: (a,operator,b,options) => {
                 switch (operator) {
+                    case 'isBefore':
+                        return (moment( a ).fromNow("")) ? options.fn(this) : options.inverse(this); 
                     case 'authRole':
                         const filtered = b.split(':').filter(role => role === a);
                         return (filtered.length > 0) ? options.fn(this) : options.inverse(this);

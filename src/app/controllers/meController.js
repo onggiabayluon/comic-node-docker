@@ -125,7 +125,7 @@ class meController {
       , Comic.find({}).lean().select('view title slug').sort({"view.totalView":-1}).limit(12) // desc
       , Comic.countDocuments({isPublish: true})
       , Comic.countDocuments({isPublish: false})
-      , User.find({}).select('banned role name _id').lean()
+      , User.find({}).select('-password').lean()
       , Category.countDocuments()
       , Category.find().select("name -_id").lean()
       , Comment.aggregate([
@@ -513,6 +513,27 @@ class meController {
   // 11. Handle Form Action Chapter: [POST] / me / stored / handle-form-action-for-comic
   async handleFormActionForChapters(req, res, next) {
     dbHelper.handleFormActionForChapters_Helper(req, res, next, null)
+  }
+
+  setCoin(req, res, next) {
+    const $chapter_id = req.body._id,
+          $coinToSet = Number(req.body.coinValue),
+          $expiredAt = req.body.date
+
+    const $coin = {
+      required: $coinToSet,
+      expiredAt: new Date($expiredAt).toISOString(),
+      createdAt: new Date().toISOString()
+    }
+    Chapter.updateOne(
+      { _id: $chapter_id },
+      { $set: { "coin": $coin } },
+    )
+    .then(result => {
+      console.log(result)
+      res.redirect('back')
+    })
+    .catch(next)
   }
 
 }

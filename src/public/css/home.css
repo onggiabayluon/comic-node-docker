@@ -551,63 +551,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #6d1d51;
+  background: #3770b4;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #245b78;
+  background: #8b6903;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #89eef8;
+  background: #0fd5e4;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #19b4cb;
+  background: #a04b74;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #0c9cd8;
+  background: #b6d91d;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #1002ca;
+  background: #c673bc;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #7b20d7;
+  background: #362102;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #556cbb;
+  background: #907f7a;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #76599a;
+  background: #dd6d96;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #06ee92;
+  background: #9150b2;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #7d77a1;
+  background: #e27080;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #146a4f;
+  background: #fef02c;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #ff7e3f;
+  background: #6f0e7b;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #565426;
+  background: #d1e243;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #07520c;
+  background: #62404a;
 }
 
 .num {

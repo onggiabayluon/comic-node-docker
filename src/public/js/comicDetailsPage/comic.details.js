@@ -1,6 +1,8 @@
 var loaded = false
 var $comicId = $("input[type=hidden][name=comicId]").val()
+var $isLoggedIn = $("input[type=hidden][name=isLoggedIn]").val()
 
+$('[data-toggle="tooltip"]').tooltip()
 /*************** star rating ***************/
 $(function() {
     $('#rating').starrr({
@@ -15,6 +17,36 @@ $(function() {
 });
 
 /*************** star rating ***************/
+
+/**********  Get Auth Chapter List ************/
+if ($isLoggedIn) {
+    getAuthChapterList()
+}
+
+function getAuthChapterList() {
+    $.ajax({
+        type: "GET",
+        url: `/fetch/comicdetail/getAuthChapterList`,
+        data: {comicSlug: $comicSlug},
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            console.log(response)
+            addUnlockClass(response)
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    })
+    return false;
+};
+
+function addUnlockClass (chapters) {
+    chapters.forEach(chapter_id => {
+        $(`#chapter-${chapter_id}`).find(".chapter__text i").removeClass("fas fa-lock").addClass("far fa-unlock")
+    });
+}
+
+/**********  Get Auth Chapter List ************/
 
 /**********  POST handlingRate ************/
 window.handlingRate = function (rateVal) {
@@ -55,6 +87,7 @@ window.handlingRate = function (rateVal) {
     return false;
 };
 /**********  POST handlingRate ************/
+
 (function getSubsribeStatus() {
     $.ajax({
         async: true,

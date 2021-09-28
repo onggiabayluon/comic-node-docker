@@ -1,0 +1,40 @@
+
+{{#if isFree}}
+<images-container>
+    {{#each chapter.image}}
+    <picture class="lazy fixed-ratio " style="padding-top: 150%;">
+        <source id="image--Main" 
+        data-srcset="{{../img_url}}/{{this.url}}"
+        data-srcmain="{{../img_url}}/{{this.url}}-medium.jpeg" />
+
+        <img alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}" 
+        class="image fixed-ratio-content"
+        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+    </picture>
+    {{/each}}
+</images-container>
+{{!-- 🛑 End show images --}}
+{{else}}
+<div id="l-unlock-container" class="l-unlock-container mx-auto mt-4 mb-4 container" >
+    <div class="c-card card">
+        <div class="c-card__body card-body">
+            <div class="card__info text-center">
+                <p class="card__info__text mb-2">
+                    <i class="fas fa-lock mr-2"></i>This Chapter is Locked</p>
+                <p class="card__info__coinText mb-4">
+                    <i class="fas fa-coins mr-1"></i>
+                    Use 
+                    <span class="font-weight-bold" style="font-size: 18px;">
+                    {{chapter.coin.required}} Coin
+                    </span> To Unlock</p>
+                <p>
+                    <i class="far fa-clock text-danger"></i>
+                    <span class="text-danger"> {{agoFormat chapter.coin.expiredAt}}</span>
+                </p>
+                <button data-toggle="modal" data-target="#confirm-modal" type="button" class="btn btn-sm btn-primary">Unlock</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+

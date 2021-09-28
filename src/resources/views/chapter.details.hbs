@@ -1,131 +1,3 @@
-<style>
-    img {
-        object-fit: cover;
-    }
-    
-    .img__PlaceholderLoader {
-        height: auto;
-        display: inline-block;
-        vertical-align: top;
-    }
-
-    /* image__dummy image styles */
-    .image__dummy {
-        box-sizing: border-box;
-        display: inline-block;
-        position: relative;
-    }
-
-    .image__dummy:before {
-        content: '';
-        position: absolute;
-        background: #fff;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-
-    .image__dummy:after {
-        content: attr(width) " x "attr(height);
-        white-space: pre;
-        color: #fff;
-        text-align: center;
-        display: block;
-        position: absolute;
-        width: 100%;
-        top: calc(50% - .5em);
-        font-size: 100%;
-    }
-
-    .image__dummy.image__dummy--alt:after {
-        content: attr(image__dummy--alt);
-    }
-
-    .image {
-        position: relative;
-        background: url('/img/loading-placeholder.svg') center center no-repeat;
-        background-size: 300px 100px;
-        text-align: center;
-        width: fit-content;
-        margin: auto;
-    }
-
-    .image__Frame {
-        color: #fff;
-        border-color: #000;
-        border-image: initial;
-        border-style: none;
-        border-width: medium;
-        height: auto;
-        margin-bottom: 0;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 100%;
-        width: auto;
-        z-index: 999;
-        position: relative;
-    }
-
-
-    @media only screen and (max-width: 550px) {
-        .image__Frame {
-            width: 400px;
-            min-height: 400px;
-        }
-    }
-
-
-    @media only screen and (min-width: 550px) {
-        .image__Frame {
-            width: 700px;
-            min-height: 700px;
-        }
-    }
-
-
-    @media only screen and (min-width: 850px) {
-        .image__Frame {
-            width: 1000px;
-            min-height: 1000px;
-        }
-    }
-</style>
-<style>
-    #subnav {
-        margin-bottom: 3rem;
-    }
-    .subnav-container {
-        padding: 0 !important;
-    }
-    images-container {
-        display: block;
-        max-width: 1000px;
-        margin: 0 auto;
-        
-    }
-    
-    .fixed-ratio {
-        display: block;
-        position: relative;
-        width: 100%;
-        height: 0;
-        overflow: hidden;
-    }
-
-    .fixed-ratio-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        width: 100%;
-        height: auto;
-        max-width: inherit;
-    }
-
-</style>
-<main>
     <nav id="chapterNavbar" class="chapterNavbar mb-4">
 
         <left-items id="left-items">
@@ -134,30 +6,32 @@
                 {{!-- <h1 class="logo__title">Dore</h1> --}}
                 <span class="logo-mobile d-block d-xs-none" style="margin-bottom: 6px;"></span>
             </a>
-            <a href="/comic/{{comics.slug}}" class="title title--ellipsis">
-                {{comics.title}}
+            <a href="/comic/{{chapter.comicSlug}}" class="title title--ellipsis">
+                {{chapter.title}}
             </a>
             <i class="m-custom ico fas fa-angle-right"></i>
-            <a href="/comic/{{comics.slug}}/{{chapter.chapter}}" class="m-custom title chapter">
+            <a href="/comic/{{chapter.comicSlug}}/{{chapter.chapter}}" class="m-custom title chapter">
                 {{replaceHyphenIntoSpace chapter.chapter}}
             </a>
         </left-items>
 
+        
+
         <mid-items id="mid-items">
             {{#if prevChapter}}
-            <a href="/comic/{{comics.slug}}/chapter-{{prevChapter.chapter}}"><i class="fad fa-2x fa-caret-square-left"></i></a>
+            <a href="/comic/{{chapter.comicSlug}}/{{prevChapter.chapter}}"><i class="fad fa-2x fa-caret-square-left"></i></a>
             {{else}}
             <a href="#"><i class="fad fa-2x fa-caret-square-left disabled"></i></a>
             {{/if}}
             
             <select id="select" onchange="location = this.value;" class="custom-select">
-                {{#each comics.chapters}}
-                    <option data-chapter=chapter-{{this.chapter}} value="/comic/{{../comics.slug}}/chapter-{{this.chapter}}">#{{this.chapter}}</option>
+                {{#each chapters}}
+                    <option data-chapter={{this.chapter}} value="/comic/{{../chapter.comicSlug}}/{{this.chapter}}">{{replaceHyphenIntoHashmark this.chapter}}</option>
                 {{/each}}
             </select>
 
             {{#if nextChapter}}
-            <a href="/comic/{{comics.slug}}/chapter-{{nextChapter.chapter}}"><i class="fad fa-2x fa-caret-square-right"></i></a>
+            <a href="/comic/{{chapter.comicSlug}}/{{nextChapter.chapter}}"><i class="fad fa-2x fa-caret-square-right"></i></a>
             {{else}}
             <a href="#"><i class="fad fa-2x fa-caret-square-right disabled"></i></a>
             {{/if}}
@@ -173,7 +47,7 @@
         <nav class="breadcrumb-container d-lg-inline-block" aria-label="breadcrumb">
             <ol class="breadcrumb pt-0">
                 <li class="breadcrumb-item mx-auto">
-                    <a href="/comic/{{comics.slug}}">{{comics.title}}</a>
+                    <a href="/comic/{{chapter.comicSlug}}">{{chapter.title}}</a>
                 </li>
             </ol>
         </nav>
@@ -182,24 +56,24 @@
     {{#if prevChapter}}
     <div class="container mb-4" style="min-height: unset;">
         <chaptercard>
-            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/chapter-{{prevChapter.chapter}}">
+            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{chapter.comicSlug}}/{{prevChapter.chapter}}">
                 <picture>
                     <source 
-                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.webp"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-small.webp"
                     type="image/webp" />
                     <source 
-                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
                     type="image/jpeg" />
                 
                     <img width="92" height="98"
                     alt="Previous Chapter" 
-                    src="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    src="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
                     />
                 </picture>
                 
                 <info id="info">
                     <div class="maintext">Prev Chapter</div>
-                    <div class="subtext">Chapter {{prevChapter.chapter}}</div>
+                    <div class="subtext">{{replaceHyphenIntoSpace prevChapter.chapter}}</div>
                 </info>
                 <right-icon id="right-icon">
                     <i class="far fa-chevron-circle-left"></i>
@@ -210,47 +84,77 @@
     {{/if}}
 
 
-    {{!-- show images --}}
-    <images-container>
-    {{#each chapter.image}}
-        <picture class="lazy fixed-ratio " style="padding-top: 150%;">
-            <source id="image--Main"
-                data-srcset="{{../img_url}}/{{this.url}}"
-                data-srcmain="{{../img_url}}/{{this.url}}-medium.jpeg"
-            />
+    
+    <div id="auth-container">
+        {{#if isFree}}
+            {{!-- show images --}}
+            <images-container>
+            {{#each chapter.image}}
+                <picture class="lazy fixed-ratio " style="padding-top: 150%;">
+                    <source id="image--Main"
+                        data-srcset="{{../img_url}}/{{this.url}}"
+                        data-srcmain="{{../img_url}}/{{this.url}}-medium.jpeg"
+                    />
 
-            <img alt="{{../comics.title}} {{../chapter.chapter}} Page {{@index}}"  
-            class="image fixed-ratio-content" 
-            onerror="this.onerror=null;this.src='/img/404.jpg';" />
-        </picture>
-    {{/each}} 
-    </images-container>
-    {{!-- 🛑 End show images --}}
+                    <img alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}"  
+                    class="image fixed-ratio-content" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+            {{/each}} 
+            </images-container>
+            {{!-- 🛑 End show images --}}
+            <input type="hidden" name="noRender" value=true>
+        {{else}}
+        <div id="l-unlock-container" class="l-unlock-container mx-auto mt-4 mb-4 container" >
+            <div class="c-card card">
+                <div class="c-card__body card-body">
+                    <div class="card__info text-center">
+                        <p class="card__info__text mb-2">
+                            <i class="fas fa-lock mr-2"></i>This Chapter is Locked</p>
+                        <p class="card__info__coinText mb-4">
+                            <i class="fas fa-coins mr-1"></i>
+                            Use 
+                            <span class="font-weight-bold" style="font-size: 18px;">
+                            {{chapter.coin.required}} Coin
+                            </span> To Unlock</p>
+                        <p>
+                            <i class="far fa-clock text-danger"></i>
+                            <span class="text-danger"> {{agoFormat chapter.coin.expiredAt}}</span>
+                        </p>
+                        <button data-toggle="modal" data-target="#confirm-modal" type="button" class="btn btn-sm btn-primary">Unlock</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    
+    
 
 
 <bottom-container class="p-3 d-block">
     {{#if nextChapter}}
     <div class="container mt-4" style="min-height: unset;">
         <chaptercard>
-            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{comics.slug}}/chapter-{{nextChapter.chapter}}">
+            <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{chapter.comicSlug}}/{{nextChapter.chapter}}">
                 <picture>
                     <source 
-                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.webp"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-small.webp"
                     type="image/webp" />
                     <source 
-                    srcset="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
                     type="image/jpeg" />
                 
                     <img width="92" height="98"
                     alt="Next Chapter"  
-                    src="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg"
+                    src="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
                     />
                 </picture>
                 
                 <info id="info">
                     <div class="maintext">Next Chapter</div>
                     <div class="subtext">
-                        Chapter {{nextChapter.chapter}}
+                        {{replaceHyphenIntoSpace nextChapter.chapter}}
                     </div>
                 </info>
                 <right-icon id="right-icon">
@@ -267,19 +171,44 @@
 </bottom-container>
     
 
-</main>
 
 <in-stuff>
     {{!-- user info --}}
     <input name="userName" value="{{user.name}}" type="hidden"></input>
     {{!-- comic info --}}
-    <input name="title" value="{{comics.title}}" type="hidden"></input>
-    <input name="comicSlug" value="{{comics.slug}}" type="hidden"></input>
+    <input name="title" value="{{chapter.title}}" type="hidden"></input>
+    <input name="comicSlug" value="{{chapter.comicSlug}}" type="hidden"></input>
     <input name="comicId" value="{{comics._id}}" type="hidden"></input>
-    <input name="thumbnail" value="{{img_url}}/{{comics.thumbnail.url}}" type="hidden"></input>
+    <input name="thumbnail" value="{{img_url}}/{{chapter.thumbnail.url}}" type="hidden"></input>
     {{!-- chapter info --}}
     <input name="isChapterComment" value="true" type="hidden"></input>
     <input name="isChapterReply" value="true" type="hidden"></input>
     <input name="chapter" value="{{chapter.chapter}}" type="hidden"></input>
     <input name="chapterId" value="{{chapter._id}}" type="hidden"></input>
 </in-stuff>
+
+<div id="confirm-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Unlock This chapter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are You Sure to Unlock this chapter</p>
+      </div>
+      <div class="modal-footer">
+        <form onsubmit="return unlockChapter(this);" action="/users/unlockChapter" method="POST">
+            <div class="form-group">
+                <input type="hidden" name="chapterSlug" value={{chapter.comicSlug}}>
+                <input type="hidden" name="chapter_id" value={{chapter._id}}>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

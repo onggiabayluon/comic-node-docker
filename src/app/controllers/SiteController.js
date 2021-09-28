@@ -3,14 +3,99 @@
 // từ model truyền sang views --> 5. views render trả về client
 const Comic     = require('../models/Comic');
 const Config    = require('../models/Config');
-const TopView      = require('../models/TopView');
-const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
+const Chapter    = require('../models/Chapter');
+const Pocket = require('../models/Pocket');
+const moment = require('moment-timezone')
+const calcEng = require('../../config/middleware/CalcTimeEnglish')
+const ObjectID  = require('mongodb').ObjectID;
+const { TEST, IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 , HOME_KEYWORDS, HOME_URL, HOME_SITENAME, IMAGE_URL_HTTP } = require('../../config/config');
 
 
 class SiteController {
 
-    test2(req, res, next) {
+    async test2(req, res, next) {
+        // return res.json(TEST)
+
+        // Chapter.findOne(
+        //     {_id: "614a909167dfed28d0116200"}
+        // ).then(result => {
+        //     // const d1 = new Date(result.coin.expiredAt)
+        //     // const diff = Math.abs(d1 - Date.now())
+        //     // res.json( diff )
+        //     const date2 =  moment( result.coin.expiredAt );
+        //     return res.json(date2.isBefore())
+        // })
+        // res.json(new Date("28-09-2021 09:47").toISOString())
+        const obj = {
+            user_id: "6084dd9dec23a633c03f96e7",
+            pockets: [
+                {
+                    "comicSlug" : "kill-the-hero",
+                    "chapters"  : ["12133113", "416123131"],
+                },
+                {
+                    "comicSlug" : "magic-emperor",
+                    "chapters"  : ["23131132", "7777777777"],
+                },
+            ]
+        }
+        
+        const $find = { "user_id": "6084dd9dec23a633c03f96e7", "pockets.comicSlug" : "kill-the-hero"}
+     
+        const $match = { "pockets": { $elemMatch : { "chapters": "61512d493384b80fe0c48ec3"  } } }
+        
+
+        // Find
+        Pocket.findOne($find, $match)
+        .lean()
+        .then(resp => {
+            res.json(resp)
+            // res.json(resp.pockets.length)
+        })
+
+        
+        
+        const comicSlug = 'end-world'
+        const newPockets = {
+            comicSlug: comicSlug,
+            chapters: ["7777777777"]
+        }
+        const $find2 = { "user_id": "6088c977f3e3952ab0cbe7f5", "pockets.comicSlug" : comicSlug }
+        // Push new Id
+        // const isExist = await Pocket.findOne($find2).countDocuments()
+        // if (isExist) return update()
+        // else return insert()
+
+        // function insert() {
+        //     Pocket.updateOne(
+        //         {
+        //             "user_id": "6088c977f3e3952ab0cbe7f5", 
+        //         },
+        //         {
+        //             $push: { "pockets": newPockets },
+        //         },
+        //         {
+        //             upsert: true
+        //         }
+        //     ).then(resp => res.json(resp))
+        // };
+        // function update() {
+        //     Pocket.updateOne(
+        //         { 
+        //             "user_id": "6088c977f3e3952ab0cbe7f5", 
+        //             "pockets.comicSlug" : comicSlug 
+        //         }, 
+        //         { 
+        //             $addToSet: { "pockets.$.chapters": ["88888888888"] },
+        //         },
+        //     ).then(resp => res.json(resp))
+        // }
+        
+
+        // Insert New
+        // Pocket.insertMany([obj]).then(resp => res.json(resp))
+
         // updateMany(
         //     { },
         //     { $set: { "view.monthView.view": 0,"view.monthView.thisMonth": 9,"view.yearView.view": 0,"view.yearView.thisYear": 2021 }},

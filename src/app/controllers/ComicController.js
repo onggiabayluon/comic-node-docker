@@ -5,6 +5,7 @@ const User      = require('../models/User');
 const Rate      = require('../models/Rate');
 const Category  = require('../models/Category')
 const ObjectID  = require('mongodb').ObjectID;
+const moment     = require('moment-timezone')
 const customError = require('../../util/customErrorHandler');
 const { okToModifyThisComment, okToModifyThisReply } = require('../middlewares/comments.middleware.js') 
 // Redis
@@ -139,7 +140,6 @@ class ComicController {
         '/js/utilityScripts/LazyLoader.js',
         '/js/othersPage/categoryPage.scripts.js'
       ]
-      res.setHeader('Cache-Control', 'public, max-age=1000');
       res.status(200).render('categories.hbs', {
         layout: 'utility_layout.hbs',
         firstCategories: firstBatch,
@@ -249,8 +249,11 @@ class ComicController {
       .findOne({ slug: req.params.comicSlug })
       .lean()
       .populate('category', 'name')
+      , Chapter
+      .find({ comicSlug: req.params.comicSlug })
+      .lean()
     ])
-      .then(([comicdoc]) => {
+      .then(([comicdoc, chapters]) => {
         if (!comicdoc) {
           return next(new customError('Not found', 404));
         }
@@ -264,22 +267,31 @@ class ComicController {
           detail_page_description: DETAIL_PAGE_DESCRIPTION,
           image_url_http: IMAGE_URL_HTTP
         }
-        let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount)).toFixed(2);
+        let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount)).toFixed(2)
         let rateCount = comicdoc.rate.rateCount
+        let firstChapter = (chapters) ? chapters[0] : 0 
+        let lastChapter = (chapters) ? chapters[chapters.length - 1] : 0 
+        let seoChapter = lastChapter.chapter.replace(/\d+$/, function(n){ return ++n })
 
-        if (comicdoc?.chapters) comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
+        // Sort array of object by keys typeof string 
+        if (chapters) {
+          chapters = chapters.sort(function(a, b) {
+            return b.chapter.localeCompare(a.chapter, undefined, {
+              numeric: true,
+              sensitivity: 'base'
+            });
+          });
+        }
         
-        let chaptersLength = (comicdoc?.chapters) ? comicdoc.chapters.length : 0 
-        let firstChapter = (comicdoc?.chapters) ? comicdoc.chapters[0] : 0 
-        let lastChapter = (comicdoc?.chapters) ? comicdoc.chapters[chaptersLength - 1] : 0 
-        res.setHeader('Cache-Control', 'public, max-age=7200');
         res.status(200).render('comic.details.hbs', {
           layout: 'comic.details_layout.hbs',
           comic: comicdoc,
+          chapters: chapters,
           rateValue: rateValue,
           rateCount: rateCount,
           firstChapter: firstChapter,
           lastChapter: lastChapter,
+          seoChapter: seoChapter,
           user: req.user,
           img_url: IMAGE_URL,
           meta
@@ -289,22 +301,21 @@ class ComicController {
   };
 
   chapterdetailsPage(req, res, next) {
-    var userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const isFree = false
 
     Promise.all([
-      Comic.findOne({ slug: req.params.comicSlug })
-      .lean()
-      .select('-category -description -lastest_chapters'),
+      Chapter.find({ comicSlug: req.params.comicSlug }).select("chapter _id").lean(),
       Chapter.findOne({ comicSlug: req.params.comicSlug, chapter: req.params.chapter }).lean(),
     ])
-      .then(([comicdoc, chapterdoc]) => {
-        if (!chapterdoc || !comicdoc) {
+      .then(([chapterList, chapterdoc]) => {
+        if (!chapterdoc || !chapterList) {
           return next(new customError('Not found', 404));
         }
         
         setRedisKey(userIp).then(results => console.log(results))
 
-        renderChapterView(comicdoc, chapterdoc)
+        renderChapterView(chapterList, chapterdoc)
       })
       .catch(err => next(err))
 
@@ -318,16 +329,24 @@ class ComicController {
       return { Success: `Set ${setResult} Key (${hllKey}) Successfully` }
     };
 
-    function renderChapterView(comicdoc, chapterdoc) {
+    function renderChapterView(chapters, chapterdoc) {
 
-      //sort to make sure when chapters get deleted then this btn wont callapse
-     
-      comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
-     
-      let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter).replace("chapter-", ""))
-      let currentChapter = comicdoc.chapters[$thisChapterIndex]
-      let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
-      let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]
+      const isFree = ((chapterdoc.coin.required === 0) || moment(chapterdoc.coin.expiredAt).isBefore())
+      // Sort array of object by keys typeof string 
+      if (chapters) {
+        chapters = chapters.sort(function(a, b) {
+          return a.chapter.localeCompare(b.chapter, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+          });
+        });
+      }
+
+      let $thisChapterIndex = chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter))
+      let currentChapter = chapters[$thisChapterIndex]
+      let prevChapter = chapters[$thisChapterIndex - 1]
+      let nextChapter = chapters[$thisChapterIndex + 1]
+      let seoChapter = currentChapter.chapter.replace(/\d+$/, function(n){ return ++n })
       let meta = {
         home_title: HOME_TITLE,
         home_description: HOME_DESCRIPTION,
@@ -337,17 +356,18 @@ class ComicController {
         detail_page_description: DETAIL_PAGE_DESCRIPTION,
         image_url_http: IMAGE_URL_HTTP
       }
-      res.setHeader('Cache-Control', 'public, max-age=2592000'); // 1 month
       res.status(200).render('chapter.details.hbs',
         {
           layout: 'chapter.details.layout.hbs',
-          comics: comicdoc,
+          seoChapter: seoChapter,
+          chapters: chapters,
           chapter: chapterdoc,
           currentChapter: currentChapter,
           prevChapter: prevChapter,
           nextChapter: nextChapter,
           user: req.user,
           img_url: IMAGE_URL,
+          isFree: isFree,
           meta
         })
     };

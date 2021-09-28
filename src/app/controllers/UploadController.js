@@ -54,14 +54,16 @@ class UploadController {
         function saveURLToDb(imagesURL, $chapter_id) {
             const newChapter = new Chapter({
                 _id: $chapter_id,
-                title: `chapter of ${req.params.slug}`,
+                title: `${req.params.slug}`,
                 chapter: `chapter-${req.body.chapter}`,
                 chapterSlug: `${req.params.slug}-${shortid()}`,
                 comicSlug: req.params.slug,
+                coinRequired: req.body.coinRequired
             })
             imagesURL.forEach((url, index) => {
                 newChapter.image[index] = { url: url }
             });
+            newChapter.thumbnail = { url: imagesURL[0] }
             newChapter.save()
         };
 

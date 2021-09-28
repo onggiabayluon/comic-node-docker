@@ -66,7 +66,8 @@ router.get('/stored/comics/:slug/create-chapter', meController.createChapterPage
 router.delete('/stored/destroyChapter/:chapter_id', meController.destroyChapter);
 // Handling Chapters Form
 router.post('/stored/handle-form-action-for-chapters', meController.handleFormActionForChapters);
-
+// Handling Comics Form 
+router.post('/stored/setCoin', ensureAuthenticated, meController.setCoin);
 
 
 

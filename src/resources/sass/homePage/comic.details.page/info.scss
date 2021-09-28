@@ -179,7 +179,8 @@
         &__item {
             & .chapter {
                 display: flex;
-                flex-direction: column;
+                flex-wrap: wrap;
+                flex-direction: row;
                 align-items: flex-start;
                 padding: 0.5rem 1rem;
                 margin-bottom: 0.6em;
@@ -196,6 +197,18 @@
                 }
                 &__date {
                     font-size: 0.9rem;
+                    flex-basis: 100%;
+                }
+                &__coin {
+                    &:hover .badge-primary{
+                        color: var(--primary-color);
+                    }
+                }
+                .badge-primary {
+                    display: flex;
+                    justify-content: space-evenly;
+                    min-width: 67px;
+                    color: var(--button-text-color-2);
                 }
             }
         }
@@ -417,5 +430,8 @@
         }
     }
     
+}
+@media (max-width: 968px) and (min-width: 768px), (max-width: 576px)  {
+    .countDownTime__text { display: none;}
 }
 

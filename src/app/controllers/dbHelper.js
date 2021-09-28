@@ -591,7 +591,6 @@ const chapterListPage_Helper = (exports.chapterListPage_Helper
     let length = await chapterLength
 
     chapterList
-      .select('title chapterSlug createdAt updatedAt description thumbnail comicSlug chapter')
       .skip(skipCourse)
       .limit(PageSize)
       .lean()
@@ -609,7 +608,9 @@ const chapterListPage_Helper = (exports.chapterListPage_Helper
             prevPage,
             prevPage2,
             pages: Math.ceil(length / PageSize),
-            chapters: chapters
+            chapters: chapters,
+            user: req.user,
+            img_url: IMAGE_URL,
           })
         }
       })

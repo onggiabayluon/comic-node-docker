@@ -5,7 +5,7 @@ const passport = require('passport');
 // Load Controller
 const UserController = require('../app/controllers/UserController');
 // Load Middleware
-const { forwardAuthenticated } = require('../config/auth/auth');
+const { authRole, forwardAuthenticated } = require('../config/auth/auth');
 const { noCache } = require('../config/header/header');
 
 // Set Private header 
@@ -22,6 +22,11 @@ router.get('/logout', UserController.logout);
 router.get('/register', forwardAuthenticated, UserController.registerPage);
 // Register 
 router.post('/register', UserController.register);
+
+// Give Coin
+router.post('/giveCoin', authRole('admin:extraAdmin'), UserController.giveCoin);
+// unlock Chapter
+router.post('/unlockChapter', UserController.unlockChapter);
 // Change Role to extraAdmin or User
 router.put('/changerole/:role/:userId', UserController.changeRole);
 // Ban User

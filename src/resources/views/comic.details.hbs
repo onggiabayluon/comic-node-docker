@@ -130,28 +130,58 @@
 
                             <div class="l-grid__item card mb-4">
                                 <div class="button-wrapper">
-                                    <a href="/comic/{{comic.slug}}/chapter-{{firstChapter.chapter}}"
+                                    <a href="/comic/{{comic.slug}}/{{firstChapter.chapter}}"
                                         class="button-wrapper__firstChapter btn btn-primary light-red mb-1">
                                         <span class="firstChapter__name"> First Chapter </span>
-                                        <span class="firstChapter__text"> Chapter {{firstChapter.chapter}}</span>
+                                        <span class="firstChapter__text"> {{replaceHyphenIntoSpace firstChapter.chapter}}</span>
                                     </a>
-                                    <a href="/comic/{{comic.slug}}/chapter-{{lastChapter.chapter}}"
+                                    <a href="/comic/{{comic.slug}}/{{lastChapter.chapter}}"
                                         class="button-wrapper__lastChapter btn btn-primary light-red mb-1">
                                         <span class="lastChapter__name"> Last Chapter </span>
-                                        <span class="lastChapter__name"> Chapter {{lastChapter.chapter}} </span>
+                                        <span class="lastChapter__name"> {{replaceHyphenIntoSpace lastChapter.chapter}} </span>
                                     </a>
                                 </div>
                                 
                                 <div class="chapter-wrapper">
                                     <ul itemscope itemtype="https://schema.org/BreadcrumbList" class="chapter-wrapper__list">
-                                        {{#each comic.chapters}}
+                                        {{#each chapters}}
                                         <li itemprop="itemListElement" itemscope
                                         itemtype="https://schema.org/ListItem" 
+                                        id="chapter-{{this._id}}"
                                         class="chapter-wrapper__item">
-                                            <a itemprop="item" class="chapter" href="/comic/{{../comic.slug}}/chapter-{{this.chapter}}" >
-                                                <span itemprop="name" class="chapter__text" id="chapter-{{this._id}}" > Chapter {{this.chapter}} </span>
-                                                <meta itemprop="position" content="{{sum @index 1}}" />
-                                                <span class="chapter__date text-muted"> {{CalcTimeEnglish this.updatedAt}}</span>
+                                            <a itemprop="item" class="chapter" href="/comic/{{../comic.slug}}/{{this.chapter}}" >
+                                                
+                                                {{#if (or
+                                                    (isBefore this.coin.expiredAt)
+                                                    (eq this.coin.required 0))}}
+                                                    <span itemprop="name" class="chapter__text" id="chapter-{{this._id}}" >
+                                                        <i class="far fa-unlock"></i> {{replaceHyphenIntoSpace this.chapter}} 
+                                                    </span>
+                                                    <meta itemprop="position" content="{{sum @index 1}}"/>
+                                                    <span class="chapter__coin text-muted ml-auto">
+                                                        <span class="badge badge-outline-primary">
+                                                            <i class="fas fa-coins"></i>
+                                                            <span>Free</span>
+                                                        </span>
+                                                    </span>
+                                                
+                                                    {{else}}
+                                                    <span itemprop="name" class="chapter__text" id="chapter-{{this._id}}" >
+                                                        <i class="fas fa-lock"></i> {{replaceHyphenIntoSpace this.chapter}} 
+                                                    </span>
+                                                    <meta itemprop="position" content="{{sum @index 1}}"/>
+                                                    <span onclick="return false;" class="chapter__countDownTime ml-auto mr-4" data-toggle="tooltip" data-placement="top" title="{{agoFormat this.coin.expiredAt}}">
+                                                        <i class="far fa-clock"></i>
+                                                        <span class="countDownTime__text">{{agoFormat this.coin.expiredAt}}</span>
+                                                    </span>
+                                                    <span class="chapter__coin text-muted">
+                                                        <span class="badge badge-primary">
+                                                            <i class="fas fa-coins"></i>
+                                                            <span>{{this.coin.required}}</span>
+                                                        </span>
+                                                    </span>
+                                                {{/if}}
+                                                <span class="chapter__date text-muted"> {{timeFormat this.updatedAt}} </span>
                                             </a>
                                         </li>
                                         {{/each}}
@@ -178,7 +208,9 @@
 <input name="comicId" value="{{comic._id}}" type="hidden"></input>
 <input name="title" value="{{comic.title}}" type="hidden"></input>
 <input name="comicSlug" value="{{comic.slug}}" type="hidden"></input>
-
+{{#if user.name}}
+<input name="isLoggedIn" value=true type="hidden"></input>
+{{/if}}
 </instuff>
 
 

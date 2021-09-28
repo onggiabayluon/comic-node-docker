@@ -1,7 +1,13 @@
 const User                      = require('../models/User')
+const Chapter                   = require('../models/Chapter')
+const Pocket                    = require('../models/Pocket');
+const Invoice                   = require('../models/Invoice');
+const customError               = require('../../util/customErrorHandler')
 const bcrypt                    = require('bcrypt');
 const passport                  = require('passport');
 const { canChangeRole, canDeleteUser, canChangeBannedStatus }         = require('../../config/permissions/users.permission')
+const { IMAGE_URL } = require('../../config/config');
+
 class UserController {
 
     // login Page
@@ -148,7 +154,7 @@ class UserController {
                 var check = await canChangeRole(user, myRole)
                 if (!check) {
                     res.status(401).redirect(`/me/stored/comics/dashboard/${myRole}`)
-                    req.flash('error-message', 'Bạn không đủ điều kiện để thay đổi Role của người này')
+                    req.flash('error-message', 'You dont have enough permission to change this user role')
                 } else {
                     changeRoleAccordingly(user, req, res, next)
                 }
@@ -159,7 +165,7 @@ class UserController {
                 user
                 .save()
                 .then(() => {
-                    req.flash('success-message', `Thay đổi Role của ${user.name} sang ${roleWantToChange} thành công`)
+                    req.flash('success-message', `Change ${user.name} Role to ${roleWantToChange} successfully`)
                     res.redirect(`/me/stored/comics/dashboard/${myRole}`)
                 })
                 .catch(next)
@@ -182,7 +188,7 @@ class UserController {
                 var check = await canDeleteUser(userToDelete, myRole)
                 if (!check) {
                     res.status(401).redirect(`/me/stored/comics/dashboard/${myRole}`)
-                    req.flash('error-message', 'Bạn không đủ điều kiện để Xóa người này')
+                    req.flash('error-message', 'You dont have enough permission to Delete this user')
                 } else {
                     deleteUser(userToDelete, req, res, next)
                 }
@@ -191,7 +197,7 @@ class UserController {
                 userToDelete
                 .remove()
                 .then(() => {
-                    req.flash('success-message', `Xóa User thành công`)
+                    req.flash('success-message', `Delete User Successfully`)
                     res.redirect(`/me/stored/comics/dashboard/${myRole}`)
                 })
                 .catch(next)
@@ -215,7 +221,7 @@ class UserController {
                 var check = await canChangeBannedStatus(userToBan, myRole)
                 if (!check) {
                     res.status(401).redirect(`/me/stored/comics/dashboard/${myRole}`)
-                    req.flash('error-message', `Bạn không đủ điều kiện để ${message} người này`)
+                    req.flash('error-message', `You dont have enough permission to ${message} this user`)
                 } else {
                     changeUserStatus(userToBan, req, res, next)
                 }
@@ -224,7 +230,7 @@ class UserController {
                 userToBan
                 .updateOne({banned: statusWantToChange})
                 .then(() => {
-                    req.flash('success-message', `${message} User thành công`)
+                    req.flash('success-message', `${message} User Successfully`)
                     res.redirect(`/me/stored/comics/dashboard/${myRole}`)
                 })
                 .catch(next)
@@ -233,6 +239,160 @@ class UserController {
             next(err)
         }
     }
+
+    // Give coin
+    giveCoin(req, res, next) {
+        const   $coinToGive = req.body.coinValue,
+                $user_id = req.body.user_id 
+                console.log(req.body)
+        User.updateOne(
+            { _id: $user_id },
+            { $inc: { coin: $coinToGive } }
+        )
+        .then(result => {
+            if (result.nModified) {
+                req.flash('success-message', `ADD ${$coinToGive} Coin to User ${$user_id} Successfully`)
+                res.redirect('back')
+            } else {
+                req.flash('error-message', `Cannot give coin to this User ${$user_id}`)
+                res.redirect('back')
+            }
+        })
+        .catch(next)
+    };
+
+    unlockChapter(req, res, next) {
+        if (!req.user) return next(new customError("You have not logged In yet", 401))
+
+        const   $user_id = req.user._id,
+                $user_current_coin = req.user.coin,
+                $chapter_id = req.body.chapter_id,
+                $slug = req.body.chapterSlug,
+                $chapterName = req.body.chapter
+
+        
+        const newPockets = {
+            comicSlug: $slug,
+            chapters: $chapter_id
+        }
+
+        const $find = { "user_id": $user_id, "pockets.comicSlug" : $slug }
+        const $addToSet = { $addToSet: { "pockets.$.chapters": $chapter_id } }
+        
+        
+        main()
+        .then(result => { 
+            if(!result) return; 
+            else Chapter
+            .findOne({ comicSlug: $slug, chapter: $chapterName })
+            .lean()
+            .then(chapter => {
+                res.status(200).render('template/chapter.detail.template.hbs', {
+                    layout: 'fetch_layout',
+                    isFree: true,
+                    chapter: chapter,
+                    img_url: IMAGE_URL,
+                  })
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
+
+        async function main () {
+            try {
+                const [chapter_coin, error1] = await getChapterCoin()
+                if (error1) throw new customError(error1, 404)
+
+                const [subtractResult, error2] = await subtractUserCoin(chapter_coin)
+                if (error2) throw new customError(error2, 403)
+
+                const [pushResult, error3] = await pushNewPocket()
+                if (error3) throw new customError(error3, 404)
+                
+                const [createResult, error4] = await createInvoice(chapter_coin)
+                if (error4) throw new customError(error4, 404)
+
+                return { message: `Unlock chapter successfully`, status: 200 }
+
+            } catch (err) { next(err) }
+        };
+        
+        async function getChapterCoin() {
+            return Chapter
+            .findOne({ _id: $chapter_id })
+            .select("coin -_id")
+            .lean()
+            .then(result => {
+                if (!result) return [null, "Error happen when find Chapter in db"]
+                else return [result.coin.required, null]
+            })
+            .catch(err => { return [null, err] })
+        };
+
+        async function subtractUserCoin(chapter_coin) {
+            if ($user_current_coin - chapter_coin < 0) return [null, "You dont have enough coin to unlock this chapter"]
+            return User
+            .updateOne(
+                { _id: $user_id },
+                { $set: { coin: $user_current_coin - chapter_coin }}
+            )
+            .then(result => {
+                if (result.nModified === 0) return [null, "Error happen when Substract user coin in db"]
+                else return [result.nModified, null]
+            })
+            .catch(err => { return [null, err] })
+        };
+
+        async function pushNewPocket() {
+            const isExist = await Pocket.findOne($find).countDocuments()
+            if (isExist) return update()
+            else return insert()
+
+            function insert() {
+                return Pocket.updateOne(
+                    { "user_id": $user_id },
+                    { $push: { "pockets": newPockets } },
+                    { upsert: true }
+                )
+                .then(result => {
+                    if (result.ok !== 1) return [null, "Error happen when Insert new Pocket in db"]
+                    else return [result.nModified, null]
+                })
+                .catch(err => { return [null, err] })
+            };
+            
+            function update() {
+                return Pocket.updateOne( $find, $addToSet )
+                .then(result => {
+                    if (result.ok !== 1) return [null, "Error happen when Push Pocket in db"]
+                    else return [result.nModified, null]
+                })
+                .catch(err => { return [null, err] })
+            }
+        };
+        
+        async function createInvoice(chapter_coin) {
+            const invoice = {
+                user_id: $user_id,
+                comicSlug: $slug,
+                chapter: {
+                    chapterName: $chapterName,
+                    chapter_id: $chapter_id
+                },
+                coin: chapter_coin,
+            }
+            return Invoice
+            .create(invoice)
+            .then(result => {
+                if (!result) return [null, "Error happen when create Invoice in db"]
+                else return [result, null]
+            })
+            .catch(err => { return [null, err] })
+        };
+
+        
+        
+    };
 }
 
 module.exports = new UserController();

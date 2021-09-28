@@ -25,7 +25,8 @@ var $userAvatarSrc
 var fetchParams = (isComicDetailPage) ? '/null' : ''
 /*************************** Global Var ***************************/
 
-/*************** Fetch bottom Comments when into view ***************/
+/*************** Fetch bottom Comments when into view OR in viewport***************/
+
 $.fn.isVisible = function () {
     var elementTop = $(this).offset().top;
     var elementBottom = elementTop + $(this).outerHeight() + 10;
@@ -36,7 +37,7 @@ $.fn.isVisible = function () {
     return elementBottom > viewportTop && elementTop < viewportBottom;
 }
 
-$(window).scroll(function () {
+$(window).on('load scroll', () => {
     if ($commentBox.isVisible()) {
         if (flag == 0) {
             // do something
@@ -56,6 +57,9 @@ $(window).scroll(function () {
         }
     }
 })
+function fetchCommentBox () {
+    
+}
 /*************** Fetch bottom Comments when into view ***************/
 
 /*************** handle fetch more comments button ***************/
@@ -180,8 +184,6 @@ window.postComment = function (form) {
     formData = {
         text: form.text.value,
         title: $title,
-        
-        
         comicSlug: $comicSlug,
         updatedAt: new Date().toISOString(),
         isComicDetailPage: isComicDetailPage,

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
-    <title>{{comic.title}} [Next Chap {{lastChapter.chapter}}] - {{meta.home_sitename}}</title>
+    <title>{{comic.title}} [Next {{replaceHyphenIntoSpace seoChapter}}] - {{meta.home_sitename}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="True">
     <meta name="description" content="Read manga {{comic.title}} {{meta.detail_page_description}} {{meta.home_sitename}}">
@@ -17,8 +17,8 @@
     <meta property="og:image" content="{{meta.image_url_http}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg">
     <meta property="og:image:secure_url" content="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg">
     <meta property="og:image:type" content="image/jpeg" /> 
-    <meta property="og:image:width" content="400" /> 
-    <meta property="og:image:height" content="300" />
+    <meta property="og:image:width" content="300" /> 
+    <meta property="og:image:height" content="400" />
     
     <meta name="twitter:title" content="{{meta.home_title}}">
     <meta name="twitter:description" content="{{meta.home_description}}">
@@ -38,7 +38,7 @@
     {{!-- vendor css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css">
     {{!-- CSS --}}
-    <link rel="stylesheet" href="/css/comic.details.min.css">
+    <link rel="stylesheet" href="/css/comic.details.min.css?v1.0.0.0">
     
 </head>
 
@@ -90,8 +90,8 @@
     <script src="/js/utilityScripts/message.scripts.js"></script>
     <script src="/js/utilityScripts/subscribe.scripts.js"></script>
     <script src="/js/utilityScripts/navbar.user.main.js"></script>
-    <script src="/js/utilityScripts/comments.scripts.js?v1.0.3.3" defer></script>
-    <script src="/js/comicDetailsPage/comic.details.js" defer></script>
+    <script src="/js/utilityScripts/comments.scripts.js?v1.0.3.4" defer></script>
+    <script src="/js/comicDetailsPage/comic.details.js?v1.0.0.5" defer></script>
 
 </body>
 </html>

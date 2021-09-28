@@ -1,5 +1,7 @@
 
 function SearchHandler(dataFetched, search, matchList, source, templateObjProperty, filterProperty, callback) {
+    Handlebars.registerHelper('eq', (v1, v2) => v1 === v2)
+    Handlebars.registerHelper('and', () => { return Array.prototype.every.call(arguments, Boolean) })
     Handlebars.registerHelper('CalcTimeEnglish', function (UploadedTime) {
         var earlierDate = new Date(UploadedTime);
         var currentTime = new Date();
@@ -122,6 +124,9 @@ function SearchHandler(dataFetched, search, matchList, source, templateObjProper
 
     Handlebars.registerHelper('ifCond', function (a, operator, b, options) {
         switch (operator) {
+            case 'authRole':
+                const filtered = b.split(':').filter(role => role === a);
+                return (filtered.length > 0) ? options.fn(this) : options.inverse(this);
             case '==':
                 return (a == b) ? options.fn(this) : options.inverse(this);
             case '===':
@@ -162,10 +167,8 @@ function SearchHandler(dataFetched, search, matchList, source, templateObjProper
         searchText.toLowerCase()
         let matches = dataFetched.filter(dataFetched => {
             const regex = new RegExp(`${searchText}`, 'gi');
-            console.log(regex)
             return filterProperty(dataFetched, regex)
         })
-        console.log(matches)
         
         if (searchText.length === 0) {
             matches = [];

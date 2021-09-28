@@ -23,6 +23,10 @@ data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <a onclick="location = this.href" class="dropdown-item text-danger" href="/me/stored/comics/dashboard/admin">
         Admin Dashboard</a>
         {{/if}}
+        <span class="dropdown-item" href="#" style="color: var(--theme-color-1);">
+            <i class="fas fa-coins"></i> 
+            <span class="ml-1">{{user.coin}} Coins</span>
+        </span>
         <a onclick="location = this.href" class="dropdown-item" href="#">Account</a>
         <a onclick="location = this.href" class="dropdown-item" href="#">Features</a>
         <a onclick="location = this.href" class="dropdown-item" href="#">History</a>

@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{comics.title}} Chap {{currentChapter.chapter}} Next Chap {{sum nextChapter.chapter 1}} - {{meta.home_sitename}}</title>
+    <title>{{chapter.title}} {{replaceHyphenIntoSpace currentChapter.chapter}} Next {{replaceHyphenIntoSpace seoChapter}} - {{meta.home_sitename}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="True">
-    <meta name="description" content="Read manga {{comics.title}} Chapter {{currentChapter.chapter}} {{meta.detail_page_description}} {{meta.home_sitename}}">
+    <meta name="description" content="Read manga {{chapter.title}} {{replaceHyphenIntoSpace currentChapter.chapter}} {{meta.detail_page_description}} {{meta.home_sitename}}">
     <meta name="author" content="{{meta.home_sitename}}">
     <meta name="keywords" itemprop="keywords" content="{{meta.home_keywords}}">
     
     <meta property="og:type" content="website">
     <meta property="og:description" content="{{meta.home_description}}">
-    <meta property="og:url" content="{{meta.home_url}}/comic/{{comics.slug}}/chapter-{{currentChapter.chapter}}">
-    <meta property="og:image" content="{{meta.image_url_http}}/{{comics.thumbnail.url}}-thumbnail-original.jpeg">
-    <meta property="og:image:secure_url" content="{{img_url}}/{{comics.thumbnail.url}}-thumbnail-original.jpeg">
+    <meta property="og:url" content="{{meta.home_url}}/comic/{{chapter.comicSlug}}/{{currentChapter.chapter}}">
+    <meta property="og:image" content="{{meta.image_url_http}}/{{chapters.thumbnail.url}}-thumbnail-original.jpeg">
+    <meta property="og:image:secure_url" content="{{img_url}}/{{chapters.thumbnail.url}}-thumbnail-original.jpeg">
     <meta property="og:image:type" content="image/jpeg" /> 
-    <meta property="og:image:width" content="400"/> 
-    <meta property="og:image:height" content="300" />
+    <meta property="og:image:width" content="300"/> 
+    <meta property="og:image:height" content="400" />
     
     <meta name="twitter:title" content="{{meta.home_title}}">
     <meta name="twitter:description" content="{{meta.home_description}}">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="{{meta.home_sitename}}">
-    <meta name="twitter:image" content="{{img_url}}/{{comics.thumbnail.url}}-thumbnail.jpeg">
-    <link rel="canonical" href="{{meta.home_url}}/comic/{{comics.slug}}/chapter-{{currentChapter.chapter}}">
+    <meta name="twitter:image" content="{{img_url}}/{{chapters.thumbnail.url}}-thumbnail.jpeg">
+    <link rel="canonical" href="{{meta.home_url}}/comic/{{chapter.comicSlug}}/-{{currentChapter.chapter}}">
     {{!-- preconnect --}}
     <link rel="preconnect" href="{{img_url}}">
     {{!-- FontAweSome cdn --}}
@@ -37,16 +37,21 @@
     {{!-- vendor css --}}
     {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css"> --}}
     {{!-- CSS --}}
-    <link rel="stylesheet" href="/css/chapter.details.min.css">
+    <link rel="stylesheet" href="/css/chapter.details.min.css?v1.0.0.0">
     
 </head>
 
 <body>
 
 
-    {{{body}}}
 
-    {{> errorsuccessMessage}}
+    <main>
+        {{{body}}}
+    
+        <modal>
+            {{> errorsuccessMessage}}
+        </modal>
+    </main>
 
     {{> homeFooter}}
 
@@ -57,10 +62,10 @@
     {{!-- custom js --}}
     <script src="/js/vendor/theme-switcher-chapter-details.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-    <script src="/js/chapterDetailsPage/chapter.LazyLoader.js"></script>
+    <script src="/js/chapterDetailsPage/chapter.LazyLoader.js?v1.0.0.0"></script>
     <script src="/js/utilityScripts/message.scripts.js"></script>
-    <script src="/js/utilityScripts/comments.scripts.js" defer></script>
-    <script src="/js/chapterDetailsPage/chapter.details.js" defer></script>
+    <script src="/js/utilityScripts/comments.scripts.js?v1.0.0.3" defer></script>
+    <script src="/js/chapterDetailsPage/chapter.details.js?v1.0.2.1" defer></script>
 
 </body>
 </html>

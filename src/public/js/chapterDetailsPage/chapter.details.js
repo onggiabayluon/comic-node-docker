@@ -11,6 +11,8 @@ var chapterUrl          = window.location.href
 var comicUrl            = href[0]
 var visited_comics      = JSON.parse(localStorage.getItem('visited_comics'));
 var visited_chapters    = JSON.parse(localStorage.getItem('visited_chapters'));
+var $noRender           = $("input[type=hidden][name=noRender]").val()
+
 var newComicList
         
 var this_visit = {
@@ -22,6 +24,9 @@ var this_visit = {
     comicSlug: $comicSlug,
     thumbnail: $thumbnail
 }
+
+
+
 
 if (visited_chapters == null) {
 
@@ -112,9 +117,78 @@ function chapterisvisited(visited_chapters) {
 }
 /* 🛑 End local History */
 
+/*************************** Chapter Select Option ***************************/
 const pathname = window.location.pathname;
 const chapter = pathname.split('/').pop()
-$(`option[data-chapter=${chapter}]`).attr('selected', true);
+$("[data-chapter='" + chapter + "']").attr('selected', true);
 
+/*************************** Chapter Select Option ***************************/
+
+
+/*************************** Unlock chapter function ***************************/
+window.unlockChapter = function (form) {
+    appendCloneMsg()
+    toggleLoading()
+    $('#confirm-modal').modal('hide');
+    let formData = {
+        chapterSlug: form.chapterSlug.value,
+        chapter_id: form.chapter_id.value,
+        chapter: chapter
+    }
+    $.ajax({
+        url: "/users/unlockChapter",
+        type: "POST",
+        data: JSON.stringify(formData),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            handleSuccessMsg({message: 'Unlock Chapter Successfully', status: 200})
+            $('#auth-container').append(response).ready(function () {
+                $('#l-unlock-container').remove()
+                chapterLazyLoad()
+            });
+        },
+        error: function (response) {
+            handleErrorMsg(response)
+        }
+    });
+    return false;
+}; 
+/*************************** Unlock chapter function ***************************/
+
+/*************************** Run lazyload if no need to fetch render ***************************/
+
+if ($noRender) {
+    chapterLazyLoad()
+} else {
+    getAuthChapter()
+}
+
+/*************************** Run lazyload if no need to fetch render ***************************/
+
+
+/*************************** getAuth chapter ajax ***************************/
+
+function getAuthChapter() {
+    $.ajax({
+        url: `/fetch/getAuthChapter/${$comicSlug}/${$chapterId}`,
+        type: "GET",
+        data: {chapterName: $chapter, noRender: $noRender},
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            $('#auth-container').append(response).ready(function () {
+                if (response.withoutLazyload) return;
+                else { 
+                    $('#l-unlock-container').remove()
+                    chapterLazyLoad()
+                } 
+            });
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    });
+};
+
+/*************************** getAuth chapter ajax ***************************/
 
 

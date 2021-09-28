@@ -34,7 +34,7 @@ const User = new Schema({
       type: String,
     },
     banned: {
-      type: String,
+      type: Boolean,
       required: true,
       default: false
     },
@@ -46,6 +46,11 @@ const User = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comic"
     }],
+    coin: {
+      type: Number,
+      required: true,
+      default: 0
+    },
 
     googleId: String,
     facebookId: String,

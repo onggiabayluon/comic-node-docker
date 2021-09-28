@@ -153,9 +153,10 @@
                                             </div>
                                             <tr>
                                                 <th>User Name</th>
+                                                <th>Coin</th>
                                                 <th>Role</th>
                                                 <th>Status</th>
-                                                <th>Edit Role</th>
+                                                <th>Edit</th>
                                                 <th>Delete User</th>
                                             </tr>
                                         </thead>
@@ -165,6 +166,9 @@
                                             <tr>
                                                 <td>
                                                     <p class="list-item-heading">{{this.name}}</p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-warning">{{this.coin}}</span>
                                                 </td>
                                                 <td>
                                                     <p class="text-muted">{{this.role}}</p>
@@ -185,19 +189,22 @@
                                                     <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <span class="sr-only">Toggle DropLeft</span>
                                                         </button>
-                                                        {{#ifCond this.role '!=' 'admin'}}
-                                                        <div class="dropdown-menu" x-placement="left-start"
-                                                            style="color: var(--theme-color-5); position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-162px, 0px, 0px);">                                
-                                                            {{#ifCond ../ this.role '!=' 'extraAdmin'}}
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{../ this._id}}" data-target="#up-to-extraAdmin">  
-                                                                    <Span class="text-info">Up to Extra Admin</Span>
-                                                            </a>
-                                                            {{/ifCond}}
-                                                            {{#ifCond ../ this.role '!=' 'user'}}
+                                                        {{#ifCond ../user.role 'authRole' 'admin:extraAdmin'}}
+                                                        <div class="dropdown-menu" x-placement="left-start">
+                                                            {{#if (and
+                                                            (eq ../../user.role "admin")
+                                                            (eq ../this.role "extraAdmin"))}}
                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{../ this._id}}" data-target="#down-to-user">
                                                                     <Span class="text-danger">Remove Extra Admin</Span>
                                                             </a>
-                                                            {{/ifCond}}
+                                                            {{/if}}
+                                                            
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{this._id}}" data-target="#give-coin-modal">  
+                                                                    <Span class="text-warning">Give Coin</Span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{this._id}}" data-target="#up-to-extraAdmin">  
+                                                                    <Span class="text-info">Up to Extra Admin</Span>
+                                                            </a>
                                                         </div>
                                                         {{/ifCond}}
                                                     </div>
@@ -553,11 +560,40 @@
     </div>
 </div>
 
+ {{!-- Give coin modal --}}
+<div class="modal fade" id="give-coin-modal" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Give Coin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="return giveCoin(this);" action="/users/giveCoin" method="POST">
+                    <div class="form-group">
+                        <label for="coin-value" class="col-form-label">Value</label>
+                        <input type="number" class="form-control" name="coinValue">
+                        <input type="hidden" class="form-control" name="user_id">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script id="userSearch-template" type="text/x-handlebars-template">
 \{{#each users}}
     <tr>
         <td>
             <p class="list-item-heading">\{{this.name}}</p>
+        </td>
+        <td>
+            <span class="badge badge-warning">\{{this.coin}}</span>
         </td>
         <td>
             <p class="text-muted">\{{this.role}}</p>
@@ -579,16 +615,18 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle DropLeft</span>
                 </button>
-                \{{#ifCond this.role '!=' 'admin'}}
-                <div class="dropdown-menu" x-placement="left-start"
-                    style="color: var(--theme-color-5); position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-162px, 0px, 0px);">
-                    \{{#ifCond this.role '!=' 'extraAdmin'}}
+                \{{#ifCond this.role 'authRole' 'admin:extraAdmin:user'}}
+                <div class="dropdown-menu" x-placement="left-start">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-id="\{{this._id}}" data-target="#give-coin-modal">
+                        <Span class="text-warning">Give Coin</Span>
+                    </a>
+                    \{{#ifCond this.role '==' 'user'}}
                     <a class="dropdown-item" href="#" data-toggle="modal" data-id="\{{this._id}}"
                         data-target="#up-to-extraAdmin">
                         <Span class="text-info">Up to Extra Admin</Span>
                     </a>
                     \{{/ifCond}}
-                    \{{#ifCond this.role '!=' 'user'}}
+                    \{{#ifCond this.role '==' 'extraAdmin'}}
                     <a class="dropdown-item" href="#" data-toggle="modal" data-id="\{{this._id}}"
                         data-target="#down-to-user">
                         <Span class="text-danger">Remove Extra Admin</Span>
@@ -720,5 +758,21 @@
             hiddenForm.action = '/users/deleteUser/' + userId + '?_method=DELETE'
             hiddenForm.submit();
         }; /* End Form */
+
+        // Set Coin
+        $('#give-coin-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            user_id = button.data('id');
+        });
+
+        window.giveCoin = function (form) {
+            form.user_id.value = user_id
+            $.ajax({
+                url: "/users/giveCoin",
+                type: "POST",
+                data: $(this).serialize(),
+                
+            });
+        }; 
     });
 </script>

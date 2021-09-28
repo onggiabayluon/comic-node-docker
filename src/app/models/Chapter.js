@@ -23,6 +23,23 @@ const Chapter = new Schema({
         url: String,
       }
     ],
+    thumbnail: {
+      key: String,
+      url: String,
+    },
+    coin: {
+      required: {
+        type: Number,
+        required: true,
+        default: 0
+      },
+      expiredAt: {
+        type: Date,
+      },
+      createdAt: {
+        type: Date,
+      }
+    }
   }, opts);
 
   module.exports = mongoose.model('Chapter', Chapter);

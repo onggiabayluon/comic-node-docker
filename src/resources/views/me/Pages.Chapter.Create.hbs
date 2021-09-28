@@ -62,12 +62,12 @@
                         </button>
                     </div>
                         <div class="card-body position-relative">
-                            <form class="dropzone "  style="margin: 2rem 0px;"
+                            <form class="dropzone " style="margin: 6rem 0 1.5rem 0;"
                             action="/me/stored/comics/{{linkComics}}/S3-multiple-upload" id="buldUploadForm" method="POST"
                                 enctype="multipart/form-data">
                                 <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 0%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
                                     <input type="number" class="form-control" id="getInput" name="chapter" 
-                                    placeholder="VD: 1 hoặc 20.1" style="cursor: auto;"
+                                    placeholder="Example: 1 Or 20.1" style="cursor: auto;"
                                     required min="0" step="any" />
                                     <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
                                         <path d="M0 1 L40 1"></path>
@@ -75,7 +75,19 @@
                                         <path d="M0 1 L40 1" class="invalid"></path>
                                         <path d="M0 1 L40 1" class="valid"></path>
                                     </svg>
-                                    <span>Thêm Chapter</span>
+                                    <span>Chapter</span>
+                                </label>
+                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 22%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
+                                    <input type="number" class="form-control" id="getInput" name="coinRequired" 
+                                    placeholder="Example: 100 or 200 or 1000" style="cursor: auto;" value=0
+                                    required min="0" step="any" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                    <span>Coin</span>
                                 </label>
                                 <div class="dz-clickable" id="uploadDropzone">
                                     <div class="dz-default dz-message" data-dz-message>
