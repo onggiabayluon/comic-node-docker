@@ -518,11 +518,13 @@ class meController {
   setCoin(req, res, next) {
     const $chapter_id = req.body._id,
           $coinToSet = Number(req.body.coinValue),
-          $expiredAt = req.body.date
+          $date = req.body.date,
+          $expiredAt = ($date) ? new Date($expiredAt).toISOString() : null
+    
 
     const $coin = {
       required: $coinToSet,
-      expiredAt: new Date($expiredAt).toISOString(),
+      expiredAt: $expiredAt,
       createdAt: new Date().toISOString()
     }
     Chapter.updateOne(

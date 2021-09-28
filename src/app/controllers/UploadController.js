@@ -58,7 +58,10 @@ class UploadController {
                 chapter: `chapter-${req.body.chapter}`,
                 chapterSlug: `${req.params.slug}-${shortid()}`,
                 comicSlug: req.params.slug,
-                coinRequired: req.body.coinRequired
+                coin: {
+                    coinRequired: req.body.coinRequired,
+                    expiredAt: req.body.date
+                }
             })
             imagesURL.forEach((url, index) => {
                 newChapter.image[index] = { url: url }

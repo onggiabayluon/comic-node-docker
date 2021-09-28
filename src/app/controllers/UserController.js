@@ -244,7 +244,6 @@ class UserController {
     giveCoin(req, res, next) {
         const   $coinToGive = req.body.coinValue,
                 $user_id = req.body.user_id 
-                console.log(req.body)
         User.updateOne(
             { _id: $user_id },
             { $inc: { coin: $coinToGive } }

@@ -199,10 +199,10 @@
                                                             </a>
                                                             {{/if}}
                                                             
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{this._id}}" data-target="#give-coin-modal">  
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{../ this._id}}" data-target="#give-coin-modal">  
                                                                     <Span class="text-warning">Give Coin</Span>
                                                             </a>
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{this._id}}" data-target="#up-to-extraAdmin">  
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{../ this._id}}" data-target="#up-to-extraAdmin">  
                                                                     <Span class="text-info">Up to Extra Admin</Span>
                                                             </a>
                                                         </div>
@@ -767,6 +767,7 @@
 
         window.giveCoin = function (form) {
             form.user_id.value = user_id
+            return console.log(form.user_id.value)
             $.ajax({
                 url: "/users/giveCoin",
                 type: "POST",

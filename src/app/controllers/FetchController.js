@@ -22,7 +22,8 @@ class SiteController {
     .findOne($find, $match)
     .lean()
     .then(pocketDoc => {
-      res.send(pocketDoc.pockets.pop().chapters)
+      if (!pocketDoc?.pockets) return res.send({message: null, status: 404})
+      else return res.send(pocketDoc.pockets.pop().chapters)
     })
   };
 

@@ -62,7 +62,7 @@
                         </button>
                     </div>
                         <div class="card-body position-relative">
-                            <form class="dropzone " style="margin: 6rem 0 1.5rem 0;"
+                            <form class="dropzone " style="margin: 12rem 0 1.5rem 0;"
                             action="/me/stored/comics/{{linkComics}}/S3-multiple-upload" id="buldUploadForm" method="POST"
                                 enctype="multipart/form-data">
                                 <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 0%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
@@ -77,7 +77,8 @@
                                     </svg>
                                     <span>Chapter</span>
                                 </label>
-                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 22%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
+
+                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 14%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
                                     <input type="number" class="form-control" id="getInput" name="coinRequired" 
                                     placeholder="Example: 100 or 200 or 1000" style="cursor: auto;" value=0
                                     required min="0" step="any" />
@@ -89,6 +90,16 @@
                                     </svg>
                                     <span>Coin</span>
                                 </label>
+
+                                <div style="position: absolute;width: 100%;top: 30%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
+                                    <input id="date" name="date" 
+                                    placeholder="Click me to Pick time until this chapter will free" 
+                                    type="text" class="mt-3 form-control"
+                                        data-field="datetime" readonly>
+                                    <div id="dtBox"></div>
+                                </div>
+                                
+
                                 <div class="dz-clickable" id="uploadDropzone">
                                     <div class="dz-default dz-message" data-dz-message>
                                         <span>Drop Multiple images here to upload</span>
@@ -115,6 +126,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function () {
+         $("#dtBox").DateTimePicker({
+            dateTimeFormat: "MM-dd-yyyy HH:mm:ss"
+        });
+
         if ($().dropzone && !$(".dropzone").hasClass("disabled")) {
             Dropzone.autoDiscover = false; 
 

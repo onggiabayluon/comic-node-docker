@@ -30,8 +30,7 @@ function getAuthChapterList() {
         data: {comicSlug: $comicSlug},
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-            console.log(response)
-            addUnlockClass(response)
+            if (response.status !== 404) addUnlockClass(response)
         },
         error: function (response) {
             console.log(response)

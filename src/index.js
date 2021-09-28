@@ -196,6 +196,7 @@ app.engine(
             },
             isBefore: (myDate) => moment( myDate ).isBefore(),
             agoFormat: (myDate) => {
+                if (!myDate) return 'UnSet'
                 // get from-now for this date
                 const fromNow = moment( myDate ).fromNow();
 
