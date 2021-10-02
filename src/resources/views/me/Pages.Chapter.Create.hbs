@@ -62,9 +62,10 @@
                         </button>
                     </div>
                         <div class="card-body position-relative">
-                            <form class="dropzone " style="margin: 12rem 0 1.5rem 0;"
+                            <form class="dropzone " style="margin: 16rem 0 1.5rem 0;"
                             action="/me/stored/comics/{{linkComics}}/S3-multiple-upload" id="buldUploadForm" method="POST"
                                 enctype="multipart/form-data">
+                                <input type="hidden" name="comicThumbnail" value="{{comic.thumbnail.url}}"/>
                                 <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 0%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
                                     <input type="number" class="form-control" id="getInput" name="chapter" 
                                     placeholder="Example: 1 Or 20.1" style="cursor: auto;"
@@ -78,7 +79,7 @@
                                     <span>Chapter</span>
                                 </label>
 
-                                <label class="form-group has-float-label custom" style="position: absolute;width: 100%;top: 14%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
+                                <label class="form-group has-float-label custom" style="position: absolute;top: 0%;left: 0;right: 0;width:95%;margin-left: auto;margin-right: auto;margin-top: 4rem;">
                                     <input type="number" class="form-control" id="getInput" name="coinRequired" 
                                     placeholder="Example: 100 or 200 or 1000" style="cursor: auto;" value=0
                                     required min="0" step="any" />
@@ -91,7 +92,7 @@
                                     <span>Coin</span>
                                 </label>
 
-                                <div style="position: absolute;width: 100%;top: 30%;left: 0;right: 0;width:95%; margin-left: auto;margin-right: auto;">
+                                <div style="position: absolute;top: 0%;left: 0;right: 0;width:95%;margin-left: auto;margin-right: auto;margin-top: 7rem;">
                                     <input id="date" name="date" 
                                     placeholder="Click me to Pick time until this chapter will free" 
                                     type="text" class="mt-3 form-control"
@@ -106,11 +107,15 @@
                                     </div>
                                 </div>
 
-                                <input class="btn btn-primary dropzone-submit-btn"
-                                name="many-files" 
-                                type="submit" id="submitDropzonebtn"
-                                value="Upload Images"
-                                style="margin-top: -1rem;"/>
+                                <label class="form-group has-float-label custom" style="position: absolute;top: 0%;left: 0;right: 0;width:95%;margin-left: auto;margin-right: auto;margin-top: 15rem;">
+                                    <input 
+                                    class="btn btn-primary dropzone-submit-btn"
+                                    name="many-files" 
+                                    type="submit" id="submitDropzonebtn"
+                                    value="Upload Images"
+                                    style="margin-top: -1rem;"/>
+                                </label>
+                                
                             </form>
                         </div> {{!-- /Dropzone Form upload --}}
                 </div>

@@ -6,7 +6,7 @@ const customError               = require('../../util/customErrorHandler')
 const bcrypt                    = require('bcrypt');
 const passport                  = require('passport');
 const { canChangeRole, canDeleteUser, canChangeBannedStatus }         = require('../../config/permissions/users.permission')
-const { IMAGE_URL } = require('../../config/config');
+const { IMAGE_URL, IMG_FORMAT } = require('../../config/config');
 
 class UserController {
 
@@ -286,12 +286,17 @@ class UserController {
             .findOne({ comicSlug: $slug, chapter: $chapterName })
             .lean()
             .then(chapter => {
-                res.status(200).render('template/chapter.detail.template.hbs', {
-                    layout: 'fetch_layout',
-                    isFree: true,
-                    chapter: chapter,
-                    img_url: IMAGE_URL,
-                  })
+                res.send({
+                    chapterdoc: chapter,
+                    storage_url: IMAGE_URL,
+                    img_format: IMG_FORMAT
+                })
+                // res.status(200).render('template/chapter.detail.template.hbs', {
+                //     layout: 'fetch_layout',
+                //     isFree: true,
+                //     chapter: chapter,
+                //     img_url: IMAGE_URL,
+                // })
             })
             .catch(err => console.log(err))
         })

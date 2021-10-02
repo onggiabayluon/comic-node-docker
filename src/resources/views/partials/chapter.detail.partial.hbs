@@ -1,0 +1,78 @@
+<div id="images-container" class="images-container container {{#if noImages}}d-none{{/if}}">
+{{#if noImages}}
+
+{{!-- Add lazysizes config to prenvent init --}}
+<script>
+    window.lazySizesConfig = window.lazySizesConfig || {};
+    window.lazySizesConfig.init = false;
+</script>
+
+{{!-- no images --}}
+{{#each chapter.image}}
+    <div class="thumbnail">
+        <div class="intrinsic" style="--aspect-ratio: {{this.width}} / {{this.height}};">
+            <picture class="intrinsic__picture">
+                    <source type="image/webp" media="--small" />
+                    <source type="image/webp" media="--large" />
+                    
+                    <img
+                    onerror="this.onerror=null;this.src='/img/404.jpg';"
+                    class="lazyload img"
+                    data-expand="2000"
+                    alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}"/>
+            </picture>
+        </div>
+    </div>
+{{/each}} {{!-- / no images --}}
+
+{{else}}
+
+{{!-- render with images --}}
+{{!-- If had meta --}}
+{{#if hadMetas}}
+
+    {{#each chapter.image}}
+    <div class="thumbnail">
+        <div class="intrinsic" style="--aspect-ratio: {{this.width}} / {{this.height}};">
+            <picture>
+                    <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-small.webp" media="--small" />
+                    <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-large.webp" media="--large" />
+                    
+                    <img
+                    data-src="{{../img_url}}/{{this.url}}-medium.jpeg" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';"
+                    class="lazyload img"
+                    data-expand="2000"
+                    alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}"/>
+            </picture>
+        </div>
+    </div>
+    {{/each}}
+
+    {{else}}
+
+    {{#each chapter.image}}
+    <div class="thumbnail">
+        <div class="intrinsic">
+            <picture>
+                    <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-small.webp" media="--small" />
+                    <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-large.webp" media="--large" />
+                    
+                    <img
+                    data-src="{{../img_url}}/{{this.url}}-medium.jpeg" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';"
+                    class="lazyload img"
+                    data-expand="2000"
+                    alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}"/>
+            </picture>
+        </div>
+    </div>
+    {{/each}}
+
+{{/if}} 
+{{!-- / If had meta --}}
+{{!-- / If render with images --}}   
+
+{{/if}} 
+
+</div>

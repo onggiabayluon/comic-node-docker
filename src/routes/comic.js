@@ -23,7 +23,7 @@ router.post('/rate', ComicController.rateHandling);
 // comic / subscribe
 router.post('/subscribe', ComicController.subscribeHandling);
 // comic / search
-router.post('/search', ComicController.searchHandling);
+router.post('/search', cache(1000), ComicController.searchHandling);
 // comic / comment 
 router.post('/comment', ComicController.postComment);
 // comic / reply

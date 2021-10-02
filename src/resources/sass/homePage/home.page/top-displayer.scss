@@ -217,13 +217,14 @@
 
 
 @media (max-width: 1000px) {
-    #top-displayer { height: 360px; }
+    #top-displayer, #top-displayer #glide_banner .glide__slide { min-height: 360px; height: 360px; }
+   
 }
 @media (max-width: 750px) {
-    #top-displayer { height: 300px; }
+    #top-displayer, #top-displayer #glide_banner .glide__slide { min-height: 300px; height: 300px; }
 }
 @media (max-width: 650px) {
-    #top-displayer { height: 350px; }
+    #top-displayer, #top-displayer #glide_banner .glide__slide { min-height: 300px; height: 350px; }
 }
 // @media (max-width: 850px) {
 //     #top-displayer {

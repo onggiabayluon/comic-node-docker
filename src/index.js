@@ -90,7 +90,7 @@ io.on('connection', client => {
 const sessionConfig = {
     store: new RedisStore({ client: redis.client }),
     secret: 'secret',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie : {
         sameSite: 'strict',
@@ -100,15 +100,18 @@ const sessionConfig = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    app.set('trust proxy', true)
+    app.set('trust proxy', 1)
     app.use(cors())
     sessionConfig.cookie.secure = true // serve secure cookies
     // sessionConfig.store: new sessionStore() 
 } else {
     // Cors and Proxy
-    app.set('trust proxy', true); 
+    app.set('trust proxy', 1); 
     app.use(cors())
 }
+
+console.log(sessionConfig.cookie.secure)
+
 app.use(session(sessionConfig));
 
 
@@ -207,7 +210,7 @@ app.engine(
                     lastDay : '[Free]',
                     sameDay : function (now) {
                         if (this.isBefore(now)) return '[Free]';
-                        else return `[Free in ${fromNow}]`;
+                        else return `[Free ${fromNow}]`;
                     },
                     nextDay : '[Free Tomorrow]',
                     nextWeek: '[Free in] dddd',

@@ -39,9 +39,10 @@
 
                         <div id="leftbox" class="l-grid col-12 col-xl-3 col-md-4 col-sm-12 col-left" style="margin: 0 0 auto 0;">
                             <div class="l-grid__image card p-xl-3 col-5 col-xl-12 col-md-12 col-sm-4">
-                                <img itemprop="image" alt="{{comic.title}} Main" width="100%" height="auto"
-                                src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" 
-                                />
+                                <div class="intrinsic" style="--aspect-ratio: 320/430;">
+                                    <img itemprop="image" alt="{{comic.title}} Main" width="100%" height="auto"
+                                        src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" />
+                                </div>
                             </div>
 
                             <div class="l-grid__mobile-title">

@@ -2,7 +2,6 @@
     display: block;
     padding: 3rem 0 5rem 0;
     background: var(--background-color);
-    min-height: 755px;
 
     heading {
         padding: 0;
@@ -149,7 +148,6 @@
 }
 @media (max-width: 768px) {
     #lastest-update-places {
-        min-height: 1235px;
         heading {
             max-width: 95%;
             margin: 0 0.5rem 1.5rem 0.5rem;

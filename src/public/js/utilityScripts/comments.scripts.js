@@ -57,9 +57,7 @@ $(window).on('load scroll', () => {
         }
     }
 })
-function fetchCommentBox () {
-    
-}
+
 /*************** Fetch bottom Comments when into view ***************/
 
 /*************** handle fetch more comments button ***************/

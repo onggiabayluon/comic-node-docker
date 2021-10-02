@@ -6,7 +6,7 @@ const User = require('../models/User');
 const moment     = require('moment-timezone')
 const customError = require('../../util/customErrorHandler');
 const { singleMongooseToObject, multiMongooseToObject } = require('../../util/mongoose');
-const { IMAGE_URL } = require('../../config/config');
+const { IMAGE_URL, IMG_FORMAT } = require('../../config/config');
 
 class SiteController {
 
@@ -60,21 +60,19 @@ class SiteController {
         .catch(next)
     };
 
-    // Function: rendered Warning
-    function getRenderedWarning () {
-      res.status(200).render('template/chapter.detail.template.hbs', {
-        layout: 'fetch_layout',
-        isFree: false,
-      })
-    };
 
     function renderChapterUI (chapters) {
-      res.status(200).render('template/chapter.detail.template.hbs', {
-        layout: 'fetch_layout',
-        isFree: true,
-        chapter: chapters,
-        img_url: IMAGE_URL,
+      res.send({
+        chapterdoc: chapters,
+        storage_url: IMAGE_URL,
+        img_format: IMG_FORMAT
       })
+      // res.status(200).render('template/chapter.detail.template.hbs', {
+      //   layout: 'fetch_layout',
+      //   isFree: true,
+      //   chapter: chapters,
+      //   img_url: IMAGE_URL,
+      // })
     };
 
   };

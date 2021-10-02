@@ -111,6 +111,65 @@ body {
 }
 
 /*!------------- END Scroll Bars-----------------!*/
+.thumbnail {
+  display: block;
+  line-height: 1.42857143;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+}
+
+.intrinsic {
+  /* display */
+  /* positioning */
+  position: relative;
+  /* box model */
+  max-width: 100%;
+  height: 0;
+  padding-bottom: calc(100% / (var(--aspect-ratio)));
+  /* padding-bottom: 75%; */
+  /* decoration */
+}
+
+.intrinsic .img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.lazyload {
+  opacity: 0;
+}
+
+.lazyloading {
+  opacity: 0.7;
+  transition: opacity 300ms;
+  background: url("/img/loading-placeholder.svg") center center no-repeat;
+  background-size: 300px 100px;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+img.lazyloaded[src="/img/404.jpg"] {
+  background: url("/img/404.jpg") center center no-repeat;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+img.lazyload:not([src]) {
+  visibility: hidden;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -371,9 +430,7 @@ p {
 }
 
 .disabled {
-  --fa-primary-color: var(--button-text-unimportant) !important;
-  color: var(--button-text-unimportant) !important;
-  border: unset !important;
+  opacity: 0.2;
 }
 
 img {
@@ -551,63 +608,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #3770b4;
+  background: #1a3fe5;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #8b6903;
+  background: #11f2be;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #0fd5e4;
+  background: #a75a91;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #a04b74;
+  background: #426315;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #b6d91d;
+  background: #82576e;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #c673bc;
+  background: #c3084f;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #362102;
+  background: #114fec;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #907f7a;
+  background: #56e696;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #dd6d96;
+  background: #0c935c;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #9150b2;
+  background: #e2e1c3;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #e27080;
+  background: #a5dced;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #fef02c;
+  background: #544dda;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #6f0e7b;
+  background: #98b319;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #d1e243;
+  background: #363d42;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #62404a;
+  background: #381cc7;
 }
 
 .num {
@@ -1324,6 +1381,7 @@ badges:hover {
 
 #glide_1 .glide__slides, #glide_2 .glide__slides {
   white-space: initial;
+  min-height: 250px;
 }
 #glide_1 .glide__slides .glide__slide, #glide_2 .glide__slides .glide__slide {
   position: relative;
@@ -2644,17 +2702,20 @@ button {
   }
 }
 @media (max-width: 1000px) {
-  #top-displayer {
+  #top-displayer, #top-displayer #glide_banner .glide__slide {
+    min-height: 360px;
     height: 360px;
   }
 }
 @media (max-width: 750px) {
-  #top-displayer {
+  #top-displayer, #top-displayer #glide_banner .glide__slide {
+    min-height: 300px;
     height: 300px;
   }
 }
 @media (max-width: 650px) {
-  #top-displayer {
+  #top-displayer, #top-displayer #glide_banner .glide__slide {
+    min-height: 300px;
     height: 350px;
   }
 }
@@ -2821,7 +2882,6 @@ button {
   display: block;
   padding: 3rem 0 5rem 0;
   background: var(--background-color);
-  min-height: 755px;
 }
 #lastest-update-places heading {
   padding: 0;
@@ -2937,9 +2997,6 @@ button {
   }
 }
 @media (max-width: 768px) {
-  #lastest-update-places {
-    min-height: 1235px;
-  }
   #lastest-update-places heading {
     max-width: 95%;
     margin: 0 0.5rem 1.5rem 0.5rem;
@@ -2988,7 +3045,7 @@ button {
 }
 #welcome-places .glide__slide--2 item {
   position: relative;
-  min-width: 210px;
+  min-height: 210px;
   height: 210px;
 }
 #welcome-places .glide__slide--2 item comic-info {
@@ -3027,6 +3084,7 @@ button {
     transform: initial !important;
     display: flex;
     flex-direction: column;
+    min-height: 330px;
   }
   #welcome-places .glide__slide--2 {
     height: 165px !important;
@@ -3045,6 +3103,7 @@ button {
     display: block;
     width: 100vw !important;
     height: 165px;
+    min-height: 165px;
     padding: 0;
   }
   #welcome-places .glide__slide--2 item:nth-child(4) comic-info {
@@ -3550,6 +3609,13 @@ search-output .lds-ellipsis div:nth-child(4) {
 }
 
 @media (max-width: 1200px) {
+  .user__name {
+    display: none;
+  }
+  .user__avatar {
+    left: 0;
+  }
+
   #navbar {
     height: 132px;
   }
@@ -3559,8 +3625,8 @@ search-output .lds-ellipsis div:nth-child(4) {
   #navbar .right {
     margin-top: 1.3rem;
   }
-  #navbar .hotkeyright {
-    display: none;
+  #navbar .right .btn {
+    padding: 5px 14px;
   }
   #navbar mobile-nav {
     display: flex;

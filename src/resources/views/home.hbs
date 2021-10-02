@@ -120,13 +120,12 @@
                                     <div class="glide__slide glide__slide--2">
                                         {{#each (limitFrom config.slider 0 4)}}
                                             {{#ifCond @index '!%' 4}}
-                                            <item>
+                                            <item style="min-height: 210px;">
                                                 <glide-img>
                                                     <picture class="lazy">
                                                         <source 
                                                             data-srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp"
                                                             data-srcmain="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/webp" />
-                                                    
                                                         <img 
                                                         width="210" height="210" alt="{{../this.title}}" 
                                                         onerror="this.onerror=null;this.src='/img/404.jpg';" />
@@ -157,7 +156,7 @@
                                                 </comic-info-back>
                                             </item>
                                             {{else}}
-                                            <item>
+                                            <item style="min-height: 165px;">
                                                 <glide-img>
                                                     <picture class="lazy">
                                                         <source 
@@ -165,7 +164,7 @@
                                                             data-srcmain="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/webp" />
                                                     
                                                         <img 
-                                                        width="210" height="210" alt="{{../this.title}}" 
+                                                        width="auto" height="165" alt="{{../this.title}}" 
                                                         onerror="this.onerror=null;this.src='/img/404.jpg';" />
                                                     </picture>
                                                 </glide-img>
@@ -326,7 +325,9 @@
                     <div class="col-md-12 pl-0 pr-0">
                         <div id="glide_2" class="glide basic">
                             <div class="glide__track" data-glide-el="track">
-                                <div id="glide__slides" class="glide__slides"></div>
+                                <div id="glide__slides" class="glide__slides">
+                                
+                                </div>
                             </div>
                             
                             <div class="glide__arrows slider-nav" data-glide-el="controls">
@@ -361,19 +362,16 @@
         <grid-container>
             {{#each comics}}
             <item class="item item--border position-relative">
+                <div class="intrinsic" style="--aspect-ratio: 92/120;">
+                    <picture class="lazy">
+                        <source data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                            data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/webp" />
+                    
+                        <img width="92" height="120" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== "
+                            alt="{{this.title}}" onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                    </picture>
+                </div>
                 
-                <picture class="lazy">
-                    <source
-                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" 
-                    data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
-                    type="image/webp"
-                    />
-                
-                    <img width="92" height="120"
-                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== "
-                    alt="{{this.title}}" 
-                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
-                </picture>
                 
                 <div class="grade-overlay"></div>
                 <div class="grade grade--bottom">
@@ -418,19 +416,18 @@
         {{#each topComicsByView}}
         <grid-comic-item class="grid__item">
             <a href="/comic/{{this.slug}}">
-                <background-overlay></background-overlay>
                 
-                <picture class="lazy">
-                    <source
-                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
-                    data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
-                    type="image/webp"
-                    />
+                <div class="intrinsic" style="--aspect-ratio: 160/160;">
+                    <background-overlay></background-overlay>
+
+                    <picture class="lazy">
+                        <source data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                            data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/webp" />
+                    
+                        <img width="160" height="160" alt="{{this.title}}" onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                    </picture>
+                </div>
                 
-                    <img width="160" height="160"
-                    alt="{{this.title}}" 
-                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
-                </picture>
 
                 <comic-info>
                     <title class="title title--ellipsis title--bot">

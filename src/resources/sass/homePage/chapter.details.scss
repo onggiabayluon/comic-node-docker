@@ -6,7 +6,8 @@
   font-style: normal;
   font-weight: 400;
   src: url('/font/hind/Hind-Regular.ttf');
-  src: local("Hind Regular"),local("Hind-Regular"),url('/font/hind/Hind-Regular.ttf') format("woff")
+  src: local("Hind-Regular"),url('/font/hind/Hind-Regular.ttf') format("woff");
+  font-display: swap;
 }
 
 @font-face {
@@ -14,7 +15,8 @@
   font-style: normal;
   font-weight: 500;
   src: url('/font/hind/Hind-Medium.ttf') format("woff");
-  src: local("Hind Regular"),local("Hind-Regular"),url('/font/hind/Hind-Medium.ttf') format("woff")
+  src: local("Hind-Medium"),url('/font/hind/Hind-Medium.ttf') format("woff");
+  font-display: swap;
 }
 
 // @font-face {

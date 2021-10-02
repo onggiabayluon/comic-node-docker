@@ -204,18 +204,19 @@
                                     <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
                                             style="justify-content: space-evenly;">
                                             
-                                        <a aria-label="Set Coin" type="button" href="#" class="tooltipIcon"
+                                        <a href="#" aria-label="Set Coin" class="icon-container tooltipIcon"
                                             data-toggle="modal" 
                                             data-id="{{this._id}}"
                                             data-target="#set-coin-modal"
                                             style="align-items: center;">
                                             <span class="tooltiptext"> Set Coin </span>
-                                            <i class="iconsminds-coins"></i>
+                                            <i class="iconsminds-coins" style="z-index: -1;"></i>
                                         </a>
 
                                         <a href="#" class="tooltipIcon delete-icon-red" style="align-items: center;">
                                             <span class="tooltiptext"> Delete </span>
-                                            <div class="icon-container" data-toggle="modal"
+                                            <div class="icon-container" 
+                                                data-toggle="modal"
                                                 data-id="{{this._id}}" 
                                                 data-slug="{{this.comicSlug}}"
                                                 data-chapter="{{this.chapter}}"

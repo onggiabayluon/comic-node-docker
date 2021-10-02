@@ -19,8 +19,10 @@ const Chapter = new Schema({
     userName: { type: String },
     image: [
       {
-        key: String,
+        _id: false,
         url: String,
+        "width": Number,
+        "height": Number,
       }
     ],
     thumbnail: {

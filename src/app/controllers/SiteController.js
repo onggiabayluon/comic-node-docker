@@ -15,7 +15,7 @@ const { TEST, IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 class SiteController {
 
     async test2(req, res, next) {
-        // return res.json(TEST)
+        return res.json(TEST)
 
         // Chapter.findOne(
         //     {_id: "614a909167dfed28d0116200"}

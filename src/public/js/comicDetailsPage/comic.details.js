@@ -97,8 +97,8 @@ window.handlingRate = function (rateVal) {
         success: function (response) {
             let isSubscribed = (response.isSub) ? response.isSub : ""
             
-            if (isSubscribed) $("#subscribe-btn").addClass("bookmark--subscribed");
-            else $("#subscribe-btn").removeClass("bookmark--subscribed");
+            if (isSubscribed) $(".bookmark").addClass("bookmark--subscribed");
+            else $(".bookmark").removeClass("bookmark--subscribed");
         },
         error: function (response) {
             console.log(response)

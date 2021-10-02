@@ -1,3 +1,4 @@
+
 /* local History */
 var $chapterId          = $("input[type=hidden][name=chapterId]").val()
 var $comicId            = $("input[type=hidden][name=comicId]").val()
@@ -126,6 +127,20 @@ $("[data-chapter='" + chapter + "']").attr('selected', true);
 
 
 /*************************** Unlock chapter function ***************************/
+function initLazy(chapters) {
+    $('#l-unlock-container').remove()
+    $('#images-container').removeClass('d-none')
+    const { storage_url, chapterdoc, img_format } = chapters
+    const pictures = document.querySelectorAll(".intrinsic__picture")
+    pictures.forEach((picture, index) => {
+        var img = chapterdoc.image[index]
+        picture.children[0].setAttribute("data-srcset", `${storage_url}/${img.url}${img_format.sm}`); 
+        picture.children[1].setAttribute("data-srcset", `${storage_url}/${img.url}${img_format.lg}`); 
+        picture.children[2].setAttribute("data-src", `${storage_url}/${img.url}${img_format.md}`); 
+    });
+    lazySizes.init();
+};
+
 window.unlockChapter = function (form) {
     appendCloneMsg()
     toggleLoading()
@@ -142,10 +157,7 @@ window.unlockChapter = function (form) {
         contentType: "application/json; charset=utf-8",
         success: function (response) {
             handleSuccessMsg({message: 'Unlock Chapter Successfully', status: 200})
-            $('#auth-container').append(response).ready(function () {
-                $('#l-unlock-container').remove()
-                chapterLazyLoad()
-            });
+            initLazy(response)
         },
         error: function (response) {
             handleErrorMsg(response)
@@ -158,7 +170,7 @@ window.unlockChapter = function (form) {
 /*************************** Run lazyload if no need to fetch render ***************************/
 
 if ($noRender) {
-    chapterLazyLoad()
+    // chapterLazyLoad()
 } else {
     getAuthChapter()
 }
@@ -178,8 +190,7 @@ function getAuthChapter() {
             $('#auth-container').append(response).ready(function () {
                 if (response.withoutLazyload) return;
                 else { 
-                    $('#l-unlock-container').remove()
-                    chapterLazyLoad()
+                    initLazy(response)
                 } 
             });
         },

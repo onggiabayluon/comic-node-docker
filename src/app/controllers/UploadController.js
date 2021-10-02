@@ -21,6 +21,7 @@ class UploadController {
     multipleUpload = async (req, res, next) => {
         MulterUploadMiddleware(req, res)
         .then(async () => { 
+            const $comicThumbnail = req.body.comicThumbnail
             const $chapter_id = new ObjectID()
 
             const workDir = path.join(__dirname, '..', 'middlewares', 'worker.js')
@@ -34,7 +35,7 @@ class UploadController {
             pool.exec('resize', [req.files, config])
                 .then((result) => {
 
-                    saveURLToDb(result, $chapter_id)
+                    saveURLToDb(result, $chapter_id, $comicThumbnail)
 
                     saveChapterRef(`chapter-${req.body.chapter}`, $chapter_id)
 
@@ -51,7 +52,7 @@ class UploadController {
         .then(() => res.redirect('back'))
         .catch(err => next(err))
         
-        function saveURLToDb(imagesURL, $chapter_id) {
+        function saveURLToDb(metadatas, $chapter_id, $comicThumbnail) {
             const newChapter = new Chapter({
                 _id: $chapter_id,
                 title: `${req.params.slug}`,
@@ -59,14 +60,16 @@ class UploadController {
                 chapterSlug: `${req.params.slug}-${shortid()}`,
                 comicSlug: req.params.slug,
                 coin: {
-                    coinRequired: req.body.coinRequired,
+                    required: req.body.coinRequired,
                     expiredAt: req.body.date
-                }
+                },
+                image: [],
             })
-            imagesURL.forEach((url, index) => {
-                newChapter.image[index] = { url: url }
+
+            metadatas.forEach((metadata, index) => {
+                newChapter.image.push(metadata)
             });
-            newChapter.thumbnail = { url: imagesURL[0] }
+            newChapter.thumbnail = { url: $comicThumbnail }
             newChapter.save()
         };
 

@@ -9,7 +9,7 @@
             <a href="/comic/{{chapter.comicSlug}}" class="title title--ellipsis">
                 {{chapter.title}}
             </a>
-            <i class="m-custom ico fas fa-angle-right"></i>
+            <svg class="ico" style="transform: translate(0px, 1px);" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
             <a href="/comic/{{chapter.comicSlug}}/{{chapter.chapter}}" class="m-custom title chapter">
                 {{replaceHyphenIntoSpace chapter.chapter}}
             </a>
@@ -19,9 +19,13 @@
 
         <mid-items id="mid-items">
             {{#if prevChapter}}
-            <a href="/comic/{{chapter.comicSlug}}/{{prevChapter.chapter}}"><i class="fad fa-2x fa-caret-square-left"></i></a>
+            <a href="/comic/{{chapter.comicSlug}}/{{prevChapter.chapter}}">
+                <img alt="caret left icon" class="caret" src="https://img.icons8.com/ios-glyphs/30/000000/sort-left.png"/>
+            </a>
             {{else}}
-            <a href="#"><i class="fad fa-2x fa-caret-square-left disabled"></i></a>
+            <a href="#">
+                <img alt="caret left icon disabled" class="caret disabled" src="https://img.icons8.com/ios-glyphs/30/000000/sort-left.png"/>
+            </a>
             {{/if}}
             
             <select id="select" onchange="location = this.value;" class="custom-select">
@@ -31,15 +35,21 @@
             </select>
 
             {{#if nextChapter}}
-            <a href="/comic/{{chapter.comicSlug}}/{{nextChapter.chapter}}"><i class="fad fa-2x fa-caret-square-right"></i></a>
+            <a href="/comic/{{chapter.comicSlug}}/{{nextChapter.chapter}}">
+                <img alt="caret right icon" class="caret" src="https://img.icons8.com/ios-glyphs/30/000000/sort-right.png"/>
+            </a>
             {{else}}
-            <a href="#"><i class="fad fa-2x fa-caret-square-right disabled"></i></a>
+            <a href="#">
+                <img alt="caret right icon disabled" class="caret disabled" src="https://img.icons8.com/ios-glyphs/30/000000/sort-right.png"/>
+            </a>
             {{/if}}
 
         </mid-items>
 
         <right-items id="right-items">
-            <a href="/"><i class="far fa-home mr-1"></i></a>
+            <a href="/">
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M13.033 2v-2l10 3v18l-10 3v-2h-9v-7h1v6h8v-18h-8v7h-1v-8h9zm1 20.656l8-2.4v-16.512l-8-2.4v21.312zm-3.947-10.656l-3.293-3.293.707-.707 4.5 4.5-4.5 4.5-.707-.707 3.293-3.293h-9.053v-1h9.053z"/></svg>
+            </a>
         </right-items>
     </nav>
 
@@ -59,15 +69,15 @@
             <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{chapter.comicSlug}}/{{prevChapter.chapter}}">
                 <picture>
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-small.webp"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail.webp"
                     type="image/webp" />
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail.jpeg"
                     type="image/jpeg" />
                 
                     <img width="92" height="98"
                     alt="Previous Chapter" 
-                    src="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
+                    src="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail.jpeg"
                     />
                 </picture>
                 
@@ -76,7 +86,7 @@
                     <div class="subtext">{{replaceHyphenIntoSpace prevChapter.chapter}}</div>
                 </info>
                 <right-icon id="right-icon">
-                    <i class="far fa-chevron-circle-left"></i>
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm3 5.753l-6.44 5.247 6.44 5.263-.678.737-7.322-6 7.335-6 .665.753z"/></svg>
                 </right-icon>
             </a>
         </chaptercard>
@@ -84,27 +94,21 @@
     {{/if}}
 
 
-    
+<script>
+window.lazySizesConfig = window.lazySizesConfig || {};
+window.lazySizesConfig.customMedia = {
+    '--small': '(max-width: 550px)',
+    '--large': '(min-width: 1000px)',
+};
+
+</script>
     <div id="auth-container">
         {{#if isFree}}
-            {{!-- show images --}}
-            <images-container>
-            {{#each chapter.image}}
-                <picture class="lazy fixed-ratio " style="padding-top: 150%;">
-                    <source id="image--Main"
-                        data-srcset="{{../img_url}}/{{this.url}}"
-                        data-srcmain="{{../img_url}}/{{this.url}}-medium.jpeg"
-                    />
-
-                    <img alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}"  
-                    class="image fixed-ratio-content" 
-                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
-                </picture>
-            {{/each}} 
-            </images-container>
-            {{!-- 🛑 End show images --}}
+           {{> chapter.detail.partial}}
+            
             <input type="hidden" name="noRender" value=true>
         {{else}}
+
         <div id="l-unlock-container" class="l-unlock-container mx-auto mt-4 mb-4 container" >
             <div class="c-card card">
                 <div class="c-card__body card-body">
@@ -126,6 +130,9 @@
                 </div>
             </div>
         </div>
+
+        {{> chapter.detail.partial noImages=true}}
+
         {{/if}}
     </div>
     
@@ -139,15 +146,15 @@
             <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{chapter.comicSlug}}/{{nextChapter.chapter}}">
                 <picture>
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-small.webp"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail.webp"
                     type="image/webp" />
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail.jpeg"
                     type="image/jpeg" />
                 
                     <img width="92" height="98"
                     alt="Next Chapter"  
-                    src="{{img_url}}/{{chapter.thumbnail.url}}-medium.jpeg"
+                    src="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail.jpeg"
                     />
                 </picture>
                 
@@ -158,7 +165,7 @@
                     </div>
                 </info>
                 <right-icon id="right-icon">
-                    <i class="far fa-chevron-circle-right"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm2 12l-4.5 4.5 1.527 1.5 5.973-6-5.973-6-1.527 1.5 4.5 4.5z"/></svg>
                 </right-icon>
             </a>
         </chaptercard>

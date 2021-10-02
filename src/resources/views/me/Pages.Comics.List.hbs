@@ -154,7 +154,7 @@
                                         <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm"
                                             style="justify-content: space-evenly;">
 
-                                            <a aria-label="Copy ID" type="button"
+                                            <a aria-label="Copy ID"
                                                 onclick="CompleteState('{{this._id}}'); copyToClipboard('{{this._id}}')"
                                                 class="tooltipIcon copy-Btn" style="align-items: center;">
                                                 <div id="circle-loader_{{this._id}}" class="circle-loader"
@@ -165,12 +165,12 @@
                                                     Copy ID</span>
                                                 <i class="iconsminds-files"></i>
                                             </a>
-                                            <a aria-label="Chapter List" type="button"
+                                            <a aria-label="Chapter List" 
                                                 href="/me/stored/comics/{{this.slug}}/chapter-list" class="tooltipIcon">
                                                 <span class="tooltiptext"> Chapter List </span>
                                                 <i class="simple-icon-menu"></i>
                                             </a>
-                                            <a aria-label="Xóa" type="button" href="#" class="tooltipIcon"
+                                            <a aria-label="Xóa"  href="#" class="tooltipIcon"
                                             data-toggle="modal" data-id="{{this.slug}}"
                                             data-target="#delete-course-modal"
                                                 style="align-items: center;">
@@ -280,7 +280,7 @@
 
                 <div class="w-20 w-sm-100 d-flex social-menu myPadding-top-sm" style="justify-content: space-evenly;">
                 
-                    <a aria-label="Copy ID" type="button" onclick="CompleteState('\{{this._id}}'); copyToClipboard('\{{this._id}}')"
+                    <a aria-label="Copy ID" onclick="CompleteState('\{{this._id}}'); copyToClipboard('\{{this._id}}')"
                         class="tooltipIcon copy-Btn" style="align-items: center;">
                         <div id="circle-loader_\{{this._id}}" class="circle-loader" style="cursor: pointer;">
                             <div id="checkmark_\{{this._id}}" class="checkmark draw"></div>
@@ -289,11 +289,11 @@
                             Copy ID</span>
                         <i class="iconsminds-files"></i>
                     </a>
-                    <a aria-label="Chapter List" type="button" href="/me/stored/comics/\{{this.slug}}/chapter-list" class="tooltipIcon">
+                    <a aria-label="Chapter List" href="/me/stored/comics/\{{this.slug}}/chapter-list" class="tooltipIcon">
                         <span class="tooltiptext"> Chapter List </span>
                         <i class="simple-icon-menu"></i>
                     </a>
-                    <a aria-label="Xóa" type="button" href="#" class="tooltipIcon" data-toggle="modal" data-id="\{{this.slug}}"
+                    <a aria-label="Xóa" href="#" class="tooltipIcon" data-toggle="modal" data-id="\{{this.slug}}"
                         data-target="#delete-course-modal" style="align-items: center;">
                         <span class="tooltiptext"> Xóa </span>
                         <i class="simple-icon-trash"></i>

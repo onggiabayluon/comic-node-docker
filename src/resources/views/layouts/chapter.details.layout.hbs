@@ -28,16 +28,17 @@
     {{!-- preconnect --}}
     <link rel="preconnect" href="{{img_url}}">
     {{!-- FontAweSome cdn --}}
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    {{!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> --}}
     {{!-- Bootstrap cdn --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {{!-- Font --}}
     <link rel="preload" as="font" href="/font/hind/Hind-Regular.ttf"  type="font/woff" crossorigin="anonymous">
     <link rel="preload" as="font" href="/font/hind/Hind-Medium.ttf" type="font/woff" crossorigin="anonymous">
+    {{!-- <link rel="preload" as="font" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet"> --}}
     {{!-- vendor css --}}
     {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css"> --}}
     {{!-- CSS --}}
-    <link rel="stylesheet" href="/css/chapter.details.min.css?v1.0.0.0">
+    <link rel="stylesheet" href="/css/chapter.details.min.css?v1.0.0.5">
     
 </head>
 
@@ -62,10 +63,12 @@
     {{!-- custom js --}}
     <script src="/js/vendor/theme-switcher-chapter-details.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-    <script src="/js/chapterDetailsPage/chapter.LazyLoader.js?v1.0.0.0"></script>
+    {{!-- <script src="/js/chapterDetailsPage/chapter.LazyLoader.js?v1.0.0.0"></script> --}}
+    {{!-- <script src="/js/vendor/ls.parent-fit.min.js"></script> --}}
+    <script src="/js/vendor/lazysizes.min.scripts.js"></script>
     <script src="/js/utilityScripts/message.scripts.js"></script>
     <script src="/js/utilityScripts/comments.scripts.js?v1.0.0.3" defer></script>
-    <script src="/js/chapterDetailsPage/chapter.details.js?v1.0.2.1" defer></script>
+    <script src="/js/chapterDetailsPage/chapter.details.js?v1.0.2.2" defer></script>
 
 </body>
 </html>

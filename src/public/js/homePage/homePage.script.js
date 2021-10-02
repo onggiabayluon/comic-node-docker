@@ -157,7 +157,7 @@ function addClassVisited() {
 function createPseudoFrame() {
     let glide__slides = $('#glide_2 #glide__slides')
     let glideLength = glide__slides.children().length
-    let child = $('#glide_2 #glide__slides .glide__slide:first-child')
+    let child = $('#glide_2 #glide__slides .glide__slide--active:first-child')
     let { width, height, wType, hType } = (glideLength > 0)
         ? { width: child.innerWidth(), height: child.innerHeight(), wType: 'px', hType: 'px' }
         : { width: 25, height: 275, wType: '%', hType: 'px' }
@@ -207,6 +207,7 @@ function constructHistory() {
                 if (result.status == 404) return createPseudoFrame()
                 $('#glide__slides').append(result)
                 addClassVisited()
+                gliderjs()
                 createPseudoFrame()
                 gliderjs()
             },

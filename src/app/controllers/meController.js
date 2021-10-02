@@ -499,10 +499,16 @@ class meController {
   // 9. Render create Chapter: [GET] / me / stored / comics / :slug / create-chapter
   createChapterPage(req, res, next) {
     var linkComics = req.params.slug;
-    res.status(200).render('me/Pages.Chapter.Create.hbs', {
-      layout: 'admin',
-      linkComics,
+    Comic.findOne({ slug: req.params.slug }).lean()
+    .select("thumbnail -_id")
+    .then(comicdoc => {
+      res.status(200).render('me/Pages.Chapter.Create.hbs', {
+        layout: 'admin',
+        comic: comicdoc,
+        linkComics,
+      })
     })
+    
   }
 
   // 10. destroy Chapter
@@ -519,7 +525,7 @@ class meController {
     const $chapter_id = req.body._id,
           $coinToSet = Number(req.body.coinValue),
           $date = req.body.date,
-          $expiredAt = ($date) ? new Date($expiredAt).toISOString() : null
+          $expiredAt = ($date) ? new Date($date).toISOString() : null
     
 
     const $coin = {

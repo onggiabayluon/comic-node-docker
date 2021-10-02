@@ -269,9 +269,9 @@ class ComicController {
         }
         let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount)).toFixed(2)
         let rateCount = comicdoc.rate.rateCount
-        let firstChapter = (chapters) ? chapters[0] : 0 
-        let lastChapter = (chapters) ? chapters[chapters.length - 1] : 0 
-        let seoChapter = lastChapter.chapter.replace(/\d+$/, function(n){ return ++n })
+        let firstChapter = (chapters?.length) ? chapters[0] : null
+        let lastChapter = (chapters?.length) ? chapters[chapters.length - 1] : null 
+        let seoChapter = lastChapter?.chapter.replace(/\d+$/, function(n){ return ++n })
 
         // Sort array of object by keys typeof string 
         if (chapters) {
@@ -356,6 +356,20 @@ class ComicController {
         detail_page_description: DETAIL_PAGE_DESCRIPTION,
         image_url_http: IMAGE_URL_HTTP
       }
+      let hadMetas = chapterdoc?.image[0].hasOwnProperty('width');
+
+      // const calculateSum = (obj, field, index) => obj
+      // .map(items => items[field])
+      // .reduce((prev, curr) => prev + curr[index] , 0);
+
+      // const containerHeight = (hadMetas)
+      // ? {
+      //   lg: calculateSum(chapterdoc.image, 'h-lg-md-sm', 0),
+      //   md: calculateSum(chapterdoc.image, 'h-lg-md-sm', 1),
+      //   sm: calculateSum(chapterdoc.image, 'h-lg-md-sm', 2)
+      // }
+      // : 'auto'
+     
       res.status(200).render('chapter.details.hbs',
         {
           layout: 'chapter.details.layout.hbs',
@@ -368,7 +382,8 @@ class ComicController {
           user: req.user,
           img_url: IMAGE_URL,
           isFree: isFree,
-          meta
+          meta,
+          hadMetas,
         })
     };
 

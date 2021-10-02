@@ -28,7 +28,7 @@
 
         item {
             position: relative;
-            min-width: 210px;
+            min-height: 210px;
             height: 210px;
 
             comic-info {
@@ -75,6 +75,7 @@
             transform : initial !important;
             display: flex;
             flex-direction: column;
+            min-height: 330px;
         } 
         .glide__slide--2 { 
             height: 165px !important ; 
@@ -93,6 +94,7 @@
                 display: block;
                 width: 100vw !important;
                 height: 165px;
+                min-height: 165px;
                 padding: 0;
 
                 comic-info {

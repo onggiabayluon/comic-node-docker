@@ -290,6 +290,15 @@ search-output {
 @media (max-width: 1200px) {
     
 
+    .user {
+        &__name {
+            display: none;
+        }
+        &__avatar {
+            left: 0;
+        }
+    }
+
     #navbar {
         height: 132px;
         desktop-nav {
@@ -298,9 +307,9 @@ search-output {
         
         .right {
             margin-top: 1.3rem;
-        }
-        .hotkeyright {
-            display: none;
+            .btn {
+                padding: 5px 14px;
+            }
         }
 
         mobile-nav {
