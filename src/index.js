@@ -91,7 +91,8 @@ const sessionConfig = {
     store: new RedisStore({ client: redis.client }),
     secret: 'secret',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    rolling: true,
     cookie : {
         sameSite: 'strict',
         maxAge: 2592000 * 1000, // 1month
@@ -102,6 +103,7 @@ const sessionConfig = {
 if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1)
     app.use(cors())
+    sessionConfig.proxy = true
     sessionConfig.cookie.secure = true // serve secure cookies
     // sessionConfig.store: new sessionStore() 
 } else {
@@ -109,8 +111,6 @@ if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1); 
     app.use(cors())
 }
-
-console.log(sessionConfig.cookie.secure)
 
 app.use(session(sessionConfig));
 
@@ -153,7 +153,9 @@ app.use(express.static(path.join(__dirname, 'public'), {
     //     res.setHeader('Cache-Control', `max-age=${isRevved ? 31536000 : 0}`);
     // }
     setHeaders: (res) => {
-        res.setHeader('Cache-Control', 'public, max-age=86400');
+        if (process.env.NODE_ENV === 'production') {
+            res.setHeader('Cache-Control', 'public, max-age=31536000');
+        }
     }
 }));
 
@@ -191,6 +193,14 @@ app.engine(
             gt: (v1, v2) => v1 > v2,
             lte: (v1, v2) => v1 <= v2,
             gte: (v1, v2) => v1 >= v2,
+            checkStringLine: (str, maxLine) => {
+                const line = (str.match(/\n/g) || '').length + 1
+                return (line >= maxLine)
+            },
+            authRole: (v1, v2) => {
+                const filtered = v2.split(':').filter(role => role === v1);
+                return filtered.length > 0
+            },
             and() {
                 return Array.prototype.every.call(arguments, Boolean);
             },

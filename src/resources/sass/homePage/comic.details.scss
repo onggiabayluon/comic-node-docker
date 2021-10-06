@@ -40,6 +40,10 @@
   background: var(--theme-color-1);
 }/*!------------- END Scroll Bars-----------------!*/
 
+// First contentful paint css
+@import "./home.page/navbar.scss";
+
+
 
 //utility css
 @import "./utility/micellenous.scss";
@@ -48,14 +52,17 @@
 @import "./utility/badges.scss";
 @import "./utility/theme-switcher.scss";
 @import "./utility/errorsuccessMessage.scss";
+@import "./utility/comments_replies.scss";
 
 // vendor css
 // @import "./vendorsass/navbar.scss";
-@import "./vendorsass/glider.scss";
+// @import "./vendorsass/glider.scss";
 @import "./vendorsass/button.scss";
 @import "./vendorsass/badge.scss";
 @import "./vendorsass/cards.scss";
-@import "./vendorsass/pagination.scss";
+@import "./vendorsass/editor.scss";
+@import "./vendorsass/trumbowyg.scss";
+// @import "./vendorsass/pagination.scss";
 
 
 // my css
@@ -65,7 +72,6 @@
 // @import "./home.page/categories-content.scss";
 // @import "./home.page/welcome-places.scss";
 // @import "./home.page/comics-gridbox.scss";
-@import "./home.page/navbar.scss";
 
 
 // @import "./categoriesPage/categories.scss";
@@ -80,6 +86,6 @@
 // @import "./home.page/media-querry.scss";
 
 @import "./comic.details.page/info.scss";
-@import "./comic.details.page/comments.scss";
+// @import "./comic.details.page/comments.scss";
 
-@import "./chapter.details.page/all.scss";
+// @import "./chapter.details.page/all.scss";

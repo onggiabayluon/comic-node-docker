@@ -163,17 +163,18 @@
                         <div class="card d-flex flex-row mb-3 my-max-height">
                             <a class="d-flex thumbnail-frame" href="#">
                                 {{#if this.thumbnail.url}}
+
                                 <picture>
                                     <source 
-                                    srcset="{{../img_url}}/{{this.thumbnail.url}}-small.webp"
+                                    srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
                                     type="image/webp" />
                                     <source 
-                                    srcset="{{../img_url}}/{{this.thumbnail.url}}-medium.jpeg"
+                                    srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
                                     type="image/jpeg" />
                                 
                                     <img width="92" height="98"
                                     alt="Img"  
-                                    src="{{../img_url}}/{{this.thumbnail.url}}-medium.jpeg"
+                                    src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
                                     />
                                 </picture>
                                 {{else}}

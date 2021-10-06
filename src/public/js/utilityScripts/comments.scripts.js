@@ -1,3 +1,4 @@
+
 /*************************** Global Var ***************************/
 // Comic Info
 var $isComicComment = $("input[type=hidden][name=isComicComment]").val()
@@ -14,7 +15,7 @@ var $isChapterReply = $("input[type=hidden][name=isChapterReply]").val() || null
 var formData
 var $pathname = window.location.pathname;
 var $search = window.location.search
-var $commentBox = $('#commentbox')
+var $commentBox = $('#comments-box')
 var flag = 0;
 // Users
 var $userAvatarSrc
@@ -36,6 +37,10 @@ $.fn.isVisible = function () {
 
     return elementBottom > viewportTop && elementTop < viewportBottom;
 }
+function checkStringLine (str, maxLine) {
+    const line = (str.match(/\n/g) || '').length + 1
+    return (line >= maxLine)
+}
 
 $(window).on('load scroll', () => {
     if ($commentBox.isVisible()) {
@@ -49,6 +54,16 @@ $(window).on('load scroll', () => {
                 success: function(result) {
                     $commentBox.append(result)
                     $userAvatarSrc = $commentBox.find("#my-avatar img").attr('src')
+
+                    $('#trumbowyg-demo').trumbowyg({
+                        btns: [
+                            ['strong', 'em',], 
+                            // ['insertImage']
+                        ],
+                        tagsToRemove: ['script', 'link'],
+                        autogrow: true
+                    })
+                   
                 },
                 error: function(result) {
                     console.log(result)
@@ -79,11 +94,11 @@ window.fetchMoreComments = function (form) {
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-            if (response) {
+            if (response.length !== 0) {
                 $(form).data().page++
-                $('#commentcontainer').append(response)
+                $('.comments-replies').append(response)
             } else {
-                $('.tfooter__btn').fadeOut("slow", () => { $(this).remove();});
+                $('#tfooter').fadeOut("slow", () => { $(this).remove();});
             }
         }
     })
@@ -95,78 +110,65 @@ window.fetchMoreComments = function (form) {
 
 
 /*************** Function ***************/
-window.showInput = function (e) {
-    $thisbtnbox = $(e).parents('.form-group').siblings('#buttonbox')
-    $thisbtnbox.addClass('buttonbox--flex');
-};
 
-window.resetInput = function (e) {
-    $thisbtnbox = $(e).parents('.buttonbox')
-    $thisbtnbox.removeClass('buttonbox--flex');
-    $thisbtnbox.parents(".replydialog").toggleClass('d-none')
-    $(e).parents('form').trigger("reset");
-};
+window.showReplyBox = function(e) {
+    $replybox = $(e).parents('.action-toolbar').siblings('.reply-box')
+    $replyboxTextarea = $replybox.find(".reply-box__textarea")
 
-window.hideReplydialog = function (e) {
-    $thisreplydialog = $(e).parents('.replydialog')
-    $thisreplydialog.toggleClass('d-none');
-};
-
-window.showReplyBox = function (e) {
-    $thisreplybox = $(e).parents('.toolbar').siblings('#replydialog')
+    if (!$replyboxTextarea.data("create")) {
+        $replybox.show()
+        $replyboxTextarea.data("create", true)
+        $replyboxTextarea.trumbowyg({
+            btns: [
+                ['strong', 'em',], 
+                // ['insertImage']
+            ],
+            tagsToRemove: ['script', 'link'],
+            autogrow: true
+        })
+    } else {
+        $replybox.toggle()
+    }
     
-    $thisBoxThumbnail = $thisreplybox.find('#author-thumbnail img');
-    $thisBoxThumbnail.attr('src', $userAvatarSrc);
-    $thisreplybox.toggleClass('d-none');
-};
+}
 
-window.expander = function (e) {
-    $thisExpander = $(e)
-    var $thisExpanderReplies = $(e).parents('.comment').siblings('.expander__content')
-    var $thisLessRepliesbtn = $(e).children('.expander__less')
-    var $thisMoreRepliesbtn = $(e).children('.expander__more')
-
-    if ($thisExpander.attr("data-expander") == 'hide') {
-        $thisExpander.attr("data-expander", "show")
-
-        $thisExpanderReplies.addClass('expander__content--show')
-        $thisLessRepliesbtn.toggleClass('d-none')
-        $thisMoreRepliesbtn.toggleClass('d-none')
-        return
-    }
-    if ($thisExpander.attr("data-expander") == 'show') {
-        $thisExpander.attr("data-expander", "hide")
-
-        $thisExpanderReplies.removeClass('expander__content--show')
-        $thisLessRepliesbtn.toggleClass('d-none')
-        $thisMoreRepliesbtn.toggleClass('d-none')
-        return
-    }
-};
+window.emptyEditor = function(e) {
+    $replybox = $(e).parent(".reply-box__wrapper").closest(".reply-box").toggle()
+    $trumbowygEditor = $(e).parent(".reply-box__wrapper, .submit-box__wrapper").siblings('.trumbowyg-box').find(".trumbowyg-textarea")
+    // Empty Trumbowyg Editor
+    $trumbowygEditor.blur(); 
+    $trumbowygEditor.trumbowyg('empty')
+}
 
 window.editableContent = function (e) {
-    $thisContentBox = $(e).parents('action-menu-renderer').siblings('.content')
-    $thisContentBox.siblings('.header').hide()
-    $thisContentBox.siblings('.toolbar').hide()
-    $thisContentBox.find('.content__text').val("1").trigger('change');
-    $thisContentBox.children('.content__text').attr('contenteditable','true');
-    $thisContentBox.find('.buttonbox').toggleClass('buttonbox--flex')
-    // $thisContentBox.addEventListener('keydown', event => {
-    //     if (event.key === 'Enter') {
-    //       document.execCommand('insertLineBreak')
-    //       event.preventDefault()
-    //     }
-    //   })
+
+    $context = $(e).parents(".item__menu").prev(".item__body").children(".context")
+    $context__text = $context.find(".context__text")
+    $context__expand = $context.find(".context__expand")
+    $context__wrapper = $context.find(".context__wrapper")
+
+    $context__expand.trigger('click');
+    $context__wrapper.show()
+    $context__text.attr('contenteditable','true').focus()
+    return false
 };
 
-window.normalState = function (e) {
-    
-    $thisContentBox = $(e).parents('comment')
-    $thisContentBox.siblings('.header').show()
-    $thisContentBox.siblings('.toolbar').show()
-    $thisContentBox.children('.content__text').trigger("reset");
-    $thisContentBox.children('.content__text').attr('contenteditable','false');
-    $thisContentBox.find('.buttonbox').toggleClass('buttonbox--flex')
+window.closeEditable = function(e) {
+    $context = $(e).closest(".context")
+    $context__text = $context.find(".context__text")
+    $context__wrapper = $context.find(".context__wrapper")
+
+    $context__wrapper.hide()
+    $context__text.attr('contenteditable','false').blur(); 
+};
+window.focusOutAfterSubmit = function(e) {
+    $form = $(e)
+    $textarea = $form.find("textarea")
+    $replybox = $form.closest(".reply-box")
+
+    $replybox.toggle()
+    $textarea.blur()
+    $textarea.trumbowyg('empty')
 };
 
 /*************** Function ***************/
@@ -175,34 +177,86 @@ window.normalState = function (e) {
 
 /*************** Form ***************/
 
+// UTILITY FUNCTION TO GET JSON FROM JQUERY SERIALIZE 
+$.fn.serializeToJson = function (extraData) {
+   
+    /**
+     * Get form key and value
+     * Remove form.text value from textarea cuz its value contain
+     * tag that cannot send to server
+    */
+    var unindexed_array = this.serializeArray()
+    // .filter((a) => a.name !== 'text');
+
+    // convert unindexed_array to my custom object format 
+    // { name: "title", value: "hehehhe"} => { title: "hehehhe"}
+    function formatObj(formArray) {
+        var returnArray = {};
+        for (var i = 0; i < formArray.length; i++){
+            returnArray[formArray[i]['name']] = formArray[i]['value'];
+        }
+        return returnArray;
+    }
+
+    return {...formatObj(unindexed_array), ...extraData}
+}
+
+function getTruncatedPart(element) {
+    var btnExpand = $(element)
+    var p = $(element).siblings(".context__text");
+    var isShowing = (p.hasClass("dynamic-ellipsis")) ? true : false
+
+    if (isShowing) {
+        // If is showing then turn into no show
+        btnExpand.html("Read Less").css("text-decoration", "underline")
+        p.removeClass("dynamic-ellipsis").toggleClass("context__text--transition")
+    } else {
+        // If now show then turn into showing
+        btnExpand.html("Read More").css("text-decoration", "unset")
+        p.addClass("dynamic-ellipsis").toggleClass("context__text--transition")
+    }
+}
+
 //  Start POST comment
 window.postComment = function (form) {
+    let textareaValue = form.querySelector('.trumbowyg-editor').innerText
+    form.text.value = textareaValue
+
+    if (textareaValue.length <= 1) {
+        alert("type more than 1 character")
+        return false
+    }
+
     appendCloneMsg()
     toggleLoading()
+    
     formData = {
-        text: form.text.value,
-        title: $title,
-        comicSlug: $comicSlug,
-        updatedAt: new Date().toISOString(),
-        isComicDetailPage: isComicDetailPage,
+        "title": $title,
+        "comicSlug": $comicSlug,
+        "isComicDetailPage": true,
     }
     if (!isComicDetailPage) {
         Object.assign(formData, {
-            isComicDetailPage: false,
             chapter: $chapter,
+            isComicDetailPage: false,
         })
     }
-    
+
+    if (isComicDetailPage) formData = $(form).serializeToJson(formData)
+    else formData = $(form).serializeToJson(formData)
+
     $.ajax({
         type: "POST",
         url: `/comic/comment`,
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            focusOutAfterSubmit(form)
             handleSuccessMsg(response)
             socket.emit('new_comment', response)
         },
         error: function (response) {
+            focusOutAfterSubmit(form)
             handleErrorMsg(response)
         }
     })
@@ -211,17 +265,22 @@ window.postComment = function (form) {
 
 //  Start POST reply
 window.postReply = function (form) {
+    let textareaValue = form.querySelector('.trumbowyg-editor').innerText
+    form.text.value = textareaValue
+
+    if (textareaValue.length <= 1) {
+        alert("type more than 1 character")
+        return false
+    }
+
     appendCloneMsg()
     toggleLoading()
+
     formData = {
-        comment_id: form.comment_id.value,
-        text: form.text.value,
-        title: $title,
-        
-        
-        comicSlug: $comicSlug,
-        updatedAt:  new Date().toISOString(),
-        isComicDetailPage: true,
+        "text": textareaValue,
+        "title": $title,
+        "comicSlug": $comicSlug,
+        "isComicDetailPage": true,
     }
     if (!isComicDetailPage) {
         Object.assign(formData, {
@@ -229,17 +288,22 @@ window.postReply = function (form) {
             isComicDetailPage: false,
         })
     }
+
+    if (isComicDetailPage) formData = $(form).serializeToJson(formData)
+    else formData = $(form).serializeToJson(formData)
+
     $.ajax({
         type: "POST",
         url: `/comic/reply`,
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-            hideReplydialog(form)
+            focusOutAfterSubmit(form)
             handleSuccessMsg(response)
             socket.emit('new_reply', {html: response, comment_id: formData.comment_id}) 
         },
         error: function (response) {
+            focusOutAfterSubmit(form)
             handleErrorMsg(response)
         }
     })
@@ -248,11 +312,10 @@ window.postReply = function (form) {
 
 //  Start destroy comment 
 window.destroyComment = function (form) {
-    
+
     formData = {
-        comment_id: form.comment_id.value,
-        comicSlug: $comicSlug,
-        isComicDetailPage: true,
+        "comicSlug": $comicSlug,
+        "isComicDetailPage": true,
     }
     if (!isComicDetailPage) {
         Object.assign(formData, {
@@ -260,7 +323,10 @@ window.destroyComment = function (form) {
             isComicDetailPage: false,
         })
     }
-    
+
+    if (isComicDetailPage) formData = $(form).serializeToJson(formData)
+    else formData = $(form).serializeToJson(formData)
+
     if (confirm("Delete this Comment ? ?")) {
         appendCloneMsg()
         toggleLoading()
@@ -285,8 +351,6 @@ window.destroyComment = function (form) {
 window.destroyReply = function (form) {
     
     formData = {
-        reply_id: form.reply_id.value,
-        comment_id: form.comment_id.value,
         comicSlug: $comicSlug,
         isComicDetailPage: true,
     }
@@ -296,6 +360,11 @@ window.destroyReply = function (form) {
             isComicDetailPage: false,
         })
     }
+
+    if (isComicDetailPage) formData = $(form).serializeToJson(formData)
+    else formData = $(form).serializeToJson(formData)
+
+    
     if (confirm("Delete this Reply ?")) {
         appendCloneMsg()
         toggleLoading()
@@ -317,19 +386,22 @@ window.destroyReply = function (form) {
 }; 
 
 // Start edit Comment 
-window.editCommentForm = function (form) {
+window.editComment = function (form) {
+    
+    let textareaValue = form.querySelector('.context__text').innerText
+    form.text.value = textareaValue
+
+    if (textareaValue.length <= 1) {
+        alert("type more than 1 character")
+        return false
+    }
+
     appendCloneMsg()
     toggleLoading()
-    $thisVal = $(form).parent().find('.content__text').html()
-    form.text.value = $thisVal
     formData = {
         comment_id: form.comment_id.value,
-        text: form.text.value,
         title: $title,
-        
-        
         comicSlug: $comicSlug,
-        updatedAt: new Date().toISOString(),
         isComicDetailPage: true,
         isComment: true,
     }
@@ -338,6 +410,9 @@ window.editCommentForm = function (form) {
             isComicDetailPage: false,
         })
     }
+
+    if (isComicDetailPage) formData = $(form).serializeToJson(formData)
+    else formData = $(form).serializeToJson(formData)
     
     $.ajax({
         type: "POST",
@@ -346,7 +421,7 @@ window.editCommentForm = function (form) {
         contentType: "application/json; charset=utf-8",
         success: function (response) {
             handleSuccessMsg(response)
-            normalState(form)
+            closeEditable(form)
             socket.emit('edited_comment', response)
         },
         error: function (response) {
@@ -356,25 +431,28 @@ window.editCommentForm = function (form) {
     return false;
 };
 // Start edit reply
-window.editReplyForm = function (form) {
+window.editReply = function (form) {
+    let textareaValue = form.querySelector('.context__text').innerText
+    form.text.value = textareaValue
+
+    if (textareaValue.length <= 1) {
+        alert("type more than 1 character")
+        return false
+    }
+
     appendCloneMsg()
     toggleLoading()
-    $thisVal = $(form).parent().find('.content__text').html()
-    form.text.value = $thisVal
+
     formData = {
         comment_id: form.comment_id.value,
         reply_id: form.reply_id.value,
         text: form.text.value,
         title: $title,
-        
-        
         comicSlug: $comicSlug,
-        updatedAt: new Date().toISOString(),
         isComicDetailPage: true,
         isReply: true,
     }
     if (!isComicDetailPage) {
-        delete formData.isComicReply
         Object.assign(formData, {
             chapter: $chapter,
             isComicDetailPage: false,
@@ -387,9 +465,8 @@ window.editReplyForm = function (form) {
         data: JSON.stringify(formData),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-
             handleSuccessMsg(response)
-            normalState(form)
+            closeEditable(form)
             socket.emit('edited_reply', response)
         },
         error: function (response) {
@@ -407,17 +484,17 @@ var socket = io()
 socket.emit('join', $comicSlug);
 
 socket.on('new_comment', response => {
-    $('#commentcontainer').prepend(response)
-    $('#commentcontainer > :nth-child(1)').css('display','block').hide().show("slow")
+    $('.comments-replies').prepend(response)
+    $('.comments-replies > :nth-child(1)').css('display','block').hide().show("slow")
 });
 
 socket.on('new_reply', response => {
-    $(`#comment-${response.comment_id}`).append(response.html)
-    $(`#comment-${response.comment_id} > :last-child`).css('display','block').hide().show("slow")
+    $(`#comments-replies-${response.comment_id}`).append(response.html)
+    $(`#comments-replies-${response.comment_id} > :last-child`).css('display','block').hide().show("slow")
 });
 
 socket.on('delete_comment', formData => {
-    $(`#comment-${formData.comment_id}`).css('display','block').slideUp("slow", function() { $(this).remove();});
+    $(`#comments-replies-${formData.comment_id}`).css('display','block').slideUp("slow", function() { $(this).remove();});
 })
 
 socket.on('delete_reply', formData => {
@@ -425,12 +502,28 @@ socket.on('delete_reply', formData => {
 })
 
 socket.on('edited_comment', formData => {
-    $(`#comment-${formData.comment_id}`).find('.content__text').html(formData.text).hide().show("slow");
+    const $thiscommentsReplies = $(`#comments-replies-${formData.comment_id}`)
+    const $context__text = $thiscommentsReplies.find('.context__text')
+    const $context__expand = $thiscommentsReplies.find('.context__expand')
+
+    if (!checkStringLine(formData.text)) {
+        $thiscommentsReplies.find('.context__text').addClass("dynamic-ellipsis")
+        $context__text.css('--ellipsis-value', 4)
+        $context__expand.removeClass("d-none")
+    }
+    $context__text.html(formData.text)
 })
 socket.on('edited_reply', formData => {
-    $(`#reply-${formData.reply_id}`).find('.content__text').html(formData.text).hide().show("slow");
+    const $thiscommentsReplies = $(`#reply-${formData.reply_id}`)
+    const $context__text = $thiscommentsReplies.find('.context__text')
+    const $context__expand = $thiscommentsReplies.find('.context__expand')
+
+    if (!checkStringLine(formData.text)) {
+        $thiscommentsReplies.find('.context__text').addClass("dynamic-ellipsis")
+        $context__text.css('--ellipsis-value', 4)
+        $context__expand.removeClass("d-none")
+    }
+    
+    $context__text.html(formData.text)
 })
 /*************** Socket IO ***************/
-
-
-

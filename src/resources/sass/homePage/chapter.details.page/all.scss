@@ -62,10 +62,9 @@
         .custom-select {
             color: var(--dark-btn-background);
             background: var(--foreground-color-2);
+            padding: 0 1rem;
+            width: fit-content;
             border: unset;
-            padding: 0 0rem;
-            text-align: center;
-            width: 3.5em;
         }
         .fad {
             --fa-primary-color: var(--dark-btn-background); 

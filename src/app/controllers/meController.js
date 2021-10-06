@@ -500,7 +500,7 @@ class meController {
   createChapterPage(req, res, next) {
     var linkComics = req.params.slug;
     Comic.findOne({ slug: req.params.slug }).lean()
-    .select("thumbnail -_id")
+    .select("title thumbnail -_id")
     .then(comicdoc => {
       res.status(200).render('me/Pages.Chapter.Create.hbs', {
         layout: 'admin',

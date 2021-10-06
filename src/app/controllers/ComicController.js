@@ -301,7 +301,8 @@ class ComicController {
   };
 
   chapterdetailsPage(req, res, next) {
-    const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const userIp = (req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(',')[0];
+    // const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const isFree = false
 
     Promise.all([

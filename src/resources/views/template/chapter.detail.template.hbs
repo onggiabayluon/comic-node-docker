@@ -1,0 +1,48 @@
+{{#if isFree}}
+{{#each chapter.image}}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="thumbnail">
+            <div class="intrinsic" style="display: flex; align-items: center; justify-content: center;">
+                <picture>
+                    <source data-srcset="{{../img_url}}/{{this.url}}-small.webp" media="--small" />
+                    <source data-srcset="{{../img_url}}/{{this.url}}-medium.jpeg" media="--medium" />
+                    <source data-srcset="{{../img_url}}/{{this.url}}-large.webp" media="--large" />
+
+                    <img onerror="this.onerror=null;this.src='/img/404.jpg';" class="lazyload" width="1000"
+                        data-expand="2000" data-intrinsic="{{../img_url}}/{{this.url}}" {{!--
+                        data-src="/img/loading-placeholder.svg" --}}
+                        alt="{{../chapter.title}} {{../chapter.chapter}} Page {{@index}}" />
+                </picture>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{!-- 🛑 End show images --}}
+{{else}}
+<div id="l-unlock-container" class="l-unlock-container mx-auto mt-4 mb-4 container">
+    <div class="c-card card">
+        <div class="c-card__body card-body">
+            <div class="card__info text-center">
+                <p class="card__info__text mb-2">
+                    <i class="fas fa-lock mr-2"></i>This Chapter is Locked
+                </p>
+                <p class="card__info__coinText mb-4">
+                    <i class="fas fa-coins mr-1"></i>
+                    Use
+                    <span class="font-weight-bold" style="font-size: 18px;">
+                        {{chapter.coin.required}} Coin
+                    </span> To Unlock
+                </p>
+                <p>
+                    <i class="far fa-clock text-danger"></i>
+                    <span class="text-danger"> {{agoFormat chapter.coin.expiredAt}}</span>
+                </p>
+                <button data-toggle="modal" data-target="#confirm-modal" type="button"
+                    class="btn btn-sm btn-primary">Unlock</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}

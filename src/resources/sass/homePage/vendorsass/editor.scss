@@ -1,0 +1,151 @@
+.html-editor {
+    height: 350px;
+  }
+  
+  .ql-snow.ql-toolbar button:hover,
+  .ql-snow .ql-toolbar button:hover,
+  .ql-snow.ql-toolbar button.ql-active,
+  .ql-snow .ql-toolbar button.ql-active,
+  .ql-snow.ql-toolbar .ql-picker-label:hover,
+  .ql-snow .ql-toolbar .ql-picker-label:hover,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+  .ql-snow.ql-toolbar .ql-picker-item:hover,
+  .ql-snow .ql-toolbar .ql-picker-item:hover,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+    color: var(--theme-color-1);
+  }
+  
+  .ql-snow.ql-toolbar button:hover .ql-fill,
+  .ql-snow .ql-toolbar button:hover .ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-fill,
+  .ql-snow .ql-toolbar button.ql-active .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+  .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
+    fill: var(--theme-color-1);
+  }
+  
+  .ql-snow.ql-toolbar button:hover .ql-stroke,
+  .ql-snow .ql-toolbar button:hover .ql-stroke,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+  .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+  .ql-snow.ql-toolbar button:hover .ql-stroke-mitter,
+  .ql-snow .ql-toolbar button:hover .ql-stroke-mitter,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke-mitter,
+  .ql-snow .ql-toolbar button.ql-active .ql-stroke-mitter,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-mitter,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-mitter,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-mitter,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-mitter,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-mitter,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-mitter,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-mitter,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-mitter {
+    stroke: var(--theme-color-1);
+  }
+  
+  .ql-toolbar.ql-snow {
+    border-color: var(--separator-color);
+  }
+  
+  .ql-container.ql-snow {
+    border-color: var(--separator-color);
+  }
+  
+  .html-editor-bubble {
+    height: 200px;
+  }
+  
+  .html-editor-bubble .ql-editor {
+    border: 1px solid var(--separator-color);
+  }
+  
+  .ql-tooltip {
+    z-index: 10;
+  }
+  
+  .ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
+  .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
+    height: 350px;
+    background: var(--foreground-color);
+  }
+  
+  .ck.ck-button,
+  a.ck.ck-button {
+    color: var(--separator-color);
+  }
+  
+  .ck.ck-button:not(.ck-disabled):focus,
+  .ck.ck-button:not(.ck-disabled):hover,
+  a.ck.ck-button:not(.ck-disabled):focus,
+  a.ck.ck-button:not(.ck-disabled):hover,
+  .ck.ck-button.ck-on,
+  a.ck.ck-button.ck-on,
+  .ck.ck-button.ck-on:not(.ck-disabled):focus,
+  .ck.ck-button.ck-on:not(.ck-disabled):hover,
+  a.ck.ck-button.ck-on:not(.ck-disabled):focus,
+  a.ck.ck-button.ck-on:not(.ck-disabled):hover {
+    background: initial;
+    color: var(--theme-color-1);
+    box-shadow: initial;
+    outline: initial;
+  }
+  
+  .ck.ck-toolbar {
+    border-color: var(--separator-color) !important;
+  }
+  
+  .ck.ck-toolbar__separator {
+    background: var(--separator-color) !important;
+  }
+  
+  .ck.ck-toolbar {
+    border-color: var(--separator-color);
+  }
+  
+  .ck.ck-editor__main > .ck-editor__editable {
+    border-color: var(--separator-color) !important;
+  }
+  
+  .ck.ck-editor__main > .ck-editor__editable {
+    background: var(--foreground-color);
+  }
+  
+  .ck.ck-content.ck-editor__editable.ck-rounded-corners {
+    box-shadow: initial !important;
+  }
+  
+  .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-focused {
+    border-color: var(--separator-color);
+  }
+  
+  .ck.ck-toolbar {
+    background: var(--foreground-color) !important;
+  }

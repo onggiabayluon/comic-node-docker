@@ -99,7 +99,7 @@ class SiteController {
         Comic
           .find({ _id: { $in: userBookmarks } })
           .lean()
-          .select("-category -description -lastest_chapters")
+          .select("-category -description")
           .then(subList => {
             res.status(200).render('template/history_bookmark.template.hbs', {
               layout: 'fetch_layout',
@@ -227,11 +227,10 @@ class SiteController {
       { $sort: sort },
     ])
       .then(commentdoc => {
-
-        res.render('template/commentBox.hbs',
+        res.render('template/comments_box.template.hbs',
           {
             layout: 'fetch_layout.hbs',
-            comments: commentdoc,
+            comments: commentdoc.pop(),
             user: req.user,
             withUIContainer: withUIContainer
           })

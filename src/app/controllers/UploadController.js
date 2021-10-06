@@ -9,7 +9,7 @@ const ObjectID      = require('mongodb').ObjectID;
 const MulterUploadMiddleware = require("../middlewares/MulterUploadMiddleWare");
 const S3UploadMiddleWare = require("../middlewares/S3UploadMiddleWare")
 const S3DeleteMiddleware = require('../middlewares/S3DeleteMiddleware');
-const imagesMiddle = require("../middlewares/ResizeMiddleware")
+// const imagesMiddle = require("../middlewares/ResizeMiddleware")
 
 // const { Worker, isMainThread, parentPort }  = require('worker_threads');
 const workerpool = require('workerpool');
@@ -22,6 +22,7 @@ class UploadController {
         MulterUploadMiddleware(req, res)
         .then(async () => { 
             const $comicThumbnail = req.body.comicThumbnail
+            const $comicTitle = req.body.comicTitle
             const $chapter_id = new ObjectID()
 
             const workDir = path.join(__dirname, '..', 'middlewares', 'worker.js')
@@ -35,7 +36,7 @@ class UploadController {
             pool.exec('resize', [req.files, config])
                 .then((result) => {
 
-                    saveURLToDb(result, $chapter_id, $comicThumbnail)
+                    saveURLToDb(result, $chapter_id, $comicThumbnail, $comicTitle)
 
                     saveChapterRef(`chapter-${req.body.chapter}`, $chapter_id)
 
@@ -52,10 +53,10 @@ class UploadController {
         .then(() => res.redirect('back'))
         .catch(err => next(err))
         
-        function saveURLToDb(metadatas, $chapter_id, $comicThumbnail) {
+        function saveURLToDb(metadatas, $chapter_id, $comicThumbnail, $comicTitle) {
             const newChapter = new Chapter({
                 _id: $chapter_id,
-                title: `${req.params.slug}`,
+                title: $comicTitle,
                 chapter: `chapter-${req.body.chapter}`,
                 chapterSlug: `${req.params.slug}-${shortid()}`,
                 comicSlug: req.params.slug,
@@ -85,7 +86,7 @@ class UploadController {
                             $position: 0,
                             $slice: 3
                         },
-                        chapters: { _id: $chapter_id, chapter: req.body.chapter, updatedAt: IOSDate }
+                        // chapters: { _id: $chapter_id, chapter: req.body.chapter, updatedAt: IOSDate }
                     },
                     "timestamps": true,
                 }

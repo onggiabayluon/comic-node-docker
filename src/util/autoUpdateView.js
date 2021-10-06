@@ -7,7 +7,7 @@ const handlingUpdate = async () => {
     try {
 
         const [keys, error1] = await getRedisKeys()
-        if (error1) return { error: error1 }
+        if (error1) return { message: error1 }
 
         const [counts, error2] = await getRedisCounts(keys)
         if (error2) return { error: error2 }

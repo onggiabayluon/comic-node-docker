@@ -28,6 +28,7 @@
     <link rel="canonical" href="{{meta.home_url}}/comic/{{comic.slug}}">
     {{!-- preconnect --}}
     <link rel="preconnect" href="{{img_url}}">
+    <link rel="preconnect" href="https://avatars.dicebear.com/">
     {{!-- FontAweSome cdn --}}
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     {{!-- Bootstrap cdn --}}
@@ -36,10 +37,9 @@
     <link rel="preload" as="font"href="/font/hind/Hind-Regular.ttf"  type="font/woff" crossorigin="anonymous">
     <link rel="preload" as="font" href="/font/hind/Hind-Medium.ttf" type="font/woff" crossorigin="anonymous">
     {{!-- vendor css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css">
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css"> --}}
     {{!-- CSS --}}
-    <link rel="stylesheet" href="/css/comic.details.min.css?v1.0.0.0">
-    
+    <link rel="stylesheet" href="/css/comic.details.min.css?v1.0.5.4">
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -77,21 +77,27 @@
         </footer>
 
     {{!-- JS cdn --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/trumbowyg.min.js" integrity="sha512-t4CFex/T+ioTF5y0QZnCY9r5fkE8bMf9uoNH2HNSwsiTaMQMO0C9KbKPMvwWNdVaEO51nDL3pAzg4ydjWXaqbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js"></script> --}}
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script> --}}
     {{!-- custom js --}}
+    {{!-- <script src="/js/vendor/ckeditor.js"></script> --}}
+    {{!-- <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script> --}}
+    
     <script src="/js/vendor/stars.js"></script>
     <script src="/js/vendor/theme-switcher.js"></script>
     <script src="/js/utilityScripts/getAuth.js"></script>
     <script src="/js/utilityScripts/message.scripts.js"></script>
     <script src="/js/utilityScripts/subscribe.scripts.js"></script>
     <script src="/js/utilityScripts/navbar.user.main.js"></script>
-    <script src="/js/utilityScripts/comments.scripts.js?v1.0.3.4" defer></script>
-    <script src="/js/comicDetailsPage/comic.details.js?v1.0.0.5" defer></script>
+    <script src="/js/utilityScripts/comments.scripts.js?v1.1.2.2" defer></script>
+    <script src="/js/comicDetailsPage/comic.details.js?v1.0.0.7" defer></script>
+    {{!-- <script src="/js/comicDetailsPage/test.plugin.js?v1.0.3.8" defer></script> --}}
 
 </body>
 </html>

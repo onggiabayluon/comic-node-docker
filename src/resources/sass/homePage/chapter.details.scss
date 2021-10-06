@@ -45,11 +45,12 @@
 
 // //utility css
 @import "./utility/micellenous.scss";
-// @import "./utility/utility.scss";
+@import "./utility/utility.scss";
 // @import "./utility/comic-info.scss";
 // @import "./utility/badges.scss";
 // @import "./utility/theme-switcher.scss";
 @import "./utility/errorsuccessMessage.scss";
+@import "./utility/comments_replies.scss";
 
 // // vendor css
 // @import "./vendorsass/navbar.scss";
@@ -57,6 +58,7 @@
 @import "./vendorsass/button.scss";
 // @import "./vendorsass/badge.scss";
 @import "./vendorsass/cards.scss";
+@import "./vendorsass/trumbowyg.scss";
 // @import "./vendorsass/pagination.scss";
 
 
@@ -81,7 +83,7 @@
 // @import "./home.page//leftcol-card.scss";
 // @import "./home.page/media-querry.scss";
 
-@import "./comic.details.page/info.scss";
-@import "./comic.details.page/comments.scss";
+// @import "./comic.details.page/info.scss";
+// @import "./comic.details.page/comments.scss";
 
 @import "./chapter.details.page/all.scss";
