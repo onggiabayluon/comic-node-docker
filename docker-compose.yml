@@ -21,6 +21,7 @@ services:
             - PORT=3000
         depends_on:
             - mongo
+            - redis
         # env_file:
         #     - ./.env
     mongo:

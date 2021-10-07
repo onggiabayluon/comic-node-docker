@@ -267,6 +267,16 @@ app.engine(
                 if (!Array.isArray(arr)) { return []; }
                 return arr.slice(startLimit, endLimit);
             },
+            limitDesc: (arr, startLimit, endLimit, field) => {
+                if (!Array.isArray(arr)) { return []; }
+                arr.sort(function (a, b) {
+                    return b[field].localeCompare(a[field], undefined, {
+                        numeric: true,
+                        sensitivity: 'base'
+                    });
+                });
+                return arr.slice(startLimit, endLimit);
+            },
             replaceHyphenIntoHashmark: (str) => {
                 str = (str) ? str.toString().replace(/chapter-/g, '#') : '';
                 return str && str[0].toUpperCase() + str.slice(1);

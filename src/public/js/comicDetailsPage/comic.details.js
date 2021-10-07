@@ -90,8 +90,8 @@ window.handlingRate = function (rateVal) {
 (function getSubsribeStatus() {
     $.ajax({
         async: true,
-        type: "POST",
-        url: `/fetch/getSubsbribeStatus`,
+        type: "GET",
+        url: `/fetch/getSubsbribeStatus?`,
         data: JSON.stringify({comicId: $comicId}),
         contentType: "application/json; charset=utf-8",
         success: function (response) {

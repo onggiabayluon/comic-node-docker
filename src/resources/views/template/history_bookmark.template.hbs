@@ -16,7 +16,7 @@
                         {{this.title}}
                     </info-title>
                 </a>
-                {{#each (limitLast this.lastest_chapters 1) }}
+                {{#each (limit lastest_chapters 1)}}
                 <a href="/comic/{{../this.slug}}/{{this.chapter}}">
                     <info-chapter id="chapter-{{this._id}}">
                         {{chapterText this.chapter}}

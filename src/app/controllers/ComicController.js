@@ -81,7 +81,7 @@ class ComicController {
             select: 'updatedAt',
             options: {
               limit: 2,
-              sort: { updatedAt: -1 },
+              sort: { "subscribed.chapters.updatedAt": -1 },
             },
             // match: { chapter: { $ne: undefined } }
           },

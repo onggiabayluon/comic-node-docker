@@ -99,12 +99,14 @@
                                                 </info-title>
                                             </a>
                                             {{#if this.chapters}}
-                                            <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}">
-                                                <info-chapter id="chapter-{{getObjValues (limit this.chapters 1) "_id"}}">
-                                                    CH. {{getObjValues (limit this.chapters 1) 'chapter'}}
-                                                    <span>{{CalcTimeEnglish this.updatedAt}}</span>
-                                                </info-chapter>
-                                            </a>
+                                                {{#each (limitDesc this.chapters 0 1 "chapter")}}
+                                                <a href="/comic/{{../this.slug}}/chapter-{{this.chapter}}">
+                                                    <info-chapter id="chapter-{{this._id}}">
+                                                        CH. {{this.chapter}}
+                                                        <span>{{CalcTimeEnglish this.updatedAt}}</span>
+                                                    </info-chapter>
+                                                </a>
+                                                {{/each}}
                                             {{/if}}
                                             <form
                                                 onclick="return subscribe(this);" 

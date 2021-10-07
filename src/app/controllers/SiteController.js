@@ -225,7 +225,6 @@ class SiteController {
                 home_sitename: HOME_SITENAME,
                 image_url_http: IMAGE_URL_HTTP
             }
-            res.setHeader('Cache-Control', 'public, max-age=1000');
             res.status(200).render('home', { 
                 layout: 'home_layout',
                 comics: comicsDoc,

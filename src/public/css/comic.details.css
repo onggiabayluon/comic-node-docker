@@ -990,63 +990,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #b0b59d;
+  background: #892f93;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #ca63e2;
+  background: #2d7a37;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #35be55;
+  background: #35dffe;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #47ee5d;
+  background: #44a1a5;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #4a429b;
+  background: #a93238;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #af89e6;
+  background: #995691;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #0cedc1;
+  background: #d2c673;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #55dd90;
+  background: #5274b1;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #687a4e;
+  background: #843d30;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #de8bba;
+  background: #6bbe8b;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #7ab7b7;
+  background: #358528;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #6627be;
+  background: #68d427;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #5eafe7;
+  background: #f42154;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #2f9834;
+  background: #c8984c;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #82d2f0;
+  background: #593854;
 }
 
 .num {
@@ -1551,7 +1551,7 @@ badges:hover {
   #comments-box .item--comment {
     margin-left: 1.9rem;
   }
-  #comments-box .item--comment {
+  #comments-box .item--reply {
     margin: 1.5rem 0 1.5rem 4rem;
   }
   #comments-box .author__thumbnail {

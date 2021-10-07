@@ -127,7 +127,7 @@ class SiteController {
 
     let subscribe = false,
       subscribedComic = req.user.subscribed,
-      clientComic_id = req.body.comicId,
+      clientComic_id = req.query.comicId,
       subLength = subscribedComic?.length
 
     for (let i = 0; i <= subLength; i++) {
