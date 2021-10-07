@@ -1,324 +1,88 @@
-{{#if withUIContainer}}
-<tools-header id="theader" class="theader pb-4">
-    <div itemprop="userInteractionCount" class="title">
-        Comments
-        <span class="title__counter text-small"> ({{#if comments.[0].maxComment}} {{comments.[0].maxComment}} {{else}} 0
-            {{/if}}) </span>
-    </div>
-    <div class="sort-menu">
-        <div class="sort-text dropdown">
-            <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="sort-icon"></i>
-                Sort
-            </a>
 
-            <div id="sort-dropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="?">Default</a>
-                <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Newest</a>
-                <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Oldest</a>
-                <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">All</a>
+{{#if withUIContainer}}
+    <tools-header id="theader" class="theader pb-4">
+        <div itemprop="userInteractionCount" class="title">
+            Comments
+            <span class="title__counter text-small"> ({{#if comments.maxComment}} {{comments.maxComment}} {{else}} 0
+                {{/if}}) </span>
+        </div>
+        <div class="sort-menu">
+            <div class="sort-text dropdown">
+                <a class="d-flex hover-theme-1" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg style="width: 20px;height: 20px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 3.202l3.839 4.798h-7.678l3.839-4.798zm0-3.202l-8 10h16l-8-10zm3.839 16l-3.839 4.798-3.839-4.798h7.678zm4.161-2h-16l8 10 8-10z"/></svg>
+                    <span class="ml-1">Sort</span>
+                </a>
+
+                <div id="sort-dropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="?">Default</a>
+                    <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Newest</a>
+                    <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Oldest</a>
+                    <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">All</a>
+                </div>
             </div>
         </div>
-    </div>
-</tools-header>
+    </tools-header>
 
-{{#if user}}
-<form class="submit-box [ mx-auto ]" onsubmit="return postComment(this);">
-    <textarea name="text" id="trumbowyg-demo" minlength="1" placeholder="Add a public Comment..."></textarea>
-    <div class="submit-box__wrapper submit-box--position [ mr-5 ]">
-        <a class="submit-box__clear [ mt-3 mr-4 pr-2 btn-less hover-theme-1 ]" data-toggle="tooltip"
-            data-placement="top" title="Clear" onclick="return emptyEditor(this);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path
-                    d="M21 6l-3 18h-12l-3-18h2.028l2.666 16h8.611l2.666-16h2.029zm-4.711-4c-.9 0-1.631-1.099-1.631-2h-5.316c0 .901-.73 2-1.631 2h-5.711v2h20v-2h-5.711z" />
-            </svg>
-        </a>
-        <button class="submit-box__submit [ mt-3 btn-less hover-theme-1 ]" data-toggle="tooltip" data-placement="top"
-            title="Send" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path
-                    d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z" />
-            </svg>
-        </button>
-    </div>
-</form>
-{{else}}
-<p class="text-medium">Login to comment</p>
-<a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
-<a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
-{{/if}}
+    <form class="submit-box [ mx-auto ]" onsubmit="return postComment(this);">
+        <input type="hidden" name="text">
+        <textarea id="trumbowyg-demo" minlength="1" placeholder="Add a public Comment..."></textarea>
+        <div class="submit-box__wrapper submit-box--position [ mr-5 ]">
+            <a class="submit-box__clear [ mt-3 mr-4 pr-2 btn-less hover-theme-1 ]" data-toggle="tooltip"
+                data-placement="top" title="Clear" onclick="return emptyEditor(this);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M21 6l-3 18h-12l-3-18h2.028l2.666 16h8.611l2.666-16h2.029zm-4.711-4c-.9 0-1.631-1.099-1.631-2h-5.316c0 .901-.73 2-1.631 2h-5.711v2h20v-2h-5.711z" />
+                </svg>
+            </a>
+            <button class="submit-box__submit [ mt-3 btn-less hover-theme-1 ]" data-toggle="tooltip" data-placement="top"
+                title="Send" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z" />
+                </svg>
+            </button>
+        </div>
+    </form>
 
 {{/if}}
 
-{{#if comments.commentArr}}
 <ul class="comments-replies">
-    {{#each comments.commentArr}}
-    <li class="comments-replies__item [ mt-4 mb-4 ]" id="comments-replies-{{this._id}}">
+    {{#if comments.commentArr}}
+        {{#each comments.commentArr}}
+        <li class="comments-replies__item [ mt-4 mb-4 ]" id="comments-replies-{{this._id}}">
 
-        <comment class="item item--comment">
+            <comment class="item item--comment">
 
-            <div class="item__body">
-                <author class="author">
-                    <img class="author__thumbnail" {{#if this.avatar}} src="{{this.avatar}}" {{else}}
-                        src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" {{/if}}
-                        alt="{{this.userName}} Profile Picture" width="40" height="40">
-                    <a class="author__name" href="#{{this.userName}}">{{this.userName}}</a>
-                    <div class="author__createdAt [ text-muted text-small ml-3 ]">
-                        {{CalcTimeEnglish this.updatedAt}}
-                    </div>
-                </author>
+                {{> inline/comments-replies-body user=../user comment_id=this._id comment=true}}
+                
+            </comment>
 
-                <context class="context mb-2" onsubmit="return false;">
-                    <form class="context__form" onsubmit="return editComment(this);">
-                        {{#if (checkStringLine this.text 4)}}
-                        <p class="context__text [ dynamic-ellipsis mt-1 ]" style="--ellipsis-value: 4;">{{this.text}}</p>
-                        <button class="context__expand [ mt-2 mb-2 btn-less font-weight-bold hover-theme-1 ]"
-                            onclick="getTruncatedPart(this);" type="button">Read more</button>
-                        {{else}}
-                        <p class="context__text [ mt-1 ]">{{this.text}}</p>
-                        <button class="context__expand [ d-none mt-2 mb-2 btn-less font-weight-bold hover-theme-1 ]"
-                            onclick="getTruncatedPart(this);" type="button">Read more</button>
-                        {{/if}}
-                        <input type="hidden" name="text">
-                        <input type="hidden" name="comment_id" value="{{this._id}}">
-                        <div class="context__wrapper [ mr-5 ]" style="display: none">
-                            <button class="context__clear [ mt-3 mr-3 btn btn-primary default ]" type="button"
-                                onclick="return closeEditable(this.parentElement);">Clear</button>
-                            <input class="context__submit [ mt-3 btn btn-primary default ]" type="submit" value="Edit">
-                        </div>
-                    </form>
-                </context>
+            <replies class="replies">
 
-                <action-toolbar class="action-toolbar">
-                    <div class="action-toolbar__like [ mr-3 ]"><svg xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-thumb-up" width="24" height="24" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3">
-                            </path>
-                        </svg></i></div>
-                    <div class="action-toolbar__dislike"><svg xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-thumb-down" width="24" height="24" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M7 13v-8a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v7a1 1 0 0 0 1 1h3a4 4 0 0 1 4 4v1a2 2 0 0 0 4 0v-5h3a2 2 0 0 0 2 -2l-1 -5a2 3 0 0 0 -2 -2h-7a3 3 0 0 0 -3 3">
-                            </path>
-                        </svg></i></div>
-                    {{#if ../user}}
-                    <div class="action-toolbar__Reply [ ml-3 hover-theme-1 ]" onclick="return showReplyBox(this);">
-                        Reply
-                    </div>
-                    {{/if}}
-                </action-toolbar>
+                {{#each this.reply}}
+                    <reply class="item item--reply" id="reply-{{this._id}}">
 
-                <reply-box class="reply-box [ mt-3 ]" onsubmit="return false;" style="display: none;">
-                    <form onsubmit="return postReply(this);">
-                        <input type="hidden" name="comment_id" value="{{this._id}}">
-                        <textarea class="reply-box__textarea" name="text" data-create=false></textarea>
-                        <div class="reply-box__wrapper reply-box--position [ mr-5 ]">
-                            <a class="submit-box__clear [ mt-3 mr-4 pr-2 btn-less hover-theme-1 ]" data-toggle="tooltip"
-                                data-placement="top" title="Clear" onclick="return emptyEditor(this);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path
-                                        d="M21 6l-3 18h-12l-3-18h2.028l2.666 16h8.611l2.666-16h2.029zm-4.711-4c-.9 0-1.631-1.099-1.631-2h-5.316c0 .901-.73 2-1.631 2h-5.711v2h20v-2h-5.711z" />
-                                </svg>
-                            </a>
-                            <button class="reply-box__submit [ mt-3 btn-less hover-theme-1 ]" data-toggle="tooltip"
-                                data-placement="top" title="Send" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path
-                                        d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </reply-box>
+                        {{> inline/comments-replies-body user=../../user comment_id=../this._id reply=true}}
 
-            </div>
+                    </reply>
+                {{/each}}
 
-            <div class="item__menu [ dropdown ]">
-                <menu class="menu">
-                    <a class="menu__icon" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical"
-                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <circle cx="12" cy="12" r="1"></circle>
-                            <circle cx="12" cy="19" r="1"></circle>
-                            <circle cx="12" cy="5" r="1"></circle>
-                        </svg>
-                    </a>
-                    <div class="menu__dropdown [ dropdown-menu dropdown-menu-right ]"
-                        aria-labelledby="dropdownMenuButton">
-                        <a class="menu__report [ dropdown-item ]" href="#">Report</a>
-                        {{#if (or
-                        (authRole ../user.role "admin:extraAdmin")
-                        (eq ../user._id ../this.userId))}}
-                        <div class="menu__divider [ dropdown-divider ]"></div>
-                        <a class="menu__editable [ dropdown-item ]" onclick="return editableContent(this);"
-                            href="#">Edit</a>
-                        <a class="menu__delete [ dropdown-item text-danger ]"
-                            onclick="return destroyComment(this.children);" href="#">
-                            Delete
-                            <form class="menu__form [ d-none ]" method="POST"
-                                enctype="application/x-www-form-urlencoded">
-                                <input class="form-control" name="comment_id" value="{{this._id}}"
-                                    type="hidden"></input>
-                            </form>
-                        </a>
-                        {{/if}}
-                    </div>
-                </menu>
-            </div>
-        </comment>
+            </replies>
 
-        <replies class="replies">
+        </li>
+        {{/each}}
+    
+        {{!-- More Comment Btn --}}
+        {{#if withUIContainer}}
+            {{#ifCond comments.maxComment '>=' 10}}
+            <tools-footer id="tfooter" class="tfooter" style="display: grid;">
+                <a data-page="2" onclick="return fetchMoreComments(this);"
+                    class="mx-auto light-red tfooter__btn btn btn-primary default mb-1">
+                    More comments
+                </a>
+            </tools-footer>
+            {{/ifCond}}
+        {{/if}} {{!-- /More Comment Btn --}}
 
-            {{#each this.reply}}
-            <reply class="item item--reply" id="reply-{{this._id}}">
-                <div class="item__body">
-                    <author class="author">
-                        <img class="author__thumbnail" {{#if this.avatar}} src="{{this.avatar}}" {{else}}
-                            src="https://avatars.dicebear.com/api/human/{{this.userName}}.svg" {{/if}}
-                            alt="{{this.userName}} Profile Picture" width="40" height="40">
-                        <a class="author__name" href="#{{this.userName}}">{{this.userName}}</a>
-                        <div class="author__createdAt [ text-muted text-small ml-3 ]">
-                            {{CalcTimeEnglish this.updatedAt}}
-                        </div>
-                    </author>
-
-                    <context class="context mb-2" onsubmit="return false;">
-                        <form class="context__form" onsubmit="return editReply(this);">
-                            {{#if (checkStringLine this.text 4)}}
-                            <p class="context__text [ dynamic-ellipsis mt-1 ]" style="--ellipsis-value: 4;">{{this.text}}</p>
-                            <button class="context__expand [ mt-2 mb-2 btn-less font-weight-bold hover-theme-1 ]"
-                                onclick="getTruncatedPart(this);" type="button">Read more</button>
-                            {{else}}
-                            <p class="context__text [ mt-1 ]">{{this.text}}</p>
-                            <button class="context__expand [ d-none mt-2 mb-2 btn-less font-weight-bold hover-theme-1 ]"
-                                onclick="getTruncatedPart(this);" type="button">Read more</button>
-                            {{/if}}
-                            <input type="hidden" name="text">
-                            <input type="hidden" name="comment_id" value="{{../this._id}}">
-                            <input type="hidden" name="reply_id" value="{{this._id}}">
-                            <div class="context__wrapper [ mr-5 ]" style="display: none">
-                                <button class="context__clear [ mt-3 mr-3 btn btn-primary default ]" type="button"
-                                    onclick="return closeEditable(this.parentElement);">Clear</button>
-                                <input class="context__submit [ mt-3 btn btn-primary default ]" type="submit"
-                                    value="Edit">
-                            </div>
-                        </form>
-                    </context>
-
-                    <action-toolbar class="action-toolbar">
-                        <div class="action-toolbar__like [ mr-3 ]"><svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon icon-tabler icon-tabler-thumb-up" width="24" height="24" viewBox="0 0 24 24"
-                                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3">
-                                </path>
-                            </svg></i></div>
-                        <div class="action-toolbar__dislike"><svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon icon-tabler icon-tabler-thumb-down" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M7 13v-8a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v7a1 1 0 0 0 1 1h3a4 4 0 0 1 4 4v1a2 2 0 0 0 4 0v-5h3a2 2 0 0 0 2 -2l-1 -5a2 3 0 0 0 -2 -2h-7a3 3 0 0 0 -3 3">
-                                </path>
-                            </svg></i></div>
-                        {{#if ../../user}}
-                        <div class="action-toolbar__Reply [ ml-3 hover-theme-1 ]" onclick="return showReplyBox(this);">
-                            Reply
-                        </div>
-                        {{/if}}
-                    </action-toolbar>
-
-                    <reply-box onsubmit="return false;" class="reply-box [ mt-3 ]" style="display: none;">
-                        <form onsubmit="return postReply(this);">
-                            <input type="hidden" name="comment_id" value="{{../this._id}}">
-                            <textarea class="reply-box__textarea" name="text" data-create=false></textarea>
-                            <div class="reply-box__wrapper reply-box--position [ mr-5 ]">
-                                <a class="submit-box__clear [ mt-3 mr-4 pr-2 btn-less hover-theme-1 ]"
-                                    data-toggle="tooltip" data-placement="top" title="Clear"
-                                    onclick="return emptyEditor(this);">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path
-                                            d="M21 6l-3 18h-12l-3-18h2.028l2.666 16h8.611l2.666-16h2.029zm-4.711-4c-.9 0-1.631-1.099-1.631-2h-5.316c0 .901-.73 2-1.631 2h-5.711v2h20v-2h-5.711z" />
-                                    </svg>
-                                </a>
-                                <button class="reply-box__submit [ mt-3 btn-less hover-theme-1 ]" data-toggle="tooltip"
-                                    data-placement="top" title="Send" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path
-                                            d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </form>
-                    </reply-box>
-
-                </div>
-
-                <div class="item__menu [ dropdown ]">
-                    <menu class="menu">
-                        <a class="menu__icon" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <circle cx="12" cy="12" r="1"></circle>
-                                <circle cx="12" cy="19" r="1"></circle>
-                                <circle cx="12" cy="5" r="1"></circle>
-                            </svg>
-                        </a>
-                        <div class="menu__dropdown [ dropdown-menu dropdown-menu-right ]"
-                            aria-labelledby="dropdownMenuButton">
-                            <a class="menu__report [ dropdown-item ]" href="#">Report</a>
-                            {{#if (or
-                            (authRole ../../user.role "admin:extraAdmin")
-                            (eq ../../user._id ../../this.userId))}}
-                            <div class="menu__divider [ dropdown-divider ]"></div>
-                            <a class="menu__editable [ dropdown-item ]" onclick="return editableContent(this);"
-                                href="#">Edit</a>
-                            <a class="menu__delete [ dropdown-item text-danger ]"
-                                onclick="return destroyReply(this.children);" href="#">
-                                Delete
-                                <form class="menu__form [ d-none ]" method="POST"
-                                    enctype="application/x-www-form-urlencoded">
-                                    <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
-                                    <input name="reply_id" value="{{this._id}}" type="hidden"></input>
-                                </form>
-                            </a>
-                            {{/if}}
-                        </div>
-                    </menu>
-                </div>
-            </reply>
-            {{/each}}
-
-        </replies>
-
-    </li>
-    {{/each}}
+    {{/if}}
 </ul>
-
-{{#if withUIContainer}}
-{{#ifCond comments.maxComment '>=' 10}}
-<tools-footer id="tfooter" class="tfooter" style="display: grid;">
-    <a data-page="2" onclick="return fetchMoreComments(this);"
-        class="mx-auto light-red tfooter__btn btn btn-primary default mb-1">
-        More comments
-    </a>
-</tools-footer>
-{{/ifCond}}
-{{/if}}
-{{/if}}

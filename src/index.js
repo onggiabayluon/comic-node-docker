@@ -90,9 +90,8 @@ io.on('connection', client => {
 const sessionConfig = {
     store: new RedisStore({ client: redis.client }),
     secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    rolling: true,
+    resave: true,
+    saveUninitialized: false,
     cookie : {
         sameSite: 'strict',
         maxAge: 2592000 * 1000, // 1month
@@ -193,6 +192,7 @@ app.engine(
             gt: (v1, v2) => v1 > v2,
             lte: (v1, v2) => v1 <= v2,
             gte: (v1, v2) => v1 >= v2,
+            strCompare: (v1, v2) => String(v1) === String(v2),
             checkStringLine: (str, maxLine) => {
                 const line = (str.match(/\n/g) || '').length + 1
                 return (line >= maxLine)

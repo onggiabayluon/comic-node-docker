@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: hind;
   font-style: normal;
@@ -427,6 +426,14 @@ p {
   opacity: 0.2;
 }
 
+img {
+  object-fit: cover;
+}
+
+img:not([src]) {
+  visibility: hidden;
+}
+
 background-overlay {
   background: #000;
   position: absolute;
@@ -851,7 +858,7 @@ heading icon-right {
   text-decoration: underline;
 }
 #comments-box .context__text {
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 #comments-box .context__text--transition {
   -webkit-animation-name: fadeIn;
@@ -908,12 +915,6 @@ heading icon-right {
   display: flex;
   margin-right: 1rem;
 }
-#theader .sort-menu .sort-icon::after {
-  font-style: normal;
-  font-family: "Font Awesome 5 Pro";
-  content: "";
-  margin: 0.3rem;
-}
 
 @media (max-width: 576px) {
   #comments-box .context__wrapper {
@@ -927,6 +928,9 @@ heading icon-right {
   }
   #comments-box .item--comment {
     margin-left: 1.9rem;
+  }
+  #comments-box .item--comment {
+    margin: 1.5rem 0 1.5rem 4rem;
   }
   #comments-box .author__thumbnail {
     left: -3.8rem;

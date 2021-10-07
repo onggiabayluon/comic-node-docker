@@ -754,6 +754,14 @@ p {
   opacity: 0.2;
 }
 
+img {
+  object-fit: cover;
+}
+
+img:not([src]) {
+  visibility: hidden;
+}
+
 background-overlay {
   background: #000;
   position: absolute;
@@ -982,63 +990,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #ee5fca;
+  background: #b0b59d;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #0bb92c;
+  background: #ca63e2;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #b59d59;
+  background: #35be55;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #a0f61d;
+  background: #47ee5d;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #955fd8;
+  background: #4a429b;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #30faea;
+  background: #af89e6;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #64d612;
+  background: #0cedc1;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #637d4f;
+  background: #55dd90;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #30a1c8;
+  background: #687a4e;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #c1f12e;
+  background: #de8bba;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #8d6831;
+  background: #7ab7b7;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #37e8e0;
+  background: #6627be;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #38337c;
+  background: #5eafe7;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #4ab4e2;
+  background: #2f9834;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #b52db9;
+  background: #82d2f0;
 }
 
 .num {
@@ -1472,7 +1480,7 @@ badges:hover {
   text-decoration: underline;
 }
 #comments-box .context__text {
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 #comments-box .context__text--transition {
   -webkit-animation-name: fadeIn;
@@ -1529,12 +1537,6 @@ badges:hover {
   display: flex;
   margin-right: 1rem;
 }
-#theader .sort-menu .sort-icon::after {
-  font-style: normal;
-  font-family: "Font Awesome 5 Pro";
-  content: "";
-  margin: 0.3rem;
-}
 
 @media (max-width: 576px) {
   #comments-box .context__wrapper {
@@ -1548,6 +1550,9 @@ badges:hover {
   }
   #comments-box .item--comment {
     margin-left: 1.9rem;
+  }
+  #comments-box .item--comment {
+    margin: 1.5rem 0 1.5rem 4rem;
   }
   #comments-box .author__thumbnail {
     left: -3.8rem;

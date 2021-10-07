@@ -39,7 +39,7 @@
     {{!-- vendor css --}}
     {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css"> --}}
     {{!-- CSS --}}
-    <link rel="stylesheet" href="/css/comic.details.min.css?v1.0.5.4">
+    <link rel="stylesheet" href="/css/comic.details.min.css?{{> version}}">
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -95,8 +95,8 @@
     <script src="/js/utilityScripts/message.scripts.js"></script>
     <script src="/js/utilityScripts/subscribe.scripts.js"></script>
     <script src="/js/utilityScripts/navbar.user.main.js"></script>
-    <script src="/js/utilityScripts/comments.scripts.js?v1.1.2.2" defer></script>
-    <script src="/js/comicDetailsPage/comic.details.js?v1.0.0.7" defer></script>
+    <script src="/js/utilityScripts/comments.scripts.js{{> version}}" defer></script>
+    <script src="/js/comicDetailsPage/comic.details.js{{> version}}" defer></script>
     {{!-- <script src="/js/comicDetailsPage/test.plugin.js?v1.0.3.8" defer></script> --}}
 
 </body>

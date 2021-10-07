@@ -61,7 +61,7 @@
 
     .context {
         &__text {
-            white-space: pre-wrap;
+            white-space: pre-line;
             &--transition {
                 -webkit-animation-name: fadeIn;
                 -webkit-animation-duration: 1s;
@@ -129,13 +129,6 @@
     .sort-menu {
       display: flex;
       margin-right: 1rem;
-      
-      .sort-icon::after {
-        font-style: normal;
-        font-family: 'Font Awesome 5 Pro';
-        content: '\f0dc';
-        margin: 0.3rem;
-      }
     }
   }
 
@@ -154,6 +147,9 @@
         }
         .item--comment {
             margin-left: 1.9rem;
+        }
+        .item--comment {
+            margin: 1.5rem 0 1.5rem 4rem;
         }
         .author {
             &__thumbnail {

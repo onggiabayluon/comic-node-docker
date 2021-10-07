@@ -27,8 +27,6 @@ var this_visit = {
 }
 
 
-
-
 if (visited_chapters == null) {
 
     visited_chapters = [$chapterId]

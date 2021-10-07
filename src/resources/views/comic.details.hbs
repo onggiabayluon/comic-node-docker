@@ -12,11 +12,10 @@
             <picture>
                 <source srcset="{{img_url}}/{{comic.thumbnail.url}}-thumbnail.webp" type="image/webp" 
                 media="(max-width: 768px)"/>
-                <source srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" type="image/webp" 
-                media="(min-width: 768px)"/>
 
                 <img itemprop="thumbnailUrl" class="backgroundBanner__img" alt="{{comic.title}} Background" 
-                src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" 
+                src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg"
+                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 769w" 
                 />
             </picture>
         </section>
@@ -126,7 +125,7 @@
                                         </h4>
                                     <div class="c-card__tags mb-3">
                                         {{#each comic.category}}
-                                        <span class="badge badge-pill badge-outline-primary mb-1" style="font-weight: 500;">{{this.name}}</span>
+                                        <a class="badge badge-pill badge-outline-primary mb-1" href="/comic/categories/{{this.name}}" style="font-weight: 500;">{{this.name}}</a>
                                         {{/each}}
                                     </div>
                                     <p class="c-card__heading font-weight-bold">Synopsis {{comic.title}}</p>

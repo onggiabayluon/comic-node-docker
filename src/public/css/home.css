@@ -1300,6 +1300,14 @@ p {
   justify-content: space-between;
 }
 
+img {
+  object-fit: cover;
+}
+
+img:not([src]) {
+  visibility: hidden;
+}
+
 background-overlay {
   background: #000;
   position: absolute;
@@ -1528,63 +1536,63 @@ heading icon-right {
   }
 }
 item:nth-child(1) comic-info-back {
-  background: #d6b8a6;
+  background: #22ab8e;
 }
 
 item:nth-child(2) comic-info-back {
-  background: #6664fd;
+  background: #488cd3;
 }
 
 item:nth-child(3) comic-info-back {
-  background: #6b712c;
+  background: #ce2a85;
 }
 
 item:nth-child(4) comic-info-back {
-  background: #fe8020;
+  background: #5cba9b;
 }
 
 item:nth-child(5) comic-info-back {
-  background: #135075;
+  background: #3afd37;
 }
 
 item:nth-child(6) comic-info-back {
-  background: #fc53af;
+  background: #b56ec9;
 }
 
 item:nth-child(7) comic-info-back {
-  background: #7b9631;
+  background: #946767;
 }
 
 item:nth-child(8) comic-info-back {
-  background: #3cfa7f;
+  background: #ddb11f;
 }
 
 item:nth-child(9) comic-info-back {
-  background: #924ef6;
+  background: #08b3b4;
 }
 
 item:nth-child(10) comic-info-back {
-  background: #fa6839;
+  background: #6a052a;
 }
 
 item:nth-child(11) comic-info-back {
-  background: #31f56b;
+  background: #04982b;
 }
 
 item:nth-child(12) comic-info-back {
-  background: #21e405;
+  background: #6c4570;
 }
 
 item:nth-child(13) comic-info-back {
-  background: #23bc5a;
+  background: #cc4caf;
 }
 
 item:nth-child(14) comic-info-back {
-  background: #76d6df;
+  background: #4b6934;
 }
 
 item:nth-child(15) comic-info-back {
-  background: #3e5952;
+  background: #65e243;
 }
 
 .num {
@@ -3096,6 +3104,7 @@ button {
 #welcome-places .glide__slide--2 item {
   position: relative;
   min-height: 210px;
+  min-width: 226px;
   height: 210px;
 }
 #welcome-places .glide__slide--2 item comic-info {

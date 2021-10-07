@@ -267,12 +267,7 @@ class ComicController {
           detail_page_description: DETAIL_PAGE_DESCRIPTION,
           image_url_http: IMAGE_URL_HTTP
         }
-        let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount)).toFixed(2)
-        let rateCount = comicdoc.rate.rateCount
-        let firstChapter = (chapters?.length) ? chapters[0] : null
-        let lastChapter = (chapters?.length) ? chapters[chapters.length - 1] : null 
-        let seoChapter = lastChapter?.chapter.replace(/\d+$/, function(n){ return ++n })
-
+        
         // Sort array of object by keys typeof string 
         if (chapters) {
           chapters = chapters.sort(function(a, b) {
@@ -283,6 +278,13 @@ class ComicController {
           });
         }
         
+        // Array get sorted ( Descending ) from max to min
+        let rateValue = ((comicdoc.rate.rateValue / comicdoc.rate.rateCount)).toFixed(2)
+        let rateCount = comicdoc.rate.rateCount
+        let firstChapter = (chapters?.length) ? chapters[chapters.length - 1] : null 
+        let lastChapter = (chapters?.length) ? chapters[0] : null
+        let seoChapter = lastChapter?.chapter.replace(/\d+$/, function(n){ return ++n })
+
         res.status(200).render('comic.details.hbs', {
           layout: 'comic.details_layout.hbs',
           comic: comicdoc,
@@ -444,7 +446,7 @@ class ComicController {
       if(!result) return; 
       else res.status(200).render('template/comment.template.hbs', {
         layout: 'fetch_layout',
-        comments: comments,
+        comments: comments.pop(),
         user: req.user
       })
     })
@@ -560,12 +562,12 @@ class ComicController {
       .findOne($find,$match)
       .lean()
       .then(commentDoc => {
-        if (!commentDoc) return [null, "comment not existed"]
-        else return [commentDoc, null]
+        if (!commentDoc) 
+        return [null, "comment not existed"]
+        else 
+        return [commentDoc, null]
       })
-      .catch(err => {
-        return [null, err]
-      })
+      .catch(err => { return [null, err] })
     };
 
     const authUserId = async (commentDoc) => {
