@@ -17,6 +17,9 @@ services:
             - MONGO_PASSWORD=${MONGO_PASSWORD}
             - WASABI_ACCESS_KEY_ID=${WASABI_ACCESS_KEY_ID}
             - WASABI_SECRET_ACCESS_KEY=${WASABI_SECRET_ACCESS_KEY}
+            - WASABI_BUCKET_NAME=${WASABI_BUCKET_NAME}
+            - WASABI_ENDPOINT=${WASABI_ENDPOINT}
+            - IMAGE_URL=${IMAGE_URL}
         command: node ./src/index.js
     mongo:
         environment:

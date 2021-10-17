@@ -133,8 +133,8 @@ function initLazy(chapters) {
     pictures.forEach((picture, index) => {
         var img = chapterdoc.image[index]
         picture.children[0].setAttribute("data-srcset", `${storage_url}/${img.url}${img_format.sm}`); 
-        picture.children[1].setAttribute("data-srcset", `${storage_url}/${img.url}${img_format.lg}`); 
-        picture.children[2].setAttribute("data-src", `${storage_url}/${img.url}${img_format.md}`); 
+        // picture.children[1].setAttribute("data-srcset", `${storage_url}/${img.url}${img_format.lg}`); 
+        picture.children[1].setAttribute("data-src", `${storage_url}/${img.url}${img_format.lg}`); 
     });
     lazySizes.init();
 };

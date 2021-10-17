@@ -318,6 +318,7 @@ class meController {
     };
   
     function addComicIdToCategories(comic_id, categories_id) {
+      if (!categories_id) return
       const bulkUpdateOfCategories = []
       for (const category_id of categories_id) {
         bulkUpdateOfCategories.push({

@@ -92,12 +92,18 @@ module.exports = function(passport) {
     }
   ));
 
+  /**
+   * Store userId in Session
+   */
   passport.serializeUser(function(user, done) {
     done(null, user._id);
   });
 
+  /**
+   * Later Session get retrieved the whole object via the deserializeUser
+   */
   passport.deserializeUser(function(id, done) {
-    User.findOne({ _id: id})
+    User.findById(id)
     .lean()
     .select("-password")
     .then(user => done(null, user))

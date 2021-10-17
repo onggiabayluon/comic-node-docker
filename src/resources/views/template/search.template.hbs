@@ -18,10 +18,13 @@
         <info class="info">
             <a href="/comic/{{this.slug}}" class="info__title">{{this.title}}</a>
             {{#if this.chapters}}
-            <a href="/comic/{{this.slug}}/chapter-{{getObjValues (limit this.chapters 1) 'chapter'}}" class="info__chapter">
-                Chapter {{getObjValues (limit this.chapters 1) 'chapter'}}
-            </a>
+                {{#each (limitDesc this.chapters 0 1 "chapter")}}
+                <a href="/comic/{{../this.slug}}/chapter-{{this.chapter}}" class="info__chapter">
+                    Chapter {{this.chapter}}
+                </a>
+                {{/each}}
             {{/if}}
+            
         </info>
     </item>
 {{/each}}

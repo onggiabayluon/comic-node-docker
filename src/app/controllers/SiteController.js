@@ -15,6 +15,17 @@ const { TEST, IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 class SiteController {
 
     async test2(req, res, next) {
+        if (!req.session.content) { req.session.count = 1; } else {
+            req.session.content += 1; 
+            return res.send(
+                JSON.stringify(req.cookies["connect.sid"])
+                + "<br>" 
+                + JSON.stringify(req.sessionID) 
+                + "<br>" 
+                + JSON.stringify(req.session.count)
+            );
+        }
+        // return res.json(req.session)
         return res.json(TEST)
 
         // Chapter.findOne(

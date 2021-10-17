@@ -79,8 +79,8 @@ const main = async (files, config) => {
 
         // Resize Each time 3 type 
         const meta = await Promise.all([
-            resize(file, 'large.webp', 'image/webp', 1000, path, rightnow, true),
-            resize(file, 'medium.jpeg', 'image/jpeg', 690, path, rightnow, false),
+            resize(file, 'large.jpeg', 'image/jpeg', 1000, path, rightnow, true),
+            // resize(file, 'medium.jpeg', 'image/jpeg', 690, path, rightnow, false),
             resize(file, 'small.webp', 'image/webp', 400, path, rightnow, false),
         ])
         

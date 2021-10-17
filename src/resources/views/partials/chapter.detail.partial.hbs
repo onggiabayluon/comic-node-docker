@@ -13,7 +13,6 @@
         <div class="intrinsic" style="--aspect-ratio: {{this.width}} / {{this.height}};">
             <picture class="intrinsic__picture">
                     <source type="image/webp" media="--small" />
-                    <source type="image/webp" media="--large" />
                     
                     <img
                     onerror="this.onerror=null;this.src='/img/404.jpg';"
@@ -36,10 +35,9 @@
         <div class="intrinsic" style="--aspect-ratio: {{this.width}} / {{this.height}};">
             <picture>
                     <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-small.webp" media="--small" />
-                    <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-large.webp" media="--large" />
                     
                     <img
-                    data-src="{{../img_url}}/{{this.url}}-medium.jpeg" 
+                    data-src="{{../img_url}}/{{this.url}}-large.jpeg" 
                     onerror="this.onerror=null;this.src='/img/404.jpg';"
                     class="lazyload img"
                     data-expand="2000"
@@ -56,10 +54,9 @@
         <div class="intrinsic">
             <picture>
                     <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-small.webp" media="--small" />
-                    <source type="image/webp" data-srcset="{{../img_url}}/{{this.url}}-large.webp" media="--large" />
                     
                     <img
-                    data-src="{{../img_url}}/{{this.url}}-medium.jpeg" 
+                    data-src="{{../img_url}}/{{this.url}}-large.jpeg" 
                     onerror="this.onerror=null;this.src='/img/404.jpg';"
                     class="lazyload img"
                     data-expand="2000"

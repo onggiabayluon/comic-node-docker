@@ -86,11 +86,13 @@ io.on('connection', client => {
 });
 
 
+
+
 // sessionConfig
 const sessionConfig = {
-    store: new RedisStore({ client: redis.client }),
+    store: new RedisStore({ client: redis.client, ttl: 2592000 }), //Default value is second
     secret: 'secret',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie : {
         sameSite: 'strict',
@@ -110,6 +112,9 @@ if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1); 
     app.use(cors())
 }
+
+
+app.use(cookieParser())
 
 app.use(session(sessionConfig));
 
@@ -165,8 +170,6 @@ app.use(express.urlencoded({
 );
 app.use(express.json());
 
-// Cookie Parser
-app.use(cookieParser())
 
 // HTTP logger
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));

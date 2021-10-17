@@ -9,16 +9,14 @@ module.exports = {
 
     WASABI_ACCESS_KEY_ID: process.env.WASABI_ACCESS_KEY_ID,
     WASABI_SECRET_ACCESS_KEY: process.env.WASABI_SECRET_ACCESS_KEY,
-    WASABI_ENDPOINT: process.env.WASABI_ENDPOINT || 's3.ap-northeast-1.wasabisys.com',
-    WASABI_BUCKET_NAME: process.env.WASABI_BUCKET_NAME || "storagepongpong",
-    WASABI_REGION: process.env.WASABI_REGION || "ap-northeast-1",
-    IMAGE_URL: process.env.URL || "https://s3.ap-northeast-1.wasabisys.com/storagepongpong",
-
-    
+    WASABI_BUCKET_NAME: process.env.WASABI_BUCKET_NAME,
+    WASABI_REGION: process.env.WASABI_REGION,
+    WASABI_ENDPOINT: process.env.WASABI_ENDPOINT || "s3.ap-southeast-1.amazonaws.com",
+    IMAGE_URL: process.env.URL,
 
     UPDATE_PER_MIN: 10,
 
-    IMG_FORMAT: { lg: '-large.webp', md: '-medium.jpeg', sm: '-small.webp' },
+    IMG_FORMAT: { lg: '-large.jpeg', md: '-medium.jpeg', sm: '-small.webp' },
     TEST: process.env.TEST || "test",
     HOME_TITLE: "Read Manga Online - Dorecomic",
     HOME_DESCRIPTION: "Read manga online free at Dorecomic with fastest update",
