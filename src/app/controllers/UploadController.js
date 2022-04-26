@@ -7,9 +7,10 @@ const shortid       = require('shortid');
 const ObjectID      = require('mongodb').ObjectID;
 // Upload Middleware
 const MulterUploadMiddleware = require("../middlewares/MulterUploadMiddleWare");
-const S3UploadMiddleWare = require("../middlewares/S3UploadMiddleWare")
-const S3DeleteMiddleware = require('../middlewares/S3DeleteMiddleware');
-// const imagesMiddle = require("../middlewares/ResizeMiddleware")
+const S3UploadMiddleWare = require("../middlewares/S3UploadMiddleWare");
+// const S3DeleteMiddleware = require('../middlewares/S3DeleteMiddleware');
+const cloudinaryDeleteMiddleware = require('../middlewares/CloudinaryDeleteMiddleware');
+const cloudinaryUploadMiddileWare = require("../middlewares/CloudinaryUploadMiddleWare");
 
 // const { Worker, isMainThread, parentPort }  = require('worker_threads');
 const workerpool = require('workerpool');
@@ -25,7 +26,7 @@ class UploadController {
             const $comicTitle = req.body.comicTitle
             const $chapter_id = new ObjectID()
 
-            const workDir = path.join(__dirname, '..', 'middlewares', 'worker.js')
+            const workDir = path.join(__dirname, '..', 'middlewares', 'workerCloudinary.js')
 
             const config = {
                 customPath: `${req.params.slug}/chapter-${req.body.chapter}`
@@ -100,7 +101,7 @@ class UploadController {
                 var params = {
                     slug: req.params.slug,
                 }
-                var imagesURL = await S3UploadMiddleWare.uploadThumbnail(req.files, params)
+                var imagesURL = await cloudinaryUploadMiddileWare.uploadThumbnail(req.files, params)
                 deleteOldThumbnailOnS3()
                 saveURLToDb(imagesURL)
             })
@@ -113,18 +114,19 @@ class UploadController {
                 if (comic.thumbnail != null) {
                     let arrURL = [
                         {
-                            url: comic.thumbnail.url + '-thumbnail.webp'
+                            url: comic.thumbnail.url + '-thumbnail-webp'
                         },
                         {
-                            url: comic.thumbnail.url + '-thumbnail.jpeg'
+                            url: comic.thumbnail.url + '-thumbnail-jpeg'
                         },
                         {
-                            url: comic.thumbnail.url + '-thumbnail-original.jpeg'
+                            url: comic.thumbnail.url + '-thumbnail-original'
                         }
                     ]
-                    S3DeleteMiddleware(arrURL, function (err) {
+                    cloudinaryDeleteMiddleware.destroyImages(arrURL, function (err) {
                         if (err) { return next(err) }
-                      });
+                    })
+
                 }
             })
         };
@@ -159,13 +161,13 @@ class UploadController {
                         let key = config[`${type}`][index]
                         let arrURL = [
                             {
-                                url: key.url + '-thumbnail.webp'
+                                url: key.url + '-thumbnail-webp'
                             },
                             {
-                                url: key.url + '-thumbnail.jpeg'
+                                url: key.url + '-thumbnail-jpeg'
                             },
                             {
-                                url: key.url + '-thumbnail-small.webp'
+                                url: key.url + '-thumbnail-small'
                             }
                         ]
                         S3DeleteMiddleware(arrURL, function (err) {

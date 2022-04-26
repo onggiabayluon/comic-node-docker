@@ -5,6 +5,7 @@ const client = redis.createClient({
     port: REDIS_PORT
 });
 
+
 function connect() {
 
 

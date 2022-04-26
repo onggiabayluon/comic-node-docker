@@ -22,9 +22,9 @@ router.get('/stored/comics/faqPage', meController.faqPage);
 router.get('/stored/config/banner', meController.configBannerPage);
 // Upload Chapter Images 
 router.post('/stored/comics/:slug/S3-multiple-upload', UploadController.multipleUpload);
-// Upload Thumbnail Image 
+// // Upload Thumbnail Image 
 router.post('/stored/comics/:slug/S3-thumbnail-upload', UploadController.thumbnailUpload);
-// Upload Config Image
+// // Upload Config Image
 router.post('/stored/config/banner/upload', UploadController.configUpload);
 
 /**               ***

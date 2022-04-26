@@ -5,7 +5,8 @@ const removeVietnameseTones = require('../../config/middleware/VnameseToEng');
 const trimEng = require('../../config/middleware/trimEng')
 const shortid = require('shortid');
 const customError = require('../../util/customErrorHandler')
-const deleteMiddleWare = require('../middlewares/S3DeleteMiddleware');
+// const deleteMiddleWare = require('../middlewares/S3DeleteMiddleware');
+const cloudinaryDeleteMiddleware = require('../middlewares/CloudinaryDeleteMiddleware');
 const { IMAGE_URL } = require('../../config/config');
 
 
@@ -366,9 +367,9 @@ const destroyComic_Helper = (exports.destroyComic_Helper
                 url: comic.thumbnail.url + '-thumbnail-original.jpeg'
               }
             ]
-            deleteMiddleWare(arrURL, function (err) {
+            cloudinaryDeleteMiddleware.destroyImages(arrURL, function (err) {
               if (err) { return next(err) }
-            }); /* -- end First task -- */
+            }) /* -- end First task -- */
           }
           else {
             console.log(' --K có thumbnail để xóa')
@@ -384,18 +385,14 @@ const destroyComic_Helper = (exports.destroyComic_Helper
                 let arrURL = []
                 chapters.map(chapter => {
                   chapter.image.forEach(image => {
-                    arrURL.push({
-                      url: image.url + '-large.webp'
-                    },
-                    {
-                      url: image.url + '-medium.jpeg'
-                    },
-                    {
-                      url: image.url + '-small.webp'
+                    let public_id = chapter.image[0]
+                    let splited_public_id = public_id.split('/')
+                    let removed_filename = splited_public_id.pop(res.indexOf('2'))
+                    let folder_name = res.join('/')
+
+                    CloudinaryDeleteMiddleware.destroyFolder(folderName, function (err) {
+                      if (err) { return next(err) }
                     })
-                  });
-                  deleteMiddleWare(arrURL, function (err) {
-                    if (err) { return next(err) }
                   });
                 })
               }
@@ -502,7 +499,7 @@ const handleFormActionForComics_Helper = (exports.handleFormActionForComics_Help
                         url: comic.thumbnail.url + '-thumbnail-original.jpeg'
                       }
                     ]
-                    deleteMiddleWare(arrURL, function (err) {
+                    cloudinaryDeleteMiddleware.destroyImages(arrURL, function (err) {
                       if (err) { return next(err) }
                     }) /* -- end First task -- */
                   }
@@ -517,20 +514,15 @@ const handleFormActionForComics_Helper = (exports.handleFormActionForComics_Help
                     } else {
                       let arrURL = []
                       chapters.map(chapter => {
-                        chapter.image.forEach(image => {
-                          arrURL.push({
-                            url: image.url + '-large.webp'
-                          },
-                          {
-                            url: image.url + '-medium.jpeg'
-                          },
-                          {
-                            url: image.url + '-small.webp'
-                          })
-                        });
-                        deleteMiddleWare(arrURL, function (err) {
+                        
+                        let public_id = chapter.image[0]
+                        let splited_public_id = public_id.split('/')
+                        let removed_filename = splited_public_id.pop(res.indexOf('2'))
+                        let folder_name = res.join('/')
+
+                        CloudinaryDeleteMiddleware.destroyFolder(folderName, function (err) {
                           if (err) { return next(err) }
-                        });
+                        })
                       })
                     }
                   })/* -- End Second task -- */
@@ -635,18 +627,18 @@ const destroyChapter_Helper = (exports.destroyChapter_Helper
         let arrURL = []
         currentChapter.image.forEach(image => {
           arrURL.push({
-            url: image.url + '-large.webp'
+            url: image.url + '-large'
           },
           {
-            url: image.url + '-medium.jpeg'
+            url: image.url + '-medium'
           },
           {
-            url: image.url + '-small.webp'
+            url: image.url + '-small'
           })
         });
-        deleteMiddleWare(arrURL, function (err) {
+        cloudinaryDeleteMiddleware.destroyImages(arrURL, function (err) {
           if (err) { return next(err) }
-        });
+        })
       });
     };
 
@@ -705,18 +697,18 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
                   let arrURL = []
                   currentChapter.image.forEach(image => {
                     arrURL.push({
-                      url: image.url + '-large.webp'
+                      url: image.url + '-large'
                     },
                     {
-                      url: image.url + '-medium.jpeg'
+                      url: image.url + '-medium'
                     },
                     {
-                      url: image.url + '-small.webp'
+                      url: image.url + '-small'
                     })
                   });
-                  deleteMiddleWare(arrURL, function (err) {
+                  cloudinaryDeleteMiddleware.destroyImages(arrURL, function (err) {
                     if (err) { return next(err) }
-                  });
+                  })
                 }
               }).catch(next)
           })

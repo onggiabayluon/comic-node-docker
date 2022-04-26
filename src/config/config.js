@@ -4,15 +4,13 @@ module.exports = {
     MONGO_USER: process.env.MONGO_USER,
     MONGO_PASSWORD: process.env.MONGO_PASSWORD,
     MONGO_FOLDER: process.env.MONGO_FOLDER || "mydb",
-    REDIS_URL: process.env.REDIS_URL || "redis",
+    REDIS_URL: process.env.REDIS_URL || "localhost",
     REDIS_PORT: process.env.REDIS_PORT || 6379,
 
-    WASABI_ACCESS_KEY_ID: process.env.WASABI_ACCESS_KEY_ID,
-    WASABI_SECRET_ACCESS_KEY: process.env.WASABI_SECRET_ACCESS_KEY,
-    WASABI_BUCKET_NAME: process.env.WASABI_BUCKET_NAME,
-    WASABI_REGION: process.env.WASABI_REGION,
-    WASABI_ENDPOINT: process.env.WASABI_ENDPOINT || "s3.ap-southeast-1.amazonaws.com",
-    IMAGE_URL: process.env.URL,
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || "dwajvm53v",
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_CLOUD_NAME || "485633522843934",
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_CLOUD_NAME || "gZYmgO8732Xzcms1AJeU1_ReCGU",
+    
 
     UPDATE_PER_MIN: 10,
 
@@ -24,5 +22,7 @@ module.exports = {
     HOME_KEYWORDS: "read manga online, dorecomic, dorecomic.com, manga online free, free manga, manga reader, manga scans, manga raw, manga, manhwa, manhua",
     HOME_URL: "https://cloudimagewall.xyz",
     HOME_SITENAME: "Dorecomic",
-    IMAGE_URL_HTTP: "http://s3.ap-northeast-1.wasabisys.com/storagepongpong",
+    
+    IMAGE_URL: "https://res.cloudinary.com/dwajvm53v/image/upload",
+    IMAGE_URL_HTTP: "http://res.cloudinary.com/dwajvm53v/image/upload",
 }
