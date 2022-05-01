@@ -4,12 +4,12 @@ module.exports = {
     MONGO_USER: process.env.MONGO_USER,
     MONGO_PASSWORD: process.env.MONGO_PASSWORD,
     MONGO_FOLDER: process.env.MONGO_FOLDER || "mydb",
-    REDIS_URL: process.env.REDIS_URL || "localhost",
+    REDIS_URL: process.env.REDIS_URL || "redis",
     REDIS_PORT: process.env.REDIS_PORT || 6379,
 
-    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || "dwajvm53v",
-    CLOUDINARY_API_KEY: process.env.CLOUDINARY_CLOUD_NAME || "485633522843934",
-    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_CLOUD_NAME || "gZYmgO8732Xzcms1AJeU1_ReCGU",
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_CLOUD_NAME,
     
 
     UPDATE_PER_MIN: 10,
