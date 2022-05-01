@@ -5,9 +5,9 @@
         <div class="thumbnail">
             <div class="intrinsic" style="display: flex; align-items: center; justify-content: center;">
                 <picture>
-                    <source data-srcset="{{../img_url}}/{{this.url}}-small.webp" media="--small" />
-                    <source data-srcset="{{../img_url}}/{{this.url}}-medium.jpeg" media="--medium" />
-                    <source data-srcset="{{../img_url}}/{{this.url}}-large.webp" media="--large" />
+                    <source data-srcset="{{../img_url}}/{{this.url}}{{../CHAPTER_FORMAT_SIZE.SMALL}}" media="--small" />
+                    {{!-- <source data-srcset="{{../img_url}}/{{this.url}}-medium.jpeg" media="--medium" /> --}}
+                    <source data-srcset="{{../img_url}}/{{this.url}}{{../CHAPTER_FORMAT_SIZE.LARGE}}" media="--large" />
 
                     <img onerror="this.onerror=null;this.src='/img/404.jpg';" class="lazyload" width="1000"
                         data-expand="2000" data-intrinsic="{{../img_url}}/{{this.url}}" {{!--

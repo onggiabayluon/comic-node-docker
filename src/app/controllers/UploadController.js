@@ -14,6 +14,7 @@ const cloudinaryUploadMiddileWare = require("../middlewares/CloudinaryUploadMidd
 
 // const { Worker, isMainThread, parentPort }  = require('worker_threads');
 const workerpool = require('workerpool');
+const { THUMBNAIL_FORMAT_SIZES } = require('../../config/config');
 
 class UploadController {
 
@@ -112,21 +113,15 @@ class UploadController {
             .findOne({ slug: req.params.slug }).lean()
             .then(comic => {
                 if (comic.thumbnail != null) {
-                    let arrURL = [
-                        {
-                            url: comic.thumbnail.url + '-thumbnail-webp'
-                        },
-                        {
-                            url: comic.thumbnail.url + '-thumbnail-jpeg'
-                        },
-                        {
-                            url: comic.thumbnail.url + '-thumbnail-original'
-                        }
-                    ]
-                    cloudinaryDeleteMiddleware.destroyImages(arrURL, function (err) {
-                        if (err) { return next(err) }
-                    })
+                    const formatSizes = THUMBNAIL_FORMAT_SIZES
 
+                    const url = comic.thumbnail.url
+
+                    const callback = (err) => {
+                        if (err) return next(err)
+                    }
+
+                    cloudinaryDeleteMiddleware.destroyImages(url, formatSizes, callback) 
                 }
             })
         };
@@ -145,13 +140,15 @@ class UploadController {
         MulterUploadMiddleware(req, res)
         .then(async () => {
             var { category, type, title, subtitle, author, description, href, index } = req.body
+            
             var params = { type: type }
-            var imagesURL = await S3UploadMiddleWare.uploadSliderImg(req.files, params)
+
+            var imagesURL = await cloudinaryUploadMiddileWare.uploadSliderImg(req.files, params)
+            
             deleteOldThumbnailOnS3()
             saveURLToDb(imagesURL)
 
             function deleteOldThumbnailOnS3() {
-                
                 Config
                 .findOne({ category: category}).lean()
                 .then(config => {
@@ -159,20 +156,16 @@ class UploadController {
                     
                     if (config[`${type}`][index] != undefined) {
                         let key = config[`${type}`][index]
-                        let arrURL = [
-                            {
-                                url: key.url + '-thumbnail-webp'
-                            },
-                            {
-                                url: key.url + '-thumbnail-jpeg'
-                            },
-                            {
-                                url: key.url + '-thumbnail-small'
-                            }
-                        ]
-                        S3DeleteMiddleware(arrURL, function (err) {
-                            if (err) { return next(err) }
-                        });
+
+                        const formatSizes = THUMBNAIL_FORMAT_SIZES
+
+                        const url = key.url
+
+                        const callback = (err) => {
+                            if (err) return next(err)
+                        }
+
+                        cloudinaryDeleteMiddleware.destroyImages(url, formatSizes, callback) 
                     }
                 })
             };

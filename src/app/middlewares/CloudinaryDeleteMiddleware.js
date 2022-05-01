@@ -9,9 +9,41 @@ cloudinary.config({
   secure: true
 });
 
+/*
+  ["survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/-thumbnail-webp",
+  survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/-thumbnail-jpeg",
+  survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/-thumbnail-small"
+  ]
+*/
+
+function getCustomFormatURLs(url, formatSizes) {
+  const FORMAT_SIZES = formatSizes 
+  
+  const URLS = []
+  
+  FORMAT_SIZES.forEach(formatSize => URLS.push(url + formatSize))
+  
+  return URLS
+}
+
+function getFolderURL(url) {
+  let public_id = url
+
+  let splited_public_id = public_id.split('/')
+
+  splited_public_id.pop(splited_public_id.indexOf('2'))
+
+  let folderUrl = splited_public_id.join('/')
+
+  return folderUrl
+}
+
+
 var self = module.exports = {
-  destroyFolder: (folderName, callback) => {
-    cloudinary.api.delete_resources_by_prefix(folderName, function (error, result) {
+  destroyFolder: (url, callback) => {
+    let folderURL = getFolderURL(url)
+
+    cloudinary.api.delete_resources_by_prefix(folderURL, function (error, result) {
       if (error) {
         console.log("Error in cloudinary.uploader.upload_stream\n", error);
         callback(error);
@@ -23,12 +55,10 @@ var self = module.exports = {
     })
   },
 
-  destroyImages: (filename, callback) => {
-    let imgKeys = filename.map(img => {
-      return img.url
-    });
+  destroyImages: (url, formatSizes, callback) => {
+    let urls = getCustomFormatURLs(url, formatSizes)
 
-    imgKeys.forEach(public_id => {
+    urls.forEach(public_id => {
       cloudinary.uploader.destroy(public_id, function (error, result) {
         if (error) {
           console.log("Error in cloudinary.uploader.upload_stream\n", error);

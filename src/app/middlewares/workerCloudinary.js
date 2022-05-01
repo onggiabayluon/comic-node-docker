@@ -16,8 +16,12 @@ const s3Promises = [];
 const uploadLoadToS3 = (options, resized) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(options, (err, url) => {
-            if (err) return reject(err);
-            return resolve(url.secure_url);
+            if (err) {
+                console.log(err)
+                return reject(err);
+            } else {
+                return resolve(url.secure_url);
+            }
         }).end(resized)
     });
 }
@@ -25,7 +29,7 @@ const uploadLoadToS3 = (options, resized) => {
 
 const resize = async (file, imgSize, imageType, width, path, now, getMeta) => {
     try {
-        const pathAndFileName = `${path}-${imgSize}`;
+        const pathAndFileName = `${path}${imgSize}`;
         
         const sharpResize = sharp(file.buffer).resize({ width: width })
         const $result = {
@@ -83,9 +87,9 @@ const main = async (files, config) => {
 
         // Resize Each time 3 type 
         const meta = await Promise.all([
-            resize(file, 'large', 'image/jpeg', 1000, path, rightnow, true),
+            resize(file, '-large', 'image/jpeg', 1000, path, rightnow, true),
             // resize(file, 'medium.jpeg', 'image/jpeg', 690, path, rightnow, false),
-            resize(file, 'small', 'image/webp', 400, path, rightnow, false),
+            resize(file, '-small', 'image/webp', 400, path, rightnow, false),
         ])
         
         // Resolve upload to Cloudinary

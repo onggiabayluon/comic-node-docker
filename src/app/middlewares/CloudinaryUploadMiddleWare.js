@@ -104,42 +104,43 @@ var self = module.exports = {
         }
 
         const resizePromises = files.map(async (file) => {
+
             const filename = `config/${params.type}/${Date.now()}-${file.originalname.replace(/\..+$/, "")}`;
+            
+            const options = {
+                use_filename: true,
+                unique_filename: false
+            };
+
             sharp(file.buffer)
                 .resize(resize)
                 .jpeg({ quality: 80 })
                 .toBuffer()
-                .then(resized => s3.upload({
-                    Body: resized,
-                    Bucket: WASABI_BUCKET_NAME,
-                    ContentType: file.mimetype,
-                    CacheControl: 'max-age=31536000',
-                    Key: `${filename}-thumbnail.jpeg`,
-                }).promise())
+                .then(resized => {
+                    options.public_id = filename + '-thumbnail-jpeg'
+                    options.format = 'jpeg'
+                    uploadLoadToS3(options, resized)
+                })
             sharp(file.buffer)
                 .resize(resize)
                 .webp({ quality: 80 })
                 .toBuffer()
-                .then(resized => s3.upload({
-                    Body: resized,
-                    Bucket: WASABI_BUCKET_NAME,
-                    ContentType: 'image/webp',
-                    CacheControl: 'max-age=31536000',
-                    Key: `${filename}-thumbnail.webp`,
-                }).promise())
+                .then(resized => {
+                    options.public_id = filename + '-thumbnail-webp'
+                    options.format = 'webp'
+                    uploadLoadToS3(options, resized)
+                })
             sharp(file.buffer)
                 .resize(resizeSmall)
                 .webp({ quality: 80 })
                 .toBuffer()
-                .then(resized => s3.upload({
-                    Body: resized,
-                    Bucket: WASABI_BUCKET_NAME,
-                    ContentType: 'image/webp',
-                    CacheControl: 'max-age=31536000',
-                    Key: `${filename}-thumbnail-small.webp`,
-                }).promise())
+                .then(resized => {
+                    options.public_id = filename + '-thumbnail-small-webp'
+                    options.format = 'webp'
+                    uploadLoadToS3(options, resized)
+                })
 
-                images = filename
+            images = filename
         });
 
         

@@ -15,6 +15,28 @@ module.exports = {
     UPDATE_PER_MIN: 10,
 
     IMG_FORMAT: { lg: '-large.jpeg', md: '-medium.jpeg', sm: '-small.webp' },
+    CHAPTER_FORMAT_SIZES: [
+        '-large',
+        '-small'
+    ],
+    THUMBNAIL_FORMAT_SIZES: [
+        '-thumbnail-webp',
+        '-thumbnail-jpeg',
+        '-thumbnail-original',
+        '-thumbnail-small-webp'
+    ],
+    SLIDER_FORMAT_SIZES: [
+        '-thumbnail-webp',
+        '-thumbnail-jpeg',
+        '-thumbnail-small'
+    ],
+    THUMBNAIL_FORMAT_SIZE_WEBP: '-thumbnail-webp.webp',
+    THUMBNAIL_FORMAT_SIZE_JPEG: '-thumbnail-jpeg.jpeg',
+    THUMBNAIL_FORMAT_SIZE_ORIGINAL: '-thumbnail-original.jpeg',
+    THUMBNAIL_FORMAT_SIZE_SMALL: '-thumbnail-small-webp.webp',
+    CHAPTER_FORMAT_SIZE_LARGE: '-large.jpeg',
+    CHAPTER_FORMAT_SIZE_SMALL: '-small.webp',
+
     TEST: process.env.TEST || "test",
     HOME_TITLE: "Read Manga Online - Dorecomic",
     HOME_DESCRIPTION: "Read manga online free at Dorecomic with fastest update",

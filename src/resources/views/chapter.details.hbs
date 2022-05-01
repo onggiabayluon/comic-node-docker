@@ -69,15 +69,15 @@
             <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{chapter.comicSlug}}/{{prevChapter.chapter}}">
                 <picture>
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail-webp.webp"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}{{IMAGE_FORMAT_SIZE.WEBP}}"
                     type="image/webp" />
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail-jpeg.jpeg"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}{{IMAGE_FORMAT_SIZE.JPEG}}"
                     type="image/jpeg" />
                 
                     <img width="92" height="98"
                     alt="Previous Chapter" 
-                    src="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail-jpeg.jpeg"
+                    src="{{img_url}}/{{chapter.thumbnail.url}}{{IMAGE_FORMAT_SIZE.JPEG}}"
                     />
                 </picture>
                 
@@ -145,15 +145,15 @@ window.lazySizesConfig.customMedia = {
             <a id="prev-chaptercard" class="prev-chaptercard" href="/comic/{{chapter.comicSlug}}/{{nextChapter.chapter}}">
                 <picture>
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail-webp.webp"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}{{IMAGE_FORMAT_SIZE.WEBP}}"
                     type="image/webp" />
                     <source 
-                    srcset="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail-jpeg.jpeg"
+                    srcset="{{img_url}}/{{chapter.thumbnail.url}}{{IMAGE_FORMAT_SIZE.JPEG}}"
                     type="image/jpeg" />
                 
                     <img width="92" height="98"
                     alt="Next Chapter"  
-                    src="{{img_url}}/{{chapter.thumbnail.url}}-thumbnail-jpeg.jpeg"
+                    src="{{img_url}}/{{chapter.thumbnail.url}}{{IMAGE_FORMAT_SIZE.JPEG}}"
                     />
                 </picture>
                 

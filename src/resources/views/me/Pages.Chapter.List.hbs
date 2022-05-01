@@ -29,14 +29,14 @@
                                     </div>
                                     <div class="input-group">
                                         <select class="custom-select" id="inputGroupSelect04" name="action">
-                                            <option selected>Chọn hành động...</option>
-                                            <option value="delete">Xóa</option>
+                                            <option selected>Choose Action...</option>
+                                            <option value="delete">Delete</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
                                         </select>
                                         <div class="input-group-append">
                                             <button class="btn btn-primary btn-sm " id="multifunctionButton"
-                                                data-target="#delete-multi">Áp dụng</button>
+                                                data-target="#delete-multi">Apply</button>
                                         </div>
                                     </div>
 
@@ -116,11 +116,11 @@
                                     <div class="d-flex align-items-center position-relative">
                                         <a href="/me/stored/comics/{{linkComics}}/create-chapter">
                                             <button type="button" class="btn btn-primary mb-1 "
-                                                style="color: white;">Tạo Chapter mới</button>
+                                                style="color: white;">Create New Chapter</button>
                                         </a>
                                         <div class="search-sm d-inline-block ml-3 mb-1">
                                                 <input id="search" type="text" class="w-100"
-                                                    placeholder="Nhập 1 hoặc 20.1">
+                                                    placeholder="Type 1 OR 20.1">
                                             </div>
                                     </div>
 
@@ -153,10 +153,10 @@
 
                     <div id="match-list" class="col-12 list" data-check-all="checkAll">
                         {{#ifCond noChapters '==' true}}
-                        <p class="text-center">Bạn chưa đăng chapter nào hết !!</p>
-                        <p class="text-center">Hãy Nhấn vào nút 
+                        <p class="text-center">You're not upload any chapter !!</p>
+                        <p class="text-center">Please Press BUTTON
                            <a href="/me/stored/comics/{{ ../linkComics}}/create-chapter" 
-                           class="text-primary"> Tạo Chapter Mới </a> </p>
+                           class="text-primary"> Create New Chapter </a> </p>
                         {{/ifCond}}
                         {{#each chapters}}
 
