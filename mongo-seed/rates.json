@@ -1,0 +1,156 @@
+[{
+  "_id": {
+    "$oid": "60ff668490140e8833f80cc8"
+  },
+  "comicId": "60bb4a5cce7f1e1178551211",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2021-07-27T01:51:00.164Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:16:06.764Z"
+  },
+  "users": [
+    {
+      "_id": {
+        "$oid": "60ff66840814221770cf1d0e"
+      },
+      "id": {
+        "$oid": "67c4dd9aec51a6a3c03f96e7"
+      },
+      "value": 5
+    },
+    {
+      "_id": {
+        "$oid": "60ff6a6de7d44c25501ef0cc"
+      },
+      "id": {
+        "$oid": "6084dd9dec23a633c03f96e7"
+      },
+      "value": 2
+    },
+    {
+      "_id": {
+        "$oid": "60ff6af108080a2878cf1fae"
+      },
+      "id": {
+        "$oid": "6086c3292e9bce268c0fdc66"
+      },
+      "value": 5
+    },
+    {
+      "_id": {
+        "$oid": "60ff6b553b501227e053f4d1"
+      },
+      "id": {
+        "$oid": "6084dd3dec23a633c03f96e7"
+      },
+      "value": 5
+    },
+    {
+      "_id": {
+        "$oid": "60ff77351c4c5c2d0ca0e64d"
+      },
+      "id": {
+        "$oid": "6085dd3dec23a633c03f96e7"
+      },
+      "value": 5
+    },
+    {
+      "_id": {
+        "$oid": "60ff782b283739036c88c8c7"
+      },
+      "id": {
+        "$oid": "6085dd3dec63a633c03f96e7"
+      },
+      "value": 5
+    },
+    {
+      "_id": {
+        "$oid": "60ff784a3b2db13674ca4ebc"
+      },
+      "id": {
+        "$oid": "6085dd3dec67a633c03f96e7"
+      },
+      "value": 2
+    },
+    {
+      "_id": {
+        "$oid": "60ff7a76c3a35632b8d1d0f0"
+      },
+      "id": {
+        "$oid": "6085dd3dec67a633c03f95e7"
+      },
+      "value": 5
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "60ff7c9f90140e8833f8184c"
+  },
+  "comicId": "603d8bebf7692e17d03cdb75",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2021-07-27T03:25:19.823Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:25:19.823Z"
+  },
+  "users": [
+    {
+      "_id": {
+        "$oid": "60ff7c9f6a84081f18556fd5"
+      },
+      "id": {
+        "$oid": "6085dd3dec67a633c03f95e7"
+      },
+      "value": 5
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "60ff7e6f90140e8833f81971"
+  },
+  "comicId": "603a068034d84d21247cdb22",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2021-07-27T03:33:03.552Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:33:03.552Z"
+  },
+  "users": [
+    {
+      "_id": {
+        "$oid": "60ff7e6f1c68fe090423b3f2"
+      },
+      "id": {
+        "$oid": "6084dd9dec23a633c03f96e7"
+      },
+      "value": 4
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "60ff7eb990140e8833f81a09"
+  },
+  "comicId": "608543c64441623214fdbf79",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2021-07-27T03:34:17.762Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-27T03:34:17.762Z"
+  },
+  "users": [
+    {
+      "_id": {
+        "$oid": "60ff7eb9241b623300aa2de6"
+      },
+      "id": {
+        "$oid": "6084dd9dec23a633c03f96e7"
+      },
+      "value": 5
+    }
+  ]
+}]

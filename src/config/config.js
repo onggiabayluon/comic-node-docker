@@ -11,6 +11,9 @@ module.exports = {
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_CLOUD_NAME,
     
+    IMAGE_URL: "https://res.cloudinary.com/dwajvm53v/image/upload",
+    IMAGE_URL_HTTP: "http://res.cloudinary.com/dwajvm53v/image/upload",
+
 
     UPDATE_PER_MIN: 10,
 
@@ -44,7 +47,4 @@ module.exports = {
     HOME_KEYWORDS: "read manga online, dorecomic, dorecomic.com, manga online free, free manga, manga reader, manga scans, manga raw, manga, manhwa, manhua",
     HOME_URL: "https://cloudimagewall.xyz",
     HOME_SITENAME: "Dorecomic",
-    
-    IMAGE_URL: "https://res.cloudinary.com/dwajvm53v/image/upload",
-    IMAGE_URL_HTTP: "http://res.cloudinary.com/dwajvm53v/image/upload",
 }

@@ -4,6 +4,7 @@
 
 /etc/certs/*
 
+/src/config/configDev.js
 # /src/config/config.js
 
 gulpfile.js

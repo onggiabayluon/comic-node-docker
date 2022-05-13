@@ -1,5 +1,11 @@
 const redis = require("redis");
-const { REDIS_URL, REDIS_PORT } = require("../config");
+var { REDIS_URL, REDIS_PORT } = require("../config");
+
+// Localhost development
+if (process.env.NODE_ENV != 'production' || process.env.NODE_ENV != 'development') {
+    REDIS_URL = 'localhost'
+}
+
 const client = redis.createClient({
     host: REDIS_URL,
     port: REDIS_PORT

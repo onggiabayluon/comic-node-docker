@@ -3,15 +3,23 @@
     "$oid": "611520f494c435226ca2f333"
   },
   "view": {
-    "totalView": 6,
+    "totalView": 45,
     "dayView": {
-      "thisDay": 15,
-      "view": 6
+      "thisDay": 30,
+      "view": 1
+    },
+    "monthView": {
+      "thisMonth": 3,
+      "view": 2
+    },
+    "yearView": {
+      "thisYear": 2022,
+      "view": 2
     }
   },
   "rate": {
-    "rateCount": 0,
-    "rateValue": 0
+    "rateCount": 3,
+    "rateValue": 14
   },
   "isPublish": true,
   "isFinish": true,
@@ -34,49 +42,40 @@
     "$date": "2021-08-12T13:24:04.084Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:05:04.020Z"
+    "$date": "2022-04-30T03:18:36.108Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "kill-the-hero/thumbnail/1628993728033-images-11-223x300"
+    "url": "kill-the-hero/thumbnail/1651288716105-images-11-223x300"
   },
   "chapters": [
     {
       "_id": {
-        "$oid": "6118845aee95502e5032eedb"
+        "$oid": "612317c76e85fc0cb826d63c"
       },
-      "chapter": "chapter-1",
+      "chapter": "2",
       "updatedAt": {
-        "$date": "2021-08-15T03:04:58.628Z"
+        "$date": "2021-08-23T03:36:39.495Z"
       }
     },
     {
       "_id": {
-        "$oid": "61188460ee95502e5032ef24"
+        "$oid": "612317cc6e85fc0cb826d66d"
       },
-      "chapter": "chapter-2",
+      "chapter": "1",
       "updatedAt": {
-        "$date": "2021-08-15T03:05:04.019Z"
+        "$date": "2021-08-23T03:36:44.266Z"
       }
     }
   ],
   "lastest_chapters": [
     {
       "_id": {
-        "$oid": "61188460ee95502e5032ef25"
-      },
-      "chapter": "chapter-2",
-      "updatedAt": {
-        "$date": "2021-08-15T03:05:04.019Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "6118845aee95502e5032eedc"
+        "$oid": "6267f569a1fadf0eecf991e8"
       },
       "chapter": "chapter-1",
       "updatedAt": {
-        "$date": "2021-08-15T03:04:58.628Z"
+        "$date": "2022-04-26T13:36:45.727Z"
       }
     }
   ]
@@ -86,14 +85,22 @@
   },
   "view": {
     "dayView": {
-      "view": 1,
-      "thisDay": 15
+      "view": 0,
+      "thisDay": 30
     },
-    "totalView": 1
+    "totalView": 2,
+    "monthView": {
+      "thisMonth": 3,
+      "view": 0
+    },
+    "yearView": {
+      "thisYear": 2022,
+      "view": 0
+    }
   },
   "rate": {
-    "rateCount": 0,
-    "rateValue": 0
+    "rateCount": 1,
+    "rateValue": 4
   },
   "isPublish": true,
   "isFinish": true,
@@ -113,40 +120,29 @@
   "subtitle": "The Survival Record of the Sword King in Another World,Otherworldly Sword King's Survival Records,이계 검왕 생존기",
   "description": "Ryu Han-Bin was a normal person who just had been discharged from his mandatory military service, when he was transported to another world. Left to fend for himself, he was given the goal of surviving and growing stronger in a desolate world riddled with monsters. The problem is the 'Guideline' that was supposed to be his guiding system to survive is filled with errors.",
   "author": "Kwon Sun Kyu - Studio Chun - Lim Kyung-Bae",
-  "chapters": [
-    {
-      "_id": {
-        "$oid": "61188944cbc64e07fc7a4c48"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T03:25:56.639Z"
-      }
-    }
-  ],
-  "lastest_chapters": [
-    {
-      "_id": {
-        "$oid": "61188944cbc64e07fc7a4c49"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T03:25:56.639Z"
-      }
-    }
-  ],
   "slug": "survival-story-of-a-sword-king-in-a-fantasy-world",
   "titleForSearch": "Survival Story Of A Sword King In A Fantasy World",
   "createdAt": {
     "$date": "2021-08-15T03:07:17.262Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:25:56.641Z"
+    "$date": "2022-04-26T13:48:50.359Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1628996845842-Survival-Story-of-a-Sword-King-333x500"
-  }
+    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1650979863636-Survival-Story-of-a-Sword-King-333x500"
+  },
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "6267f805b5c09322ac764534"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": "2022-04-26T13:48:50.353Z"
+      }
+    }
+  ]
 },{
   "_id": {
     "$oid": "61188b1ac753d11db4271220"
@@ -174,39 +170,17 @@
   "subtitle": "魔皇大管家, Devil Housekeeper",
   "description": "Magic Emperor summary is updating. Come visit MangaNato.com sometime to read the latest chapter of Magic Emperor. If you have any question about this manga, Please don't hesitate to contact us or translate team. Hope you enjoy it.",
   "author": "Nightingale (Original) + No Two Comics",
-  "chapters": [
-    {
-      "_id": {
-        "$oid": "61188b26c753d11db42712ad"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T03:33:58.741Z"
-      }
-    }
-  ],
-  "lastest_chapters": [
-    {
-      "_id": {
-        "$oid": "61188b26c753d11db42712ae"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T03:33:58.741Z"
-      }
-    }
-  ],
   "slug": "magic-emperor",
   "titleForSearch": "Magic Emperor",
   "createdAt": {
     "$date": "2021-08-15T03:33:46.103Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:34:08.825Z"
+    "$date": "2022-04-26T13:31:38.255Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "magic-emperor/thumbnail/1628998448821-43692"
+    "url": "magic-emperor/thumbnail/1650979898251-43692"
   }
 },{
   "_id": {
@@ -215,9 +189,17 @@
   "view": {
     "dayView": {
       "view": 0,
-      "thisDay": 15
+      "thisDay": 26
     },
-    "totalView": 1
+    "totalView": 2,
+    "monthView": {
+      "thisMonth": 3,
+      "view": 0
+    },
+    "yearView": {
+      "thisYear": 2022,
+      "view": 0
+    }
   },
   "rate": {
     "rateCount": 0,
@@ -235,40 +217,29 @@
   "subtitle": "템빨",
   "description": "Young Woo Shin, Username: Grid. In the words best virtual reality game , bad luck always revolves around him. But he stumbled across a job during a quest, the strongest legendary job out of over 2 billion players!",
   "author": "Dong Wook Lee",
-  "chapters": [
-    {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9158"
-      },
-      "chapter": "chapter-82",
-      "updatedAt": {
-        "$date": "2021-08-15T03:37:26.603Z"
-      }
-    }
-  ],
-  "lastest_chapters": [
-    {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9159"
-      },
-      "chapter": "chapter-82",
-      "updatedAt": {
-        "$date": "2021-08-15T03:37:26.603Z"
-      }
-    }
-  ],
   "slug": "overgeared",
   "titleForSearch": "Overgeared",
   "createdAt": {
     "$date": "2021-08-15T03:36:44.382Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:37:26.604Z"
+    "$date": "2022-04-26T13:41:01.610Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "overgeared/thumbnail/1628998612827-mangatx"
-  }
+    "url": "overgeared/thumbnail/1650979909648-mangatx"
+  },
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "6267f602a1fadf0eecf993db"
+      },
+      "chapter": "chapter-82",
+      "updatedAt": {
+        "$date": "2022-04-26T13:41:01.600Z"
+      }
+    }
+  ]
 },{
   "_id": {
     "$oid": "61188ca20526910e7c9b91f1"
@@ -276,9 +247,9 @@
   "view": {
     "dayView": {
       "view": 0,
-      "thisDay": 15
+      "thisDay": 23
     },
-    "totalView": 7
+    "totalView": 1
   },
   "rate": {
     "rateCount": 0,
@@ -302,57 +273,17 @@
   "subtitle": "I want a slow life in the countryside after reincarnation",
   "description": "The protagonist, Inaka Yuuji, was ran over by a truck because his awareness was dulled from overworking.\r\n\r\n“Ahー, with this I don’t have to work so much anymore. I want to spend my next life leisurely……” was the wish Yuuji blurted out, He met God and it was decided he will be reincarnated in the countryside of the other world. He became Alfred Slowlet, 2nd son of a countryside noble, will he be able to enjoy and leisurely spend his slow life in the countryside?",
   "author": "Renkinou",
-  "chapters": [
-    {
-      "_id": {
-        "$oid": "61188d300526910e7c9b92f9"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T03:42:40.057Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "61188d340526910e7c9b9340"
-      },
-      "chapter": "chapter-2",
-      "updatedAt": {
-        "$date": "2021-08-15T03:42:44.917Z"
-      }
-    }
-  ],
-  "lastest_chapters": [
-    {
-      "_id": {
-        "$oid": "61188d340526910e7c9b9341"
-      },
-      "chapter": "chapter-2",
-      "updatedAt": {
-        "$date": "2021-08-15T03:42:44.917Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "61188d300526910e7c9b92fa"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T03:42:40.057Z"
-      }
-    }
-  ],
   "slug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
   "titleForSearch": "Tensei Shite Inaka De Slowlife Wo Okuritai",
   "createdAt": {
     "$date": "2021-08-15T03:40:18.256Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:42:44.919Z"
+    "$date": "2022-04-26T13:35:24.360Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1628998826898-34352-350x500"
+    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1650980124356-34352-350x500"
   }
 },{
   "_id": {
@@ -384,57 +315,17 @@
   "subtitle": "The Beast Tamer Exiled from the the Hero's Party and the Cat Eared Girl from the Strongest Race Meet, The Beast Tamer Exiled from the Hero’s Party and the Cat Eared Girl from the Strongest Race Meet, 勇者パーティーを追放されたビーストテイマー、最強種族の猫耳少女と出会う, Yuusha Party wo Tsuihou Sareta Beast Tamer, Saikyou Shu Nekomimi Shojo to Deau",
   "description": "Because Rein was a weak and simple beast tamer, he was expelled from the hero's group but that didn't stop his desire to be an adventurer. By taking simple quests afterwards he has a destined encounter with a strong cat girl.",
   "author": "Moto Shigemura - Suzu Miyama",
-  "chapters": [
-    {
-      "_id": {
-        "$oid": "6118942de430531d94bd47c6"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T04:12:29.240Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "61189433e430531d94bd4811"
-      },
-      "chapter": "chapter-2",
-      "updatedAt": {
-        "$date": "2021-08-15T04:12:35.339Z"
-      }
-    }
-  ],
-  "lastest_chapters": [
-    {
-      "_id": {
-        "$oid": "61189433e430531d94bd4812"
-      },
-      "chapter": "chapter-2",
-      "updatedAt": {
-        "$date": "2021-08-15T04:12:35.339Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "6118942de430531d94bd47c7"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T04:12:29.240Z"
-      }
-    }
-  ],
   "slug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
   "titleForSearch": "Yuusha Party Wo Tsuihou Sareta Beast Tamer  Saikyou Shuzoku Nekomimi Shojo To Deau",
   "createdAt": {
     "$date": "2021-08-15T04:12:10.530Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T04:12:35.340Z"
+    "$date": "2022-04-26T13:36:05.669Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/thumbnail/1629000740370-35299-351x500"
+    "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/thumbnail/1650980165665-35299-351x500"
   }
 },{
   "_id": {
@@ -472,38 +363,16 @@
   "subtitle": "",
   "description": "King Grey has unrivaled strength, wealth, and prestige in a world governed by martial ability. However, solitude lingers closely behind those with great power. Beneath the glamorous exterior of a powerful king lurks the shell of man, devoid of purpose and will.\r\n\r\nReincarnated into a new world filled with magic and monsters, the king has a second chance to relive his life. Correcting the mistakes of his past will not be his only challenge, however. Underneath the peace and prosperity of the new world is an undercurrent threatening to destroy everything he has worked for, questioning his role and reason for being born again.",
   "author": "Turtleme - Fuyuki23",
-  "chapters": [
-    {
-      "_id": {
-        "$oid": "611894e0e430531d94bd495e"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T04:15:28.873Z"
-      }
-    }
-  ],
-  "lastest_chapters": [
-    {
-      "_id": {
-        "$oid": "611894e0e430531d94bd495f"
-      },
-      "chapter": "chapter-1",
-      "updatedAt": {
-        "$date": "2021-08-15T04:15:28.873Z"
-      }
-    }
-  ],
   "slug": "the-begining-after-the-end",
   "titleForSearch": "The begining after the end",
   "createdAt": {
     "$date": "2021-08-15T04:15:12.836Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T04:15:28.875Z"
+    "$date": "2022-04-26T13:36:17.793Z"
   },
   "__v": 0,
   "thumbnail": {
-    "url": "the-begining-after-the-end/thumbnail/1629000920821-BAE-333x500"
+    "url": "the-begining-after-the-end/thumbnail/1650980177790-BAE-333x500"
   }
 }]
