@@ -31,6 +31,8 @@ services:
             - "27012:27017"
         volumes:
             - mongo-db:/data/db
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        # bindIp: 127.0.0.1
         
     redis:
         image: redis

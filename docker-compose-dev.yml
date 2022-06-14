@@ -3,9 +3,6 @@ services:
     nginx:
         image: nginx:stable-alpine
         restart: always
-        ports:
-            - "80:80"
-            - "443:443"
         volumes:
             - ./etc/nginx/defaultDev.conf:/etc/nginx/conf.d/default.conf
             - ./etc/certs:/etc/nginx/certs:ro
@@ -17,8 +14,6 @@ services:
         # image: node-app-image:tag
         restart: always
         image: livipst2/comic-node-app
-        environment:
-            - PORT=3000
         depends_on:
             - mongo
             - redis
@@ -29,8 +24,10 @@ services:
         # Open port for outside connection
         ports:
             - "27012:27017"
+        command: mongod --auth
         volumes:
             - mongo-db:/data/db
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     mongo_seed:
         image: mongo
         links:
