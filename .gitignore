@@ -10,5 +10,6 @@
 gulpfile.js
 
 *.dev.yml
+*.withenvtest.yml
 *.seeds.2.yml
 *.prod.2.yml
