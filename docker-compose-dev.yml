@@ -27,7 +27,7 @@ services:
         command: mongod --auth
         volumes:
             - mongo-db:/data/db
-            - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            # - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     mongo_seed:
         image: mongo
         links:
@@ -38,6 +38,8 @@ services:
             - ./mongo-seed:/mongo-seed
         command:
             /mongo-seed/import.sh
+        depends_on:
+            - mongo
     redis:
         image: redis
         restart: always
