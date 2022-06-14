@@ -1,0 +1,41 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:stable-alpine
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./etc/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ./etc/certs:/etc/nginx/certs:ro
+        depends_on:
+            - node-app
+    node-app:
+        # Custom container name
+        # container_name: node-app
+        # image: node-app-image:tag
+        restart: always
+        image: gcr.io/gcp-comic-demo/comic-node-app-test
+        environment:
+            - PORT=3000
+        depends_on:
+            - mongo
+            - redis
+        # env_file:
+        #     - ./.env
+    mongo:
+        image: mongo
+        # Open port for outside connection
+        ports:
+            - "27012:27017"
+        volumes:
+            - mongo-db:/data/db
+        
+    redis:
+        image: redis
+        restart: always
+
+# Named volumes
+volumes:
+    mongo-db:
