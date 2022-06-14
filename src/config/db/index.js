@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const { MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT, MONGO_FOLDER } = require("../config");
-const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/${MONGO_FOLDER}?authSource=admin`
-// const mongoURL = 'mongodb://localhost:27017/ducchuy2'
+var mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/${MONGO_FOLDER}?authSource=admin`
+
+// Localhost development
+if (process.env.NODE_ENV != 'production' || process.env.NODE_ENV != 'development') {
+    mongoURL = 'mongodb://localhost:27017/ducchuy2'
+}
+
 async function connect() {
 
     try {

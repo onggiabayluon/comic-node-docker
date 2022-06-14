@@ -28,10 +28,10 @@
                     <a class="position-relative mt-4" href="#" style="height: fit-content;flex: 1 0 21%;">
                         <picture>
 
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
 
-                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                                 class="list-thumbnail border-0" style="max-width: 180px;object-position: right;" />
                         </picture>
                         <span
@@ -46,10 +46,10 @@
                     <a class="position-relative mt-4" href="#" style="height: fit-content;">
                         <picture>
 
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
 
-                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                                 style="max-width: 100%;object-position: right;" />
                         </picture>
                         <span
@@ -64,10 +64,10 @@
                     <a class="position-relative mt-4" href="#" style="height: fit-content;">
                         <picture>
 
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
 
-                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                                 style="max-width: 100%;object-position: right;" />
                         </picture>
                         <span
@@ -82,10 +82,10 @@
                     <a class="position-relative mt-4" href="#" style="height: fit-content;">
                         <picture>
 
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
 
-                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                                 style="max-width: 100%;object-position: right;" />
                         </picture>
                         <span
@@ -99,10 +99,10 @@
                     <a class="position-relative mt-4" href="#" style="height: fit-content;">
                         <picture>
 
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" />
-                            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                            <source srcset="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
 
-                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                            <img alt="{{this.title}}" alt="banner" src="{{../img_url}}/{{this.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                                 style="max-width: 100%;object-position: right;" />
                         </picture>
                         <span
@@ -348,14 +348,16 @@
                             window.location.replace('/me/stored/config/banner');
                         });
                         this.on("error", function (file, responseText) {
-                            alert(responseText)
+                            console.log(responseText)
+
+                            alert(JSON.stringify(responseText))
                             if (responseText === "You can't upload files of this type.") {
                                 message__wrongFileType.classList.remove("d-none");
                             } else {
                                 message2.classList.remove("d-none");
                             }
                             message.classList.add("d-none");
-                            setTimeout(() => { window.location.href = '' }, 4000)
+                            {{!-- setTimeout(() => { window.location.href = '' }, 4000) --}}
                         });
                     },
                     thumbnailWidth: 160,

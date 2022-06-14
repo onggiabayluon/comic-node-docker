@@ -28,10 +28,13 @@
     },
     {
       "$oid": "608a16fc2c381630b89c0f3d"
+    },
+    {
+      "$oid": "611520f494c435226ca2f333"
     }
   ],
   "updatedAt": {
-    "$date": "2021-07-18T03:08:02.792Z"
+    "$date": "2021-08-15T04:09:37.288Z"
   }
 },{
   "_id": {
@@ -143,6 +146,70 @@
   },
   "updatedAt": {
     "$date": "2021-05-06T13:06:20.251Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61279cba4202a93280c328f8"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [],
+  "name": "test123",
+  "password": "$2b$10$LsUPK.F1qOIerqLqdwozpuDqPus5DGMjFAlmQA1XUM1SqW/ten1cS",
+  "createdAt": {
+    "$date": "2021-08-26T13:52:58.953Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-26T13:52:58.953Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61279d69fcd09e31d4f6afcb"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [],
+  "name": "test1234",
+  "password": "$2b$10$4fqTnPJEigUue4VEmN/fPuWPwDJ1eXjeIzSb2dOO46HXfwMLanZ7W",
+  "createdAt": {
+    "$date": "2021-08-26T13:55:53.276Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-26T13:55:53.276Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61279ddb001d8018b0c334e2"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [],
+  "name": "test12345",
+  "password": "$2b$10$WirA4H2wVzsNI9YcSHAkOuyX9ItbI6ajxuqgXchFmKHjL0vCvN8sG",
+  "createdAt": {
+    "$date": "2021-08-26T13:57:47.252Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-26T13:57:47.252Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61279df2f7be8b234461b2f0"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [],
+  "name": "test123457",
+  "password": "$2b$10$wfvnu52UH0sQgqyQ2gfGvuUmXHfjcwkc5i6HalMFfrcSVfOR.UPH2",
+  "createdAt": {
+    "$date": "2021-08-26T13:58:10.194Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-26T13:58:10.194Z"
   },
   "__v": 0
 }]

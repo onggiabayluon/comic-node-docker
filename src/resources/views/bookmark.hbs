@@ -84,9 +84,9 @@
                                     {{#each sublist.subscribed}}
                                     <div class="glide__slide">
                                             <picture>
-                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" type="image/webp" />
-                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/jpeg" />
-                                                <img width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
+                                                <img width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                                                     onerror="this.onerror=null;this.src='/img/404.jpg';" />
                                             </picture>
                                         {{!-- <badges>

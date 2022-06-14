@@ -17,7 +17,15 @@ const cors      = require("cors");
 const CronJob   = require('cron').CronJob;
 const handlebars = require('express-handlebars');
 const Handlebars = require('handlebars');
-const { UPDATE_PER_MIN } = require("./config/config")
+const { UPDATE_PER_MIN, 
+    THUMBNAIL_FORMAT_SIZE_WEBP, 
+    THUMBNAIL_FORMAT_SIZE_JPEG, 
+    THUMBNAIL_FORMAT_SIZE_ORIGINAL, 
+    CHAPTER_FORMAT_SIZES,
+    CHAPTER_FORMAT_SIZE_LARGE,
+    CHAPTER_FORMAT_SIZE_SMALL,
+    THUMBNAIL_FORMAT_SIZE_SMALL
+} = require("./config/config")
 const session       = require('express-session');
 const redis     = require(path.resolve('./src/config/redis'))
 const moment = require('moment-timezone')
@@ -44,6 +52,19 @@ db.connect();
 const app   = express();
 const port = process.env.PORT || 3000;
 
+// Render Global vars to views
+app.locals = {
+    IMAGE_FORMAT_SIZE: {
+        WEBP: THUMBNAIL_FORMAT_SIZE_WEBP,
+        JPEG: THUMBNAIL_FORMAT_SIZE_JPEG,
+        ORIGINAL: THUMBNAIL_FORMAT_SIZE_ORIGINAL,
+        SMALL: THUMBNAIL_FORMAT_SIZE_SMALL
+    },
+    CHAPTER_FORMAT_SIZE: {
+        LARGE: CHAPTER_FORMAT_SIZE_LARGE,
+        SMALL: CHAPTER_FORMAT_SIZE_SMALL
+    }
+}
 
 // Socket io
 const server = require('http').createServer(app);

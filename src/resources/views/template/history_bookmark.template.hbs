@@ -3,10 +3,10 @@
     {{#each sublist}}
         <div id="comic-{{this._id}}" class="glide__slide">
                 <picture>
-                    <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" type="image/webp" />
-                    <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/jpeg" />
+                    <source srcset="{{../img_url}}/{{this.thumbnail.url}}{{../IMAGE_FORMAT_SIZE.WEBP}}" type="image/webp" />
+                    <source srcset="{{../img_url}}/{{this.thumbnail.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}" type="image/jpeg" />
             
-                    <img alt="{{this.title}}" width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                    <img alt="{{this.title}}" width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                         onerror="this.onerror=null;this.src='/img/404.jpg';" />
                 </picture>
             
@@ -37,13 +37,13 @@
     {{#each historyItems}}
     <div id="comic-{{this.comicId}}" class="glide__slide">
         <picture >
-            <source srcset="{{this.thumbnail}}-thumbnail.webp"
+            <source srcset="{{this.thumbnail}}{{../IMAGE_FORMAT_SIZE.WEBP}}"
                 type="image/webp" />
-            <source srcset="{{this.thumbnail}}-thumbnail.jpeg"
+            <source srcset="{{this.thumbnail}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                 type="image/jpeg" />
     
             <img alt="{{this.title}}" width="198" height="160"
-                src="{{this.thumbnail}}-thumbnail.jpeg"
+                src="{{this.thumbnail}}{{../IMAGE_FORMAT_SIZE.JPEG}}"
                 onerror="this.onerror=null;this.src='/img/404.jpg';" />
         </picture>
         <bottom-info>

@@ -1,1033 +1,203 @@
 [{
   "_id": {
-    "$oid": "60b4575fea600f0f6ca7c49d"
+    "$oid": "6267f569a1fadf0eecf991e8"
   },
-  "title": "chapter of wizard-of-anesia",
-  "chapter": "chapter-10",
-  "chapterSlug": "wizard-of-anesia-35-mmFNA-",
-  "comicSlug": "wizard-of-anesia",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c49f"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583163-0"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a0"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583166-0_1"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a1"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583167-0_2"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a2"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583167-0_3"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a3"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583168-1"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a4"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583168-2"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a5"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583169-3"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a6"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583169-4"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a7"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583170-5"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a8"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583170-6"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4a9"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583171-7"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4aa"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583171-8"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4ab"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583172-9"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4ac"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583172-10"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4ad"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583172-11"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4ae"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583173-12"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4af"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583174-13"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4b0"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583174-14"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4b1"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583175-15"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4b2"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583175-16"
-    },
-    {
-      "_id": {
-        "$oid": "60b4575fea600f0f6ca7c4b3"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1622431583175-17"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-05-31T03:26:23.217Z"
+  "thumbnail": {
+    "url": "kill-the-hero/thumbnail/1650979851456-images-11-223x300"
   },
-  "updatedAt": {
-    "$date": "2021-05-31T03:26:23.217Z"
+  "coin": {
+    "required": 0,
+    "expiredAt": null
   },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b4de4fa345290b7004c86c"
-  },
-  "title": "chapter of toi-la-nguoi-choi-duy-nhat-dang-nhap",
+  "title": "Kill The Hero",
   "chapter": "chapter-1",
-  "chapterSlug": "toi-la-nguoi-choi-duy-nhat-dang-nhap-4h5FEJpty",
-  "comicSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c86e"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127813-0"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c86f"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127816-0_1"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c870"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127818-0_2"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c871"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127818-0_3"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c872"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127819-0_5"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c873"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127819-0_6"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c874"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127820-1_02"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c875"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127820-1_04"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c876"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127821-1_06"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c877"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127821-1_08"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c878"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127822-1_09"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de4fa345290b7004c879"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466127822-1_11"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-05-31T13:02:07.859Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:11:20.282Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b4de5ba345290b7004c87a"
-  },
-  "title": "chapter of toi-la-nguoi-choi-duy-nhat-dang-nhap",
-  "chapter": "chapter-2",
-  "chapterSlug": "toi-la-nguoi-choi-duy-nhat-dang-nhap-O67cOVYl_",
-  "comicSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c87c"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139112-27_02"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c87d"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139112-27_03"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c87e"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139113-27_05"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c87f"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139114-27_06"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c880"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139129-27_08"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c881"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139130-27_10"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c882"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139131-27_11"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c883"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139134-27_12"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c884"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139136-27_13"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c885"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139137-27_14"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c886"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139138-27_16"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c887"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139138-27_18"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c888"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139139-27_20"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c889"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139139-27_22"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c88a"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139140-27_24"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c88b"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139141-27_26"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c88c"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139142-27_28"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c88d"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139142-27_30"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c88e"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139143-27_31"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c88f"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139144-27_32"
-    },
-    {
-      "_id": {
-        "$oid": "60b4de5ba345290b7004c890"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622466139145-27_33"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-05-31T13:02:19.159Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:11:20.282Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60b6f1e36ce2a71ac0a4c413"
-  },
-  "title": "chapter of toi-la-nguoi-choi-duy-nhat-dang-nhap",
-  "chapter": "chapter-4",
-  "chapterSlug": "toi-la-nguoi-choi-duy-nhat-dang-nhap-c4vLGhKZp",
-  "comicSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60b6f1e36ce2a71ac0a4c415"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622602211457-0"
-    },
-    {
-      "_id": {
-        "$oid": "60b6f1e36ce2a71ac0a4c416"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622602211460-0_1"
-    },
-    {
-      "_id": {
-        "$oid": "60b6f1e36ce2a71ac0a4c417"
-      },
-      "url": "toi-la-nguoi-choi-duy-nhat-dang-nhap/chapter-undefined/1622602211461-0_2"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-02T02:50:11.506Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T10:11:20.282Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60bb797af8b6d00d14efc5b3"
-  },
-  "title": "chapter of the-strongest-dull-princes-secret-battle-for-the-throne",
-  "chapter": "chapter-1",
-  "chapterSlug": "the-strongest-dull-princes-secret-battle-for-the-throne-U6l2WUxA6",
-  "comicSlug": "the-strongest-dull-princes-secret-battle-for-the-throne",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60bb797af8b6d00d14efc5b5"
-      },
-      "url": "the-strongest-dull-princes-secret-battle-for-the-throne/chapter-undefined/1622899066186-44412-352x500"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-06-05T13:17:46.218Z"
-  },
-  "updatedAt": {
-    "$date": "2021-06-05T13:17:46.218Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60ee9f7c203fe42a60ac116c"
-  },
-  "title": "chapter of wizard-of-anesia",
-  "chapter": "chapter-11",
-  "chapterSlug": "wizard-of-anesia-heVa8UAJU",
-  "comicSlug": "wizard-of-anesia",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60ee9f7c203fe42a60ac116e"
-      },
-      "url": "wizard-of-anesia/chapter-undefined/1626251132920-1c2cd52f-6d15-4fca-90c6-59649050fa2e"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-14T08:25:32.963Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-14T08:25:32.963Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60ef9a04abe09323403b7469"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-1",
-  "chapterSlug": "test-3dXvQ9538",
-  "comicSlug": "test",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60ef9a04abe09323403b746b"
-      },
-      "url": "test/chapter-undefined/1626315268344-1c2cd52f-6d15-4fca-90c6-59649050fa2e"
-    },
-    {
-      "_id": {
-        "$oid": "60ef9a04abe09323403b746c"
-      },
-      "url": "test/chapter-undefined/1626315268390-43245160_p3"
-    },
-    {
-      "_id": {
-        "$oid": "60ef9a04abe09323403b746d"
-      },
-      "url": "test/chapter-undefined/1626315268393-background-4777641_1920"
-    },
-    {
-      "_id": {
-        "$oid": "60ef9a04abe09323403b746e"
-      },
-      "url": "test/chapter-undefined/1626315268395-custom_png_edited-"
-    },
-    {
-      "_id": {
-        "$oid": "60ef9a04abe09323403b746f"
-      },
-      "url": "test/chapter-undefined/1626315268397-custom_png_edited_v2-"
-    },
-    {
-      "_id": {
-        "$oid": "60ef9a04abe09323403b7470"
-      },
-      "url": "test/chapter-undefined/1626315268398-custom_png_edited_v3-"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-15T02:14:28.462Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-15T02:14:28.462Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60ef9a9bedf6702150e5e88f"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-2",
-  "chapterSlug": "test-Cs8mkGO_n",
-  "comicSlug": "test",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60ef9a9bedf6702150e5e891"
-      },
-      "url": "test/chapter-undefined/1626315419408-custom_png_edited-"
-    },
-    {
-      "_id": {
-        "$oid": "60ef9a9bedf6702150e5e892"
-      },
-      "url": "test/chapter-undefined/1626315419411-custom_png_edited_v2-"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-15T02:16:59.523Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-15T02:16:59.523Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60ef9aed8b4eeb0e7c5b74b6"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-3",
-  "chapterSlug": "test-_iNi-VQ66",
-  "comicSlug": "test",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60ef9aed8b4eeb0e7c5b74b8"
-      },
-      "url": "test/chapter-undefined/1626315501502-custom_png_edited_v3-"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-15T02:18:21.556Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-15T02:18:21.556Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60ef9b051f60ee2714551665"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-4",
-  "chapterSlug": "test-UhgRGh_E5",
-  "comicSlug": "test",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60ef9b051f60ee2714551667"
-      },
-      "url": "test/chapter-undefined/1626315525339-1c2cd52f-6d15-4fca-90c6-59649050fa2e"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-15T02:18:45.481Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-15T02:18:45.481Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60ef9b3d1f60ee2714551668"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-5",
-  "chapterSlug": "test-5yp9qbhHX",
-  "comicSlug": "test",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60ef9b3d1f60ee271455166a"
-      },
-      "url": "test/chapter-undefined/1626315581678-43245160_p3"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-15T02:19:41.689Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-15T02:19:41.689Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60efa40bd2cf7707588089ec"
-  },
-  "title": "chapter of test",
-  "chapter": "chapter-7",
-  "chapterSlug": "test-IZwPoYONO",
-  "comicSlug": "test",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60efa40bd2cf7707588089ee"
-      },
-      "url": "test/chapter-7/1626317835486-custom_png_edited_v3-"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-15T02:57:15.527Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-15T02:57:15.527Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60f39b2f59d748350c1a9899"
-  },
-  "title": "chapter of an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "chapter": "chapter-5",
-  "chapterSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH-Y5TYwdxtA",
-  "comicSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "image": [
-    {
-      "_id": {
-        "$oid": "60f39b2f59d748350c1a989b"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-5/1626577711217-background-4777641_1920"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-07-18T03:08:31.242Z"
-  },
-  "updatedAt": {
-    "$date": "2021-07-18T03:08:31.242Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "610deb4df477db04c844a1b3"
-  },
-  "title": "chapter of an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "chapter": "chapter-6.1",
-  "chapterSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH-fdfjn2B9P",
-  "comicSlug": "an-a-ranked-adventurers-slow-living-5oVZ93zLH",
-  "image": [
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1b5"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157750-1"
-    },
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1b6"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157751-1"
-    },
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1b7"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157752-2"
-    },
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1b8"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157753-3"
-    },
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1b9"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157754-4"
-    },
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1ba"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157758-5"
-    },
-    {
-      "_id": {
-        "$oid": "610deb4df477db04c844a1bb"
-      },
-      "url": "an-a-ranked-adventurers-slow-living-5oVZ93zLH/chapter-6.1/1628302157758-6"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-07T02:09:17.770Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-07T02:09:17.770Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "6118845aee95502e5032eed8"
-  },
-  "title": "chapter of kill-the-hero",
-  "chapter": "chapter-1",
-  "chapterSlug": "kill-the-hero-iFX_zS7aV",
+  "chapterSlug": "kill-the-hero-2N73ENamt",
   "comicSlug": "kill-the-hero",
   "image": [
     {
-      "_id": {
-        "$oid": "6118845aee95502e5032eeda"
-      },
-      "url": "kill-the-hero/chapter-1/1628996698616-images-11-223x300"
+      "url": "kill-the-hero/chapter-1/1650980202703-images-11-223x300",
+      "width": 1000,
+      "height": 1345
     }
   ],
   "createdAt": {
-    "$date": "2021-08-15T03:04:58.640Z"
+    "$date": "2022-04-26T13:36:45.747Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:04:58.640Z"
+    "$date": "2022-04-26T13:36:45.747Z"
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "61188460ee95502e5032ef21"
+    "$oid": "6267f602a1fadf0eecf993db"
   },
-  "title": "chapter of kill-the-hero",
-  "chapter": "chapter-2",
-  "chapterSlug": "kill-the-hero-mZfZkdeNq",
-  "comicSlug": "kill-the-hero",
-  "image": [
-    {
-      "_id": {
-        "$oid": "61188460ee95502e5032ef23"
-      },
-      "url": "kill-the-hero/chapter-2/1628996704016-images-11-223x300"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T03:05:04.025Z"
+  "thumbnail": {
+    "url": "overgeared/thumbnail/1650979909648-mangatx"
   },
-  "updatedAt": {
-    "$date": "2021-08-15T03:05:04.025Z"
+  "coin": {
+    "required": 0,
+    "expiredAt": null
   },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "61188944cbc64e07fc7a4c45"
-  },
-  "title": "chapter of survival-story-of-a-sword-king-in-a-fantasy-world",
-  "chapter": "chapter-1",
-  "chapterSlug": "survival-story-of-a-sword-king-in-a-fantasy-world-gPWOHAq2g",
-  "comicSlug": "survival-story-of-a-sword-king-in-a-fantasy-world",
-  "image": [
-    {
-      "_id": {
-        "$oid": "61188944cbc64e07fc7a4c47"
-      },
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1628997956632-Survival-Story-of-a-Sword-King-333x500"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T03:25:56.649Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-15T03:25:56.649Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "61188b26c753d11db42712aa"
-  },
-  "title": "chapter of magic-emperor",
-  "chapter": "chapter-1",
-  "chapterSlug": "magic-emperor-7ew1OzWQj",
-  "comicSlug": "magic-emperor",
-  "image": [
-    {
-      "_id": {
-        "$oid": "61188b26c753d11db42712ac"
-      },
-      "url": "magic-emperor/chapter-1/1628998438736-43692"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T03:33:58.750Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-15T03:33:58.750Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "61188bf60526910e7c9b9146"
-  },
-  "title": "chapter of overgeared",
+  "title": "Overgeared",
   "chapter": "chapter-82",
-  "chapterSlug": "overgeared-LPRyzVa-E",
+  "chapterSlug": "overgeared-55ajErtgr",
   "comicSlug": "overgeared",
   "image": [
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9148"
-      },
-      "url": "overgeared/chapter-82/1628998646589-OG-82__0007_compress86"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0007_compress86",
+      "width": 1000,
+      "height": 646
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9149"
-      },
-      "url": "overgeared/chapter-82/1628998646591-OG-82__0012_compress80"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0012_compress80",
+      "width": 1000,
+      "height": 10989
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b914a"
-      },
-      "url": "overgeared/chapter-82/1628998646592-OG-82__0022_compress69"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0022_compress69",
+      "width": 1000,
+      "height": 6944
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b914b"
-      },
-      "url": "overgeared/chapter-82/1628998646593-OG-82__0032_compress37"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0032_compress37",
+      "width": 1000,
+      "height": 15996
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b914c"
-      },
-      "url": "overgeared/chapter-82/1628998646594-OG-82__0042_compress81"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0042_compress81",
+      "width": 1000,
+      "height": 9865
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b914d"
-      },
-      "url": "overgeared/chapter-82/1628998646594-OG-82__0052_compress26"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0052_compress26",
+      "width": 1000,
+      "height": 6944
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b914e"
-      },
-      "url": "overgeared/chapter-82/1628998646595-OG-82__0062_compress87"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0062_compress87",
+      "width": 1000,
+      "height": 9175
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b914f"
-      },
-      "url": "overgeared/chapter-82/1628998646595-OG-82__0072_compress89"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0072_compress89",
+      "width": 1000,
+      "height": 7625
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9150"
-      },
-      "url": "overgeared/chapter-82/1628998646596-OG-82__0082_compress7"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0082_compress7",
+      "width": 1000,
+      "height": 7744
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9151"
-      },
-      "url": "overgeared/chapter-82/1628998646596-OG-82__0092_compress26"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0092_compress26",
+      "width": 1000,
+      "height": 10034
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9152"
-      },
-      "url": "overgeared/chapter-82/1628998646597-OG-82__0181_compress5"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0181_compress5",
+      "width": 1000,
+      "height": 14118
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9153"
-      },
-      "url": "overgeared/chapter-82/1628998646597-OG-82__0191_compress25"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0191_compress25",
+      "width": 1000,
+      "height": 13330
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9154"
-      },
-      "url": "overgeared/chapter-82/1628998646598-OG-82__0201_compress10"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0201_compress10",
+      "width": 1000,
+      "height": 8060
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9155"
-      },
-      "url": "overgeared/chapter-82/1628998646598-OG-82__0211_compress6"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0211_compress6",
+      "width": 1000,
+      "height": 8829
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9156"
-      },
-      "url": "overgeared/chapter-82/1628998646598-OG-82__0221_compress31"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0221_compress31",
+      "width": 1000,
+      "height": 7960
     },
     {
-      "_id": {
-        "$oid": "61188bf60526910e7c9b9157"
-      },
-      "url": "overgeared/chapter-82/1628998646599-OG-82__0231_compress48"
+      "url": "overgeared/chapter-82/1650980355518-OG-82__0231_compress48",
+      "width": 1000,
+      "height": 5733
+    },
+    {
+      "url": "overgeared/chapter-82/1650980355518-OG-82__999f3_compress28",
+      "width": 1000,
+      "height": 1643
     }
   ],
   "createdAt": {
-    "$date": "2021-08-15T03:37:26.613Z"
+    "$date": "2022-04-26T13:41:01.635Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:37:26.613Z"
+    "$date": "2022-04-26T13:41:01.635Z"
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "61188d300526910e7c9b92f6"
+    "$oid": "6267f805b5c09322ac764534"
   },
-  "title": "chapter of tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "thumbnail": {
+    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1650979863636-Survival-Story-of-a-Sword-King-333x500"
+  },
+  "coin": {
+    "required": 0,
+    "expiredAt": null
+  },
+  "title": "Survival Story Of A Sword King In A Fantasy World",
   "chapter": "chapter-1",
-  "chapterSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai-TLjV-Oqin",
-  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "chapterSlug": "survival-story-of-a-sword-king-in-a-fantasy-world--8rtbq4jE",
+  "comicSlug": "survival-story-of-a-sword-king-in-a-fantasy-world",
   "image": [
     {
-      "_id": {
-        "$oid": "61188d300526910e7c9b92f8"
-      },
-      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-1/1628998960053-34352-350x500"
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page000_",
+      "width": 1000,
+      "height": 1478
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page002_",
+      "width": 1000,
+      "height": 22876
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page003_",
+      "width": 1000,
+      "height": 22404
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page004_",
+      "width": 1000,
+      "height": 19811
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page007_",
+      "width": 1000,
+      "height": 21853
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page008_",
+      "width": 1000,
+      "height": 21444
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page009_",
+      "width": 1000,
+      "height": 24401
+    },
+    {
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page010_",
+      "width": 1000,
+      "height": 13168
     }
   ],
   "createdAt": {
-    "$date": "2021-08-15T03:42:40.065Z"
+    "$date": "2022-04-26T13:48:50.370Z"
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:42:40.065Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "61188d340526910e7c9b933d"
-  },
-  "title": "chapter of tensei-shite-inaka-de-slowlife-wo-okuritai",
-  "chapter": "chapter-2",
-  "chapterSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai-54qjwDgxU",
-  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
-  "image": [
-    {
-      "_id": {
-        "$oid": "61188d340526910e7c9b933f"
-      },
-      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-2/1628998964915-34352-350x500"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T03:42:44.925Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-15T03:42:44.925Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "6118942de430531d94bd47c3"
-  },
-  "title": "chapter of yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
-  "chapter": "chapter-1",
-  "chapterSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau-Z0CmEIPLi",
-  "comicSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
-  "image": [
-    {
-      "_id": {
-        "$oid": "6118942de430531d94bd47c5"
-      },
-      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1629000749236-35299-351x500"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T04:12:29.251Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-15T04:12:29.251Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "61189433e430531d94bd480e"
-  },
-  "title": "chapter of yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
-  "chapter": "chapter-2",
-  "chapterSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau-tusQPgghW",
-  "comicSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
-  "image": [
-    {
-      "_id": {
-        "$oid": "61189433e430531d94bd4810"
-      },
-      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-2/1629000755336-35299-351x500"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T04:12:35.346Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-15T04:12:35.346Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "611894e0e430531d94bd495b"
-  },
-  "title": "chapter of the-begining-after-the-end",
-  "chapter": "chapter-1",
-  "chapterSlug": "the-begining-after-the-end-5C7dFKVv0",
-  "comicSlug": "the-begining-after-the-end",
-  "image": [
-    {
-      "_id": {
-        "$oid": "611894e0e430531d94bd495d"
-      },
-      "url": "the-begining-after-the-end/chapter-1/1629000928869-BAE-333x500"
-    }
-  ],
-  "createdAt": {
-    "$date": "2021-08-15T04:15:28.881Z"
-  },
-  "updatedAt": {
-    "$date": "2021-08-15T04:15:28.881Z"
+    "$date": "2022-04-26T13:48:50.370Z"
   },
   "__v": 0
 }]

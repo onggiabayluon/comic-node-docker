@@ -5,8 +5,9 @@ const removeVietnameseTones = require('../../config/middleware/VnameseToEng');
 const trimEng = require('../../config/middleware/trimEng')
 const shortid = require('shortid');
 const customError = require('../../util/customErrorHandler')
-const deleteMiddleWare = require('../middlewares/S3DeleteMiddleware');
-const { IMAGE_URL } = require('../../config/config');
+// const deleteMiddleWare = require('../middlewares/S3DeleteMiddleware');
+const cloudinaryDeleteMiddleware = require('../middlewares/CloudinaryDeleteMiddleware');
+const { IMAGE_URL, THUMBNAIL_FORMAT_SIZES, CHAPTER_FORMAT_SIZES } = require('../../config/config');
 
 
 /***** Comic Controller *****
@@ -358,17 +359,16 @@ const destroyComic_Helper = (exports.destroyComic_Helper
 
           console.log("--1 Tiến hành Xóa comic thumbnail trên s3: ")
           if (comic.thumbnail != null) {
-            let arrURL = [
-              {
-                url: comic.thumbnail.url + '-thumbnail.webp'
-              },
-              {
-                url: comic.thumbnail.url + '-thumbnail-original.jpeg'
-              }
-            ]
-            deleteMiddleWare(arrURL, function (err) {
-              if (err) { return next(err) }
-            }); /* -- end First task -- */
+            const formatSizes = THUMBNAIL_FORMAT_SIZES
+            
+            const url = comic.thumbnail.url
+
+            const callback = (err) => {
+              if (err) return next(err)
+            }
+            
+            cloudinaryDeleteMiddleware.destroyImages(url, formatSizes, callback)
+            /* -- end First task -- */
           }
           else {
             console.log(' --K có thumbnail để xóa')
@@ -379,24 +379,16 @@ const destroyComic_Helper = (exports.destroyComic_Helper
             .then(chapters => {
               if (!chapters) {
                 console.log(' --K có chapter images để xóa')
-              }
-              else {
-                let arrURL = []
+              } else {
                 chapters.map(chapter => {
-                  chapter.image.forEach(image => {
-                    arrURL.push({
-                      url: image.url + '-large.webp'
-                    },
-                    {
-                      url: image.url + '-medium.jpeg'
-                    },
-                    {
-                      url: image.url + '-small.webp'
-                    })
-                  });
-                  deleteMiddleWare(arrURL, function (err) {
-                    if (err) { return next(err) }
-                  });
+                  let url = chapter.image[0].url
+
+                  const callback = (err) => {
+                    if (err) return next(err)
+                  }
+
+                  CloudinaryDeleteMiddleware.destroyFolder(url, callback)
+
                 })
               }
             })
@@ -494,17 +486,16 @@ const handleFormActionForComics_Helper = (exports.handleFormActionForComics_Help
                 .then(comic => {
                   console.log("--1 Tiến hành Xóa comic thumbnail trên s3: ")
                   if (comic.thumbnail != null) {
-                    let arrURL = [
-                      {
-                        url: comic.thumbnail.url + '-thumbnail.webp'
-                      },
-                      {
-                        url: comic.thumbnail.url + '-thumbnail-original.jpeg'
-                      }
-                    ]
-                    deleteMiddleWare(arrURL, function (err) {
-                      if (err) { return next(err) }
-                    }) /* -- end First task -- */
+                    const formatSizes = THUMBNAIL_FORMAT_SIZES
+
+                    const url = comic.thumbnail.url
+
+                    const callback = (err) => {
+                      if (err) return next(err)
+                    }
+
+                    cloudinaryDeleteMiddleware.destroyImages(url, formatSizes, callback) 
+                    /* -- end First task -- */
                   }
                 })
 
@@ -515,22 +506,15 @@ const handleFormActionForComics_Helper = (exports.handleFormActionForComics_Help
                     if (chapters.length == 0) {
                       console.log(' --K có chapter images để xóa')
                     } else {
-                      let arrURL = []
                       chapters.map(chapter => {
-                        chapter.image.forEach(image => {
-                          arrURL.push({
-                            url: image.url + '-large.webp'
-                          },
-                          {
-                            url: image.url + '-medium.jpeg'
-                          },
-                          {
-                            url: image.url + '-small.webp'
-                          })
-                        });
-                        deleteMiddleWare(arrURL, function (err) {
-                          if (err) { return next(err) }
-                        });
+                        let url = chapter.image[0].url
+
+                        const callback = (err) => {
+                          if (err) return next(err)
+                        }
+
+                        CloudinaryDeleteMiddleware.destroyFolder(url, callback)
+                        
                       })
                     }
                   })/* -- End Second task -- */
@@ -632,20 +616,16 @@ const destroyChapter_Helper = (exports.destroyChapter_Helper
       Chapter.findOne({ _id: req.params.chapter_id }, function (err, currentChapter) {
         // return res.json(chapter)
         console.log("-- 1.Tiến hành Xóa chapter images trên s3" + " [" + currentChapter.chapter + "]:")
-        let arrURL = []
         currentChapter.image.forEach(image => {
-          arrURL.push({
-            url: image.url + '-large.webp'
-          },
-          {
-            url: image.url + '-medium.jpeg'
-          },
-          {
-            url: image.url + '-small.webp'
-          })
-        });
-        deleteMiddleWare(arrURL, function (err) {
-          if (err) { return next(err) }
+          const formatSizes = CHAPTER_FORMAT_SIZES
+
+          const url = image.url
+
+          const callback = (err) => {
+            if (err) return next(err)
+          }
+
+          cloudinaryDeleteMiddleware.destroyImages(url, formatSizes, callback) 
         });
       });
     };
@@ -702,20 +682,16 @@ const handleFormActionForChapters_Helper = (exports.handleFormActionForChapters_
                   console.log(' --K có chapter để xóa')
                 } else {
                   console.log("-- 2.Tiến hành Xóa chapter images trên s3" + " [" + currentChapter.chapter + "]:")
-                  let arrURL = []
                   currentChapter.image.forEach(image => {
-                    arrURL.push({
-                      url: image.url + '-large.webp'
-                    },
-                    {
-                      url: image.url + '-medium.jpeg'
-                    },
-                    {
-                      url: image.url + '-small.webp'
-                    })
-                  });
-                  deleteMiddleWare(arrURL, function (err) {
-                    if (err) { return next(err) }
+                    const formatSizes = CHAPTER_FORMAT_SIZES
+
+                    const url = image.url
+
+                    const callback = (err) => {
+                      if (err) return next(err)
+                    }
+
+                    cloudinaryDeleteMiddleware.destroyImages(url, formatSizes, callback)
                   });
                 }
               }).catch(next)
