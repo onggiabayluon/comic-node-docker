@@ -1,147 +1,42 @@
 [{
   "_id": {
-    "$oid": "6267f569a1fadf0eecf991e8"
+    "$oid": "63114bb373911e8346823662"
   },
   "thumbnail": {
-    "url": "kill-the-hero/thumbnail/1650979851456-images-11-223x300"
+    "url": "kill-the-hero/thumbnail/1662076693016-images-11-223x300"
   },
   "coin": {
-    "required": 0,
+    "required": 100,
     "expiredAt": null
   },
   "title": "Kill The Hero",
   "chapter": "chapter-1",
-  "chapterSlug": "kill-the-hero-2N73ENamt",
+  "chapterSlug": "kill-the-hero-V0T0pzQ6V",
   "comicSlug": "kill-the-hero",
   "image": [
     {
-      "url": "kill-the-hero/chapter-1/1650980202703-images-11-223x300",
+      "url": "kill-the-hero/chapter-1/1662077876557-1650980202703-images-11-223x300-large",
       "width": 1000,
       "height": 1345
     }
   ],
   "createdAt": {
-    "$date": "2022-04-26T13:36:45.747Z"
-  },
-  "updatedAt": {
-    "$date": "2022-04-26T13:36:45.747Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "6267f602a1fadf0eecf993db"
-  },
-  "thumbnail": {
-    "url": "overgeared/thumbnail/1650979909648-mangatx"
-  },
-  "coin": {
-    "required": 0,
-    "expiredAt": null
-  },
-  "title": "Overgeared",
-  "chapter": "chapter-82",
-  "chapterSlug": "overgeared-55ajErtgr",
-  "comicSlug": "overgeared",
-  "image": [
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0007_compress86",
-      "width": 1000,
-      "height": 646
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0012_compress80",
-      "width": 1000,
-      "height": 10989
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0022_compress69",
-      "width": 1000,
-      "height": 6944
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0032_compress37",
-      "width": 1000,
-      "height": 15996
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0042_compress81",
-      "width": 1000,
-      "height": 9865
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0052_compress26",
-      "width": 1000,
-      "height": 6944
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0062_compress87",
-      "width": 1000,
-      "height": 9175
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0072_compress89",
-      "width": 1000,
-      "height": 7625
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0082_compress7",
-      "width": 1000,
-      "height": 7744
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0092_compress26",
-      "width": 1000,
-      "height": 10034
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0181_compress5",
-      "width": 1000,
-      "height": 14118
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0191_compress25",
-      "width": 1000,
-      "height": 13330
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0201_compress10",
-      "width": 1000,
-      "height": 8060
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0211_compress6",
-      "width": 1000,
-      "height": 8829
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0221_compress31",
-      "width": 1000,
-      "height": 7960
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__0231_compress48",
-      "width": 1000,
-      "height": 5733
-    },
-    {
-      "url": "overgeared/chapter-82/1650980355518-OG-82__999f3_compress28",
-      "width": 1000,
-      "height": 1643
+    "$date": {
+      "$numberLong": "1662077878704"
     }
-  ],
-  "createdAt": {
-    "$date": "2022-04-26T13:41:01.635Z"
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:41:01.635Z"
+    "$date": {
+      "$numberLong": "1662077878704"
+    }
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "6267f805b5c09322ac764534"
+    "$oid": "63114bff73911e12b782367e"
   },
   "thumbnail": {
-    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1650979863636-Survival-Story-of-a-Sword-King-333x500"
+    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1662076890902-1650979863636-Survival-Story-of-a-Sword-King-333x500-thumbnail-original"
   },
   "coin": {
     "required": 0,
@@ -149,55 +44,853 @@
   },
   "title": "Survival Story Of A Sword King In A Fantasy World",
   "chapter": "chapter-1",
-  "chapterSlug": "survival-story-of-a-sword-king-in-a-fantasy-world--8rtbq4jE",
+  "chapterSlug": "survival-story-of-a-sword-king-in-a-fantasy-world-pX11dF4-t",
   "comicSlug": "survival-story-of-a-sword-king-in-a-fantasy-world",
   "image": [
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page000_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page000_-large",
       "width": 1000,
       "height": 1478
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page002_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page002_-large",
       "width": 1000,
       "height": 22876
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page003_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page003_-large",
       "width": 1000,
       "height": 22404
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page004_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page004_-large",
       "width": 1000,
       "height": 19811
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page007_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page007_-large",
       "width": 1000,
       "height": 21853
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page008_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page008_-large",
       "width": 1000,
       "height": 21444
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page009_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page009_-large",
       "width": 1000,
       "height": 24401
     },
     {
-      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1650980870733-SSSK01page010_",
+      "url": "survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/1662077952072-1650980870733-SSSK01page010_-large",
       "width": 1000,
       "height": 13168
     }
   ],
   "createdAt": {
-    "$date": "2022-04-26T13:48:50.370Z"
+    "$date": {
+      "$numberLong": "1662077979734"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:48:50.370Z"
+    "$date": {
+      "$numberLong": "1662077979734"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63114c3a73911e93608236ac"
+  },
+  "thumbnail": {
+    "url": "overgeared/thumbnail/1632022688489-mangatx"
+  },
+  "coin": {
+    "required": 0,
+    "expiredAt": null
+  },
+  "title": "Overgeared",
+  "chapter": "chapter-82",
+  "chapterSlug": "overgeared--8uyVtFq5",
+  "comicSlug": "overgeared",
+  "image": [
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0007_compress86-large",
+      "width": 1000,
+      "height": 646
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0012_compress80-large",
+      "width": 1000,
+      "height": 10989
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0022_compress69-large",
+      "width": 1000,
+      "height": 6944
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0032_compress37-large",
+      "width": 1000,
+      "height": 15996
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0042_compress81-large",
+      "width": 1000,
+      "height": 9865
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0052_compress26-large",
+      "width": 1000,
+      "height": 6944
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0062_compress87-large",
+      "width": 1000,
+      "height": 9175
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0072_compress89-large",
+      "width": 1000,
+      "height": 7625
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0082_compress7-large",
+      "width": 1000,
+      "height": 7744
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0092_compress26-large",
+      "width": 1000,
+      "height": 10034
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0181_compress5-large",
+      "width": 1000,
+      "height": 14118
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0191_compress25-large",
+      "width": 1000,
+      "height": 13330
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0201_compress10-large",
+      "width": 1000,
+      "height": 8060
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0211_compress6-large",
+      "width": 1000,
+      "height": 8829
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0221_compress31-large",
+      "width": 1000,
+      "height": 7960
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__0231_compress48-large",
+      "width": 1000,
+      "height": 5733
+    },
+    {
+      "url": "overgeared/chapter-82/1662078011305-1650980355518-OG-82__999f3_compress28-large",
+      "width": 1000,
+      "height": 1643
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1662078059245"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1662078059245"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63114d1873911e8ae8823700"
+  },
+  "thumbnail": {
+    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1662078170180-1650980124356-34352-350x500-thumbnail-original"
+  },
+  "coin": {
+    "required": 200,
+    "expiredAt": {
+      "$date": {
+        "$numberLong": "1662117804000"
+      }
+    }
+  },
+  "title": "Tensei Shite Inaka De Slowlife Wo Okuritai",
+  "chapter": "chapter-20",
+  "chapterSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai-0supfAvw6",
+  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "image": [
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__1_compress22-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__2_compress45-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__3_compress47-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__3_compress47-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__4_compress30-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__5_compress11-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__6_compress89-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__7_compress67-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__8_compress41-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__8_compress41-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__9_compress16-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__10_compress92-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__11_compress68-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__12_compress44-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__13_compress16-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__13_compress16-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__14_compress89-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__15_compress62-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__16_compress66-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__17_compress42-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__18_compress21-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__18_compress21-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__19_compress96-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__20_compress39-small",
+      "width": 1000,
+      "height": 1428
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__21_compress58-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__22_compress33-large",
+      "width": 1000,
+      "height": 1429
+    },
+    {
+      "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/chapter-20/1662078232696-1655294832773-TSIO40__23_compress43-large",
+      "width": 1000,
+      "height": 1429
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1662078289994"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1662078289994"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63114d5773911e5ed782373d"
+  },
+  "thumbnail": {
+    "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/thumbnail/1662078255904-1650980165665-35299-351x500-thumbnail-original"
+  },
+  "coin": {
+    "required": 0,
+    "expiredAt": null
+  },
+  "title": "Yuusha Party Wo Tsuihou Sareta Beast Tamer, Saikyou Shuzoku Nekomimi Shojo To Deau",
+  "chapter": "chapter-1",
+  "chapterSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau-wSNTNHTdu",
+  "comicSlug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
+  "image": [
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-1-large",
+      "width": 1000,
+      "height": 811
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-2-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-3-large",
+      "width": 1000,
+      "height": 711
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-3-small",
+      "width": 1000,
+      "height": 710
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-4-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-5-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-6-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-7-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-8-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-8-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-9-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-10-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-11-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-12-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-13-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-13-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-14-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-15-small",
+      "width": 1000,
+      "height": 1423
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-16-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-17-large",
+      "width": 1000,
+      "height": 1422
+    },
+    {
+      "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/chapter-1/1662078295992-1655294718692-18-large",
+      "width": 1000,
+      "height": 1422
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1662078340069"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1662078340069"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63114e3c73911e7b008237c8"
+  },
+  "thumbnail": {
+    "url": "magic-emperor/thumbnail/1662076935751-43692"
+  },
+  "coin": {
+    "required": 0,
+    "expiredAt": null
+  },
+  "title": "Magic Emperor",
+  "chapter": "chapter-1",
+  "chapterSlug": "magic-emperor-hOVzy-xId",
+  "comicSlug": "magic-emperor",
+  "image": [
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-1",
+      "width": 1000,
+      "height": 750
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-10",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-11",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-100",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-101",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-102",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-103",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-105",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-106",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-107",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-108",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-109",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-111",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-112",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-113",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-114",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-115",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-116",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-118",
+      "width": 1000,
+      "height": 781
+    },
+    {
+      "url": "magic-emperor/chapter-1/1662078525025-119",
+      "width": 1000,
+      "height": 781
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1662078558375"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1662078558375"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6311511273911e1be582383e"
+  },
+  "thumbnail": {
+    "url": "the-begining-after-the-end/thumbnail/1662078318923-1650980177790-BAE-333x500-thumbnail-original"
+  },
+  "coin": {
+    "required": 0,
+    "expiredAt": null
+  },
+  "title": "The begining after the end",
+  "chapter": "chapter-1",
+  "chapterSlug": "the-begining-after-the-end--tbzM3Io3",
+  "comicSlug": "the-begining-after-the-end",
+  "image": [
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655259534447-01-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655259534447-02-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-01-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-02-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-03-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-04-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-05-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-06-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-07-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-08-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-09-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-010-large",
+      "width": 1000,
+      "height": 2700
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-011-large",
+      "width": 1000,
+      "height": 2696
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-012-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-013-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-014-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-015-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-016-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-017-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-018-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-019-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-020-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-021-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-022-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-023-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-024-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-025-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-026-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-027-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-028-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-029-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-030-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-031-large",
+      "width": 1000,
+      "height": 2820
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-032-large",
+      "width": 1000,
+      "height": 2799
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-033-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-034-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-035-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-036-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-037-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-038-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-039-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-040-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-041-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-042-large",
+      "width": 1000,
+      "height": 2699
+    },
+    {
+      "url": "the-begining-after-the-end/chapter-1/1662079251450-1655294457257-043-large",
+      "width": 1000,
+      "height": 2691
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1662079341534"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1662079341534"
+    }
   },
   "__v": 0
 }]

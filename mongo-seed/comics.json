@@ -3,23 +3,23 @@
     "$oid": "611520f494c435226ca2f333"
   },
   "view": {
-    "totalView": 45,
+    "totalView": 129,
     "dayView": {
-      "thisDay": 30,
-      "view": 1
+      "thisDay": 2,
+      "view": 0
     },
     "monthView": {
-      "thisMonth": 3,
-      "view": 2
+      "thisMonth": 8,
+      "view": 0
     },
     "yearView": {
       "thisYear": 2022,
-      "view": 2
+      "view": 0
     }
   },
   "rate": {
-    "rateCount": 3,
-    "rateValue": 14
+    "rateCount": 2,
+    "rateValue": 9
   },
   "isPublish": true,
   "isFinish": true,
@@ -39,14 +39,18 @@
   "slug": "kill-the-hero",
   "titleForSearch": "Kill The Hero",
   "createdAt": {
-    "$date": "2021-08-12T13:24:04.084Z"
+    "$date": {
+      "$numberLong": "1628774644084"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-30T03:18:36.108Z"
+    "$date": {
+      "$numberLong": "1662077878690"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "kill-the-hero/thumbnail/1651288716105-images-11-223x300"
+    "url": "kill-the-hero/thumbnail/1662076693016-images-11-223x300"
   },
   "chapters": [
     {
@@ -55,7 +59,9 @@
       },
       "chapter": "2",
       "updatedAt": {
-        "$date": "2021-08-23T03:36:39.495Z"
+        "$date": {
+          "$numberLong": "1629689799495"
+        }
       }
     },
     {
@@ -64,18 +70,22 @@
       },
       "chapter": "1",
       "updatedAt": {
-        "$date": "2021-08-23T03:36:44.266Z"
+        "$date": {
+          "$numberLong": "1629689804266"
+        }
       }
     }
   ],
   "lastest_chapters": [
     {
       "_id": {
-        "$oid": "6267f569a1fadf0eecf991e8"
+        "$oid": "63114bb373911e8346823662"
       },
       "chapter": "chapter-1",
       "updatedAt": {
-        "$date": "2022-04-26T13:36:45.727Z"
+        "$date": {
+          "$numberLong": "1662077878685"
+        }
       }
     }
   ]
@@ -84,23 +94,19 @@
     "$oid": "611884e5cbc64e07fc7a4b4a"
   },
   "view": {
-    "dayView": {
-      "view": 0,
-      "thisDay": 30
-    },
-    "totalView": 2,
+    "totalView": 1,
     "monthView": {
-      "thisMonth": 3,
+      "thisMonth": 9,
       "view": 0
     },
     "yearView": {
-      "thisYear": 2022,
+      "thisYear": 2021,
       "view": 0
     }
   },
   "rate": {
-    "rateCount": 1,
-    "rateValue": 4
+    "rateCount": 0,
+    "rateValue": 0
   },
   "isPublish": true,
   "isFinish": true,
@@ -123,23 +129,29 @@
   "slug": "survival-story-of-a-sword-king-in-a-fantasy-world",
   "titleForSearch": "Survival Story Of A Sword King In A Fantasy World",
   "createdAt": {
-    "$date": "2021-08-15T03:07:17.262Z"
+    "$date": {
+      "$numberLong": "1628996837262"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:48:50.359Z"
+    "$date": {
+      "$numberLong": "1662077979724"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1650979863636-Survival-Story-of-a-Sword-King-333x500"
+    "url": "survival-story-of-a-sword-king-in-a-fantasy-world/thumbnail/1662076890902-1650979863636-Survival-Story-of-a-Sword-King-333x500-thumbnail-original"
   },
   "lastest_chapters": [
     {
       "_id": {
-        "$oid": "6267f805b5c09322ac764534"
+        "$oid": "63114bff73911e12b782367e"
       },
       "chapter": "chapter-1",
       "updatedAt": {
-        "$date": "2022-04-26T13:48:50.353Z"
+        "$date": {
+          "$numberLong": "1662077979717"
+        }
       }
     }
   ]
@@ -148,11 +160,19 @@
     "$oid": "61188b1ac753d11db4271220"
   },
   "view": {
-    "dayView": {
-      "view": 0,
-      "thisDay": 0
+    "totalView": 5,
+    "monthView": {
+      "thisMonth": 8,
+      "view": 0
     },
-    "totalView": 0
+    "yearView": {
+      "thisYear": 2022,
+      "view": 0
+    },
+    "dayView": {
+      "thisDay": 2,
+      "view": 0
+    }
   },
   "rate": {
     "rateCount": 0,
@@ -173,37 +193,55 @@
   "slug": "magic-emperor",
   "titleForSearch": "Magic Emperor",
   "createdAt": {
-    "$date": "2021-08-15T03:33:46.103Z"
+    "$date": {
+      "$numberLong": "1628998426103"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:31:38.255Z"
+    "$date": {
+      "$numberLong": "1662078558367"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "magic-emperor/thumbnail/1650979898251-43692"
-  }
+    "url": "magic-emperor/thumbnail/1662076935751-43692"
+  },
+  "chapters": [],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "63114e3c73911e7b008237c8"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1662078558365"
+        }
+      }
+    }
+  ]
 },{
   "_id": {
     "$oid": "61188bcc0526910e7c9b902e"
   },
   "view": {
-    "dayView": {
-      "view": 0,
-      "thisDay": 26
-    },
-    "totalView": 2,
+    "totalView": 73,
     "monthView": {
-      "thisMonth": 3,
+      "thisMonth": 8,
       "view": 0
     },
     "yearView": {
       "thisYear": 2022,
       "view": 0
+    },
+    "dayView": {
+      "thisDay": 1,
+      "view": 0
     }
   },
   "rate": {
-    "rateCount": 0,
-    "rateValue": 0
+    "rateCount": 2,
+    "rateValue": 9
   },
   "isPublish": true,
   "isFinish": true,
@@ -220,23 +258,30 @@
   "slug": "overgeared",
   "titleForSearch": "Overgeared",
   "createdAt": {
-    "$date": "2021-08-15T03:36:44.382Z"
+    "$date": {
+      "$numberLong": "1628998604382"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:41:01.610Z"
+    "$date": {
+      "$numberLong": "1662078133137"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "overgeared/thumbnail/1650979909648-mangatx"
+    "url": "overgeared/thumbnail/1662078133130-1650979909648-mangatx-thumbnail-original"
   },
+  "chapters": [],
   "lastest_chapters": [
     {
       "_id": {
-        "$oid": "6267f602a1fadf0eecf993db"
+        "$oid": "63114c3a73911e93608236ac"
       },
       "chapter": "chapter-82",
       "updatedAt": {
-        "$date": "2022-04-26T13:41:01.600Z"
+        "$date": {
+          "$numberLong": "1662078059231"
+        }
       }
     }
   ]
@@ -245,15 +290,19 @@
     "$oid": "61188ca20526910e7c9b91f1"
   },
   "view": {
-    "dayView": {
-      "view": 0,
-      "thisDay": 23
+    "totalView": 31,
+    "monthView": {
+      "thisMonth": 9,
+      "view": 1
     },
-    "totalView": 1
+    "yearView": {
+      "thisYear": 2021,
+      "view": 30
+    }
   },
   "rate": {
-    "rateCount": 0,
-    "rateValue": 0
+    "rateCount": 1,
+    "rateValue": 5
   },
   "isPublish": true,
   "isFinish": true,
@@ -276,25 +325,51 @@
   "slug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
   "titleForSearch": "Tensei Shite Inaka De Slowlife Wo Okuritai",
   "createdAt": {
-    "$date": "2021-08-15T03:40:18.256Z"
+    "$date": {
+      "$numberLong": "1628998818256"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:35:24.360Z"
+    "$date": {
+      "$numberLong": "1662078289975"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1650980124356-34352-350x500"
-  }
+    "url": "tensei-shite-inaka-de-slowlife-wo-okuritai/thumbnail/1662078170180-1650980124356-34352-350x500-thumbnail-original"
+  },
+  "chapters": [],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "63114d1873911e8ae8823700"
+      },
+      "chapter": "chapter-20",
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1662078289973"
+        }
+      }
+    }
+  ]
 },{
   "_id": {
     "$oid": "6118941ae430531d94bd470c"
   },
   "view": {
-    "dayView": {
-      "view": 0,
-      "thisDay": 16
+    "totalView": 2,
+    "monthView": {
+      "thisMonth": 8,
+      "view": 0
     },
-    "totalView": 1
+    "yearView": {
+      "thisYear": 2022,
+      "view": 0
+    },
+    "dayView": {
+      "thisDay": 2,
+      "view": 0
+    }
   },
   "rate": {
     "rateCount": 0,
@@ -318,29 +393,54 @@
   "slug": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau",
   "titleForSearch": "Yuusha Party Wo Tsuihou Sareta Beast Tamer  Saikyou Shuzoku Nekomimi Shojo To Deau",
   "createdAt": {
-    "$date": "2021-08-15T04:12:10.530Z"
+    "$date": {
+      "$numberLong": "1629000730530"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:36:05.669Z"
+    "$date": {
+      "$numberLong": "1662078340058"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/thumbnail/1650980165665-35299-351x500"
-  }
+    "url": "yuusha-party-wo-tsuihou-sareta-beast-tamer-saikyou-shuzoku-nekomimi-shojo-to-deau/thumbnail/1662078255904-1650980165665-35299-351x500-thumbnail-original"
+  },
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "63114d5773911e5ed782373d"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1662078340057"
+        }
+      }
+    }
+  ]
 },{
   "_id": {
     "$oid": "611894d0e430531d94bd48a2"
   },
   "view": {
-    "dayView": {
-      "view": 0,
-      "thisDay": 0
+    "totalView": 19,
+    "monthView": {
+      "thisMonth": 8,
+      "view": 1
     },
-    "totalView": 0
+    "yearView": {
+      "thisYear": 2022,
+      "view": 1
+    },
+    "dayView": {
+      "thisDay": 2,
+      "view": 1
+    }
   },
   "rate": {
-    "rateCount": 0,
-    "rateValue": 0
+    "rateCount": 1,
+    "rateValue": 5
   },
   "isPublish": true,
   "isFinish": true,
@@ -366,13 +466,31 @@
   "slug": "the-begining-after-the-end",
   "titleForSearch": "The begining after the end",
   "createdAt": {
-    "$date": "2021-08-15T04:15:12.836Z"
+    "$date": {
+      "$numberLong": "1629000912836"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-26T13:36:17.793Z"
+    "$date": {
+      "$numberLong": "1662079341522"
+    }
   },
   "__v": 0,
   "thumbnail": {
-    "url": "the-begining-after-the-end/thumbnail/1650980177790-BAE-333x500"
-  }
+    "url": "the-begining-after-the-end/thumbnail/1662078318923-1650980177790-BAE-333x500-thumbnail-original"
+  },
+  "chapters": [],
+  "lastest_chapters": [
+    {
+      "_id": {
+        "$oid": "6311511273911e1be582383e"
+      },
+      "chapter": "chapter-1",
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1662079341520"
+        }
+      }
+    }
+  ]
 }]

@@ -1,9 +1,11 @@
 #! /bin/bash
-colls=( comics chapters categories comments users rates configs )
+colls=( comics chapters categories comments users rates configs invoices pockets )
 
 username=ducchuy
 password=mypassword
-dbname=mydb
+dbname=MyComic
+
+echo $dbname
 
 for c in ${colls[@]}
 do

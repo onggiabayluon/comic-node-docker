@@ -5,161 +5,179 @@
   "category": "image",
   "__v": 0,
   "createdAt": {
-    "$date": "2021-08-09T03:50:38.890Z"
+    "$date": {
+      "$numberLong": "1628481038890"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-30T09:55:17.479Z"
+    "$date": {
+      "$numberLong": "1662086331662"
+    }
   },
   "slider": [
     {
       "_id": {
-        "$oid": "626cfd29a819062e3059ddb4"
+        "$oid": "6311519173911eb3dc823854"
       },
       "title": "Villians are destiny to die",
       "subtitle": "",
       "description": "Penelope Eckart reincarnated as the adopted daughter of Duke Eckart and the villainess of a reverse harem dating sim. The problem is, she entered the game at its hardest difficulty, and no matter what she does, death awaits her at every ending! Before the \"real daughter\" of Duke Eckart appears, she must choose one of the male leads and reach a happy ending in order to survive. But the two brothers always pick a fight with her over every little thing, as well as a crazy crown prince, whose routes all lead to death. There's even a magician who's enamoured with the female lead, and a loyal slave knight! But somehow, the favourability meters of the male leads increase the more she crosses the line with them!",
       "author": "Gwon Gyeoeul",
       "href": "",
-      "url": "config/slider/1651309865797-item_1"
+      "url": "config/slider/1662079377619-item_1"
     },
     {
       "_id": {
-        "$oid": "626cff13944b2706b4ce9d68"
+        "$oid": "6311601e73911ed283823957"
       },
       "title": "Solo Leveling",
       "subtitle": "",
       "description": "10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \"Hunters\". However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of dungeons, the \"World's Weakest\". Having no skills whatsoever to display",
       "author": "Sung-Lak Jang",
       "href": "",
-      "url": "config/slider/1651310355380-item_2"
+      "url": "config/slider/1662083102956-item_2"
     },
     {
       "_id": {
-        "$oid": "626d078563309535305d0b41"
+        "$oid": "6311603273911ead2d82396f"
       },
       "title": "Noblesse",
       "subtitle": "",
       "description": "10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \"Hunters\". However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of dungeons, the \"World's Weakest\". Having no skills whatsoever to display",
       "author": "Son Jae-Ho - Lee Gwang-Su",
       "href": "",
-      "url": "config/slider/1651312517463-item_1"
+      "url": "config/slider/1662083122723-item_3"
     },
     {
       "_id": {
-        "$oid": "626cfe01944b2706b4ce9c90"
+        "$oid": "631143ba73911ead21823506"
       },
       "title": "The Beginning After The End",
       "subtitle": "",
       "description": "King Grey has unrivaled strength, wealth, and prestige in a world governed by martial ability. However, solitude lingers closely behind those with great power. Beneath ... glamorous exterior of a powerful king lurks the shell of man, devoid of purpose and will. Reincarnated into a new world filled with magic and monsters, the king has a second chance to relive his life. Correcting the mistakes of his past will not be his only challenge, however. Underneath the peace and prosperity of the new world is an undercurrent threatening to destroy everything he has worked for, questioning his role and reason for being born again..",
       "author": "Son Jae-Ho - Lee Gwang-Su",
       "href": "",
-      "url": "config/slider/1651310081799-item_wide_blank_1_v4"
+      "url": "config/slider/1662075834201-item_wide_blank_1_v4"
     },
     {
       "_id": {
-        "$oid": "626cfe2d944b2706b4ce9cdd"
+        "$oid": "631143c673911e6be082350f"
       },
       "title": "Villians are destiny to die",
       "subtitle": "",
       "description": " Penelope Eckart reincarnated as the adopted daughter of Duke Eckart and the villainess of a reverse harem dating sim. The problem is, she entered the game at its hardest difficulty, and no matter what she does, death awaits her at every ending! Before the \"real daughter\" of Duke Eckart appears, she must choose one of the male leads and reach a happy ending in order to survive. But the two brothers always pick a fight with her over every little thing, as well as a crazy crown prince, whose routes all lead to death. There's even a magician who's enamoured with the female lead, and a loyal slave knight! But somehow, the favourability meters of the male leads increase the more she crosses the line with them!",
       "author": "Gwon Gyeoeul",
       "href": "",
-      "url": "config/slider/1651310125420-item_1"
+      "url": "config/slider/1662075846789-item_1"
     },
     {
       "_id": {
-        "$oid": "626cff21944b2706b4ce9dd8"
+        "$oid": "631143d873911e067d823518"
       },
       "title": " Solo Leveling",
       "subtitle": "",
       "description": "10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \"Hunters\". However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of dungeons, the \"World's Weakest\". Having no skills whatsoever to display",
       "author": "Sung-Lak Jang",
       "href": "",
-      "url": "config/slider/1651310369271-item_2"
+      "url": "config/slider/1662075864280-item_2"
     },
     {
       "_id": {
-        "$oid": "626cff27944b2706b4ce9e00"
+        "$oid": "631143ea73911e9f36823521"
       },
       "title": "Noblesse",
       "subtitle": "",
       "description": "10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \"Hunters\". However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I'm someone who has to risk his life in the lowliest of dungeons, the \"World's Weakest\". Having no skills whatsoever to display",
       "author": "Son Jae-Ho - Lee Gwang-Su",
       "href": "",
-      "url": "config/slider/1651310375487-item_1"
+      "url": "config/slider/1662075882533-item_3"
     },
     {
       "_id": {
-        "$oid": "626cff2e944b2706b4ce9e28"
+        "$oid": "6311441073911e6fdd82352a"
       },
       "title": "When The Vllainess Love",
       "subtitle": "",
       "description": "I’ve transmigrated into the body of a princess, living on borrowed time. It’s okay, though, we can cure this illness! My goal is to lead a life where I can do whatever I want! First, I decided to rave over all of my favorite characters in the novel! But, because I am a villainess, people around me tend to be wary… “You will die soon, and yet… how can you laugh like that?” Well, it’s ‘cus I’m super hot.",
       "author": "Hj - 붉구",
       "href": "",
-      "url": "config/slider/1651310382707-item_wide_blank_2_v4"
+      "url": "config/slider/1662075920549-item_wide_blank_2_v4"
     }
   ],
   "banner": [
     {
       "_id": {
-        "$oid": "626d024363309535305d063c"
+        "$oid": "6311450973911e9c85823546"
       },
       "title": "",
       "subtitle": "",
       "description": "",
       "author": "",
       "href": "",
-      "url": "config/banner/1651311171898-solo_wallpaper"
+      "url": "config/banner/1662076169543-solo_wallpaper"
     },
     {
       "_id": {
-        "$oid": "626d06fd63309535305d0a1f"
+        "$oid": "6311454073911e2ba282354f"
       },
       "title": "",
       "subtitle": "",
       "description": "",
       "author": "",
       "href": "",
-      "url": "config/banner/1651312380960-solo_wallpaper"
+      "url": "config/banner/1662076224118-zero_two"
     },
     {
       "_id": {
-        "$oid": "626d071763309535305d0a75"
+        "$oid": "63115f0b73911e883282394a"
       },
       "title": "",
       "subtitle": "",
       "description": "",
       "author": "",
       "href": "",
-      "url": "config/banner/1651312407203-solo_wallpaper"
+      "url": "config/banner/1662082827159-solo_wallpaper"
     }
   ],
   "banner_background": [
     {
       "_id": {
-        "$oid": "626d038d63309535305d06ca"
+        "$oid": "6311456173911e594f823561"
       },
       "href": "",
-      "url": "config/banner_background/1651311501123-solo_wallpaper"
+      "url": "config/banner_background/1662076257171-solo_wallpaper"
+    },
+    {
+      "_id": {
+        "$oid": "6311457e73911e49ee82357c"
+      },
+      "href": "",
+      "url": "config/banner_background/1662076286348-zero_two"
+    },
+    {
+      "_id": {
+        "$oid": "6311458973911e53da823585"
+      },
+      "href": "",
+      "url": "config/banner_background/1662076297419-solo_wallpaper"
     }
   ],
   "banner_topright": [
     {
       "_id": {
-        "$oid": "626d01b063309535305d05fd"
+        "$oid": "63116cbb73911e6b898239e2"
       },
       "href": "",
-      "url": "config/banner_topright/1651311024332-upload_v2"
+      "url": "v1662086333/config/banner_topright/1662086331641-upload_v2"
     }
   ],
   "banner_botright": [
     {
       "_id": {
-        "$oid": "626d010363309535305d053c"
+        "$oid": "6311630973911eccbd8239a9"
       },
       "href": "",
-      "url": "config/banner_botright/1651310851062-readall"
+      "url": "v1651310854/config/banner_botright/1651310851062-readall"
     }
   ]
 }]

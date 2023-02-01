@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "6152e633dc612fac2846df82"
+  },
+  "user_id": "613bfe7ad09b88681fd916ac",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2021-09-28T09:53:55.714Z"
+  },
+  "pockets": [
+    {
+      "chapters": [
+        "6152e497e7e95d7ebc369fec"
+      ],
+      "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai"
+    },
+    {
+      "chapters": [
+        "6157dcd0668453535479d285"
+      ],
+      "comicSlug": "kill-the-hero"
+    },
+    {
+      "chapters": [
+        "6157e267e390e9261835177c",
+        "6157e280e390e978f73517d6"
+      ],
+      "comicSlug": "overgeared"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2021-10-03T00:39:34.670Z"
+  }
+}]

@@ -1,215 +1,255 @@
 [{
   "_id": {
-    "$oid": "6084dd9dec23a633c03f96e7"
+    "$oid": "613bfe7ad09b88681fd916ac"
   },
   "role": "admin",
-  "name": "adminlivip",
-  "email": "livipst2@gmail.com",
-  "password": "$2b$10$pBJoSjOiHVNnIROESIdl1OJFuyxneSqY9NTQdu8BX4Jw/At68D2je",
-  "createdAt": {
-    "$date": "2021-04-25T03:10:21.874Z"
-  },
-  "__v": 0,
   "banned": "false",
-  "comment": [
-    {
-      "$oid": "607a994a6290a72e18635e53"
-    }
-  ],
   "subscribed": [
     {
-      "$oid": "603a068034d84d21247cdb22"
+      "$oid": "61188b1ac753d11db4271220"
     },
     {
-      "$oid": "603d8bebf7692e17d03cdb75"
+      "$oid": "611894d0e430531d94bd48a2"
     },
     {
-      "$oid": "60bb7904f8b6d00d14efc5b2"
-    },
-    {
-      "$oid": "608a16fc2c381630b89c0f3d"
+      "$oid": "61188bcc0526910e7c9b902e"
     },
     {
       "$oid": "611520f494c435226ca2f333"
     }
   ],
-  "updatedAt": {
-    "$date": "2021-08-15T04:09:37.288Z"
-  }
-},{
-  "_id": {
-    "$oid": "6086c3292e9bce268c0fdc66"
-  },
-  "role": "extraAdmin",
-  "name": "userdethuong",
-  "email": "user2@gmail.com",
-  "password": "$2b$10$edGMS/KlD1a2grgnViVRKOxDR8QryUBCgejNiCZxlXIpwYtNiKmOC",
+  "name": "adminlivip",
+  "password": "$2b$10$STUzTIIHSNAFd4EvyxzzuOKsiJhCKDodmZA6xLKa3rwQQfoGMmSZy",
   "createdAt": {
-    "$date": "2021-04-26T13:42:02.088Z"
+    "$date": "2021-09-11T00:55:22.431Z"
   },
   "updatedAt": {
-    "$date": "2021-04-26T13:42:02.088Z"
+    "$date": "2021-10-07T02:53:51.157Z"
   },
   "__v": 0,
-  "banned": "false"
+  "coin": 1741
 },{
   "_id": {
-    "$oid": "60877f09030b3f2ecc6f7f0f"
-  },
-  "role": "extraAdmin",
-  "banned": "true",
-  "name": "testBan",
-  "email": "user3@gmail.com",
-  "password": "$2b$10$f/jBjpG8F6aZDv0relLs6.z0jGRJ8/8e3tiqqUzyiXw7mvPrLqQKy",
-  "createdAt": {
-    "$date": "2021-04-27T03:03:37.716Z"
-  },
-  "updatedAt": {
-    "$date": "2021-05-06T13:06:54.181Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "6088c977f3e3952ab0cbe7f5"
+    "$oid": "613bfec9d09b88be34d916b4"
   },
   "role": "user",
   "banned": "false",
-  "name": "mapdit",
-  "email": "user4@gmail.com",
-  "password": "$2b$10$PxhCx7ssDS6WQz5XNLl6FufpIN1yWqqOjjwC1VcoeGy8WA7YmxtU6",
+  "subscribed": [
+    {
+      "$oid": "611520f494c435226ca2f333"
+    }
+  ],
+  "name": "testuser",
+  "password": "$2b$10$NRsJkl9fxrZ9S/CJd4B19OhtZWIWtuBKyXsSct7mjSBL8qmrbOrxG",
   "createdAt": {
-    "$date": "2021-04-28T02:33:27.551Z"
+    "$date": "2021-09-11T00:56:41.290Z"
   },
   "updatedAt": {
-    "$date": "2021-05-03T14:54:31.826Z"
+    "$date": "2021-09-11T00:57:40.656Z"
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "608969f3a64abe2fd8014929"
-  },
-  "role": "user",
-  "banned": "true",
-  "name": "mapdit",
-  "email": "usertest@gmail.com",
-  "password": "$2b$10$7tEax/PMr8/OfBLEIjOTlO0Mb7DVLdfQjwMBVrS9CUToZ0oTX3htu",
-  "createdAt": {
-    "$date": "2021-04-28T13:58:11.702Z"
-  },
-  "updatedAt": {
-    "$date": "2021-05-03T14:53:51.855Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60896a6933273818c4aaf146"
-  },
-  "role": "user",
-  "banned": "false",
-  "name": "bebee",
-  "email": "usermapdit@gmail.com",
-  "password": "$2b$10$z0Lx.7TSO0.jXNZALz4Kh.66Zmc8JPqIA9M1lWvr3nWKGj1Om/.Wq",
-  "createdAt": {
-    "$date": "2021-04-28T14:00:10.004Z"
-  },
-  "updatedAt": {
-    "$date": "2021-04-28T14:00:10.004Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "60896ac8df3412313c84259d"
-  },
-  "role": "user",
-  "banned": "false",
-  "name": "bebee2",
-  "email": "usermapdit2@gmail.com",
-  "password": "$2b$10$ZDvZ771AQiceCEmAbaCF6uNVc315jRdLL5S0Kwoi1lLwkySqzDytW",
-  "createdAt": {
-    "$date": "2021-04-28T14:01:44.178Z"
-  },
-  "updatedAt": {
-    "$date": "2021-04-28T14:01:44.178Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "6091ed83ebd0352e3cd60fbf"
-  },
-  "role": "user",
-  "banned": "false",
-  "name": "VVH",
-  "email": "hoavinh@tyti.com",
-  "password": "$2b$10$HHW/QyliHT1s1VuPORICYO3Nbqd6plpYe0SlmH0NMJvlmGOUAhmFC",
-  "createdAt": {
-    "$date": "2021-05-05T00:57:40.050Z"
-  },
-  "updatedAt": {
-    "$date": "2021-05-06T13:06:20.251Z"
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "61279cba4202a93280c328f8"
+    "$oid": "613c6f252bdb4a1fa0a84025"
   },
   "role": "user",
   "banned": "false",
   "subscribed": [],
-  "name": "test123",
-  "password": "$2b$10$LsUPK.F1qOIerqLqdwozpuDqPus5DGMjFAlmQA1XUM1SqW/ten1cS",
+  "name": "testtest",
+  "password": "$2b$10$UIIxycp0wUa7c.0oe64LDOHOW2nl6pPXFfSEcbmfHtb3jVRu1Su4.",
   "createdAt": {
-    "$date": "2021-08-26T13:52:58.953Z"
+    "$date": "2021-09-11T08:56:05.583Z"
   },
   "updatedAt": {
-    "$date": "2021-08-26T13:52:58.953Z"
+    "$date": "2021-09-11T08:56:05.583Z"
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "61279d69fcd09e31d4f6afcb"
+    "$oid": "613c9ad0c763f17e96660011"
   },
   "role": "user",
   "banned": "false",
   "subscribed": [],
-  "name": "test1234",
-  "password": "$2b$10$4fqTnPJEigUue4VEmN/fPuWPwDJ1eXjeIzSb2dOO46HXfwMLanZ7W",
+  "name": "Nguyễn Thành Dũng",
+  "avatar": "https://scontent.xx.fbcdn.net/v/t1.30497-1/c59.0.200.200a/p200x200/84628273_176159830277856_972693363922829312_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=12b3be&_nc_ohc=xum7jbIRvI8AX9Yk3vR&_nc_ht=scontent.xx&edm=AP4hL3IEAAAA&oh=1dc1eac1caf3444870553f3766867724&oe=6162C939",
+  "facebookId": "591353032225521",
   "createdAt": {
-    "$date": "2021-08-26T13:55:53.276Z"
+    "$date": "2021-09-11T12:02:24.549Z"
   },
   "updatedAt": {
-    "$date": "2021-08-26T13:55:53.276Z"
+    "$date": "2021-09-11T12:02:24.549Z"
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "61279ddb001d8018b0c334e2"
+    "$oid": "613da67319c3150a43c4c90a"
   },
   "role": "user",
   "banned": "false",
-  "subscribed": [],
-  "name": "test12345",
-  "password": "$2b$10$WirA4H2wVzsNI9YcSHAkOuyX9ItbI6ajxuqgXchFmKHjL0vCvN8sG",
+  "subscribed": [
+    {
+      "$oid": "611520f494c435226ca2f333"
+    },
+    {
+      "$oid": "61188bcc0526910e7c9b902e"
+    }
+  ],
+  "name": "Duc Huy Luong",
+  "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgWD1QuOON_8pRpe-EGTdh710uYm9GTy1BZ2lB6cQ=s96-c",
+  "googleId": "117369108119322273649",
   "createdAt": {
-    "$date": "2021-08-26T13:57:47.252Z"
+    "$date": "2021-09-12T07:04:19.209Z"
   },
   "updatedAt": {
-    "$date": "2021-08-26T13:57:47.252Z"
+    "$date": "2021-10-02T10:46:20.531Z"
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "61279df2f7be8b234461b2f0"
+    "$oid": "613daba519c3158bc7c4c942"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [
+    {
+      "$oid": "611520f494c435226ca2f333"
+    }
+  ],
+  "name": "Đức Huy",
+  "avatar": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2711050505854045&height=200&width=200&ext=1634023589&hash=AeSUS_qqn398DeSBVlA",
+  "facebookId": "2711050505854045",
+  "createdAt": {
+    "$date": "2021-09-12T07:26:29.601Z"
+  },
+  "updatedAt": {
+    "$date": "2021-09-12T08:24:59.205Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "613dcb2d19c315a758c4ca55"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [
+    {
+      "$oid": "611520f494c435226ca2f333"
+    }
+  ],
+  "name": "Ducchuy",
+  "avatar": "https://lh3.googleusercontent.com/a-/AOh14Gg45yE0zowP_UrYUrAMgtuvmh-oN1xPpvSXcBjjVw=s96-c",
+  "googleId": "112121410834113088974",
+  "createdAt": {
+    "$date": "2021-09-12T09:41:01.670Z"
+  },
+  "updatedAt": {
+    "$date": "2021-09-12T14:17:55.591Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "613dcb4319c315acbbc4ca5d"
   },
   "role": "user",
   "banned": "false",
   "subscribed": [],
-  "name": "test123457",
-  "password": "$2b$10$wfvnu52UH0sQgqyQ2gfGvuUmXHfjcwkc5i6HalMFfrcSVfOR.UPH2",
+  "name": "Huy Luong Duc",
+  "avatar": "https://lh3.googleusercontent.com/a/AATXAJyU2miJ0t_nGzNpaMpeQgeyPkWelaESbzzyEYHl=s96-c",
+  "googleId": "112164540937560059331",
   "createdAt": {
-    "$date": "2021-08-26T13:58:10.194Z"
+    "$date": "2021-09-12T09:41:23.803Z"
   },
   "updatedAt": {
-    "$date": "2021-08-26T13:58:10.194Z"
+    "$date": "2021-09-12T09:41:23.803Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "613f42cb19c315fcb5c4cc6d"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [],
+  "name": "Phúc Hậu",
+  "avatar": "https://scontent.xx.fbcdn.net/v/t1.30497-1/c59.0.200.200a/p200x200/84628273_176159830277856_972693363922829312_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=12b3be&_nc_ohc=xum7jbIRvI8AX9Yk3vR&_nc_ht=scontent.xx&edm=AP4hL3IEAAAA&oh=93dc0375648b83ea4931685e5d6a048e&oe=6166BDB9",
+  "facebookId": "537639227589990",
+  "createdAt": {
+    "$date": "2021-09-13T12:23:39.094Z"
+  },
+  "updatedAt": {
+    "$date": "2021-09-13T12:23:39.094Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "613f43d719c315b653c4cc82"
+  },
+  "role": "user",
+  "banned": "false",
+  "subscribed": [],
+  "name": "Hau Tran",
+  "avatar": "https://lh3.googleusercontent.com/a-/AOh14GiFt17YtD1OhKwOIZwPBrZz9TcrNyiEd6QCP-L4=s96-c",
+  "googleId": "105508524387590585420",
+  "createdAt": {
+    "$date": "2021-09-13T12:28:07.250Z"
+  },
+  "updatedAt": {
+    "$date": "2021-09-13T12:28:07.250Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "614fcab9409bfed516606e05"
+  },
+  "role": "admin",
+  "banned": "false",
+  "subscribed": [
+    {
+      "$oid": "611894d0e430531d94bd48a2"
+    }
+  ],
+  "name": "adminmin",
+  "password": "$2b$10$sPsLjqbG3s/8SJFJUYDxqe5Ig0c4TDMa9wF/KYX1/Rskq8Y3tVvsW",
+  "createdAt": {
+    "$date": "2021-09-26T01:19:53.810Z"
+  },
+  "updatedAt": {
+    "$date": "2021-09-26T02:05:47.320Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "615fc10eb3aaaa015cf47e94"
+  },
+  "role": "user",
+  "banned": false,
+  "subscribed": [],
+  "coin": 0,
+  "name": "ducchuy",
+  "password": "$2b$10$r/y7VM0FWRHyLxMZPab2yOsMF7VylxqAFRLzPs0SvFVR9ik.RPFfu",
+  "createdAt": {
+    "$date": "2021-10-08T03:54:54.471Z"
+  },
+  "updatedAt": {
+    "$date": "2021-10-08T03:54:54.471Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61625fe5e9c4107147a46965"
+  },
+  "role": "user",
+  "banned": false,
+  "subscribed": [],
+  "coin": 0,
+  "name": "Usertest",
+  "password": "$2b$10$.VXaYHWl.nRzHjbkZ012Fued1CpSy6riaBJM8rFmbE7Csfwa1GPmu",
+  "createdAt": {
+    "$date": "2021-10-10T03:37:09.140Z"
+  },
+  "updatedAt": {
+    "$date": "2021-10-10T03:37:09.140Z"
   },
   "__v": 0
 }]

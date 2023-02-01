@@ -3,20 +3,39 @@ services:
     nginx:
         image: nginx:stable-alpine
         restart: always
+        ports:
+            - "3000:80"
         volumes:
             - ./etc/nginx/defaultDev.conf:/etc/nginx/conf.d/default.conf
             - ./etc/certs:/etc/nginx/certs:ro
         depends_on:
             - node-app
     node-app:
+        # Building image at local
+        build: .
         # Custom container name
         # container_name: node-app
         # image: node-app-image:tag
         restart: always
-        image: livipst2/comic-node-app
+        # image: livipst2/comic-node-app
         depends_on:
             - mongo
             - redis
+        environment:
+            - NODE_ENV=development
+            # Remove Later :x:
+            - MONGO_USER=ducchuy
+            - MONGO_PASSWORD=mypassword
+            - MONGO_FOLDER=MyComic
+            # - WASABI_ACCESS_KEY_ID=NGAA0F53USVKDK1KHV0M
+            # - WASABI_SECRET_ACCESS_KEY=MKCCJ0gCJ2YveUg2SYhtHUnj4HHgiS51vqZjGuBk
+            # - WASABI_ENDPOINT=s3.eu-central-1.wasabisys.com
+            # - WASABI_BUCKET_NAME=cloudimagewallbucket
+            - WASABI_REGION=eu-central-1
+            - CLOUDINARY_CLOUD_NAME=dwajvm53v
+            - CLOUDINARY_API_KEY=485633522843934
+            - CLOUDINARY_API_SECRET=gZYmgO8732Xzcms1AJeU1_ReCGU
+            - IMAGE_URL=https://res.cloudinary.com/dwajvm53v/image/upload
         # env_file:
         #     - ./.env
     mongo:
@@ -26,8 +45,13 @@ services:
             - "27012:27017"
         command: mongod --auth
         volumes:
-            - mongo-db:/data/db
-            # - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            # - mongo-db:/data/db
+            # Create new db using mongo-init.js file
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=ducchuy
+            - MONGO_INITDB_ROOT_PASSWORD=mypassword
+            - MONGO_INITDB_DATABASE=MyComic
     mongo_seed:
         image: mongo
         links:
@@ -38,8 +62,6 @@ services:
             - ./mongo-seed:/mongo-seed
         command:
             /mongo-seed/import.sh
-        depends_on:
-            - mongo
     redis:
         image: redis
         restart: always

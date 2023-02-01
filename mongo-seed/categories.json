@@ -26,14 +26,21 @@
     },
     {
       "$oid": "61188bcc0526910e7c9b902e"
+    },
+    {
+      "$oid": "6145b73893ec36583386b641"
     }
   ],
   "name": "Manhwa",
   "createdAt": {
-    "$date": "2021-05-15T01:34:02.384Z"
+    "$date": {
+      "$numberLong": "1621042442384"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:36:44.393Z"
+    "$date": {
+      "$numberLong": "1631958840384"
+    }
   },
   "__v": 0
 },{
@@ -59,10 +66,14 @@
   ],
   "name": "Manga",
   "createdAt": {
-    "$date": "2021-05-15T08:59:26.773Z"
+    "$date": {
+      "$numberLong": "1621069166773"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T04:15:12.839Z"
+    "$date": {
+      "$numberLong": "1629000912839"
+    }
   },
   "__v": 0
 },{
@@ -85,10 +96,14 @@
   ],
   "name": "Action",
   "createdAt": {
-    "$date": "2021-05-15T09:44:32.432Z"
+    "$date": {
+      "$numberLong": "1621071872432"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T04:15:12.840Z"
+    "$date": {
+      "$numberLong": "1629000912840"
+    }
   },
   "__v": 0
 },{
@@ -102,10 +117,14 @@
   ],
   "name": "Manhua",
   "createdAt": {
-    "$date": "2021-05-16T13:21:24.228Z"
+    "$date": {
+      "$numberLong": "1621171284228"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:33:46.114Z"
+    "$date": {
+      "$numberLong": "1628998426114"
+    }
   },
   "__v": 0
 },{
@@ -128,10 +147,14 @@
   ],
   "name": "Fantasy",
   "createdAt": {
-    "$date": "2021-07-18T02:15:46.277Z"
+    "$date": {
+      "$numberLong": "1626574546277"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T04:15:12.840Z"
+    "$date": {
+      "$numberLong": "1629000912840"
+    }
   },
   "__v": 0
 },{
@@ -148,10 +171,14 @@
   ],
   "name": "Comedy",
   "createdAt": {
-    "$date": "2021-07-18T02:15:52.295Z"
+    "$date": {
+      "$numberLong": "1626574552295"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:40:18.266Z"
+    "$date": {
+      "$numberLong": "1628998818266"
+    }
   },
   "__v": 0
 },{
@@ -165,10 +192,14 @@
   ],
   "name": "Slice of Life",
   "createdAt": {
-    "$date": "2021-07-18T02:15:57.922Z"
+    "$date": {
+      "$numberLong": "1626574557922"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T03:40:18.266Z"
+    "$date": {
+      "$numberLong": "1628998818266"
+    }
   },
   "__v": 0
 },{
@@ -178,10 +209,14 @@
   "comic": [],
   "name": "Romance",
   "createdAt": {
-    "$date": "2021-07-18T02:16:02.494Z"
+    "$date": {
+      "$numberLong": "1626574562494"
+    }
   },
   "updatedAt": {
-    "$date": "2021-07-18T02:16:02.494Z"
+    "$date": {
+      "$numberLong": "1626574562494"
+    }
   },
   "__v": 0
 },{
@@ -191,10 +226,14 @@
   "comic": [],
   "name": "Sci-Fi",
   "createdAt": {
-    "$date": "2021-07-18T02:16:09.710Z"
+    "$date": {
+      "$numberLong": "1626574569710"
+    }
   },
   "updatedAt": {
-    "$date": "2021-07-18T02:16:09.710Z"
+    "$date": {
+      "$numberLong": "1626574569710"
+    }
   },
   "__v": 0
 },{
@@ -208,10 +247,14 @@
   ],
   "name": "Mystery",
   "createdAt": {
-    "$date": "2021-07-18T02:16:18.457Z"
+    "$date": {
+      "$numberLong": "1626574578457"
+    }
   },
   "updatedAt": {
-    "$date": "2021-08-15T04:15:12.840Z"
+    "$date": {
+      "$numberLong": "1629000912840"
+    }
   },
   "__v": 0
 },{
@@ -221,10 +264,14 @@
   "comic": [],
   "name": "Sports",
   "createdAt": {
-    "$date": "2021-07-18T02:16:23.084Z"
+    "$date": {
+      "$numberLong": "1626574583084"
+    }
   },
   "updatedAt": {
-    "$date": "2021-07-18T02:16:23.084Z"
+    "$date": {
+      "$numberLong": "1626574583084"
+    }
   },
   "__v": 0
 },{
@@ -234,10 +281,14 @@
   "comic": [],
   "name": "Historical",
   "createdAt": {
-    "$date": "2021-07-18T02:16:33.561Z"
+    "$date": {
+      "$numberLong": "1626574593561"
+    }
   },
   "updatedAt": {
-    "$date": "2021-07-18T02:16:33.561Z"
+    "$date": {
+      "$numberLong": "1626574593561"
+    }
   },
   "__v": 0
 },{
@@ -247,36 +298,48 @@
   "comic": [],
   "name": "Horror",
   "createdAt": {
-    "$date": "2021-07-18T02:16:40.102Z"
+    "$date": {
+      "$numberLong": "1626574600102"
+    }
   },
   "updatedAt": {
-    "$date": "2021-07-18T02:16:40.102Z"
+    "$date": {
+      "$numberLong": "1626574600102"
+    }
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "626d05c463309535305d08fc"
+    "$oid": "615da831feb216177b3e4247"
   },
   "comic": [],
   "name": "Adventure",
   "createdAt": {
-    "$date": "2022-04-30T09:47:48.330Z"
+    "$date": {
+      "$numberLong": "1633527857325"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-30T09:47:48.330Z"
+    "$date": {
+      "$numberLong": "1633527857325"
+    }
   },
   "__v": 0
 },{
   "_id": {
-    "$oid": "626d05d363309535305d095c"
+    "$oid": "6311700973911e5e47823a25"
   },
   "comic": [],
   "name": "SliceofLife",
   "createdAt": {
-    "$date": "2022-04-30T09:48:03.194Z"
+    "$date": {
+      "$numberLong": "1662087177275"
+    }
   },
   "updatedAt": {
-    "$date": "2022-04-30T09:48:03.194Z"
+    "$date": {
+      "$numberLong": "1662087177275"
+    }
   },
   "__v": 0
 }]

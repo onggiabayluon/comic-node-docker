@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "6152e633481f8d34d2c65a0f"
+  },
+  "user_id": "613bfe7ad09b88681fd916ac",
+  "comicSlug": "tensei-shite-inaka-de-slowlife-wo-okuritai",
+  "chapter": {
+    "chapterName": "chapter-1",
+    "chapter_id": "6152e497e7e95d7ebc369fec"
+  },
+  "coin": 100,
+  "createdAt": {
+    "$date": "2021-09-28T09:53:55.725Z"
+  },
+  "updatedAt": {
+    "$date": "2021-09-28T09:53:55.725Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6157de3d668453250079d2b0"
+  },
+  "user_id": "613bfe7ad09b88681fd916ac",
+  "comicSlug": "kill-the-hero",
+  "chapter": {
+    "chapterName": "chapter-1",
+    "chapter_id": "6157dcd0668453535479d285"
+  },
+  "coin": 100,
+  "createdAt": {
+    "$date": "2021-10-02T04:21:17.547Z"
+  },
+  "updatedAt": {
+    "$date": "2021-10-02T04:21:17.547Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6157eaf2e390e9b16f3518c3"
+  },
+  "user_id": "613bfe7ad09b88681fd916ac",
+  "comicSlug": "overgeared",
+  "chapter": {
+    "chapterName": "chapter-30",
+    "chapter_id": "6157e267e390e9261835177c"
+  },
+  "coin": 9,
+  "createdAt": {
+    "$date": "2021-10-02T05:15:30.662Z"
+  },
+  "updatedAt": {
+    "$date": "2021-10-02T05:15:30.662Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6158fbc649889c4e66d43f21"
+  },
+  "user_id": "613bfe7ad09b88681fd916ac",
+  "comicSlug": "overgeared",
+  "chapter": {
+    "chapterName": "chapter-31",
+    "chapter_id": "6157e280e390e978f73517d6"
+  },
+  "coin": 150,
+  "createdAt": {
+    "$date": "2021-10-03T00:39:34.693Z"
+  },
+  "updatedAt": {
+    "$date": "2021-10-03T00:39:34.693Z"
+  },
+  "__v": 0
+}]
