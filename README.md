@@ -7,8 +7,8 @@
 - [x] Bookmark
 - [X] Local reading history
 - [x] Rate
-- [] Payment using Stripe
-- [] Update User Profile
+- [ ] Payment using Stripe
+- [ ] Update User Profile
 - [X] Chapter Free timer (Free after a specific interval time, Ex: 1 week)
 - [X] Chapter Coin (Require coin for reading a chapter) 
 
