@@ -1,4 +1,4 @@
-### Functionality
+### Functionalities
 
 - [X] CRUD, Admin interface
 - [X] Login, logout, signup
