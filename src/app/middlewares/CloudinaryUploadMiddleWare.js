@@ -29,13 +29,52 @@ var self = module.exports = {
      * Small image : width 400px (webp)
      */
 
+    uploadAvatar: async (files, params) => {
+
+        const name = params.username || params.slug;
+
+        let images = "";
+
+
+        const resizePromises = files.map(async (file) => {
+            const filename = `users/${name}/${Date.now()}-${file.originalname.replace(/\..+$/, "")}`;
+            
+            const options = {
+                use_filename: true,
+                unique_filename: false
+            };
+
+            try {
+                const resized = await sharp(file.buffer)
+                .resize({ width: 320, fit: 'cover' })
+                .jpeg({ quality: 80 })
+                .toBuffer();
+                
+                options.public_id = filename + '-thumbnail-original';
+                options.format = 'jpeg';
+
+                const cloudinaryResult = await uploadLoadToS3(options, resized);
+                images = cloudinaryResult
+
+            } catch (err) {
+                console.log(err);
+            }
+        });
+
+        await Promise.all(resizePromises);
+
+        return images;
+    },
+
     
     uploadThumbnail: async (files, params) => {
         const images = new Object();
 
+        const name = params.username || params.slug
+
         const resizePromises = files.map(async (file) => {
 
-            const filename = `${params.slug}/thumbnail/${Date.now()}-${file.originalname.replace(/\..+$/, "")}`;
+            const filename = `${name}/thumbnail/${Date.now()}-${file.originalname.replace(/\..+$/, "")}`;
            
             const options = {
                 use_filename: true,

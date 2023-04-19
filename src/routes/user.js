@@ -9,7 +9,7 @@ const { authRole, forwardAuthenticated } = require('../config/auth/auth');
 const { noCache } = require('../config/header/header');
 
 // Set Private header 
-router.get('/*', noCache)
+// router.get('/*', noCache)
 
 /** Route **/
 // Login Page
@@ -22,6 +22,11 @@ router.get('/logout', UserController.logout);
 router.get('/register', forwardAuthenticated, UserController.registerPage);
 // Register 
 router.post('/register', UserController.register);
+// Profile
+router.get('/profile', UserController.profilePage);
+// Profile
+router.post('/edit-profile', UserController.editProfile);
+router.post('/upload-avatar', UserController.uploadAvatar);
 
 // Give Coin
 router.post('/giveCoin', authRole('admin:extraAdmin'), UserController.giveCoin);

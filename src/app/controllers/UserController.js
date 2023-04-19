@@ -7,8 +7,73 @@ const bcrypt                    = require('bcrypt');
 const passport                  = require('passport');
 const { canChangeRole, canDeleteUser, canChangeBannedStatus }         = require('../../config/permissions/users.permission')
 const { IMAGE_URL, IMG_FORMAT } = require('../../config/config');
+const MulterUploadMiddleware = require("../middlewares/MulterUploadMiddleWare");
+const cloudinaryUploadMiddileWare = require("../middlewares/CloudinaryUploadMiddleWare");
 
 class UserController {
+
+    // Profile Page
+
+    profilePage(req, res, next) {
+        res.render('users/profile', {
+            layout: 'utility_layout.hbs',
+            user: req.user,
+        })
+    }
+
+    editProfile(req, res, next) {
+        const { username } = req.body;
+        let errors = [];
+
+        checkInput()
+
+        edit()
+
+        res.render('users/profile', {
+            layout: 'utility_layout.hbs',
+            success: errors.length > 0 ? false : true ,
+            errors,
+            username,
+            user: req.user
+        })
+
+        function checkInput() {
+            if (!username) {
+                errors.push({ msg: 'Please enter all fields' });
+            }
+        }
+        async function edit() {
+            const res = await User.updateOne({ _id: req.user._id }, { name: username });
+            if (res.nModified == 1) {
+                req.user['name'] = username
+            }
+        }
+    }
+
+    // Upload user avatar
+    uploadAvatar(req,res,next) {
+        MulterUploadMiddleware(req, res)
+            .then(async () => {
+                var params = {
+                    username: req.user.name,
+                }
+                var imagesURL = await cloudinaryUploadMiddileWare.uploadAvatar(req.files, params)
+                
+                await saveURLToDb(imagesURL)
+                return res.redirect('back');
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        
+        async function saveURLToDb(imagesURL) {
+            User.updateOne(
+                { _id: req.user._id },
+                { avatar: imagesURL }
+            )
+            .catch(err => console.log(err))
+        };
+    }
 
     // login Page
     loginPage(req, res, next) {

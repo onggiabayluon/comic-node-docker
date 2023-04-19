@@ -1,0 +1,385 @@
+<style>
+    .dropzone-submit-btn {
+        position: absolute;
+        bottom: -40px;
+        left: 15%;
+        right: 15%;
+    }
+
+    #navbar {
+        background: var(--background-color);
+    }
+
+    main {
+        height: 100vw;
+    }
+
+    html,
+    body {
+        background: var(--foreground-color);
+    }
+
+    #card-wrapper grid-container {
+        grid-auto-rows: 310px;
+    }
+
+    .glide__slides {
+        flex-wrap: wrap !important;
+    }
+
+    .glide__slide {
+        width: auto !important;
+        min-width: 210px;
+        max-width: 210px;
+        padding-bottom: 20px;
+    }
+
+    @media (max-width: 576px) {
+        #bookmark-places heading {
+            padding: 0px 7% 0 7% !important;
+        }
+
+        #bookmark-places .container {
+            padding: 0 1rem;
+        }
+
+        .glide__slides {
+            justify-content: space-around;
+        }
+
+        .glide__slide {
+            min-width: 45%;
+        }
+
+        heading .title,
+        heading icon-right {
+            margin: 0;
+        }
+
+        icon-right,
+        h2 {
+            margin: 0;
+        }
+    }
+</style>
+
+<style>
+    .alert {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: slide-in-top 0.5s ease forwards;
+    }
+
+    @keyframes slide-in-top {
+        from {
+            top: -50%;
+        }
+
+        to {
+            top: 5%;
+        }
+    }
+
+    .emp-profile {
+        padding: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+
+    .profile-img {
+        text-align: center;
+    }
+
+    .profile-img img {
+        width: 70%;
+        height: 100%;
+    }
+
+    .profile-img .file {
+        position: relative;
+        overflow: hidden;
+        margin-top: -20%;
+        width: 70%;
+        border: none;
+        border-radius: 0;
+        font-size: 15px;
+        background: #212529b8;
+    }
+
+    .profile-img .file input {
+        position: absolute;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+
+    .profile-head h5 {
+        color: #333;
+    }
+
+    .profile-head h6 {
+        color: #0062cc;
+    }
+
+    .profile-edit-btn {
+        border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: #6c757d;
+        cursor: pointer;
+    }
+
+    .proile-rating {
+        font-size: 12px;
+        color: #818182;
+        margin-top: 5%;
+    }
+
+    .proile-rating span {
+        color: #495057;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .profile-head .nav-tabs {
+        margin-bottom: 5%;
+    }
+
+    .profile-head .nav-tabs .nav-link {
+        font-weight: 600;
+        border: none;
+    }
+
+    .profile-head .nav-tabs .nav-link.active {
+        border: none;
+        border-bottom: 2px solid #0062cc;
+    }
+
+    .profile-work {
+        padding: 14%;
+        margin-top: -15%;
+    }
+
+    .profile-work p {
+        font-size: 12px;
+        color: #818182;
+        font-weight: 600;
+        margin-top: 10%;
+    }
+
+    .profile-work a {
+        text-decoration: none;
+        color: #495057;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .profile-work ul {
+        list-style: none;
+    }
+
+    .profile-tab label {
+        font-weight: 600;
+    }
+
+    .profile-tab p {
+        font-weight: 600;
+        color: #0062cc;
+    }
+</style>
+<link rel="stylesheet" href="/css/vendor/dropzone.min.css" />
+
+<section id="my-profile" itemprop="articleSection" class="foreground-color">
+    {{#if success}}
+    <div class="position-fixed alert slide-in-top alert-success" style="z-index:100;" role=" alert">
+        <button type="button" class="ml-4 close" data-dismiss="alert">&times;</button>
+        Update Profile successfully
+    </div>
+    {{/if}}
+    {{#if user}}
+    <div class="container emp-profile">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {{#unless user.avatar}}
+                    <img src="https://avatars.dicebear.com/api/human/{{user.name}}.svg"
+                        alt="{{user.name}} Profile Picture" width="40" height="40">
+                    {{else}}
+                    <img src="{{user.avatar}}" alt="{{user.name}} Profile Picture" width="40" height="40">
+                    {{/unless}}
+                </div>
+
+                {{!-- Dropzone Form upload --}}
+                <div class="card-body position-relative">
+                    <form class="" action="/users/upload-avatar" id="buldUploadForm" method="POST"
+                        enctype="multipart/form-data">
+                        <input type="file" name="many-files">
+                        <input type="submit" class="btn btn-primary dropzone-submit-btn" name="btnAddMore"
+                            value="Upload" />
+                    </form>
+                </div> {{!-- /Dropzone Form upload --}}
+
+            </div>
+            <div class="col-md-6">
+                <form action="/users/edit-profile" method="post">
+
+                    <div class="profile-head">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                    aria-controls="profile" aria-selected="false">Timeline</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {{!-- Right --}}
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>User Id</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{user._id}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Coin</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{user.coin}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="username" id="exampleInputEmail1" value={{user.name}}>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Experience</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Expert</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Hourly Rate</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>10$/hr</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Total Projects</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>230</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>English Level</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Expert</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Availability</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>6 months</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Your Bio</label><br />
+                                    <p>Your detail description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Right --}}
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
+            </div>
+        </div>
+
+
+        <style>
+            .profile-label {
+                border-radius: unset;
+                font-weight: 700;
+                background: #e6e6e6a6;
+            }
+
+            .profile-label:hover {
+                background: #ededed;
+            }
+
+            .profile-label.active {
+                background: #e6e6e6;
+                border-left: 3px solid #ee2c74;
+                text-decoration: underline;
+            }
+
+            .profile-label:hover {
+                background: #c2c2c2;
+            }
+        </style>
+
+        <div class="row">
+            <div class="col-md-4 mt-4 pt-4">
+                <div class="d-flex flex-column btn-group-toggle" data-toggle="buttons">
+                    <label class="profile-label btn  active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> General
+                        information
+                    </label>
+                    <label class="profile-label btn ">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                    </label>
+                    <label class="profile-label btn ">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                    </label>
+                </div>
+
+            </div>
+
+
+        </div>
+        </form>
+    </div>
+    {{else}}
+    <div style="    text-align: center;
+    margin: 1rem 0;
+    font-weight: bold;
+    border: 0.5rem;">Please login to view this page</div>
+    {{/if}}
+</section>
+
+<script src="/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="/js/vendor/dropzone.min.js"></script>
+
+<script>
+    $(".alert").delay(4000).slideUp(200);
+</script>

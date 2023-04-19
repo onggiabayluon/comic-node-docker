@@ -53,7 +53,7 @@
         border-radius: .5em;
         display: none;
     }
-    
+
     .modal-header--modifier {
         padding: 0.5rem 1rem 0.5rem !important;
     }
@@ -90,13 +90,12 @@
         color: #000;
         background-color: transparent;
     }
-
 </style>
 
 
-    
+
 <div class="modalBox">
-    <div id="js-modal" class="modal modalBox--modifier js-modal">
+    <div id="js-modal" class="modal modalBox--modifier js-modal is-active">
         <div class="modal-content">
             <div class="modal-header modal-header--modifier">
                 <h5 class="modal-title text-success" id="exampleModalLabel">Success</h5>
@@ -125,7 +124,7 @@
         const bars = document.getElementById('bar');
         const progress = document.getElementById('progress');
 
-        
+
         setTimeout(function () {
             $('.alert-danger').fadeOut('fast');
             $('.alert-success').fadeOut('fast');
@@ -146,7 +145,7 @@
     /* Start Modal Message*/
     var modal = document.getElementById('js-modal');
     var btnClose = document.getElementById('js-close');
-        
+
     if (modal !== null) {
         var modalChildren = modal.children;
 
@@ -154,10 +153,10 @@
             hideModal()
         }, 5000);
 
-            toggleClasses();
-            showModal();
-            showModalChildren();
-        
+        toggleClasses();
+        showModal();
+        showModalChildren();
+
         function showModal() {
             // Define initial properties
             dynamics.css(modal, {
@@ -219,6 +218,6 @@
         btnClose.addEventListener('click', function (e) {
             hideModal();
             dynamics.setTimeout(toggleClasses, 500);
-        }); 
+        });
     } /* End Modal Message*/
 </script>
