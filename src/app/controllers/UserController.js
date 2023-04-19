@@ -60,7 +60,7 @@ class UserController {
                 var imagesURL = await cloudinaryUploadMiddileWare.uploadAvatar(req.files, params)
                 
                 await saveURLToDb(imagesURL)
-                return res.redirect('back');
+                return res.redirect('/users/profile');
             })
             .catch(err => {
                 console.log(err)
