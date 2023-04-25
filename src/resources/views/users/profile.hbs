@@ -199,9 +199,18 @@
     {{#if success}}
     <div class="position-fixed alert slide-in-top alert-success" style="z-index:100;" role=" alert">
         <button type="button" class="ml-4 close" data-dismiss="alert">&times;</button>
-        Update Profile successfully
+        {{messages}}
     </div>
     {{/if}}
+    {{#if errors}}
+    <div class="position-fixed alert slide-in-top alert-danger" style="z-index:100;" role=" alert">
+        {{#each errors}}
+        <button type="button" class="ml-4 close" data-dismiss="alert">&times;</button>
+        <p>{{msg}}</p>
+        {{/each}}
+    </div>
+    {{/if}}
+
     {{#if user}}
     <div class="container emp-profile">
         <div class="row">
@@ -227,23 +236,23 @@
 
             </div>
             <div class="col-md-6">
-                <form action="/users/edit-profile" method="post">
+                <div class="profile-head">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Change Password</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="profile-head">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                    aria-controls="home" aria-selected="true">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                    aria-controls="profile" aria-selected="false">Timeline</a>
-                            </li>
-                        </ul>
-                    </div>
-                    {{!-- Right --}}
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                {{!-- Right --}}
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <form action="/users/edit-profile" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>User Id</label>
@@ -268,61 +277,52 @@
                                     <input type="text" name="username" id="exampleInputEmail1" value={{user.name}}>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Experience</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
+                            <div class="row mt-4">
+                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Total Projects</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>230</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Availability</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>6 months</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br />
-                                    <p>Your detail description</p>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    {{!-- End Right --}}
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <form action="/users/change-password" method="post">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Current
+                                        Password</span>
+                                </div>
+                                <input required id="currentPassword" name="currentPassword" type="password"
+                                    class="form-control" value={{currentPassword}}>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">New Password</span>
+                                </div>
+                                <input required id="newPassword" name="newPassword" type="password" class="form-control"
+                                    value={{newPassword}}>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Confirm
+                                        Password</span>
+                                </div>
+                                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default" pattern="^.{6,}$"
+                                    required title="Passwords must match and be at least 6 characters long"
+                                    oninput="checkPasswordValidity()" value={{confirmPassword}}>
+                            </div>
+
+
+                            <div class="row mt-4">
+                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                {{!-- End Right --}}
+
             </div>
-            <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
-            </div>
+
         </div>
 
 
@@ -355,19 +355,14 @@
                         <input type="radio" name="options" id="option1" autocomplete="off" checked> General
                         information
                     </label>
-                    <label class="profile-label btn ">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-                    </label>
-                    <label class="profile-label btn ">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-                    </label>
+
                 </div>
 
             </div>
 
 
         </div>
-        </form>
+
     </div>
     {{else}}
     <div style="    text-align: center;

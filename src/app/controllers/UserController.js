@@ -21,21 +21,31 @@ class UserController {
         })
     }
 
+    buyCoinPage(req, res, next) {
+        res.render('users/buy-coin', {
+            layout: 'utility_layout.hbs',
+            user: req.user,
+        })
+    }
+
     editProfile(req, res, next) {
         const { username } = req.body;
         let errors = [];
+        let messages = ""
 
         checkInput()
 
-        edit()
-
-        res.render('users/profile', {
-            layout: 'utility_layout.hbs',
-            success: errors.length > 0 ? false : true ,
-            errors,
-            username,
-            user: req.user
+        edit().then(() => {
+            res.render('users/profile', {
+                layout: 'utility_layout.hbs',
+                success: errors.length > 0 ? false : true ,
+                errors,
+                username,
+                user: req.user,
+                messages
+            })
         })
+
 
         function checkInput() {
             if (!username) {
@@ -46,7 +56,65 @@ class UserController {
             const res = await User.updateOne({ _id: req.user._id }, { name: username });
             if (res.nModified == 1) {
                 req.user['name'] = username
+                messages = 'update profile successfully'
             }
+        }
+    }
+
+    async changePassword(req,res,next) {
+        let { currentPassword, newPassword, confirmPassword } = req.body;
+        let errors = [];
+        let messages = ""
+
+        await checkInput()
+
+        changePassword()
+
+        async function checkInput() {
+            if (!(currentPassword, newPassword, confirmPassword)) {
+                errors.push({ msg: 'Please type all the required fields' });
+            }
+            const user = await User.findOne({ _id: req.user._id });
+            const currentPasswordHash = user.password;
+
+            const isMatch = await bcrypt.compare(currentPassword, currentPasswordHash);
+
+            if (!isMatch) {
+                errors.push({ msg: 'Wrong password' });
+            }
+            if (!(newPassword === confirmPassword)) {
+                errors.push({ msg: 'new Pass and confirm Pass do not matched ' });
+            }
+        }
+        async function changePassword() {
+            const user = await User.findOne({ _id: req.user._id });
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newPassword, salt, (err, hash) => {
+                    if (err) throw err;
+                    newPassword = hash;
+                    user.password = hash;
+                    user
+                    .save()
+                    .then(user => {
+                        if (errors) {
+                            res.status(401)
+                        } else {
+                            res.status(200)
+                        }
+                        res.render('users/profile', {
+                            layout: 'utility_layout.hbs',
+                            success: errors.length > 0 ? false : true ,
+                            errors,
+                            user: req.user,
+                            messages: "Update password succesfully",
+                            currentPassword: errors.length > 0 ? currentPassword : "" ,
+                            newPassword: errors.length > 0 ? newPassword : "" ,
+                            confirmPassword: errors.length > 0 ? confirmPassword : "" 
+                        })
+                    })
+                    .catch(next);
+                });
+            });
         }
     }
 
@@ -79,25 +147,32 @@ class UserController {
     loginPage(req, res, next) {
         res.render('users/login', {
             layout: 'login_register_layout',
-            // referer: req.headers.referer || req.headers.referrer,
-            title: 'Sign in to your Account'
+            title: 'Sign in to your Account',
+            error: req.flash('error')
         })
     }
 
     // Login
     login(req, res, next) {
-        let referer = req.session.redirectTo || '/'
+        let referer = '/'
         delete req.session.redirectTo;
         passport.authenticate('local', {
         successRedirect: referer,
         failureRedirect: '/users/login',
         failureFlash: true
-        })(req, res, next);
+        })(req, res, (err) => {
+            console.log('-----Authentication Error----');
+            console.log('-----Authentication Error----', err);
+            if (err) {
+                req.flash('error', 'Invalid username or password');
+                res.redirect('/users/login');
+            }
+        });
     };
 
     // Login Google
     loginGoogle(req, res, next) {
-        let referer = req.body.referer || '/'
+        let referer = '/'
         delete req.session.redirectTo;
         passport.authenticate('google', {
         successRedirect: referer,
@@ -108,7 +183,7 @@ class UserController {
     
     // Login Facebook
     loginFacebook(req, res, next) {
-        let referer = req.body.referer || '/'
+        let referer = '/'
         delete req.session.redirectTo;
         passport.authenticate('facebook', {
         successRedirect: referer,

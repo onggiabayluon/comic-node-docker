@@ -28,6 +28,7 @@ module.exports = {
     // forwardAuthenticated để tránh trường hợp đã đăng nhập rồi mà user còn cố gắng vào page login
     forwardAuthenticated: function(req, res, next) {
       if (!req.isAuthenticated()) {
+        console.log('not loggedin')
         req.session.redirectTo = req.headers.referer;
         return next();
       }

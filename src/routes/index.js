@@ -34,6 +34,7 @@ function route(app) {
         next(error);
     });
     app.use((error, req, res, next) => {
+        console.log("------error:::", error)
         // res.setHeader('Cache-Control', 'private, max-age=0, no-cache');
         res.status(error.status || 500)
         res.json({
