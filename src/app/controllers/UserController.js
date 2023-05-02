@@ -9,9 +9,51 @@ const { canChangeRole, canDeleteUser, canChangeBannedStatus }         = require(
 const { IMAGE_URL, IMG_FORMAT } = require('../../config/config');
 const MulterUploadMiddleware = require("../middlewares/MulterUploadMiddleWare");
 const cloudinaryUploadMiddileWare = require("../middlewares/CloudinaryUploadMiddleWare");
+const momoPayment = require("../middlewares/Momo")
 
 class UserController {
 
+    // ipn
+    momoIPN(req, res, next) {
+        // Verify the request is from MoMo by checking the signature
+
+        // Check if the transaction was successful
+        if (req.body.resultCode === '0') {
+            // Handle successful transaction
+        } else {
+            // Handle error
+            console.error(`MoMo error: ${req.body.message}`);
+        }
+
+        // Send response to MoMo
+        res.status(200).send('OK');
+    }
+
+    // paymomo
+    async payMomo(req, res, next) {
+        const partnerCode = "MOMO";
+        const accessKey = "F8BBA842ECF85";
+        const secretKey = "K951B6PE1waDMi640xX08PD3vg6EkVlz";
+        const amount = "50000";
+        const orderId = partnerCode + new Date().getTime();
+        const orderInfo = "pay with MoMo";
+        const redirectUrl = "http://localhost:3000/";
+        const ipnUrl = "http://localhost:3000/users/ipn";
+        const requestType = "captureWallet";
+        const extraData = "";
+        
+        momoPayment.createPayment(partnerCode, accessKey, secretKey, amount, orderId, orderInfo, redirectUrl, ipnUrl, requestType, extraData)
+        .then(response => {
+            console.log(response);
+            // Handle success response
+            res.redirect(response)
+        })
+        .catch(error => {
+            console.error(error);
+            // Handle error response
+        });
+
+    }
     // Profile Page
 
     profilePage(req, res, next) {
