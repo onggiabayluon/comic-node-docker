@@ -33,7 +33,7 @@ router.post('/upload-avatar', UserController.uploadAvatar);
 
 router.post('/pay-momo', UserController.payMomo);
 // IPN callback route
-router.post('/ipn', UserController.momoIPN);
+router.get('/check-momo', UserController.checkMomoPayment);
 
 
 // Give Coin

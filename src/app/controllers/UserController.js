@@ -14,36 +14,34 @@ const momoPayment = require("../middlewares/Momo")
 
 class UserController {
 
-    // ipn
-    momoIPN(req, res, next) {
-        // Verify the request is from MoMo by checking the signature
+    checkMomoPayment(req, res, next) {
+        const { partnerCode, orderId, requestId, amount, orderInfo, orderType, transId, resultCode, message, payType, responseTime, extraData, signature } = req.query;
+        if (Number(resultCode) === 0) {
+          console.log("payment successfull, save stuff to database...")
+          req.flash('successMsg', 'Payment successful!');
 
-        // Check if the transaction was successful
-        if (req.body.resultCode === '0') {
-            // Handle successful transaction
         } else {
-            // Handle error
-            console.error(`MoMo error: ${req.body.message}`);
+          console.log(`Error code ${resultCode}: ${message}`)
+          req.flash('errorMsg', `Payment failed: ${message}`);
+          console.log(req.flash('errorMsg'))
         }
 
-        // Send response to MoMo
-        res.status(200).send('OK');
+        return res.redirect("/")
     }
 
     // paymomo
     async payMomo(req, res, next) {
+        const priceChoosen = req.body.price
         const partnerCode = "MOMO";
         const accessKey = "F8BBA842ECF85";
         const secretKey = "K951B6PE1waDMi640xX08PD3vg6EkVlz";
-        const amount = "50000";
-        const orderId = partnerCode + new Date().getTime();
+        const amount = priceChoosen; // change price here
         const orderInfo = "pay with MoMo";
-        const redirectUrl = "http://localhost:3000/";
+        const redirectUrl = "http://localhost:3000/users/check-momo";
         const ipnUrl = "http://localhost:3000/users/ipn";
-        const requestType = "captureWallet";
-        const extraData = "";
+        const extraData = ""
         
-        momoPayment.createPayment(partnerCode, accessKey, secretKey, amount, orderId, orderInfo, redirectUrl, ipnUrl, requestType, extraData)
+        momoPayment.createPayment(partnerCode, accessKey, secretKey, amount, redirectUrl, ipnUrl, orderInfo, extraData)
         .then(response => {
             console.log(response);
             // Handle success response
@@ -53,7 +51,6 @@ class UserController {
             console.error(error);
             // Handle error response
         });
-
     }
     // Profile Page
 

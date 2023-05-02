@@ -1,74 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    
-    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+    {{!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
     <title>{{meta.home_title}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="True">
     <meta name="description" content="{{meta.home_description}}">
     <meta name="author" content="{{meta.home_sitename}}">
     <meta name="keywords" itemprop="keywords" content="{{meta.home_keywords}}">
-    
+
     <meta property="og:type" content="website">
     <meta property="og:description" content="{{meta.home_description}}">
     <meta property="og:url" content="{{meta.home_url}}">
-    <meta property="og:image" content="{{#each config.banner_background}}{{../meta.image_url_http}}/{{this.url}}-thumbnail.jpeg{{/each}}">
-    <meta property="og:image:secure_url" content="{{#each config.banner_background}}{{../img_url}}/{{this.url}}-thumbnail.jpeg{{/each}}">
-    <meta property="og:image:type" content="image/jpeg" /> 
-    <meta property="og:image:width" content="300" /> 
+    <meta property="og:image"
+        content="{{#each config.banner_background}}{{../meta.image_url_http}}/{{this.url}}-thumbnail.jpeg{{/each}}">
+    <meta property="og:image:secure_url"
+        content="{{#each config.banner_background}}{{../img_url}}/{{this.url}}-thumbnail.jpeg{{/each}}">
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="300" />
     <meta property="og:image:height" content="400" />
-    
+
     <meta name="twitter:title" content="{{meta.home_title}}">
     <meta name="twitter:description" content="{{meta.home_description}}">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="{{meta.home_sitename}}">
-    <meta name="twitter:image" content="{{#each config.banner_background}}{{../img_url}}/{{this.url}}-thumbnail.jpeg{{/each}}">
+    <meta name="twitter:image"
+        content="{{#each config.banner_background}}{{../img_url}}/{{this.url}}-thumbnail.jpeg{{/each}}">
     <link rel="canonical" href="{{meta.home_url}}">
     {{!-- preconnect --}}
     <link rel="preconnect" href="{{img_url}}">
     {{!-- Bootstrap cdn --}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {{!-- FontAweSome cdn --}}
-    <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet preload" as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{!-- Font --}}
-    <link rel="preload" as="font" href="/font/hind/Hind-Regular.ttf"  type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/font/hind/Hind-Regular.ttf" type="font/woff" crossorigin="anonymous">
     <link rel="preload" as="font" href="/font/hind/Hind-Medium.ttf" type="font/woff" crossorigin="anonymous">
     {{!-- vendor css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css">
     {{!-- CSS --}}
     <link rel="stylesheet" href="/css/home.min.css{{> version}}">
-    
+
 </head>
 
 <body>
 
-        <header>
-            {{> homeHeader}}
-        </header>
+    <header>
+        {{> homeHeader}}
+    </header>
 
-        <main style="min-height: 2630px;">
+    <main style="min-height: 2630px;">
+        {{#each successMsg}}
+        <div class="alert alert-success">{{this}}</div>
+        {{/each}}
+        {{!-- {{#if errors }} --}}
+        {{#each errorMsg}}
+        <div class="alert alert-danger">{{this}}</div>
+        {{/each}}
+        {{!-- {{/if}} --}}
 
-            {{{body}}}  
-            
-            <modal>
-                {{> errorsuccessMessage}}
-            </modal>
-        </main>
-        
-        <footer>
-            {{> homeFooter}}
-        </footer>
+        {{{body}}}
+
+        <modal>
+            {{> errorsuccessMessage}}
+        </modal>
+    </main>
+
+    <footer>
+        {{> homeFooter}}
+    </footer>
 
     {{!-- JS cdn --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js"></script> --}}
-    {{!-- <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> --}}
+    {{!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js"></script> --}}
+    {{!--
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> --}}
     {{!-- custom js --}}
     <script src="/js/vendor/theme-switcher.js" defer></script>
     <script src="/js/utilityScripts/getAuth.js" defer></script>
@@ -78,6 +102,7 @@
     <script src="/js/utilityScripts/navbar.user.main.js" defer></script>
     <script src="/js/utilityScripts/LazyLoader.js" defer></script>
     <script src="/js/homePage/homePage.script.js{{> version}}" defer></script>
-    
+
 </body>
+
 </html>
