@@ -259,7 +259,8 @@ app.engine(
                 return moment( myDate ).fromNow();
             },
             totalRating: (rateCount, rateValue) => {
-                return ((rateValue / rateCount)).toFixed(2)
+                let rate = ((rateValue / rateCount)).toFixed(2)
+                return isNaN(rate) ? 0 : rate
             },
             setVar: (varName, varValue, options) => {
                 if (!options.data.root) {
