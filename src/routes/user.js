@@ -30,9 +30,9 @@ router.get('/buy-coin', UserController.buyCoinPage);
 router.post('/edit-profile', UserController.editProfile);
 router.post('/change-password', UserController.changePassword);
 router.post('/upload-avatar', UserController.uploadAvatar);
-
+router.post('/upload-avatar', UserController.uploadAvatar);
 // Give Coin
-router.post('/giveCoin', authRole('admin:extraAdmin'), UserController.giveCoin);
+router.get('/attendance', UserController.createAttendance);
 // unlock Chapter
 router.post('/unlockChapter', UserController.unlockChapter);
 // Change Role to extraAdmin or User

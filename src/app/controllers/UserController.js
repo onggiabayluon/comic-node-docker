@@ -1,11 +1,12 @@
-const User                      = require('../models/User')
-const Chapter                   = require('../models/Chapter')
-const Pocket                    = require('../models/Pocket');
-const Invoice                   = require('../models/Invoice');
-const customError               = require('../../util/customErrorHandler')
-const bcrypt                    = require('bcrypt');
-const passport                  = require('passport');
-const { canChangeRole, canDeleteUser, canChangeBannedStatus }         = require('../../config/permissions/users.permission')
+const User = require('../models/User')
+const Chapter = require('../models/Chapter')
+const Pocket = require('../models/Pocket');
+const Invoice = require('../models/Invoice');
+const customError = require('../../util/customErrorHandler')
+const Attendance = require('../models/Attendance');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const { canChangeRole, canDeleteUser, canChangeBannedStatus } = require('../../config/permissions/users.permission')
 const { IMAGE_URL, IMG_FORMAT } = require('../../config/config');
 const MulterUploadMiddleware = require("../middlewares/MulterUploadMiddleWare");
 const cloudinaryUploadMiddileWare = require("../middlewares/CloudinaryUploadMiddleWare");
@@ -35,15 +36,14 @@ class UserController {
 
         checkInput()
 
-        edit().then(() => {
-            res.render('users/profile', {
-                layout: 'utility_layout.hbs',
-                success: errors.length > 0 ? false : true ,
-                errors,
-                username,
-                user: req.user,
-                messages
-            })
+        edit()
+
+        res.render('users/profile', {
+            layout: 'utility_layout.hbs',
+            success: errors.length > 0 ? false : true,
+            errors,
+            username,
+            user: req.user
         })
 
 
@@ -119,27 +119,27 @@ class UserController {
     }
 
     // Upload user avatar
-    uploadAvatar(req,res,next) {
+    uploadAvatar(req, res, next) {
         MulterUploadMiddleware(req, res)
             .then(async () => {
                 var params = {
                     username: req.user.name,
                 }
                 var imagesURL = await cloudinaryUploadMiddileWare.uploadAvatar(req.files, params)
-                
+
                 await saveURLToDb(imagesURL)
                 return res.redirect('/users/profile');
             })
             .catch(err => {
                 console.log(err)
             })
-        
+
         async function saveURLToDb(imagesURL) {
             User.updateOne(
                 { _id: req.user._id },
                 { avatar: imagesURL }
             )
-            .catch(err => console.log(err))
+                .catch(err => console.log(err))
         };
     }
 
@@ -157,17 +157,10 @@ class UserController {
         let referer = '/'
         delete req.session.redirectTo;
         passport.authenticate('local', {
-        successRedirect: referer,
-        failureRedirect: '/users/login',
-        failureFlash: true
-        })(req, res, (err) => {
-            console.log('-----Authentication Error----');
-            console.log('-----Authentication Error----', err);
-            if (err) {
-                req.flash('error', 'Invalid username or password');
-                res.redirect('/users/login');
-            }
-        });
+            successRedirect: referer,
+            failureRedirect: '/users/login',
+            failureFlash: true
+        })(req, res, next);
     };
 
     // Login Google
@@ -175,23 +168,23 @@ class UserController {
         let referer = '/'
         delete req.session.redirectTo;
         passport.authenticate('google', {
-        successRedirect: referer,
-        failureRedirect: '/users/login',
-        failureFlash: true
+            successRedirect: referer,
+            failureRedirect: '/users/login',
+            failureFlash: true
         })(req, res, next);
     };
-    
+
     // Login Facebook
     loginFacebook(req, res, next) {
         let referer = '/'
         delete req.session.redirectTo;
         passport.authenticate('facebook', {
-        successRedirect: referer,
-        failureRedirect: '/users/login',
-        failureFlash: true
+            successRedirect: referer,
+            failureRedirect: '/users/login',
+            failureFlash: true
         })(req, res, next);
     };
-    
+
     // Logout
     logout(req, res) {
         req.logout();
@@ -207,7 +200,7 @@ class UserController {
             title: 'Register new Account'
         })
     }
-    
+
     // Register
     register(req, res, next) {
         const layout = "login_register_layout"
@@ -243,40 +236,40 @@ class UserController {
                 errors.push({ msg: 'Password must be at least 6 characters' });
             }
         }
-        
+
         function createUser(name) {
-            User.findOne({name: name})
-            .then(user => {
-                if (user) {
-                    errors.push({ msg: 'This Name is already taken' });
-                    return renderView(true)
-                } else {
-                    const newUser = new User({
-                        name,
-                        password
-                      });
-              
-                      bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(newUser.password, salt, (err, hash) => {
-                          if (err) throw err;
-                          newUser.password = hash;
-                          newUser
-                            .save()
-                            .then(user => {
-                                let successMessage = 'You are now registered and can log in'
-                                res.render('users/login', {
-                                    layout: layout,
-                                    name,
-                                    password,
-                                    success_message: successMessage,
-                                })
-                            })
-                            .catch(next);
+            User.findOne({ name: name })
+                .then(user => {
+                    if (user) {
+                        errors.push({ msg: 'This Name is already taken' });
+                        return renderView(true)
+                    } else {
+                        const newUser = new User({
+                            name,
+                            password
                         });
-                      });
-                }
-            })
-            .catch(next)
+
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                                if (err) throw err;
+                                newUser.password = hash;
+                                newUser
+                                    .save()
+                                    .then(user => {
+                                        let successMessage = 'You are now registered and can log in'
+                                        res.render('users/login', {
+                                            layout: layout,
+                                            name,
+                                            password,
+                                            success_message: successMessage,
+                                        })
+                                    })
+                                    .catch(next);
+                            });
+                        });
+                    }
+                })
+                .catch(next)
         }
 
     }
@@ -289,7 +282,7 @@ class UserController {
             var user = await User.findOne({ _id: req.params.userId })
 
             authChangeRole(user, req, res, next)
-        
+
             async function authChangeRole(user, req, res, next) {
                 var check = await canChangeRole(user, myRole)
                 if (!check) {
@@ -303,12 +296,12 @@ class UserController {
             async function changeRoleAccordingly(user, req, res, next) {
                 user.role = roleWantToChange
                 user
-                .save()
-                .then(() => {
-                    req.flash('success-message', `Change ${user.name} Role to ${roleWantToChange} successfully`)
-                    res.redirect(`/me/stored/comics/dashboard/${myRole}`)
-                })
-                .catch(next)
+                    .save()
+                    .then(() => {
+                        req.flash('success-message', `Change ${user.name} Role to ${roleWantToChange} successfully`)
+                        res.redirect(`/me/stored/comics/dashboard/${myRole}`)
+                    })
+                    .catch(next)
             }
 
         } catch (err) {
@@ -323,7 +316,7 @@ class UserController {
             var userToDelete = await User.findOne({ _id: req.params.userId })
 
             authDeletePermission(userToDelete, req, res, next)
-        
+
             async function authDeletePermission(userToDelete, req, res, next) {
                 var check = await canDeleteUser(userToDelete, myRole)
                 if (!check) {
@@ -335,14 +328,14 @@ class UserController {
             }
             async function deleteUser(userToDelete, req, res, next) {
                 userToDelete
-                .remove()
-                .then(() => {
-                    req.flash('success-message', `Delete User Successfully`)
-                    res.redirect(`/me/stored/comics/dashboard/${myRole}`)
-                })
-                .catch(next)
+                    .remove()
+                    .then(() => {
+                        req.flash('success-message', `Delete User Successfully`)
+                        res.redirect(`/me/stored/comics/dashboard/${myRole}`)
+                    })
+                    .catch(next)
             }
-        } catch(err) {
+        } catch (err) {
             next(err)
         }
     }
@@ -356,7 +349,7 @@ class UserController {
             var userToBan = await User.findOne({ _id: req.params.userId })
 
             authBanPermission(userToBan, req, res, next)
-        
+
             async function authBanPermission(userToBan, req, res, next) {
                 var check = await canChangeBannedStatus(userToBan, myRole)
                 if (!check) {
@@ -368,12 +361,12 @@ class UserController {
             }
             async function changeUserStatus(userToBan, req, res, next) {
                 userToBan
-                .updateOne({banned: statusWantToChange})
-                .then(() => {
-                    req.flash('success-message', `${message} User Successfully`)
-                    res.redirect(`/me/stored/comics/dashboard/${myRole}`)
-                })
-                .catch(next)
+                    .updateOne({ banned: statusWantToChange })
+                    .then(() => {
+                        req.flash('success-message', `${message} User Successfully`)
+                        res.redirect(`/me/stored/comics/dashboard/${myRole}`)
+                    })
+                    .catch(next)
             }
         } catch (err) {
             next(err)
@@ -382,67 +375,103 @@ class UserController {
 
     // Give coin
     giveCoin(req, res, next) {
-        const   $coinToGive = req.body.coinValue,
-                $user_id = req.body.user_id 
+        const $coinToGive = req.body.coinValue,
+            $user_id = req.body.user_id
         User.updateOne(
             { _id: $user_id },
             { $inc: { coin: $coinToGive } }
         )
-        .then(result => {
-            if (result.nModified) {
-                req.flash('success-message', `ADD ${$coinToGive} Coin to User ${$user_id} Successfully`)
-                res.redirect('back')
-            } else {
-                req.flash('error-message', `Cannot give coin to this User ${$user_id}`)
-                res.redirect('back')
-            }
-        })
-        .catch(next)
+            .then(result => {
+                if (result.nModified) {
+                    req.flash('success-message', `ADD ${$coinToGive} Coin to User ${$user_id} Successfully`)
+                    res.redirect('back')
+                } else {
+                    req.flash('error-message', `Cannot give coin to this User ${$user_id}`)
+                    res.redirect('back')
+                }
+            })
+            .catch(next)
     };
+
+    async createAttendance (req,res,next){
+        try {
+            const total = req.user.coin + 100
+          const currentDate = new Date();
+          const formattedDate = currentDate.toISOString().slice(0, 10);
+      
+          const existingAttendance = await Attendance.findOne({ user_id: req.user._id });
+      
+          if (existingAttendance) {
+            if (existingAttendance.date !== formattedDate) {
+              // Nếu bản ghi đã tồn tại nhưng date khác với ngày hiện tại, cập nhật ngày mới
+              console.log(req.user.coin)
+              await Attendance.updateOne({ user_id: req.user._id }, { date: formattedDate });
+              await User.updateOne({_id: req.user._id}, {$set: {coin: total}})
+              req.flash('success-message', `Điểm danh thành công`)
+              res.redirect('/')
+             // return updatedAttendance;
+            } else {
+              // Nếu đã có bản ghi cùng userId và date, log ra thông báo
+              req.flash('error-message', `Tài khoản đã điểm danh ngày nay rồi `)
+              return
+            }
+          } else {
+            // Nếu bản ghi chưa tồn tại, tạo bản ghi mới
+            await Attendance.create({ date: formattedDate, user_id: req.user._id });
+            await User.updateOne({_id: req.user._id}, {$set: {coin: total}})
+            req.flash('success-message', `Điểm danh thành công`)
+            return
+          }
+        } catch (err) {
+          console.log(`Failed to create or update attendance record: ${err}`);
+          throw err;
+        }
+      
+      }
 
     unlockChapter(req, res, next) {
         if (!req.user) return next(new customError("You have not logged In yet", 401))
 
-        const   $user_id = req.user._id,
-                $user_current_coin = req.user.coin,
-                $chapter_id = req.body.chapter_id,
-                $slug = req.body.chapterSlug,
-                $chapterName = req.body.chapter
+        const $user_id = req.user._id,
+            $user_current_coin = req.user.coin,
+            $chapter_id = req.body.chapter_id,
+            $slug = req.body.chapterSlug,
+            $chapterName = req.body.chapter
 
-        
+
         const newPockets = {
             comicSlug: $slug,
             chapters: $chapter_id
         }
 
-        const $find = { "user_id": $user_id, "pockets.comicSlug" : $slug }
+        const $find = { "user_id": $user_id, "pockets.comicSlug": $slug }
         const $addToSet = { $addToSet: { "pockets.$.chapters": $chapter_id } }
-        
-        
+
+
         main()
-        .then(result => { 
-            if(!result) return; 
-            else Chapter
-            .findOne({ comicSlug: $slug, chapter: $chapterName })
-            .lean()
-            .then(chapter => {
-                res.send({
-                    chapterdoc: chapter,
-                    storage_url: IMAGE_URL,
-                    img_format: IMG_FORMAT
-                })
-                // res.status(200).render('template/chapter.detail.template.hbs', {
-                //     layout: 'fetch_layout',
-                //     isFree: true,
-                //     chapter: chapter,
-                //     img_url: IMAGE_URL,
-                // })
+            .then(result => {
+                if (!result) return;
+                else Chapter
+                    .findOne({ comicSlug: $slug, chapter: $chapterName })
+                    .lean()
+                    .then(chapter => {
+                        res.send({
+                            chapterdoc: chapter,
+                            storage_url: IMAGE_URL,
+                            img_format: IMG_FORMAT
+                        })
+                        // res.status(200).render('template/chapter.detail.template.hbs', {
+                        //     layout: 'fetch_layout',
+                        //     isFree: true,
+                        //     chapter: chapter,
+                        //     img_url: IMAGE_URL,
+                        // })
+                    })
+                    .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err))
 
-        async function main () {
+        async function main() {
             try {
                 const [chapter_coin, error1] = await getChapterCoin()
                 if (error1) throw new customError(error1, 404)
@@ -452,7 +481,7 @@ class UserController {
 
                 const [pushResult, error3] = await pushNewPocket()
                 if (error3) throw new customError(error3, 404)
-                
+
                 const [createResult, error4] = await createInvoice(chapter_coin)
                 if (error4) throw new customError(error4, 404)
 
@@ -460,31 +489,31 @@ class UserController {
 
             } catch (err) { next(err) }
         };
-        
+
         async function getChapterCoin() {
             return Chapter
-            .findOne({ _id: $chapter_id })
-            .select("coin -_id")
-            .lean()
-            .then(result => {
-                if (!result) return [null, "Error happen when find Chapter in db"]
-                else return [result.coin.required, null]
-            })
-            .catch(err => { return [null, err] })
+                .findOne({ _id: $chapter_id })
+                .select("coin -_id")
+                .lean()
+                .then(result => {
+                    if (!result) return [null, "Error happen when find Chapter in db"]
+                    else return [result.coin.required, null]
+                })
+                .catch(err => { return [null, err] })
         };
 
         async function subtractUserCoin(chapter_coin) {
             if ($user_current_coin - chapter_coin < 0) return [null, "You dont have enough coin to unlock this chapter"]
             return User
-            .updateOne(
-                { _id: $user_id },
-                { $set: { coin: $user_current_coin - chapter_coin }}
-            )
-            .then(result => {
-                if (result.nModified === 0) return [null, "Error happen when Substract user coin in db"]
-                else return [result.nModified, null]
-            })
-            .catch(err => { return [null, err] })
+                .updateOne(
+                    { _id: $user_id },
+                    { $set: { coin: $user_current_coin - chapter_coin } }
+                )
+                .then(result => {
+                    if (result.nModified === 0) return [null, "Error happen when Substract user coin in db"]
+                    else return [result.nModified, null]
+                })
+                .catch(err => { return [null, err] })
         };
 
         async function pushNewPocket() {
@@ -498,23 +527,23 @@ class UserController {
                     { $push: { "pockets": newPockets } },
                     { upsert: true }
                 )
-                .then(result => {
-                    if (result.ok !== 1) return [null, "Error happen when Insert new Pocket in db"]
-                    else return [result.nModified, null]
-                })
-                .catch(err => { return [null, err] })
+                    .then(result => {
+                        if (result.ok !== 1) return [null, "Error happen when Insert new Pocket in db"]
+                        else return [result.nModified, null]
+                    })
+                    .catch(err => { return [null, err] })
             };
-            
+
             function update() {
-                return Pocket.updateOne( $find, $addToSet )
-                .then(result => {
-                    if (result.ok !== 1) return [null, "Error happen when Push Pocket in db"]
-                    else return [result.nModified, null]
-                })
-                .catch(err => { return [null, err] })
+                return Pocket.updateOne($find, $addToSet)
+                    .then(result => {
+                        if (result.ok !== 1) return [null, "Error happen when Push Pocket in db"]
+                        else return [result.nModified, null]
+                    })
+                    .catch(err => { return [null, err] })
             }
         };
-        
+
         async function createInvoice(chapter_coin) {
             const invoice = {
                 user_id: $user_id,
@@ -526,16 +555,13 @@ class UserController {
                 coin: chapter_coin,
             }
             return Invoice
-            .create(invoice)
-            .then(result => {
-                if (!result) return [null, "Error happen when create Invoice in db"]
-                else return [result, null]
-            })
-            .catch(err => { return [null, err] })
+                .create(invoice)
+                .then(result => {
+                    if (!result) return [null, "Error happen when create Invoice in db"]
+                    else return [result, null]
+                })
+                .catch(err => { return [null, err] })
         };
-
-        
-        
     };
 }
 

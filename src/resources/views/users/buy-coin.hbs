@@ -209,6 +209,10 @@
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                 aria-controls="profile" aria-selected="false">MOMO</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#attendance" role="tab"
+                                aria-controls="profile" aria-selected="false">Điểm danh</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -235,6 +239,15 @@
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <form action="/users/....." method="post">
                             <div>Enter Stuff here.....</div>
+                            <div class="row mt-4">
+                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="profile-tab">
+                        <form action="/users/attendance" method="get">
+                            {{!-- /<div>Enter Stuff here.....</div> --}}
                             <div class="row mt-4">
                                 <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
                             </div>
