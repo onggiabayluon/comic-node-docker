@@ -1,4 +1,5 @@
 const Comic     = require('../models/Comic');
+const Attendance = require('../models/Attendance');
 const Chapter   = require('../models/Chapter');
 const Comment   = require('../models/Comment');
 const User      = require('../models/User');
@@ -838,6 +839,7 @@ class ComicController {
     }
 
   };
+  
 
 
   async rateHandling(req, res, next) {
@@ -874,6 +876,7 @@ class ComicController {
       })
     } else { return next(new customError("Not allow to rate second time", 405)) }
   };
+
 }
 
 //export (SiteController) thì lát require nhận được nó
