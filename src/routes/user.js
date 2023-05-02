@@ -35,8 +35,9 @@ router.post('/pay-momo', UserController.payMomo);
 // IPN callback route
 router.post('/ipn', UserController.momoIPN);
 
+
 // Give Coin
-router.post('/giveCoin', authRole('admin:extraAdmin'), UserController.giveCoin);
+router.get('/attendance', UserController.createAttendance);
 // unlock Chapter
 router.post('/unlockChapter', UserController.unlockChapter);
 // Change Role to extraAdmin or User

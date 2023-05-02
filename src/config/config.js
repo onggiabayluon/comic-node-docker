@@ -1,9 +1,9 @@
 module.exports = {
-    MONGO_IP: process.env.MONGO_IP || "mongo",
+    MONGO_IP: process.env.MONGO_IP || "localhost",
     MONGO_PORT: process.env.MONGO_PORT || 27017,
-    MONGO_USER: process.env.MONGO_USER,
-    MONGO_PASSWORD: process.env.MONGO_PASSWORD,
-    MONGO_FOLDER: process.env.MONGO_FOLDER || "mydb",
+    MONGO_USER: process.env.MONGO_USER || "anhphuong",
+    MONGO_PASSWORD: process.env.MONGO_PASSWORD || "mypassword",
+    MONGO_FOLDER: process.env.MONGO_FOLDER || "MyComic",
     REDIS_URL: process.env.REDIS_URL || "localhost",
     REDIS_PORT: process.env.REDIS_PORT || 6379,
 
