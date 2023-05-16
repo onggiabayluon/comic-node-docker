@@ -30,10 +30,7 @@ router.get('/buy-coin', UserController.buyCoinPage);
 router.post('/edit-profile', UserController.editProfile);
 router.post('/change-password', UserController.changePassword);
 router.post('/upload-avatar', UserController.uploadAvatar);
-
 router.post('/pay-momo', UserController.payMomo);
-// IPN callback route
-router.get('/check-momo', UserController.checkMomoPayment);
 
 
 // Give Coin

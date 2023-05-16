@@ -10,10 +10,17 @@ const opts = {
   // set lại time zone sang asia
   timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
+const Author = new Schema({
+  name: { type: String, index: true },
+  comic: [{ 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comic"
+ }]
+}, opts);
 
-const Attendance = new Schema({
-    date : {type : String},
-    user_id : {type : String}
-})
 
-module.exports = mongoose.model('Attendance', Attendance);
+
+
+  //               mongoose.model('ModelName', mySchema);
+  module.exports = mongoose.model('Author', Author);
+

@@ -110,17 +110,25 @@ io.on('connection', client => {
 
 
 // sessionConfig
-const sessionConfig = {
-    store: new RedisStore({ client: redis.client, ttl: 2592000 }), //Default value is second
+// const sessionConfig = {
+//     store: new RedisStore({ client: redis.client, ttl: 2592000 }), //Default value is second
+//     secret: 'secret',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie : {
+//         sameSite: 'strict',
+//         maxAge: 2592000 * 1000, // 1month
+//         secure: false
+//     },
+// };
+app.use(session({
     secret: 'secret',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    cookie : {
-        sameSite: 'strict',
-        maxAge: 2592000 * 1000, // 1month
-        secure: false
-    },
-};
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
+    }
+}));
 
 if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1)
@@ -137,7 +145,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(cookieParser())
 
-app.use(session(sessionConfig));
+//app.use(session(sessionConfig));
 
 
 // Passport Config

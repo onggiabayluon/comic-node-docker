@@ -32,9 +32,9 @@ module.exports = function(passport) {
 
   // Google 
   passport.use(new GoogleStrategy({
-    clientID: '885722097368-aoh1lfihdgdvef92h8u0a96letbcsh6j.apps.googleusercontent.com',
-    clientSecret: 'URETJgo_KhJRHmC-053NQklU',
-    callbackURL: "https://cloudimagewall.xyz/users/google/callback"
+    clientID: '656609692565-8pmpjdheb354jc04ug1uc2pcjo0s1h70.apps.googleusercontent.com',
+    clientSecret: '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',
+    callbackURL: "http://localhost:3000/users/google/callback"
   }, function (accessToken, refreshToken, profile, done) {
     // console.log(profile)
     User
@@ -62,9 +62,9 @@ module.exports = function(passport) {
 
   // Facebook
   passport.use(new FacebookStrategy({
-    clientID: '198247612131034',
-    clientSecret: 'b2fd578f561a46e92e3a4d71cdda2f31',
-    callbackURL: "https://cloudimagewall.xyz/users/facebook/callback",
+    clientID: '246346584729473',
+    clientSecret: 'f8d941da40b6a4d280f67561af9f2ee2',
+    callbackURL: "http://localhost:3000/users/facebook/callback",
     profileFields: ['id', 'displayName', 'picture.type(large)']
   },
     function (accessToken, refreshToken, profile, done) {

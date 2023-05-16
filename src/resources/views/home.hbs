@@ -83,7 +83,7 @@
     </grid-container>
 </section>
 
-<section id="categories-nav" itemprop="articleSection">
+{{!-- <section id="categories-nav" itemprop="articleSection">
     <ul class="categoires-container">
         <li id="hidden-btn" class="category" style="color: var(--button-text-unimportant);"
         data-toggle="tooltip" data-placement="top" title=" Under Construction !! ">
@@ -96,7 +96,7 @@
         <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/SliceofLife">Slice of Life</a></li>
         <li onclick="location = this.children[0].href" class="more"><a href="/comic/categories/all">MORE GENRES</a></li>
     </ul>
-</section>
+</section> --}}
 
 <section id="welcome-places" itemprop="articleSection" class="foreground-color border-bottom-2">
     <heading class="container">
@@ -144,9 +144,7 @@
                                                 </comic-info>
                                                 <comic-info-back class="comic-info-back">
                                                     <color-overlay></color-overlay>
-                                                    <title class=" title--ellipsis title--bot">
-                                                        {{../this.title}}
-                                                    </title>
+                                                    <a href="./comic/{{../this.href}}"><title class="title title--ellipsis">{{../this.title}}</title></a>
                                                     <author>
                                                         <a href="#">{{../this.author}}</a>
                                                     </author>
@@ -308,7 +306,7 @@
     </slider-container>
 </section>
 
-<section id="bookmark-places" itemprop="articleSection"class="foreground-color">
+{{!-- <section id="bookmark-places" itemprop="articleSection"class="foreground-color">
     <heading class="container">
         <h2 class="title">
             <a href="/comic/bookmark"> My Series</a>
@@ -345,7 +343,7 @@
             </div>
         </div>
     </slider-container>
-</section>
+</section> --}}
 
 <section id="lastest-update-places" itemprop="articleBody">
     <wrapper-big class="container">

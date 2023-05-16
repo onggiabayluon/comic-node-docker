@@ -60,15 +60,6 @@
     </header>
 
     <main style="min-height: 2630px;">
-        {{#each successMsg}}
-        <div class="alert alert-success">{{this}}</div>
-        {{/each}}
-        {{!-- {{#if errors }} --}}
-        {{#each errorMsg}}
-        <div class="alert alert-danger">{{this}}</div>
-        {{/each}}
-        {{!-- {{/if}} --}}
-
         {{{body}}}
 
         <modal>

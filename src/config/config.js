@@ -13,7 +13,8 @@ module.exports = {
     
     IMAGE_URL: "https://res.cloudinary.com/dwajvm53v/image/upload",
     IMAGE_URL_HTTP: "http://res.cloudinary.com/dwajvm53v/image/upload",
-
+    KEY : "QCJBFMKOECWUWQTQCGBMERXTYBHGZHPI",
+    CODE: "QDE469XL",
 
     UPDATE_PER_MIN: 10,
 

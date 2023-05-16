@@ -1,7 +1,134 @@
 <style>
+    /* Import Google font - Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins',
+            sans-serif;
+    }
+
+    .date {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        justify-content: center;
+    }
+
+    .wrapper {
+        width: 450px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .wrapper header {
+        display: flex;
+        align-items: center;
+        padding: 25px 30px 10px;
+        justify-content: space-between;
+    }
+
+    header .icons {
+        display: flex;
+    }
+
+    header .icons span {
+        height: 38px;
+        width: 38px;
+        margin: 0 1px;
+        cursor: pointer;
+        color: #878787;
+        text-align: center;
+        line-height: 38px;
+        font-size: 1.9rem;
+        user-select: none;
+        border-radius: 50%;
+    }
+
+    .icons span:last-child {
+        margin-right: -10px;
+    }
+
+    header .icons span:hover {
+        background: #f2f2f2;
+    }
+
+    header .current-date {
+        font-size: 1.45rem;
+        font-weight: 500;
+    }
+
+    .calendar {
+        padding: 20px;
+    }
+
+    .calendar ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style:
+            none;
+        text-align: center;
+    }
+
+    .calendar .days {
+        margin-bottom: 20px;
+    }
+
+    .calendar li {
+        color: #333;
+        width: calc(100% / 7);
+        font-size: 1.07rem;
+    }
+
+    .calendar .weeks li {
+        font-weight: 500;
+        cursor: default;
+    }
+
+    .calendar .days li {
+        z-index:
+            1;
+        cursor: pointer;
+        position: relative;
+        margin-top: 30px;
+    }
+
+    .days li.inactive {
+        color: #aaa;
+    }
+
+    .days li.active {
+        color: #fff;
+    }
+
+    .days li::before {
+        position:
+            absolute;
+        content: "";
+        left: 50%;
+        top: 50%;
+        height: 40px;
+        width: 40px;
+        z-index: -1;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .days li.active::before {
+        background: #9B59B6;
+    }
+
+    .days li:not(.active):hover::before {
+        background: #f2f2f2;
+    }
+
     .dropzone-submit-btn {
         position: absolute;
-        bottom: -40px;
+        bottom:
+            -40px;
         left: 15%;
         right: 15%;
     }
@@ -106,13 +233,15 @@
         border: none;
         border-radius: 0;
         font-size: 15px;
-        background: #212529b8;
+        background:
+            #212529b8;
     }
 
     .profile-img .file input {
         position: absolute;
         opacity: 0;
-        right: 0;
+        right:
+            0;
         top: 0;
     }
 
@@ -121,13 +250,15 @@
     }
 
     .profile-head h6 {
-        color: #0062cc;
+        color:
+            #0062cc;
     }
 
     .profile-edit-btn {
         border: none;
         border-radius: 1.5rem;
-        width: 70%;
+        width:
+            70%;
         padding: 2%;
         font-weight: 600;
         color: #6c757d;
@@ -166,7 +297,8 @@
     }
 
     .profile-work p {
-        font-size: 12px;
+        font-size:
+            12px;
         color: #818182;
         font-weight: 600;
         margin-top: 10%;
@@ -193,11 +325,17 @@
     }
 </style>
 
-
 <section id="my-profile" itemprop="articleSection" class="foreground-color">
 
-
     {{#if user}}
+    {{#if successMsg}}
+    <div class="alert alert-success" id="myDiv">{{successMsg}}</div>
+    {{/if}}
+    {{!-- {{#if errors }} --}}
+    {{#if errorMsg}}
+    <div class="alert alert-danger" id="myDiv">{{errorMsg}}</div>
+    {{/if}}
+    {{!-- {{/if}} --}}
     <div class="container emp-profile">
         <div class="row">
             <div class="col-md-6">
@@ -205,11 +343,7 @@
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                aria-controls="home" aria-selected="true">VIETNAMPAY</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">MOMO</a>
+                                aria-controls="home" aria-selected="true">MOMO</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#attendance" role="tab"
@@ -218,7 +352,7 @@
                     </ul>
                 </div>
 
-                {{!-- Right --}}
+                {{! Right }}
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <form action="/users/pay-momo" method="post">
@@ -229,7 +363,9 @@
                                 <select name="price" class="custom-select" id="inputGroupSelect01">
                                     <option value="10000" selected>10000 VNĐ</option>
                                     <option value="20000">20000 VNĐ</option>
-                                    <option value="30000">30000 VNĐ</option>
+                                    <option value="30000">50000 VNĐ</option>
+                                    <option value="30000">100000 VNĐ</option>
+                                    <option value="30000">200000 VNĐ</option>
                                 </select>
                             </div>
                             <div class="row mt-4">
@@ -237,31 +373,43 @@
                             </div>
                         </form>
                     </div>
-
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <form action="/users/....." method="post">
-                            <div>Enter Stuff here.....</div>
-                            <div class="row mt-4">
-                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
-                            </div>
-                        </form>
-                    </div>
-
                     <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="profile-tab">
                         <form action="/users/attendance" method="get">
-                            {{!-- /<div>Enter Stuff here.....</div> --}}
-                            <div class="row mt-4">
+                            {{! /<div>Enter Stuff here.....</div> }}
+                            <div class="row mt-4" class="date" style="margin-left: 14%;margin-bottom: 10%;">
                                 <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Submit" />
+                            </div>
+                            <div class="date">
+                                <div class="wrapper">
+                                    <header>
+                                        <p class="current-date"></p>
+                                        <div class="icons">
+                                            <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                                            <span id="next" class="material-symbols-rounded">chevron_right</span>
+                                        </div>
+                                    </header>
+                                    <div class="calendar">
+                                        <ul class="weeks">
+                                            <li>Sun</li>
+                                            <li>Mon</li>
+                                            <li>Tue</li>
+                                            <li>Wed</li>
+                                            <li>Thu</li>
+                                            <li>Fri</li>
+                                            <li>Sat</li>
+                                        </ul>
+                                        <ul class="days"></ul>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
 
                 </div>
-                {{!-- End Right --}}
+                {{! End Right }}
             </div>
 
         </div>
-
 
     </div>
     {{else}}
@@ -271,3 +419,66 @@
     border: 0.5rem;">Please login to view this page</div>
     {{/if}}
 </section>
+
+<script>
+    const daysTag = document.querySelector(".days"),
+currentDate = document.querySelector(".current-date"),
+prevNextIcon = document.querySelectorAll(".icons span");
+
+// getting new date, current year and month
+let date = new Date(),
+currYear = date.getFullYear(),
+currMonth = date.getMonth();
+
+// storing full name of all months in array
+const months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"];
+
+const renderCalendar = () => {
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+    lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
+    lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+    lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+    let liTag = "";
+
+    for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+        liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+    }
+
+    for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+        // adding active class to li if the current day, month, and year matched
+        let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
+                     && currYear === new Date().getFullYear() ? "active" : "";
+        liTag += `<li class="${isToday}">${i}</li>`;
+    }
+
+    for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
+        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+    }
+    currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+    daysTag.innerHTML = liTag;
+}
+renderCalendar();
+
+prevNextIcon.forEach(icon => { // getting prev and next icons
+    icon.addEventListener("click", () => { // adding click event on both icons
+        // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+        currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+
+        if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+            // creating a new date of current year & month and pass it as date value
+            date = new Date(currYear, currMonth, new Date().getDate());
+            currYear = date.getFullYear(); // updating current year with new date year
+            currMonth = date.getMonth(); // updating current month with new date month
+        } else {
+            date = new Date(); // pass the current date as date value
+        }
+        renderCalendar(); // calling renderCalendar function
+    });
+});
+</script>
+<script>
+  setTimeout(function(){
+    document.getElementById("myDiv").style.display = "none";
+  }, 2000); // 5000 milliseconds = 5 seconds
+</script>

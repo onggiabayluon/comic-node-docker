@@ -11,61 +11,67 @@ const { IMAGE_URL, IMG_FORMAT } = require('../../config/config');
 const MulterUploadMiddleware = require("../middlewares/MulterUploadMiddleWare");
 const cloudinaryUploadMiddileWare = require("../middlewares/CloudinaryUploadMiddleWare");
 const momoPayment = require("../middlewares/Momo")
+const moment = require('moment');
+
 
 class UserController {
 
-    checkMomoPayment(req, res, next) {
-        const { partnerCode, orderId, requestId, amount, orderInfo, orderType, transId, resultCode, message, payType, responseTime, extraData, signature } = req.query;
-        if (Number(resultCode) === 0) {
-          console.log("payment successfull, save stuff to database...")
-          req.flash('successMsg', 'Payment successful!');
-
-        } else {
-          console.log(`Error code ${resultCode}: ${message}`)
-          req.flash('errorMsg', `Payment failed: ${message}`);
-          console.log(req.flash('errorMsg'))
-        }
-
-        return res.redirect("/")
-    }
-
     // paymomo
     async payMomo(req, res, next) {
+        req.session.key = 0;
         const priceChoosen = req.body.price
         const partnerCode = "MOMO";
         const accessKey = "F8BBA842ECF85";
         const secretKey = "K951B6PE1waDMi640xX08PD3vg6EkVlz";
         const amount = priceChoosen; // change price here
         const orderInfo = "pay with MoMo";
-        const redirectUrl = "http://localhost:3000/users/check-momo";
+        const redirectUrl = "http://localhost:3000/users/buy-coin";
         const ipnUrl = "http://localhost:3000/users/ipn";
         const extraData = ""
-        
+
         momoPayment.createPayment(partnerCode, accessKey, secretKey, amount, redirectUrl, ipnUrl, orderInfo, extraData)
-        .then(response => {
-            console.log(response);
-            // Handle success response
-            res.redirect(response)
-        })
-        .catch(error => {
-            console.error(error);
-            // Handle error response
-        });
+            .then(response => {
+                // Handle success response
+                res.redirect(response)
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle error response
+            });
     }
     // Profile Page
 
-    profilePage(req, res, next) {
+    async profilePage(req, res, next) {
+        let history = req.user ? await Invoice.find({user_id : req.user._id}).lean() : null
+        console.log(new Date(),history)
         res.render('users/profile', {
             layout: 'utility_layout.hbs',
             user: req.user,
-        })
-    }
+            invoice : history
 
-    buyCoinPage(req, res, next) {
+        })
+        //console.log (new Date(),req.user ? await Invoice.find({user_id : req.user._id}) : null)
+    }
+     
+     async buyCoinPage(req, res, next) {
+        let { partnerCode, orderId, requestId, amount, orderInfo, orderType, transId, resultCode, message, payType, responseTime, extraData, signature } = req.query;
+        if (resultCode != null) {
+            if (Number(resultCode) === 0) {
+                await User.updateOne({ _id: req.user._id }, { $set: { coin: amount } })
+                req.session.successMsg = 'Payment successful!';
+            } else {
+                req.session.errorMsg = `Payment failed`;
+            }
+        }
         res.render('users/buy-coin', {
             layout: 'utility_layout.hbs',
             user: req.user,
+            errorMsg: req.session.errorMsg,
+            successMsg: req.session.successMsg
         })
+        req.session.errorMsg = null;
+        req.session.successMsg = null;
+        req.session.key = null;
     }
 
     editProfile(req, res, next) {
@@ -100,7 +106,7 @@ class UserController {
         }
     }
 
-    async changePassword(req,res,next) {
+    async changePassword(req, res, next) {
         let { currentPassword, newPassword, confirmPassword } = req.body;
         let errors = [];
         let messages = ""
@@ -133,25 +139,25 @@ class UserController {
                     newPassword = hash;
                     user.password = hash;
                     user
-                    .save()
-                    .then(user => {
-                        if (errors) {
-                            res.status(401)
-                        } else {
-                            res.status(200)
-                        }
-                        res.render('users/profile', {
-                            layout: 'utility_layout.hbs',
-                            success: errors.length > 0 ? false : true ,
-                            errors,
-                            user: req.user,
-                            messages: "Update password succesfully",
-                            currentPassword: errors.length > 0 ? currentPassword : "" ,
-                            newPassword: errors.length > 0 ? newPassword : "" ,
-                            confirmPassword: errors.length > 0 ? confirmPassword : "" 
+                        .save()
+                        .then(user => {
+                            if (errors) {
+                                res.status(401)
+                            } else {
+                                res.status(200)
+                            }
+                            res.render('users/profile', {
+                                layout: 'utility_layout.hbs',
+                                success: errors.length > 0 ? false : true,
+                                errors,
+                                user: req.user,
+                                messages: "Update password succesfully",
+                                currentPassword: errors.length > 0 ? currentPassword : "",
+                                newPassword: errors.length > 0 ? newPassword : "",
+                                confirmPassword: errors.length > 0 ? confirmPassword : ""
+                            })
                         })
-                    })
-                    .catch(next);
+                        .catch(next);
                 });
             });
         }
@@ -432,41 +438,41 @@ class UserController {
             .catch(next)
     };
 
-    async createAttendance (req,res,next){
+    async createAttendance(req, res, next) {
         try {
             const total = req.user.coin + 100
-          const currentDate = new Date();
-          const formattedDate = currentDate.toISOString().slice(0, 10);
-      
-          const existingAttendance = await Attendance.findOne({ user_id: req.user._id });
-      
-          if (existingAttendance) {
-            if (existingAttendance.date !== formattedDate) {
-              // Nếu bản ghi đã tồn tại nhưng date khác với ngày hiện tại, cập nhật ngày mới
-              console.log(req.user.coin)
-              await Attendance.updateOne({ user_id: req.user._id }, { date: formattedDate });
-              await User.updateOne({_id: req.user._id}, {$set: {coin: total}})
-              req.flash('success-message', `Điểm danh thành công`)
-              res.redirect('/')
-             // return updatedAttendance;
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 10);
+
+            const existingAttendance = await Attendance.findOne({ user_id: req.user._id });
+
+            if (existingAttendance) {
+                if (existingAttendance.date !== formattedDate) {
+                    // Nếu bản ghi đã tồn tại nhưng date khác với ngày hiện tại, cập nhật ngày mới
+                    console.log(req.user.coin)
+                    await Attendance.updateOne({ user_id: req.user._id }, { date: formattedDate });
+                    await User.updateOne({ _id: req.user._id }, { $set: { coin: total } })
+                    req.session.successMsg = 'Điểm danh thành công!';
+                    res.redirect('/users/buy-coin')
+                    // return updatedAttendance;
+                } else {
+                    // Nếu đã có bản ghi cùng userId và date, log ra thông báo
+                    req.session.errorMsg =  `Tài khoản đã điểm danh ngày nay rồi `
+                    res.redirect('/users/buy-coin')
+                }
             } else {
-              // Nếu đã có bản ghi cùng userId và date, log ra thông báo
-              req.flash('error-message', `Tài khoản đã điểm danh ngày nay rồi `)
-              return
+                // Nếu bản ghi chưa tồn tại, tạo bản ghi mới
+                await Attendance.create({ date: formattedDate, user_id: req.user._id });
+                await User.updateOne({ _id: req.user._id }, { $set: { coin: total } })
+                req.session.successMsg = 'Điểm danh thành công!';
+                res.redirect('/users/buy-coin')
             }
-          } else {
-            // Nếu bản ghi chưa tồn tại, tạo bản ghi mới
-            await Attendance.create({ date: formattedDate, user_id: req.user._id });
-            await User.updateOne({_id: req.user._id}, {$set: {coin: total}})
-            req.flash('success-message', `Điểm danh thành công`)
-            return
-          }
         } catch (err) {
-          console.log(`Failed to create or update attendance record: ${err}`);
-          throw err;
+            console.log(`Failed to create or update attendance record: ${err}`);
+            throw err;
         }
-      
-      }
+
+    }
 
     unlockChapter(req, res, next) {
         if (!req.user) return next(new customError("You have not logged In yet", 401))
@@ -603,5 +609,21 @@ class UserController {
         };
     };
 }
-
 module.exports = new UserController();
+
+function sortObject(obj) {
+	let sorted = {};
+	let str = [];
+	let key;
+	for (key in obj){
+		if (obj.hasOwnProperty(key)) {
+		str.push(encodeURIComponent(key));
+		}
+	}
+	str.sort();
+    for (key = 0; key < str.length; key++) {
+        sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
+    }
+    return sorted;
+}
+

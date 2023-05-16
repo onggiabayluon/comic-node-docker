@@ -211,9 +211,7 @@ class SiteController {
         let prevPage = +req.query.page - 1;
         let prevPage2 = +req.query.page - 2;
         let limitTopView = 10;
-
-        console.log("test:" + req.flash("errorMsg"))
-
+        
         Promise.all([
             Comic.countDocuments({})
             , Comic.find({})
@@ -251,8 +249,6 @@ class SiteController {
                 config: config,
                 topComicsByView: topComicsByView,
                 meta,
-                errorMsg: req.flash("errorMsg"),
-                successMsg: req.flash("successMsg")
              });
           })
           .catch(err => next(err))

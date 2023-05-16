@@ -2,6 +2,7 @@ const Comic     = require('../models/Comic');
 const Chapter   = require('../models/Chapter');
 const Config    = require('../models/Config');
 const Category  = require('../models/Category');
+const Author  = require('../models/Author');
 const Comment   = require('../models/Comment');
 const User      = require('../models/User');
 const ObjectID  = require('mongodb').ObjectID;
